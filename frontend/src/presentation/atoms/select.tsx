@@ -93,7 +93,7 @@ interface SelectFormikProps extends SelectHTMLAttributes<HTMLSelectElement> {
   options: SelectFormikOption[]
 }
 
-interface SelectFormikOption {
+export interface SelectFormikOption {
   value: string
   label: string
   disabled?: boolean

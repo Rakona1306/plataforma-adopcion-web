@@ -166,7 +166,7 @@ export default function Header() {
               className="hidden md:block"
             >
               <Button
-                href="/adoptar"
+                href="/login"
                 icon={<FaDog size={16} className="relative z-10" />}
                 spaceClassName="bg-white"
                 className="text-sm font-semibold hover:text-white"
@@ -260,7 +260,7 @@ export default function Header() {
                 className="mt-2 pt-3 border-t border-primary/10"
               >
                 <Button
-                  href="/adoptar"
+                  href="/login"
                   icon={<FaDog size={16} className="relative z-10" />}
                   spaceClassName="bg-white"
                   className="w-full justify-center text-sm font-semibold hover:text-white"

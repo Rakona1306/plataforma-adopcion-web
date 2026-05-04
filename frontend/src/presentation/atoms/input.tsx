@@ -72,7 +72,7 @@ export default function Input({
           aria-invalid={hasError}
           aria-describedby={describedBy}
           className={joinClasses(
-            'w-full rounded-xl border bg-white px-4 py-3 text-sm text-slate-900 outline-none transition-all duration-300',
+            'w-full rounded-xl border bg-white px-4 py-3 text-sm text-slate-900 outline-none transition-all duration-300 disabled:bg-gray-200 disabled:text-slate-600 disabled:cursor-not-allowed',
             'placeholder:text-slate-400',
             'focus:border-primary focus:ring-4 focus:ring-secondary/30',
             !hasError ? 'hover:border-slate-400' : '',
