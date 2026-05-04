@@ -8,7 +8,7 @@ export const paymentMethods: PaymentMethod[] = [
     icon: BsPaypal,
   },
   {
-    name: "July Avelino",
+    name: "Yape o Plin July Avelino",
     account: "955288116",
     imageMehtod: "/home/methods/yape-y-plin.jpg"
   },

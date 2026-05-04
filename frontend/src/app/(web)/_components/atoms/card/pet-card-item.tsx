@@ -96,7 +96,7 @@ export function PetCardItem({ pet }: PetCardItemProps) {
               <Button href={`/mascotas/${pet.id}`} className='flex-1 w-full font-bold' containerClassName='w-full'>
                 Ver Detalles
               </Button>
-              <Button href='/padrinar' className='flex-1 w-full border-terciary text-terciary before:bg-terciary! hover:text-white! font-bold' containerClassName='w-full'>
+              <Button href={`/mascotas/${pet.id}#padrinar`} className='flex-1 w-full border-terciary text-terciary before:bg-terciary! hover:text-white! font-bold' containerClassName='w-full'>
                 Apadrinar
               </Button>
             </div>

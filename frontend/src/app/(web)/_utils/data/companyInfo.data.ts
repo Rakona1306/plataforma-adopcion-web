@@ -1,5 +1,5 @@
 export const companyInfo = {
-  name: "PawsAdopt Albergue",
+  name: "Albergue Salva Vidas",
   shortDescription: "Rescatando vidas, transformando familias",
   description: "Somos una organización sin fines de lucro dedicada a rescatar, rehabilitar y encontrar hogares amorosos para mascotas necesitadas.",
   mission: "Darle una segunda oportunidad a cada mascota que entra por nuestras puertas, brindándole no solo un hogar, sino una familia amorosa.",

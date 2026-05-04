@@ -3,13 +3,19 @@
 import Button from "@/app/(web)/_components/atoms/button/button";
 import { PetCardItem } from "@/app/(web)/_components/atoms/card/pet-card-item";
 import Title from "@/app/(web)/_components/atoms/title";
+import { sendSponsorshipSchema } from "@/app/(web)/_schemas/sponsorship/send.chema";
+import { companyInfo } from "@/app/(web)/_utils/data/companyInfo.data";
+import { PaymentMethod, paymentMethods } from "@/app/(web)/_utils/data/paymentMethods";
 import { petsData } from "@/app/(web)/_utils/data/pets.data";
 import { usePet } from "@/application/hooks/pet/usePet";
 import Input from "@/presentation/atoms/input";
+import Select, { SelectFormikOption } from "@/presentation/atoms/select";
+import Textarea from "@/presentation/atoms/text-area";
 import FormContainer from "@/presentation/molecules/form-container";
+import { notSpace } from "@/shared/functions/notSpace";
 import Link from "next/link";
 import { useState } from "react";
-import { BiChevronLeft, BiChevronRight, BiHeart } from "react-icons/bi";
+import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import { FaSyringe, FaUsers } from "react-icons/fa";
 import { LuZap } from "react-icons/lu";
 import { MdPets } from "react-icons/md";
@@ -18,9 +24,20 @@ interface PetDeatilPageProps {
   petId: number;
 }
 
+export const parsePaymentMethodsToOptions = (
+  methods: PaymentMethod[]
+): SelectFormikOption[] => {
+  return methods.map((method) => ({
+    value: method.name,
+    label: `${method.name}  ${method.account ? `(${method.account})` : ''}`,
+  }));
+};
+
 export default function PetDeatilPage({ petId }: PetDeatilPageProps) {
   const { pet } = usePet(petId);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const methodOptions = parsePaymentMethodsToOptions(paymentMethods);
 
   if (!pet) {
     return (
@@ -217,7 +234,6 @@ export default function PetDeatilPage({ petId }: PetDeatilPageProps) {
               <Button
                 containerClassName="w-full"
                 spaceClassName="bg-gray-100!"
-                href=""
                 className="w-full px-8 py-4 rounded-full font-bold text-lg hover:shadow-lg hover:shadow-primary/50 transition-all duration-300 "
               >
                 Adoptar a {pet.name}
@@ -225,6 +241,7 @@ export default function PetDeatilPage({ petId }: PetDeatilPageProps) {
               <Button
                 containerClassName="w-full"
                 spaceClassName="bg-gray-100!"
+                href="#padrinar"
                 className="w-full px-8 py-4 bg-white before:bg-terciary! text-terciary border-2 border-terciary rounded-full font-bold text-lg transition-all duration-300"
               >
                 Apadrina a {pet.name}
@@ -281,7 +298,7 @@ export default function PetDeatilPage({ petId }: PetDeatilPageProps) {
               </p>
               <div className="flex justify-center">
                 <Button
-                  href="https://wa.me/1234567890"
+                  href={`https://wa.me/${notSpace(companyInfo.contact.phone)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-block px-6 py-2 bg-white text-blue-600! hover:text-white! before:bg-blue-600! border-blue-600! rounded-full font-semibold transition-colors"
@@ -293,33 +310,98 @@ export default function PetDeatilPage({ petId }: PetDeatilPageProps) {
           </div>
         </div>
 
-        {/* <div className="mt-10 ">
+        <div className="mt-10">
           <Title htmlTag="h3" className="text-center mb-5 text-slate-800">
             Apadrinar a <span className="text-primary">{pet.name}</span>
           </Title>
-          <section className="flex gap-5">
+          <section
+            id="padrinar"
+            className="flex gap-5 scroll-mt-42 scroll-smooth justify-center"
+          >
             <FormContainer
               initialValues={{
                 name: "",
                 email: "",
-                amount: 0,
+                amount: 10,
                 pet: pet.id,
+                petName: pet.name,
+                celular: "",
+                message: "",
+                method: ""
               }}
               onSubmit={(values) => {
                 console.log(values);
               }}
-              containerClassName="w-full bg-white border-slate-500 py-8 px-4 rounded-lg"
+              validationSchema={sendSponsorshipSchema}
+              containerClassName="w-full bg-white border-slate-500 py-8 px-4 rounded-lg max-w-[700px]"
+              className="space-y-5"
             >
               <Input
                 name="name"
-                label="Nombre Completo"
+                label="Nombre Completo *"
                 placeholder="Juan Perez Hidalgo"
               />
+
+              <Input 
+                name="petName"
+                label="Ahijad@"
+                placeholder="Escriba su nombre"
+                disabled
+              />
+
+              <section className="w-full flex gap-5">
+                <Input
+                  name="email"
+                  label="Email *"
+                  placeholder="juanperezhidalgo@gmail.com"
+                />
+
+                <Input
+                  name="celular"
+                  label="Celular *"
+                  placeholder="123456789"
+                  type="tel"
+                />
+              </section>
+
+              <section className="w-full flex gap-5">
+                <Input
+                  name="amount"
+                  label="Monto (S/.) *"
+                  placeholder="10"
+                  type="number"
+                  min={1}
+                />
+
+                <Select
+                  name="method"
+                  label="Metodo de Pago *"
+                  options={[
+                    { value: "", label: "Seleccione un metodo", disabled: true },
+                    ...methodOptions,
+                  ]}
+                />
+              </section>
+
+              <section>
+                <Textarea
+                  name="message"
+                  label="Mensaje"
+                  placeholder="Escriba un mensaje"
+                  rows={5}
+                />
+              </section>
+
+              <section className="w-full">
+                <Button className="w-full" containerClassName="w-full">
+                  Enviar Solicitud
+                </Button>
+              </section>
             </FormContainer>
 
-            <div className="w-full"></div>
+            {/*<div className="w-full"></div> */}
           </section>
-        </div> */}
+        </div>
 
         {/* Related Pets */}
         <div className="mt-20 space-y-8">
