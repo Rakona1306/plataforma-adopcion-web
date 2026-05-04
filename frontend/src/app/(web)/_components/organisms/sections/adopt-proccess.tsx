@@ -16,9 +16,9 @@ export default function AdoptProccess() {
           y feliz.
         </p>
 
-        <div className="flex mt-10 items-stretch">
+        <div className="flex mt-10 items-stretch flex-wrap lg:flex-nowrap lg:gap-5 gap-10">
           {adoptInfoData.map((item, index) => (
-            <div key={index} className="flex items-stretch">
+            <div key={index} className="flex items-stretch max-lg:w-full min-w-[300px]">
               <div className="flex-1">
                 <AdoptInfoCard
                   Icon={item.Icon}
@@ -29,7 +29,7 @@ export default function AdoptProccess() {
               </div>
 
               {index < adoptInfoData.length - 1 && (
-                <div className="flex items-center px-2">
+                <div className="flex items-center px-2 max-lg:hidden">
                   <div className="w-7 border-t-4 border-secondary rounded-lg"></div>
                 </div>
               )}
@@ -37,8 +37,8 @@ export default function AdoptProccess() {
           ))}
         </div>
 
-        <div className="pt-10 border-t-[0.5px] border-slate-400/50 mt-10 flex gap-5 items-stretch">
-          <div className="w-full">
+        <div className="pt-10 border-t-[0.5px] border-slate-400/50 mt-10 flex gap-5 items-stretch lg:flex-nowrap flex-wrap">
+          <div className="w-full min-w-[300px]">
             <span className="text-3xl font-bold text-terciary">100%</span>
             <Title htmlTag="h6" className="mt-3 text-lg text-gray-700 font-medium">Acompañamiento Post-Adopción</Title>
             <p className="mt-3 text-base text-gray-500">Te brindamos seguimiento completo durante el primer mes.</p>

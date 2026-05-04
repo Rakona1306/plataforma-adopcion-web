@@ -18,7 +18,7 @@
   --color-terciary: var(--terciary);
   --color-quaternary: var(--quaternary);
   --color-background: var(--background);
-
+  --color-foreground: var(--color-slate-800);
 }
 
 @media (prefers-color-scheme: dark) {

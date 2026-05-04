@@ -3,11 +3,13 @@ export const companyInfo = {
   shortDescription: "Rescatando vidas, transformando familias",
   description: "Somos una organización sin fines de lucro dedicada a rescatar, rehabilitar y encontrar hogares amorosos para mascotas necesitadas.",
   mission: "Darle una segunda oportunidad a cada mascota que entra por nuestras puertas, brindándole no solo un hogar, sino una familia amorosa.",
+  address: "Altura de, Av. José Saco Rojas, Carabayllo 15121",
+  linkAddress: "https://maps.app.goo.gl/HfGBJJGCsMP5kryr7",
   
   contact: {
     address: "Jr. Los Precursores 245, San Isidro, Lima",
     phone: "+51 955 288 116",
-    email: "contacto@pawsadopt.pe",
+    email: "albergue.adoptasalvavidas@gmail.com",
     website: "www.pawsadopt.pe"
   },
 
