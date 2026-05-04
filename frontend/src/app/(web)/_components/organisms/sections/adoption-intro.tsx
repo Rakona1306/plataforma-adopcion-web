@@ -13,8 +13,8 @@ export default function AdoptionIntro() {
     <>
       <section>
         <Container>
-          <section className="w-full py-10 pb-20 flex gap-5 items-center">
-            <div className="space-y-5 w-1/2">
+          <section className="w-full py-10 pb-20 flex gap-5 items-center md:flex-row flex-col">
+            <div className="space-y-5 w-full md:w-1/2">
               <Tag className="flex items-center gap-2 py-3 px-6">
                 <span className="leading-none">Transforma tu vida </span>
                 <FaStar />
@@ -72,7 +72,7 @@ export default function AdoptionIntro() {
             </div>
 
             <div className="w-1/2 flex justify-center">
-              <div className="w-fit relative before:absolute before:inset-0 before:bg-terciary before:-bottom-8 before:-right-10 before:top-10 before:left-10 before:z-10 before:rounded-2xl">
+              <div className="w-fit relative max-lg:before:hidden before:absolute before:inset-0 before:bg-terciary before:-bottom-8 before:-right-10 before:top-10 before:left-10 before:z-10 before:rounded-2xl">
                 <img
                   src="/home/aside.jpg"
                   alt="Aside"

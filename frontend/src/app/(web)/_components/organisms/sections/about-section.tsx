@@ -195,7 +195,7 @@ export default function AboutSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="sobre-nosotros" className="py-16 md:py-24 bg-linear-to-b from-gray-100 to-primary/5">
+    <section ref={sectionRef} id="sobre-nosotros" className="py-16 md:py-26 md:pt-40 bg-linear-to-b from-gray-100 to-primary/5">
       <Container className="space-y-16 md:space-y-24">
         
         {/* Header */}

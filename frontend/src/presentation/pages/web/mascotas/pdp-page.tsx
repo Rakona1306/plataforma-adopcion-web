@@ -5,6 +5,8 @@ import { PetCardItem } from "@/app/(web)/_components/atoms/card/pet-card-item";
 import Title from "@/app/(web)/_components/atoms/title";
 import { petsData } from "@/app/(web)/_utils/data/pets.data";
 import { usePet } from "@/application/hooks/pet/usePet";
+import Input from "@/presentation/atoms/input";
+import FormContainer from "@/presentation/molecules/form-container";
 import Link from "next/link";
 import { useState } from "react";
 import { BiChevronLeft, BiChevronRight, BiHeart } from "react-icons/bi";
@@ -210,6 +212,25 @@ export default function PetDeatilPage({ petId }: PetDeatilPageProps) {
               </div>
             </div>
 
+            {/* CTA Buttons */}
+            <div className="space-y-4 pt-6 border-t-2 border-primary/10">
+              <Button
+                containerClassName="w-full"
+                spaceClassName="bg-gray-100!"
+                href=""
+                className="w-full px-8 py-4 rounded-full font-bold text-lg hover:shadow-lg hover:shadow-primary/50 transition-all duration-300 "
+              >
+                Adoptar a {pet.name}
+              </Button>
+              <Button
+                containerClassName="w-full"
+                spaceClassName="bg-gray-100!"
+                className="w-full px-8 py-4 bg-white before:bg-terciary! text-terciary border-2 border-terciary rounded-full font-bold text-lg transition-all duration-300"
+              >
+                Apadrina a {pet.name}
+              </Button>
+            </div>
+
             {/* Description */}
             <div className="space-y-3">
               <h2 className="text-2xl font-bold text-slate-800">
@@ -250,25 +271,6 @@ export default function PetDeatilPage({ petId }: PetDeatilPageProps) {
               </p>
             </div>
 
-            {/* CTA Buttons */}
-            <div className="space-y-4 pt-6 border-t-2 border-primary/10">
-              <Button 
-                containerClassName="w-full"
-                spaceClassName="bg-gray-100!"
-                href=""
-                className="w-full px-8 py-4 rounded-full font-bold text-lg hover:shadow-lg hover:shadow-primary/50 transition-all duration-300 "
-              >
-                Adoptar a {pet.name}
-              </Button>
-              <Button 
-                containerClassName="w-full"
-                spaceClassName="bg-gray-100!"
-                className="w-full px-8 py-4 bg-white before:bg-terciary! text-terciary border-2 border-terciary rounded-full font-bold text-lg transition-all duration-300"
-              >
-                Apadrina a {pet.name}
-              </Button>
-            </div>
-
             {/* Contact CTA */}
             <div className="p-6 rounded-xl bg-blue-50 border border-blue-200 text-center space-y-3">
               <FaUsers className="w-8 h-8 text-blue-600 mx-auto" />
@@ -290,6 +292,34 @@ export default function PetDeatilPage({ petId }: PetDeatilPageProps) {
             </div>
           </div>
         </div>
+
+        {/* <div className="mt-10 ">
+          <Title htmlTag="h3" className="text-center mb-5 text-slate-800">
+            Apadrinar a <span className="text-primary">{pet.name}</span>
+          </Title>
+          <section className="flex gap-5">
+            <FormContainer
+              initialValues={{
+                name: "",
+                email: "",
+                amount: 0,
+                pet: pet.id,
+              }}
+              onSubmit={(values) => {
+                console.log(values);
+              }}
+              containerClassName="w-full bg-white border-slate-500 py-8 px-4 rounded-lg"
+            >
+              <Input
+                name="name"
+                label="Nombre Completo"
+                placeholder="Juan Perez Hidalgo"
+              />
+            </FormContainer>
+
+            <div className="w-full"></div>
+          </section>
+        </div> */}
 
         {/* Related Pets */}
         <div className="mt-20 space-y-8">

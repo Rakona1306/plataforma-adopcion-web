@@ -1,4 +1,0 @@
-/**
- * Componentes base - Exportar todos
- */
-

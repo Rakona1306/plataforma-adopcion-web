@@ -22,7 +22,7 @@ export const bannerData: BannerHomeData = {
       subtitle: 'Miles de mascotas esperan tu amor',
       description: 'Cada adopción es un acto de amor. Nuestras mascotas necesitan un hogar donde puedan ser felices. Haz una diferencia hoy y cambia una vida.',
       cta: 'Ver Mascotas',
-      ctaLink: '#mascotas',
+      ctaLink: '/mascotas',
       category: 'adopcion'
     },
     {
@@ -32,7 +32,7 @@ export const bannerData: BannerHomeData = {
       subtitle: 'Apoya a nuestras mascotas sin compromisos de adopción',
       description: 'Con tu aporte mensual, proporcionas alimento, cuidados médicos y amor. Recibe fotos y actualizaciones mensuales de tu mascota.',
       cta: 'Conviértete en Padrino',
-      ctaLink: '#apadrinamiento',
+      ctaLink: '/mascotas',
       category: 'donacion'
     },
     {
@@ -42,7 +42,7 @@ export const bannerData: BannerHomeData = {
       subtitle: 'Dedica tu tiempo a lo que realmente importa',
       description: 'Necesitamos manos amigas para cuidar, pasear y socializar a nuestras mascotas. Si amas a los animales, ¡te necesitamos!',
       cta: 'Sé Voluntario',
-      ctaLink: '#voluntariado',
+      ctaLink: '/voluntariado',
       category: 'voluntariado'
     },
     {
@@ -51,8 +51,8 @@ export const bannerData: BannerHomeData = {
       title: 'Estamos Contigo Después de la Adopción',
       subtitle: 'Tu mascota merece lo mejor siempre',
       description: 'Nuestro equipo de expertos está disponible 24/7 para asesorarte sobre cuidados, salud y comportamiento de tu nueva familia.',
-      cta: 'Acceder a Soporte',
-      ctaLink: '#soporte',
+      cta: 'Nosotros',
+      ctaLink: '/nosotros',
       category: 'seguimiento'
     },
     {
@@ -61,8 +61,8 @@ export const bannerData: BannerHomeData = {
       title: 'Historias que Inspiran',
       subtitle: 'Conoce las transformaciones que hemos logrado juntos',
       description: 'Cientos de familias han encontrado la felicidad adoptando con nosotros. Lee sus historias y déjate inspirar para dar el siguiente paso.',
-      cta: 'Ver Historias',
-      ctaLink: '#historias',
+      cta: 'Realizar donación',
+      ctaLink: '/donaciones',
       category: 'adopcion'
     }
   ]

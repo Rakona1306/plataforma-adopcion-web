@@ -7,6 +7,8 @@ import { paymentMethods } from "@/app/(web)/_utils/data/paymentMethods";
 import { MdPets, MdLocationOn, MdPhone } from "react-icons/md";
 import { headerData } from "@/shared/utils/web/data/header.data";
 import Container from "@/presentation/atoms/container";
+import { companyInfo } from "../../_utils/data/companyInfo.data";
+import { notSpace } from "@/shared/functions/notSpace";
 
 const CONTACT = {
   phone: "+51 955 288 116",
@@ -81,15 +83,15 @@ export default function Footer() {
             {/* Contact */}
             <div className="space-y-3">
               <a
-                href={`tel:${CONTACT.phone.replace(/\s/g, "")}`}
+                href={`tel:${notSpace(companyInfo.contact.phone)}`}
                 className="flex items-center gap-2.5 text-sm text-white/70 hover:text-terciary transition-colors duration-200"
               >
                 <MdPhone className="text-terciary flex-shrink-0" />
-                {CONTACT.phone}
+                {companyInfo.contact.phone}
               </a>
               <div className="flex items-start gap-2.5 text-sm text-white/70">
                 <MdLocationOn className="text-terciary flex-shrink-0 mt-0.5" />
-                <span>{CONTACT.address}</span>
+                <span>{companyInfo.address}</span>
               </div>
             </div>
           </motion.div>

@@ -3,6 +3,7 @@
 import { PetCardItem } from "@/app/(web)/_components/atoms/card/pet-card-item"
 import { petsData } from "@/app/(web)/_utils/data/pets.data"
 import { usePetSearch } from "@/application/hooks/pet/usePetSearch"
+import Container from "@/presentation/atoms/container"
 import { BiSearch, BiX } from "react-icons/bi"
 
 export default function PetListPage () {
@@ -22,10 +23,10 @@ export default function PetListPage () {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-100 to-primary/5 py-12 md:py-16">
-      <div className="container mx-auto px-4 md:px-6 space-y-12">
+      <Container className=" space-y-12">
         {/* Header */}
         <div className="text-center space-y-4">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-800">
             Conoce a Nuestras <span className="text-primary">Mascotas</span>
           </h1>
           <p className="text-lg md:text-xl text-foreground/70 max-w-2xl mx-auto">
@@ -37,7 +38,7 @@ export default function PetListPage () {
         <div className="max-w-4xl mx-auto space-y-6">
           {/* Search Bar */}
           <div className="relative">
-            <BiSearch className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-foreground/50" />
+            <BiSearch className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-800" />
             <input
               type="text"
               placeholder="Busca por nombre, raza o características..."
@@ -51,11 +52,11 @@ export default function PetListPage () {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             {/* Race Filter */}
             <div className="space-y-2">
-              <label className="block text-sm font-semibold text-foreground">Tipo de Mascota</label>
+              <label className="block text-sm font-semibold text-slate-800">Tipo de Mascota</label>
               <select
                 value={selectedRace}
                 onChange={(e) => setSelectedRace(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg border-2 border-primary/20 focus:border-primary outline-none transition-colors text-foreground text-base"
+                className="w-full px-4 py-3 rounded-lg border-2 border-primary/20 focus:border-primary outline-none transition-colors text-slate-800 text-base"
               >
                 <option value="todos">Todas</option>
                 {races.map((race) => (
@@ -68,11 +69,11 @@ export default function PetListPage () {
 
             {/* Gender Filter */}
             <div className="space-y-2">
-              <label className="block text-sm font-semibold text-foreground">Género</label>
+              <label className="block text-sm font-semibold text-slate-800">Género</label>
               <select
                 value={selectedGender}
                 onChange={(e) => setSelectedGender(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg border-2 border-primary/20 focus:border-primary outline-none transition-colors text-foreground text-base"
+                className="w-full px-4 py-3 rounded-lg border-2 border-primary/20 focus:border-primary outline-none transition-colors text-slate-800 text-base"
               >
                 <option value="todos">Todos</option>
                 {genders.map((gender) => (
@@ -104,7 +105,7 @@ export default function PetListPage () {
 
         {/* Results Count */}
         <div className="text-center">
-          <p className="text-lg text-foreground/70">
+          <p className="text-lg text-slate-800/70">
             Mostrando <span className="font-bold text-primary">{filteredPets.length}</span> de{' '}
             <span className="font-bold text-primary">{petsData.length}</span> mascotas
           </p>
@@ -120,10 +121,10 @@ export default function PetListPage () {
         ) : (
           <div className="text-center py-16 md:py-24">
             <div className="text-6xl mb-4">🔍</div>
-            <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
+            <h3 className="text-2xl md:text-3xl font-bold text-slate-800 mb-2">
               No encontramos mascotas
             </h3>
-            <p className="text-lg text-foreground/70 max-w-md mx-auto">
+            <p className="text-lg text-slate-800/70 max-w-md mx-auto">
               Intenta con otros criterios de búsqueda o filtros
             </p>
             <button
@@ -138,7 +139,7 @@ export default function PetListPage () {
             </button>
           </div>
         )}
-      </div>
+      </Container>
     </div>
   )
 }
