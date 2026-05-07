@@ -1,0 +1,28 @@
+# Visual Studio
+.vs/
+bin/
+obj/
+
+# Rider
+.idea/
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# User files
+*.user
+*.suo
+
+# EF
+Migrations/
+
+# Node
+node_modules/
+
+# Environment
+.env
+
+Migrations
