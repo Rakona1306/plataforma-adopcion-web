@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\.env||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\.env||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
@@ -43,10 +51,6 @@
       "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\.env||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\.env||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\infrastructure\\configuration\\dotenvloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\infrastructure\\configuration\\dotenvloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -62,15 +66,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\.gitignore",
+              "RelativeDocumentMoniker": "API\\.gitignore",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\.gitignore",
+              "RelativeToolTip": "API\\.gitignore",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-05-07T23:49:16.841Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\appsettings.json",
               "RelativeDocumentMoniker": "API\\appsettings.json",
@@ -83,24 +104,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "appsettings.Development.json",
-              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\appsettings.Development.json",
-              "RelativeDocumentMoniker": "API\\appsettings.Development.json",
-              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\appsettings.Development.json",
-              "RelativeToolTip": "API\\appsettings.Development.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-05-07T23:45:43.264Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "WeatherForecastController.cs",
               "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Presentation\\Controllers\\WeatherForecastController.cs",
               "RelativeDocumentMoniker": "API\\Presentation\\Controllers\\WeatherForecastController.cs",
@@ -108,12 +112,11 @@
               "RelativeToolTip": "API\\Presentation\\Controllers\\WeatherForecastController.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAQwAUAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-07T23:37:58.587Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-07T23:37:58.587Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "RolesController.cs",
               "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Presentation\\Controllers\\RolesController.cs",
               "RelativeDocumentMoniker": "API\\Presentation\\Controllers\\RolesController.cs",
@@ -121,12 +124,11 @@
               "RelativeToolTip": "API\\Presentation\\Controllers\\RolesController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-07T23:37:55.234Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-07T23:37:55.234Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "RoleMapper.cs",
               "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Roles\\Mappers\\RoleMapper.cs",
               "RelativeDocumentMoniker": "API\\Application\\Features\\Roles\\Mappers\\RoleMapper.cs",
@@ -134,12 +136,11 @@
               "RelativeToolTip": "API\\Application\\Features\\Roles\\Mappers\\RoleMapper.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAABRAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-07T23:24:08.396Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-07T23:24:08.396Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "CreateRoleValidator.cs",
               "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Roles\\Validators\\CreateRoleValidator.cs",
               "RelativeDocumentMoniker": "API\\Application\\Features\\Roles\\Validators\\CreateRoleValidator.cs",
@@ -147,12 +148,36 @@
               "RelativeToolTip": "API\\Application\\Features\\Roles\\Validators\\CreateRoleValidator.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-07T23:21:29.133Z",
+              "WhenOpened": "2026-05-07T23:21:29.133Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": ".env",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\.env",
+              "RelativeDocumentMoniker": "API\\.env",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\.env",
+              "RelativeToolTip": "API\\.env",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-05-07T23:09:25.806Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 3,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "API\\appsettings.Development.json",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\appsettings.Development.json",
+              "RelativeToolTip": "API\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-05-07T23:45:43.264Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "Role.cs",
               "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Domain\\Model\\Role.cs",
               "RelativeDocumentMoniker": "API\\Domain\\Model\\Role.cs",
@@ -160,12 +185,11 @@
               "RelativeToolTip": "API\\Domain\\Model\\Role.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-07T23:17:07.518Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-07T23:17:07.518Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "RoleResponse.cs",
               "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Roles\\Dtos\\RoleResponse.cs",
               "RelativeDocumentMoniker": "API\\Application\\Features\\Roles\\Dtos\\RoleResponse.cs",
@@ -173,12 +197,11 @@
               "RelativeToolTip": "API\\Application\\Features\\Roles\\Dtos\\RoleResponse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-07T23:16:53.042Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-07T23:16:53.042Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "CreateRoleDto.cs",
               "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Roles\\Dtos\\CreateRoleDto.cs",
               "RelativeDocumentMoniker": "API\\Application\\Features\\Roles\\Dtos\\CreateRoleDto.cs",
@@ -186,29 +209,11 @@
               "RelativeToolTip": "API\\Application\\Features\\Roles\\Dtos\\CreateRoleDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAUAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-07T23:16:43.145Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-07T23:16:43.145Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": ".env",
-              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\.env",
-              "RelativeDocumentMoniker": "API\\.env",
-              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\.env",
-              "RelativeToolTip": "API\\.env",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-05-07T23:09:25.806Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "DotEnvLoader.cs",
               "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Infrastructure\\Configuration\\DotEnvLoader.cs",
               "RelativeDocumentMoniker": "API\\Infrastructure\\Configuration\\DotEnvLoader.cs",
@@ -216,12 +221,11 @@
               "RelativeToolTip": "API\\Infrastructure\\Configuration\\DotEnvLoader.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-07T23:09:08.832Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-07T23:09:08.832Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Program.cs",
               "RelativeDocumentMoniker": "API\\Program.cs",
@@ -229,12 +233,11 @@
               "RelativeToolTip": "API\\Program.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-07T23:04:21.828Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-07T23:04:21.828Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "ConnDbContext.cs",
               "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Infrastructure\\Db\\ConnDbContext.cs",
               "RelativeDocumentMoniker": "API\\Infrastructure\\Db\\ConnDbContext.cs",
@@ -242,8 +245,7 @@
               "RelativeToolTip": "API\\Infrastructure\\Db\\ConnDbContext.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAQwBIAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-07T22:47:35.348Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-07T22:47:35.348Z"
             }
           ]
         }
