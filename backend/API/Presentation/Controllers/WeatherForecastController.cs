@@ -1,6 +1,7 @@
+using API.Domain.Model;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Controllers
+namespace API.Presentation.Controllers
 {
     [ApiController]
     [Route("[controller]")]
