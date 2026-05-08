@@ -1,7 +1,7 @@
-﻿using API.Application.Features.Roles.Dtos;
+﻿using API.Application.Features.Organization.Roles.Dtos;
 using FluentValidation;
 
-namespace API.Application.Features.Roles.Validators
+namespace API.Application.Features.Organization.Roles.Validators
 {
     public class CreateRoleValidator : AbstractValidator<CreateRoleDto>
     {

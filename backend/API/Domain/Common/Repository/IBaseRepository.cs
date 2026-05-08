@@ -10,9 +10,9 @@ namespace API.Domain.Common.Repository
             string? search = null,
             string? sort = null
             );
-        Task<T?> GetByIdAsync(int id);
+        Task<T?> GetByIdAsync(Guid id);
         Task<T> CreateAsync(T entity);
-        Task<T> UpdateAsync(T entity, int id, int userId, string tableName);
-        Task DeleteAsync(int id, int? userId, string tableName);
+        Task<T> UpdateAsync(T entity, Guid id);
+        Task DeleteAsync(Guid id);
     }
 }

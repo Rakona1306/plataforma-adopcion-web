@@ -1,4 +1,4 @@
-﻿using API.Domain.Model;
+﻿using API.Domain.Model.Organization;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 

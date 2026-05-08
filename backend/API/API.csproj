@@ -23,9 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\Common\" />
     <Folder Include="Infrastructure\Db\Entity\" />
-    <Folder Include="Infrastructure\RepositoryImpl\" />
+    <Folder Include="Infrastructure\RepositoryImpl\Organization\" />
   </ItemGroup>
 
 </Project>

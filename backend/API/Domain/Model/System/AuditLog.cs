@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace API.Domain.Model
+namespace API.Domain.Model.System
 {
     public class AuditLog
     {
