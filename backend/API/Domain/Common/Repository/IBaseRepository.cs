@@ -13,6 +13,6 @@ namespace API.Domain.Common.Repository
         Task<T?> GetByIdAsync(Guid id);
         Task<T> CreateAsync(T entity);
         Task<T> UpdateAsync(T entity, Guid id);
-        Task DeleteAsync(Guid id);
+        Task DeleteAsync(T entity, Guid id);
     }
 }

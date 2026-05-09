@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using API.Domain.Model.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace API.Domain.Model.System
 {
@@ -6,12 +7,13 @@ namespace API.Domain.Model.System
     {
         [Key]
         public int Id { get; set; }
-        public int? UserId { get; set; }
+        public Guid? UserId { get; set; }
+        public AuditEnum AuditType { get; set; }
         [Required]
         public string TableName { get; set; } = string.Empty;
         [Required]
-        public string RecordId { get; set; } = string.Empty;
-        public object? OldValues { get; set; }
+        public Guid RecordId { get; set; }
+        public string? OldValues { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
 }

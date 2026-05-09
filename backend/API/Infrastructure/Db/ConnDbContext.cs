@@ -1,4 +1,6 @@
-﻿using API.Domain.Model.Organization;
+﻿using API.Domain.Model;
+using API.Domain.Model.Organization;
+using API.Domain.Model.System;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -8,6 +10,9 @@ namespace API.Infrastructure.Db
     {
         public ConnDbContext(DbContextOptions<ConnDbContext> options) : base(options) { }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<AuditLog> AuditLogs { get; set; }
+
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(
         ModelBuilder modelBuilder)

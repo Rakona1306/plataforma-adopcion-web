@@ -26,7 +26,6 @@ C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\obj\De
 C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\obj\Debug\net10.0\staticwebassets.development.json
 C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\obj\Debug\net10.0\staticwebassets.build.endpoints.json
 C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\obj\Debug\net10.0\swae.build.ex.cache
-C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
 C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\obj\Debug\net10.0\API.csproj.Up2Date
 C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\obj\Debug\net10.0\API.dll
 C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\obj\Debug\net10.0\refint\API.dll
@@ -137,3 +136,4 @@ C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\bin\De
 C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\bin\Debug\net10.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
 C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\bin\Debug\net10.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
 C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\bin\Debug\net10.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
+C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt

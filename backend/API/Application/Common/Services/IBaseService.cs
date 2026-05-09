@@ -12,7 +12,7 @@ namespace API.Application.Common.Services
             );
         Task<TDto?> GetByIdAsync(Guid id);
         Task<TDto> CreateAsync(TCreateDto entity);
-        Task<TDto> UpdateAsync(TUpdateDto entity, Guid id, int? userId, string tableName);
-        Task DeleteAsync(Guid id, int? userId, string tableName);
+        Task<TDto> UpdateAsync(TUpdateDto entity, Guid id, Guid? userId);
+        Task DeleteAsync(Guid id, Guid? userId);
     }
 }

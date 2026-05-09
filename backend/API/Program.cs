@@ -1,10 +1,14 @@
+using API.Application.Configuration;
 using API.Infrastructure.Configuration;
 using API.Infrastructure.Db;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
-DotEnvLoader.Load(Path.Combine(Directory.GetCurrentDirectory(), ".env"));
+DotEnvLoader.Load(Path.Combine(Directory.GetCurrentDirectory(), ".env.example"));
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddSwaggerGen();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ConnDbContext>(options =>
@@ -14,6 +18,9 @@ builder.Services.AddDbContext<ConnDbContext>(options =>
         ));
 
 // Add services to the container.
+builder.Services.AddApplicationServices();
+builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -25,6 +32,8 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
