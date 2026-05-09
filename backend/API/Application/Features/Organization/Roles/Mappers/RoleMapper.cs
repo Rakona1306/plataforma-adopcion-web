@@ -1,5 +1,5 @@
-﻿using API.Application.Features.Roles.Dtos;
-using API.Domain.Model;
+﻿using API.Application.Features.Organization.Roles.Dtos;
+using API.Domain.Model.Organization;
 using Riok.Mapperly.Abstractions;
 
 namespace API.Application.Features.Roles.Mappers
@@ -12,6 +12,9 @@ namespace API.Application.Features.Roles.Mappers
         public partial RoleResponse ToResponse(Role role);
 
         public partial List<RoleResponse> ToResponseList(List<Role> roles);
-        public partial RoleResponse UpdateRole(CreateRoleDto request, Role role);
+        public partial void UpdateRole(
+            CreateRoleDto source,
+            [MappingTarget] Role target
+        );
     }
 }

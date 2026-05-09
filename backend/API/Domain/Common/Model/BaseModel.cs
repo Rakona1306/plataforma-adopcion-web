@@ -7,8 +7,8 @@ namespace API.Domain.Common.Model
         [Key]
         public Guid Id { get; set; } = Guid.NewGuid();
         public DateTime CreatedAt { get; set; }
-        public int CreatedBy { get; set; }
+        public Guid? CreatedBy { get; set; }
         public DateTime LastUpdatedAt { get; set; }
-        public int UpdatedBy { get; set; }
+        public Guid? UpdatedBy { get; set; }
     }
 }

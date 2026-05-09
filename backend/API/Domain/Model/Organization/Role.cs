@@ -1,6 +1,6 @@
 ﻿using API.Domain.Common.Model;
 
-namespace API.Domain.Model
+namespace API.Domain.Model.Organization
 {
     public class Role: BaseModel
     {

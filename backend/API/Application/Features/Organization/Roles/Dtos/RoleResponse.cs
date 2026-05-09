@@ -1,4 +1,4 @@
-﻿namespace API.Application.Features.Roles.Dtos
+﻿namespace API.Application.Features.Organization.Roles.Dtos
 {
     public class RoleResponse
     {
