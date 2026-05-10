@@ -1,6 +1,5 @@
 ﻿using API.Application.Features.Organization.Roles.Dtos;
 using API.Application.Services.Organization.Roles;
-using API.Domain.Model.Organization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Presentation.Controllers
