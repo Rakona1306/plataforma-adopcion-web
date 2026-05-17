@@ -1,4 +1,5 @@
-import { SponsorshipItem } from "@/shared/utils/web/data/sponsoship.data";
+
+import { SponsorshipItem } from "@/core/shared/utils/web/data/sponsoship.data";
 import Title from "../../atoms/title";
 
 export default function SponsorshipCard({ description, img, title }: SponsorshipItem) {

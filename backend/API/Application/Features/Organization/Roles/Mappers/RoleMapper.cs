@@ -8,9 +8,7 @@ namespace API.Application.Features.Roles.Mappers
     public partial class RoleMapper
     {
         public partial Role ToEntity(CreateRoleDto request);
-
         public partial RoleResponse ToResponse(Role role);
-
         public partial List<RoleResponse> ToResponseList(List<Role> roles);
         public partial void UpdateRole(
             CreateRoleDto source,

@@ -17,11 +17,13 @@ export default function Input({
   rightIconAriaLabel,
   onChange,
   onBlur,
+  error,
+  hasErrorActive,
   ...props
 }: InputFormikProps) {
   const [field, meta] = useField(props.name)
   const inputId = id ?? props.name
-  const hasError = Boolean(meta.touched && meta.error)
+  const hasError = Boolean(meta.touched && meta.error) || error || hasErrorActive
   const helperId = helperText ? `${inputId}-helper` : undefined
   const errorId = hasError ? `${inputId}-error` : undefined
   const describedBy = [helperId, errorId].filter(Boolean).join(' ') || undefined
@@ -69,7 +71,6 @@ export default function Input({
           value={field.value ?? ''}
           onChange={handleChange}
           onBlur={handleBlur}
-          aria-invalid={hasError}
           aria-describedby={describedBy}
           className={joinClasses(
             'w-full rounded-xl border bg-white px-4 py-3 text-sm text-slate-900 outline-none transition-all duration-300 disabled:bg-gray-200 disabled:text-slate-600 disabled:cursor-not-allowed',
@@ -103,7 +104,7 @@ export default function Input({
 
       {hasError ? (
         <p id={errorId} className="text-xs font-medium text-red-600">
-          {meta.error}
+          {meta.error || error}
         </p>
       ) : null}
     </div>
@@ -121,6 +122,8 @@ interface InputFormikProps extends InputHTMLAttributes<HTMLInputElement> {
   rightIconOnClick?: (event: MouseEvent<HTMLButtonElement>) => void
   leftIconAriaLabel?: string
   rightIconAriaLabel?: string
+  error?: string
+  hasErrorActive?: boolean
 }
 
 function joinClasses(...classNames: Array<string | undefined>) {

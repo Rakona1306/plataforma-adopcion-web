@@ -1,5 +1,6 @@
 "use server"
-import HomePage from "@/presentation/pages/web/home-page";
+
+import HomePage from "@/components/pages/web/home-page";
 
 export default async function Home() {
   return (

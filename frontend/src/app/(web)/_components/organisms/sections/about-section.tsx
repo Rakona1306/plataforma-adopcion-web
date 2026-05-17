@@ -148,12 +148,11 @@ import { companyInfo } from '@/app/(web)/_utils/data/companyInfo.data'
 import { Card, CardContent } from '../../molecules/card/card'
 import { BiMapPin, BiPhone } from 'react-icons/bi'
 import { CgMail } from 'react-icons/cg'
-import { HiExternalLink } from 'react-icons/hi'
 import Title from '../../atoms/title'
-import Container from '@/presentation/atoms/container'
 import Button from '../../atoms/button/button'
 import { BsWhatsapp } from 'react-icons/bs'
 import { MdEmail } from 'react-icons/md'
+import Container from '@/components/atoms/container'
 
 export default function AboutSection() {
   const [isVisible, setIsVisible] = useState(false)

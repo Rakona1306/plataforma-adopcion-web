@@ -1,8 +1,9 @@
-import Container from "@/presentation/atoms/container";
+
 import Title from "../../atoms/title";
-import { usePetSearch } from "@/application/hooks/pet/usePetSearch";
 import Button from "../../atoms/button/button";
 import { PetCardItem } from "../../atoms/card/pet-card-item";
+import { usePetSearch } from "@/core/application/hooks/pet/usePetSearch";
+import Container from "@/components/atoms/container";
 
 export default function PetsSection() {
   const { filteredPets } = usePetSearch();

@@ -15,16 +15,16 @@ import {
 import { IoPhonePortraitOutline } from "react-icons/io5";
 import { FaHandshake, FaMapMarkerAlt, FaUsers } from "react-icons/fa";
 import { CgLock } from "react-icons/cg";
-import Container from "@/presentation/atoms/container";
 import Button from "@/app/(web)/_components/atoms/button/button";
 import Title from "@/app/(web)/_components/atoms/title";
-import FormContainer from "@/presentation/molecules/form-container";
-import Input from "@/presentation/atoms/input";
-import Textarea from "@/presentation/atoms/text-area";
 import { companyInfo } from "@/app/(web)/_utils/data/companyInfo.data";
 import { MdOutlineEmail } from "react-icons/md";
 import Link from "next/link";
-import { notSpace } from "@/shared/functions/notSpace";
+import Container from "@/components/atoms/container";
+import FormContainer from "@/components/molecules/form-container";
+import Input from "@/components/atoms/input";
+import Textarea from "@/components/atoms/text-area";
+import { notSpace } from "@/core/shared/helpers/notSpace";
 
 const iconMap: Record<string, React.ComponentType<{ className: string }>> = {
   heart: BiHeart,
@@ -142,7 +142,7 @@ export default function VolunteerPage() {
                 />
               </section>
 
-              <Textarea 
+              <Textarea
                 label="Mensaje"
                 name="message"
                 placeholder="Escribe tu mensaje aquí"

@@ -1,9 +1,14 @@
-import NosotrosPage from "@/presentation/pages/web/aboiut-page";
+import NosotrosPage from "@/components/pages/web/aboiut-page";
+import { Suspense } from "react";
 
-export default function Page() {
+
+export default async function Page() {
+
   return (
     <div className="">
-      <NosotrosPage />
+      <Suspense fallback={<div>Loading...</div>}>
+        <NosotrosPage />
+      </Suspense>
     </div>
   )
 }

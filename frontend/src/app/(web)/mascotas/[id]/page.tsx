@@ -1,6 +1,7 @@
 "use server"
 
-import PetDeatilPage from "@/presentation/pages/web/mascotas/pdp-page";
+import PetDeatilPage from "@/components/pages/web/mascotas/pdp-page"
+
 
 export default async function Page({
   params,

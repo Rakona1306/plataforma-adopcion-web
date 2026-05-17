@@ -2,15 +2,14 @@
 
 import { useRef } from "react";
 import { motion, useInView, type Variants } from "motion/react";
-import Container from "@/presentation/atoms/container";
-import Tag from "@/presentation/atoms/tag";
 import Title from "../../atoms/title";
-import Button from "../../atoms/button/button";
-import { sponsorshipData } from "@/shared/utils/web/data/sponsoship.data";
 import { FaHeart, FaPaw } from "react-icons/fa";
 import { MdPets, MdVolunteerActivism, MdUpdate } from "react-icons/md";
 import { HiSparkles } from "react-icons/hi2";
 import Link from "next/link";
+import Container from "@/components/atoms/container";
+import Tag from "@/components/atoms/tag";
+import { sponsorshipData } from "@/core/shared/utils/web/data/sponsoship.data";
 
 /* ── icons per card (fallback if no img) ─────────────── */
 const cardIcons = [MdVolunteerActivism, MdUpdate, MdPets];
@@ -130,10 +129,7 @@ export default function SponsorshipSection() {
                 initial="hidden"
                 animate={inView ? "visible" : "hidden"}
                 whileHover={{ y: -6, transition: { duration: 0.25, ease: "easeOut" } }}
-                className="group relative bg-white rounded-2xl overflow-hidden
-                           border border-quaternary/60 shadow-sm
-                           hover:shadow-[0_8px_32px_rgba(115,29,52,0.12)]
-                           transition-shadow duration-300"
+                className="group relative bg-white rounded-2xl overflow-hidden border border-quaternary/60 shadow-sm hover:shadow-[0_8px_32px_rgba(115,29,52,0.12)] transition-shadow duration-300"
               >
                 {/* Card image */}
                 <div className="relative h-48 overflow-hidden bg-quaternary/40">
@@ -141,8 +137,7 @@ export default function SponsorshipSection() {
                   <img
                     src={item.img}
                     alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-500
-                               group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     onError={(e) => {
                       (e.target as HTMLImageElement).style.display = "none";
                     }}
@@ -151,15 +146,12 @@ export default function SponsorshipSection() {
                   <div className="absolute inset-0 bg-linear-to-t from-primary/40 via-transparent to-transparent" />
 
                   {/* Icon badge */}
-                  <div className="absolute top-3 right-3 w-9 h-9 rounded-xl
-                                  bg-white/90 backdrop-blur-sm flex items-center justify-center
-                                  shadow-sm">
+                  <div className="absolute top-3 right-3 w-9 h-9 rounded-xl bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-sm">
                     <Icon size={18} className="text-primary" />
                   </div>
 
                   {/* Index pill */}
-                  <div className="absolute bottom-3 left-3 w-7 h-7 rounded-full
-                                  bg-terciary flex items-center justify-center shadow-sm">
+                  <div className="absolute bottom-3 left-3 w-7 h-7 rounded-full bg-terciary flex items-center justify-center shadow-sm">
                     <span className="text-xs font-bold text-primary">{index + 1}</span>
                   </div>
                 </div>
@@ -183,9 +175,7 @@ export default function SponsorshipSection() {
                 </div>
 
                 {/* Bottom border accent on hover */}
-                <div className="absolute bottom-0 left-0 w-full h-0.75 bg-terciary
-                               scale-x-0 group-hover:scale-x-100 origin-left
-                               transition-transform duration-300 rounded-b-2xl" />
+                <div className="absolute bottom-0 left-0 w-full h-0.75 bg-terciary scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 rounded-b-2xl" />
               </motion.div>
             );
           })}
@@ -204,8 +194,7 @@ export default function SponsorshipSection() {
             <FaPaw size={120} className="text-terciary" />
           </div>
 
-          <div className="relative z-10 flex flex-col md:flex-row items-center
-                          justify-between gap-6">
+          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="text-center md:text-left">
               <div className="flex items-center gap-2 justify-center md:justify-start mb-2">
                 <HiSparkles className="text-terciary" size={18} />

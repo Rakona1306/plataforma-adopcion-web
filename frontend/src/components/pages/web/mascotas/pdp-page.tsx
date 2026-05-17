@@ -7,12 +7,12 @@ import { sendSponsorshipSchema } from "@/app/(web)/_schemas/sponsorship/send.che
 import { companyInfo } from "@/app/(web)/_utils/data/companyInfo.data";
 import { PaymentMethod, paymentMethods } from "@/app/(web)/_utils/data/paymentMethods";
 import { petsData } from "@/app/(web)/_utils/data/pets.data";
-import { usePet } from "@/application/hooks/pet/usePet";
-import Input from "@/presentation/atoms/input";
-import Select, { SelectFormikOption } from "@/presentation/atoms/select";
-import Textarea from "@/presentation/atoms/text-area";
-import FormContainer from "@/presentation/molecules/form-container";
-import { notSpace } from "@/shared/functions/notSpace";
+import Input from "@/components/atoms/input";
+import Select, { SelectFormikOption } from "@/components/atoms/select";
+import Textarea from "@/components/atoms/text-area";
+import FormContainer from "@/components/molecules/form-container";
+import { usePet } from "@/core/application/hooks/pet/usePet";
+import { notSpace } from "@/core/shared/helpers/notSpace";
 import Link from "next/link";
 import { useState } from "react";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";

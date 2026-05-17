@@ -1,61 +1,29 @@
-'use client'
+"use client";
 
-import { motion } from 'motion/react'
-import * as Yup from 'yup'
-import { useState } from 'react'
-import FormContainer, { FormContainerFormikSubmit } from '@/presentation/molecules/form-container'
-import Input from '@/presentation/atoms/input'
-import SocialLinks from '../social-links'
-import { companyInfo } from '@/app/(web)/_utils/data/companyInfo.data'
-
-const loginSchema = Yup.object().shape({
-  email: Yup.string()
-    .email('Email inválido')
-    .required('El email es requerido'),
-  password: Yup.string()
-    .min(6, 'La contraseña debe tener mínimo 6 caracteres')
-    .required('La contraseña es requerida'),
-})
-
-type LoginFormValues = {
-  email: string
-  password: string
-}
+import { motion } from "motion/react";
+import { useState } from "react";
+import SocialLinks from "../social-links";
+import { companyInfo } from "@/app/(web)/_utils/data/companyInfo.data";
+import FormContainer, {
+  FormContainerFormikSubmit,
+} from "@/components/molecules/form-container";
+import Input from "@/components/atoms/input";
+import { LoginDto } from "@/core/application/features/system/auth/dtos/login.dto";
+import { useAuth } from "@/core/application/features/system/auth/hooks/useAuth";
+import { getFieldError } from "@/core/shared/helpers/getFieldError";
+import {
+  containerVariants,
+  itemVariants,
+} from "@/core/shared/helpers/variants";
+import { Alert } from "@/components/atoms/alert";
 
 export default function LoginForm() {
-  const [isLoading, setIsLoading] = useState(false)
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
+  const { login, isLoading, error } = useAuth();
 
-  const handleSubmit: FormContainerFormikSubmit<LoginFormValues> = async (values) => {
-    setIsLoading(true)
-    try {
-      // Simular llamada a API
-      await new Promise((resolve) => setTimeout(resolve, 1500))
-      console.log('Login:', values)
-      // Aquí iría la lógica real de login
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.4 },
-    },
-  }
+  const handleSubmit: FormContainerFormikSubmit<LoginDto> = async (values) => {
+    login(values);
+  };
 
   return (
     <motion.div
@@ -66,20 +34,32 @@ export default function LoginForm() {
     >
       <motion.div variants={itemVariants}>
         <h2 className="text-3xl font-bold text-primary mb-2">Bienvenido 👋</h2>
-        <p className="text-slate-500">Inicia sesión en tu cuenta de {companyInfo.name}</p>
+        <p className="text-slate-500">
+          Inicia sesión en tu cuenta de {companyInfo.name}
+        </p>
       </motion.div>
 
-      <FormContainer<LoginFormValues>
+      <FormContainer<LoginDto>
         initialValues={{
-          email: '',
-          password: '',
+          email: "",
+          password: "",
         }}
-        validationSchema={loginSchema}
+        validationSchema={LoginDto}
         onSubmit={handleSubmit}
         className="space-y-5"
       >
+        {error && (
+          <Alert
+            type="error"
+            message="Error en el inicio de sesión"
+            title={error.message || "Ocurrió un error inesperado"}
+          />
+        )}
+
         <motion.div variants={itemVariants}>
           <Input
+            error={getFieldError(error, "Email")}
+            hasErrorActive={error ? true : false}
             name="email"
             label="Correo Electrónico"
             type="email"
@@ -90,21 +70,22 @@ export default function LoginForm() {
 
         <motion.div variants={itemVariants}>
           <Input
+            error={getFieldError(error, "Password")}
+            hasErrorActive={error ? true : false}
             name="password"
             label="Contraseña"
-            type={showPassword ? 'text' : 'password'}
+            type={showPassword ? "text" : "password"}
             placeholder="••••••••"
             leftIcon={<span>🔒</span>}
             rightIcon={
-              <motion.button
-                type="button"
+              <motion.div
                 onClick={() => setShowPassword(!showPassword)}
                 className="text-sm font-semibold text-primary hover:text-secondary"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
-                {showPassword ? '🙈' : '👁️'}
-              </motion.button>
+                {showPassword ? "🙈" : "👁️"}
+              </motion.div>
             }
             rightIconOnClick={() => setShowPassword(!showPassword)}
           />
@@ -137,7 +118,7 @@ export default function LoginForm() {
           variants={itemVariants}
           type="submit"
           disabled={isLoading}
-          className="w-full py-3 px-4 bg-gradient-to-r from-primary to-secondary text-white rounded-xl font-semibold transition-all duration-300 disabled:opacity-70 hover:shadow-lg"
+          className="w-full py-3 px-4 bg-linear-to-r from-primary to-secondary text-white rounded-xl font-semibold transition-all duration-300 disabled:opacity-70 hover:shadow-lg"
           whileHover={{ scale: isLoading ? 1 : 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
@@ -152,7 +133,7 @@ export default function LoginForm() {
               Ingresando...
             </span>
           ) : (
-            'Iniciar Sesión'
+            "Iniciar Sesión"
           )}
         </motion.button>
       </FormContainer>
@@ -170,5 +151,5 @@ export default function LoginForm() {
         <SocialLinks />
       </motion.div>
     </motion.div>
-  )
+  );
 }

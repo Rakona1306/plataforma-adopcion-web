@@ -38,8 +38,3 @@ export interface LoginInput {
   password: string;
 }
 
-export interface AuthResponse {
-  user: User;
-  accessToken: string;
-  refreshToken?: string;
-}

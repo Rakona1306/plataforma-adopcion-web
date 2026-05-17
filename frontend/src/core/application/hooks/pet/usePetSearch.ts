@@ -1,7 +1,7 @@
 "use client"
 
 import { petsData } from "@/app/(web)/_utils/data/pets.data"
-import { Pet } from "@/domain/models/Pet"
+import { Pet } from "@/core/domain/models/Pet"
 import { useMemo, useState } from "react"
 
 export const usePetSearch = (): UsePetSearchReturn => {

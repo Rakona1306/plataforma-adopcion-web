@@ -1,21 +1,22 @@
-import { PetCharacteristics } from "./PetCharacteristics"
-import { Race } from "./Race"
+import { PetCharacteristics } from "./PetCharacteristics";
+import { Race } from "./Race";
 
 export interface Pet {
-  id: number
-  name: string
-  description: string
-  age: number
-  images: Images[]
-  characteristics: PetCharacteristics[]
-  race: Race
-  breed: string
+  id: number;
+  name: string;
+  breed: string;
+  age: number;
+  description: string;
+  characteristics: PetCharacteristics[];
   gender: string
   isVaccinated: boolean
-  history?: string
+  race: Race
+  history: string
+  images: PetImage[]
 }
 
-export interface Images {
-  id: number
-  url: string
+export interface PetImage {
+  id: number;
+  url: string;
+  petId?: string;
 }

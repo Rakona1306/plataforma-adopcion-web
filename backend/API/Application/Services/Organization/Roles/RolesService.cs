@@ -1,24 +1,29 @@
 ﻿using API.Application.Features.Organization.Roles.Dtos;
 using API.Application.Features.Roles.Mappers;
+using API.Application.Features.System.AuditLogs.Dtos;
+using API.Application.Features.System.AuditLogs.Mappers;
 using API.Domain.Common.Model;
 using API.Domain.Model.Enums;
 using API.Domain.Model.Organization;
+using API.Domain.Model.System;
 using API.Domain.Repository.Organization;
 using API.Domain.Repository.System;
 using System.Text.Json;
 
 namespace API.Application.Services.Organization.Roles
 {
-    public class RolesService: IRolesService
+    public class RolesService : IRolesService
     {
         private readonly IRoleRepository _repository;
         private readonly RoleMapper _mapper;
+        private readonly AuditLogMapper _auditMapper;
         private readonly IAuditLogRepository _auditRepository;
         private readonly string _tableName;
 
-        public RolesService (IRoleRepository roleRepository, IAuditLogRepository auditLogRepository)
+        public RolesService(IRoleRepository roleRepository, IAuditLogRepository auditLogRepository)
         {
             _mapper = new RoleMapper();
+            _auditMapper = new AuditLogMapper();
             _repository = roleRepository;
             _auditRepository = auditLogRepository;
             _tableName = "Roles";
@@ -30,10 +35,10 @@ namespace API.Application.Services.Organization.Roles
 
             var created = await _repository.CreateAsync(role);
             await _auditRepository.CreateAsync<Role>(
-                AuditEnum.CREATE, 
-                created.Id, 
-                _tableName, 
-                null, 
+                AuditEnum.CREATE,
+                created.Id,
+                _tableName,
+                null,
                 null
             );
 
@@ -50,6 +55,7 @@ namespace API.Application.Services.Organization.Roles
             }
             Role deletedRole = role;
             await _repository.DeleteAsync(role, id);
+
             await _auditRepository.CreateAsync<Role>(
                     AuditEnum.DELETE,
                     deletedRole.Id,
@@ -87,11 +93,25 @@ namespace API.Application.Services.Organization.Roles
         {
             var role = await _repository.GetByIdAsync(id);
 
-            if (role is null) {
+            if (role is null)
+            {
                 return null;
             }
 
             return _mapper.ToResponse(role);
+        }
+
+        public async Task<Paginate<AuditLogResponse>> GetInteractionsAsync(int page, int pageSize, Guid RecordId)
+        {
+            Paginate<AuditLog> auditLogs = await _auditRepository.GetInteractionsAsync(page, pageSize, RecordId, _tableName);
+
+            return new Paginate<AuditLogResponse>()
+            {
+                Items = _auditMapper.ToResponseList([.. auditLogs.Items]),
+                TotalCount = auditLogs.TotalCount,
+                Page = auditLogs.Page,
+                PageSize = auditLogs.PageSize
+            };
         }
 
         public async Task<RoleResponse> UpdateAsync(CreateRoleDto entity, Guid id, Guid? userId)
@@ -103,8 +123,9 @@ namespace API.Application.Services.Organization.Roles
             {
                 throw new Exception("Role not found");
             }
-            var oldValue = JsonSerializer.Deserialize<Role>(
-                JsonSerializer.Serialize(existingRole)
+            var mappedRoleInteraction = _mapper.ToResponse(existingRole);
+            var oldValue = JsonSerializer.Deserialize<RoleResponse>(
+                JsonSerializer.Serialize(mappedRoleInteraction)
              );
 
             _mapper.UpdateRole(
@@ -123,10 +144,7 @@ namespace API.Application.Services.Organization.Roles
                     existingRole,
                     id
                 );
-            Console.WriteLine("----------");
-            Console.WriteLine(oldValue);
-            Console.WriteLine("----------");
-            await _auditRepository.CreateAsync<Role>(
+            await _auditRepository.CreateAsync<RoleResponse>(
                 AuditEnum.UPDATE,
                 existingRole.Id,
                 _tableName,

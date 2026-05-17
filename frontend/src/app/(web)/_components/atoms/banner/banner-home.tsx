@@ -1,8 +1,8 @@
-import { BannerHomeItem } from "@/shared/utils/web/data/banner.data";
+
 import Link from "next/link";
 import Title from "../title";
-import Button from "../button/button";
 import { GiSittingDog } from "react-icons/gi";
+import { BannerHomeItem } from "@/core/shared/utils/web/data/banner.data";
 
 interface BannerHomeProps {
   item: BannerHomeItem;

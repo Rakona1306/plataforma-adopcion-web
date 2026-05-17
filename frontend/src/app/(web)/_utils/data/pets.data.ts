@@ -1,4 +1,4 @@
-import { Pet } from "@/domain/models/Pet";
+import { Pet } from "@/core/domain/models/Pet";
 
 
 export const petsData: Pet[] = [
@@ -24,7 +24,8 @@ export const petsData: Pet[] = [
     breed: "Golden Retriever",
     gender: "Macho",
     isVaccinated: true,
-    history: "Max fue rescatado de una familia que no podía cuidarlo por falta de tiempo. Desde entonces ha estado en un hogar temporal donde ha demostrado ser muy sociable y amoroso con niños y otros animales."
+    history: "Max fue rescatado de una familia que no podía cuidarlo por falta de tiempo. Desde entonces ha estado en un hogar temporal donde ha demostrado ser muy sociable y amoroso con niños y otros animales.",
+    
   },
   {
     id: 2,

@@ -8,7 +8,7 @@ namespace API.Infrastructure.RepositoryImpl.Organization
 {
     public class RoleRepository : IRoleRepository
     {
-        private readonly ConnDbContext _context; 
+        private readonly ConnDbContext _context;
         public RoleRepository(ConnDbContext context)
         {
             _context = context;
@@ -17,6 +17,7 @@ namespace API.Infrastructure.RepositoryImpl.Organization
         public async Task<Role> CreateAsync(Role entity)
         {
             var query = _context.Roles;
+            entity.CreatedAt = DateTime.UtcNow;
             await query.AddAsync(entity);
             await _context.SaveChangesAsync();
             return entity;
@@ -86,6 +87,15 @@ namespace API.Infrastructure.RepositoryImpl.Organization
             await _context.SaveChangesAsync();
 
             return entity;
+        }
+
+        public async Task<Role> SearchRoleByName(string name)
+        {
+            IQueryable<Role> query = _context.Roles
+                .AsNoTracking();
+            query = query.Where(x => x.Name == name);
+
+            return await query.FirstAsync();
         }
     }
 }

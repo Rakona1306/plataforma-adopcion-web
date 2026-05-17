@@ -6,6 +6,5 @@ namespace API.Presentation.Controllers
     [Route("api/[controller]")]
     public class AuditController: ControllerBase
     {
-        private readonly IAudit
     }
 }

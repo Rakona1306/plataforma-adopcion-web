@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import QueryClientLayout from "@/components/layouts/query-client-provider";
+import SileoLayout from "@/components/layouts/sileo-layout";
 
 export const metadata: Metadata = {
   title: "Albergue Salva Vidas",
@@ -22,8 +24,12 @@ export default function RootLayout({
         
       </head>
       <body className="min-h-full flex flex-col">
-        {children}
-        <SpeedInsights />
+        <QueryClientLayout>
+          <SileoLayout>
+            {children}
+            <SpeedInsights />
+          </SileoLayout>
+        </QueryClientLayout>
       </body>
 
     </html>

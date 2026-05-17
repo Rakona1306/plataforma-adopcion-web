@@ -1,4 +1,5 @@
-﻿using API.Domain.Common.Model;
+﻿using API.Application.Features.System.AuditLogs.Dtos;
+using API.Domain.Common.Model;
 
 namespace API.Application.Common.Services
 {
@@ -14,5 +15,6 @@ namespace API.Application.Common.Services
         Task<TDto> CreateAsync(TCreateDto entity);
         Task<TDto> UpdateAsync(TUpdateDto entity, Guid id, Guid? userId);
         Task DeleteAsync(Guid id, Guid? userId);
+        Task<Paginate<AuditLogResponse>> GetInteractionsAsync(int page, int pageSize, Guid RecordId);
     }
 }

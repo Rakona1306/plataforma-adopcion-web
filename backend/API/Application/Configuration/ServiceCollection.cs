@@ -1,11 +1,9 @@
 ﻿using API.Application.Services.Organization.Roles;
-using API.Domain.Model;
+using API.Application.Services.System.Auths;
 using API.Domain.Repository.Organization;
 using API.Domain.Repository.System;
 using API.Infrastructure.RepositoryImpl.Organization;
 using API.Infrastructure.RepositoryImpl.System;
-using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.Design;
 
 namespace API.Application.Configuration
 {
@@ -18,6 +16,14 @@ namespace API.Application.Configuration
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IRolesService, RolesService>();
 
+            // User
+            services.AddScoped<IUserRepository, UserRepository>();
+
+            // Auth
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IAuthRepository, AuthRepository>();
+
+            // ----------------------------
             services.AddScoped<IAuditLogRepository, AuditLogRepository>();
 
             return services;

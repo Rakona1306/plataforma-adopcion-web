@@ -4,9 +4,9 @@ import { useState } from 'react'
 import { donationData } from '@/app/(web)/_utils/data/donation.data'
 import { BiCheck, BiHeart } from 'react-icons/bi'
 import { Card, CardContent } from '@/app/(web)/_components/molecules/card/card'
-import Container from '@/presentation/atoms/container'
 import Button from '@/app/(web)/_components/atoms/button/button'
 import { paymentMethods } from '@/app/(web)/_utils/data/paymentMethods'
+import Container from '@/components/atoms/container'
 
 export default function DonationsPage() {
   const [selectedAmount, setSelectedAmount] = useState(50)

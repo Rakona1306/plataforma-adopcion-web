@@ -1,12 +1,12 @@
 "use client"
 
-import { useScroll } from "@/application/hooks/useScroll"
+import { useScroll } from "@/core/application/hooks/useScroll"
 import Image from "next/image"
 import Link from "next/link"
 
 export default function ImageExpandable({ alt, src, width, height, className, widthExpanded, heightExpanded, loading, href, notExpandable }: ImageExpandableProps) {
 
-  const scroll = useScroll()
+  const scrollY = useScroll()
 
   if (href) {
     return (
@@ -14,9 +14,9 @@ export default function ImageExpandable({ alt, src, width, height, className, wi
         <Image 
           src={src} 
           alt={alt}  
-          width={notExpandable ? width : scroll === 0 ? widthExpanded : width} 
-          height={notExpandable ? height : scroll === 0 ? heightExpanded : height}
-          className={`${className} transition-all duration-300 ${!notExpandable && scroll === 0 ? "cursor-pointer" : ""}`} 
+          width={notExpandable ? width : scrollY === 0 ? widthExpanded : width} 
+          height={notExpandable ? height : scrollY === 0 ? heightExpanded : height}
+          className={`${className} transition-all duration-300 ${!notExpandable && scrollY === 0 ? "cursor-pointer" : ""}`} 
           loading={loading}
         />
       </Link>
@@ -28,9 +28,9 @@ export default function ImageExpandable({ alt, src, width, height, className, wi
       <Image 
         src={src} 
         alt={alt}  
-        width={notExpandable ? width : scroll === 0 ? widthExpanded : width} 
-        height={notExpandable ? height : scroll === 0 ? heightExpanded : height} 
-        className={`${className} transition-all duration-300 ${!notExpandable && scroll === 0 ? "cursor-pointer" : ""}`} 
+        width={notExpandable ? width : scrollY === 0 ? widthExpanded : width} 
+        height={notExpandable ? height : scrollY === 0 ? heightExpanded : height} 
+        className={`${className} transition-all duration-300 ${!notExpandable && scrollY === 0 ? "cursor-pointer" : ""}`} 
         loading={loading}
       />
     </>

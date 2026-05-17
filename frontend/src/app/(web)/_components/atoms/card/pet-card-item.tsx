@@ -1,19 +1,16 @@
 'use client'
 
-import { Pet } from '@/domain/models/Pet'
 import Link from 'next/link'
-import { useState } from 'react'
-import { BiHeart } from 'react-icons/bi'
 import { FaSyringe } from 'react-icons/fa'
 import Title from '../title'
 import Button from '../button/button'
+import { Pet } from '@/core/domain/models/Pet'
 
 interface PetCardItemProps {
   pet: Pet
 }
 
 export function PetCardItem({ pet }: PetCardItemProps) {
-  const [isFavorite, setIsFavorite] = useState(false)
 
   const getGenderLabel = (gender: string) => {
     return gender === 'Macho' ? '♂️' : '♀️'
