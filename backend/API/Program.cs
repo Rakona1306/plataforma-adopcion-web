@@ -2,6 +2,7 @@ using API.Application.Configuration;
 using API.Infrastructure.Configuration;
 using API.Infrastructure.Db;
 using API.Infrastructure.Extensions.Jwt;
+using API.Infrastructure.Extensions.Supabase;
 using API.Infrastructure.Middlewares;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -13,6 +14,7 @@ DotEnvLoader.Load(Path.Combine(Directory.GetCurrentDirectory(), ".env.example"))
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration.AddEnvironmentVariables();
 
 builder.Configuration.AddEnvironmentVariables();
 builder.Services.Configure<JwtOptions>(
@@ -32,7 +34,7 @@ builder.Services.AddDbContext<ConnDbContext>(options =>
 builder.Services.AddApplicationServices();
 builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
 
-
+builder.Services.AddSupabase();
 
 builder.Services.AddControllers();
 builder.Services.AddFluentValidationAutoValidation();
@@ -84,9 +86,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseMiddleware<ExceptionMiddleware>();
-app.UseMiddleware<JwtUserMiddleware>();
+// app.UseMiddleware<JwtUserMiddleware>();
 
 // app.UseHttpsRedirection();
 
@@ -95,8 +95,6 @@ app.UseCors("AllowFrontend");
 app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseAuthentication();
-
-app.UseMiddleware<JwtUserMiddleware>();
 
 app.UseAuthorization();
 

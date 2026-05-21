@@ -40,7 +40,8 @@ namespace API.Infrastructure.Middlewares
             // 🔓 Rutas públicas
             if (
                 path!.Contains("/api/auth/login") ||
-                path!.Contains("/api/auth/register")
+                path!.Contains("/api/auth/register") ||
+                path!.Contains("/api/roles")
             )
             {
                 await _next(context);

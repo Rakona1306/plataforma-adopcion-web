@@ -3,18 +3,39 @@ using API.Domain.Common.Model;
 
 namespace API.Application.Common.Services
 {
-    public interface IBaseService<TDto, TCreateDto, TUpdateDto>
+    public interface IBaseService<
+    TResponse,
+    TCreate,
+    TUpdate,
+    TFilter>
     {
-        Task<Paginate<TDto>> GetAllAsync(
+        Task<Paginate<TResponse>> GetAllAsync(
+            TFilter filter
+        );
+
+        Task<TResponse?> GetByIdAsync(Guid id);
+
+        Task<TResponse> CreateAsync(
+            TCreate dto,
+            Guid? userId = null
+        );
+
+        Task<TResponse> UpdateAsync(
+            Guid id,
+            TUpdate dto,
+            Guid? userId = null
+        );
+
+        Task DeleteAsync(
+            Guid id,
+            Guid? userId = null
+        );
+
+        Task<Paginate<AuditLogResponse>> GetInteractionsAsync(
             int page,
             int pageSize,
-            string? search = null,
-            string? sort = null
-            );
-        Task<TDto?> GetByIdAsync(Guid id);
-        Task<TDto> CreateAsync(TCreateDto entity);
-        Task<TDto> UpdateAsync(TUpdateDto entity, Guid id, Guid? userId);
-        Task DeleteAsync(Guid id, Guid? userId);
-        Task<Paginate<AuditLogResponse>> GetInteractionsAsync(int page, int pageSize, Guid RecordId);
+            Guid recordId
+        );
+
     }
 }

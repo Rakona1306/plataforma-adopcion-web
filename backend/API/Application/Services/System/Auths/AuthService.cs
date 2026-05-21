@@ -64,7 +64,7 @@ namespace API.Application.Services.System.Auths
             Console.WriteLine(hash);
 
             User userCreated = await _userRepository
-                .CreateAsync(user);
+                .CreateAsync(user, null);
 
             var userMapped = _mapper.ToResponse(userCreated);
             var expiresAtUtc = DateTime.UtcNow.AddMinutes(_jwtOptions.ExpirationMinutes);

@@ -1,14 +1,16 @@
-﻿using API.Application.Features.Organization.Roles.Dtos;
+﻿using API.Application.Attributes;
+using API.Application.Features.Organization.Roles.Dtos;
 using API.Application.Services.Organization.Roles;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.AspNetCore.RateLimiting;
 
-namespace API.Presentation.Controllers
+namespace API.Presentation.Controllers.Organization
 {
     [ApiController]
     [Route("api/[controller]")]
     [EnableRateLimiting("InteractionsPolicy")]
+    [AuthorizeJwt]
     public class RolesController : ControllerBase
     {
         private readonly IRolesService _service;
@@ -27,13 +29,10 @@ namespace API.Presentation.Controllers
         [HttpGet]
         [OutputCache(Duration = 60)]
         public async Task<IActionResult> GetAll(
-            [FromQuery] int page = 1,
-            [FromQuery] int pageSize = 10,
-            [FromQuery] string? search = "",
-            [FromQuery] string? sort = ""
+            [FromQuery] RoleFilterDto filter
             )
         {
-            var result = await _service.GetAllAsync(page, pageSize, search, sort);
+            var result = await _service.GetAllAsync(filter);
             return Ok(result);
         }
         [HttpGet("{id:guid}")]
@@ -43,10 +42,10 @@ namespace API.Presentation.Controllers
             return Ok(result);
         }
         [HttpPut("{id:guid}")]
-        public async Task<IActionResult> Update(Guid id, [FromBody] CreateRoleDto
+        public async Task<IActionResult> Update(Guid id, [FromBody] UpdateRoleDto
         request)
         {
-            var result = await _service.UpdateAsync(request, id, null);
+            var result = await _service.UpdateAsync(id, request, null);
             return Ok(result);
         }
         [HttpDelete("{id:guid}")]

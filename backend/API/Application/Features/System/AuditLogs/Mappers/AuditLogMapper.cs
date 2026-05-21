@@ -1,5 +1,4 @@
 ﻿using API.Application.Features.System.AuditLogs.Dtos;
-using API.Domain.Model.Enums;
 using API.Domain.Model.System;
 using Riok.Mapperly.Abstractions;
 
@@ -16,9 +15,5 @@ namespace API.Application.Features.System.AuditLogs.Mappers
         )]
         public partial AuditLogResponse ToResponse(AuditLog auditLog);
         public partial List<AuditLogResponse> ToResponseList(List<AuditLog> auditLogs);
-        private string MapAuditType(AuditEnum auditType)
-        {
-            return auditType.ToString();
-        }
     }
 }

@@ -1,9 +1,4 @@
-﻿using API.Application.Services.Organization.Roles;
-using API.Application.Services.System.Auths;
-using API.Domain.Repository.Organization;
-using API.Domain.Repository.System;
-using API.Infrastructure.RepositoryImpl.Organization;
-using API.Infrastructure.RepositoryImpl.System;
+﻿using System.Reflection;
 
 namespace API.Application.Configuration
 {
@@ -11,20 +6,33 @@ namespace API.Application.Configuration
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            var mapperTypes = Assembly.GetExecutingAssembly().GetTypes()
+            .Where(t => t.IsClass && !t.IsAbstract && t.Name.EndsWith("Mapper"));
 
-            // Role
-            services.AddScoped<IRoleRepository, RoleRepository>();
-            services.AddScoped<IRolesService, RolesService>();
+            foreach (var type in mapperTypes) services.AddSingleton(type);
 
-            // User
-            services.AddScoped<IUserRepository, UserRepository>();
+            // 2. 🔥 REGISTRO AUTOMÁTICO DE REPOSITORIOS Y SERVICIOS
+            var implementations = Assembly.GetExecutingAssembly().GetTypes()
+                .Where(t => t.IsClass && !t.IsAbstract && (
+                    t.Name.EndsWith("Repository") ||
+                    t.Name.EndsWith("RepositoryImpl") ||
+                    t.Name.EndsWith("Service")
+                ));
 
-            // Auth
-            services.AddScoped<IAuthService, AuthService>();
-            services.AddScoped<IAuthRepository, AuthRepository>();
+            foreach (var currentClass in implementations)
+            {
+                // Buscamos las interfaces que implementa esta clase (ej. IRoleRepository)
+                var interfaces = currentClass.GetInterfaces();
 
-            // ----------------------------
-            services.AddScoped<IAuditLogRepository, AuditLogRepository>();
+                foreach (var currentInterface in interfaces)
+                {
+                    // Evitamos registrar interfaces de .NET (como IDisposable)
+                    if (currentInterface.Name.StartsWith("I"))
+                    {
+                        services.AddScoped(currentInterface, currentClass);
+                    }
+                }
+            }
 
             return services;
         }

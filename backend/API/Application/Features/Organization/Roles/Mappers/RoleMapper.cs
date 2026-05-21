@@ -10,9 +10,6 @@ namespace API.Application.Features.Roles.Mappers
         public partial Role ToEntity(CreateRoleDto request);
         public partial RoleResponse ToResponse(Role role);
         public partial List<RoleResponse> ToResponseList(List<Role> roles);
-        public partial void UpdateRole(
-            CreateRoleDto source,
-            [MappingTarget] Role target
-        );
+        public partial void Update(UpdateRoleDto source, [MappingTarget] Role target);
     }
 }

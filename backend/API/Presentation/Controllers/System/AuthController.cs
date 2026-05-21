@@ -4,7 +4,7 @@ using API.Application.Services.System.Auths;
 using API.Infrastructure.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Presentation.Controllers
+namespace API.Presentation.Controllers.System
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -99,6 +99,7 @@ namespace API.Presentation.Controllers
         }
 
         [HttpGet("profile")]
+        [AuthorizeJwt]
         [AuthorizedUser]
         public IActionResult Profile()
         {
@@ -113,6 +114,7 @@ namespace API.Presentation.Controllers
         }
 
         [HttpPost("logout")]
+        [AuthorizeJwt]
         public IActionResult Logout()
         {
             Response.Cookies.Delete("access_token");

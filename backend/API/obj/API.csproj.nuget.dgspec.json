@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\API.csproj": {}
+    "D:\\ProyectosPersonales\\plataforma-adopcion-web\\backend\\API\\API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\API.csproj": {
+    "D:\\ProyectosPersonales\\plataforma-adopcion-web\\backend\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\API.csproj",
+        "projectUniqueName": "D:\\ProyectosPersonales\\plataforma-adopcion-web\\backend\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\API.csproj",
+        "projectPath": "D:\\ProyectosPersonales\\plataforma-adopcion-web\\backend\\API\\API.csproj",
         "packagesPath": "C:\\Users\\juanc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\obj\\",
+        "outputPath": "D:\\ProyectosPersonales\\plataforma-adopcion-web\\backend\\API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -102,6 +102,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[10.1.7, )"
+            },
+            "supabase-csharp": {
+              "target": "Package",
+              "version": "[0.16.2, )"
             }
           },
           "imports": [
