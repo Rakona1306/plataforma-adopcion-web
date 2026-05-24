@@ -1,27 +1,113 @@
-# Visual Studio
-.vs/
+# ==========================================
+# BUILD
+# ==========================================
 bin/
 obj/
+out/
 
-# Rider
-.idea/
-
-# VS Code
-.vscode/
-
-# Logs
-*.log
-
-# User files
+# ==========================================
+# .NET
+# ==========================================
+*.rsuser
 *.user
 *.suo
+*.cache
+*.pdb
+*.mdb
 
-# EF
-Migrations/
+# ==========================================
+# VISUAL STUDIO (Community, Professional, etc.)
+# ==========================================
+.vs/
+[Bb]in/
+[Oo]bj/
+[Log]/
+[Logs]/
+*.user
+*.userosscache
+*.sln.docstates
+*.suo
+*.vshost.exe
+*.vshost.exe.manifest
+*.cscfg
+*.cdxml
 
-# Node
+# Archivos de diagnóstico y profiling de VS
+*.diagsession
+*.performance
+
+# ==========================================
+# JETBRAINS (Rider, IntelliJ, WebStorm, etc.)
+# ==========================================
+.idea/
+*.iws
+*.iml
+.jetbrains/
+
+# ==========================================
+# VISUAL STUDIO CODE
+# ==========================================
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
+
+# ==========================================
+# CACHÉ Y ARCHIVOS TEMPORALES DEL SISTEMA
+# ==========================================
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.trash/
+
+# ==========================================
+# DEPENDENCIAS Y PAQUETES (Caché de Nuget/Node)
+# ==========================================
 node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
 
-# Environment
-*.env
-.env*
+# NuGet y paquetes de .NET
+*.nuget.props
+*.nuget.targets
+packages/
+# Opcional: Descomenta la siguiente línea si usas almacenamiento local de herramientas .NET
+# .dotnet/
+
+# ==========================================
+# LOGS Y CACHÉ DE COMPILACIÓN GENERAL
+# ==========================================
+*.log
+*.bak
+*.cache
+*.tmp
+*.temp
+.sass-cache/
+.eslintcache
+.parcel-cache/
+.next/
+.nuxt/
+
+# ==========================================
+# ENTORNO Y SECRETOS (¡Nunca commitear!)
+# ==========================================
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx

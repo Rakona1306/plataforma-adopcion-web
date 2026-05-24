@@ -22,7 +22,6 @@ namespace API.Infrastructure.Db
         public DbSet<TraitCategory> TraitCategories { get; set; }
         public DbSet<Trait> Traits { get; set; }
         public DbSet<Vaccine> Vaccines { get; set; }
-        public DbSet<PetCharacter> PetCharacters { get; set; }
 
         // --- Módulo: Entidades Core y Relaciones ---
         public DbSet<Pet> Pets { get; set; }

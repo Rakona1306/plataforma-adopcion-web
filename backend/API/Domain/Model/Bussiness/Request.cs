@@ -10,8 +10,9 @@ namespace API.Domain.Model.Bussiness
 
         public Guid UserId { get; set; }
 
-        public User User { get; set; }
-            = null!;
+        public User User { get; set; }  = null!;
+        public string District { get; set; } = string.Empty;
+        public string Phone { get; set; } = string.Empty;
 
         // PET (OPCIONAL)
 

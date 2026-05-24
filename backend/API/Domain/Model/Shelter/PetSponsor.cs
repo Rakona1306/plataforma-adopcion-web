@@ -1,4 +1,6 @@
 ﻿using API.Domain.Common.Model;
+using API.Domain.Model.Enums;
+using Supabase.Gotrue;
 
 namespace API.Domain.Model.Shelter
 {
@@ -6,13 +8,11 @@ namespace API.Domain.Model.Shelter
     {
         public Guid UserId { get; set; }
 
-        public User User { get; set; }
-            = null!;
+        public User User { get; set; } = null!;
 
         public Guid PetId { get; set; }
 
-        public Pet Pet { get; set; }
-            = null!;
+        public Pet Pet { get; set; }  = null!;
 
         public decimal MonthlyAmount { get; set; }
 

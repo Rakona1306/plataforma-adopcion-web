@@ -1,44 +1,113 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# ==========================================
+# BUILD
+# ==========================================
+bin/
+obj/
+out/
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+# ==========================================
+# .NET
+# ==========================================
+*.rsuser
+*.user
+*.suo
+*.cache
+*.pdb
+*.mdb
 
-# testing
-/coverage
+# ==========================================
+# VISUAL STUDIO (Community, Professional, etc.)
+# ==========================================
+.vs/
+[Bb]in/
+[Oo]bj/
+[Log]/
+[Logs]/
+*.user
+*.userosscache
+*.sln.docstates
+*.suo
+*.vshost.exe
+*.vshost.exe.manifest
+*.cscfg
+*.cdxml
 
-# next.js
-/.next/
-/out/
+# Archivos de diagnóstico y profiling de VS
+*.diagsession
+*.performance
 
-# production
-/build
+# ==========================================
+# JETBRAINS (Rider, IntelliJ, WebStorm, etc.)
+# ==========================================
+.idea/
+*.iws
+*.iml
+.jetbrains/
 
-# misc
+# ==========================================
+# VISUAL STUDIO CODE
+# ==========================================
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
+
+# ==========================================
+# CACHÉ Y ARCHIVOS TEMPORALES DEL SISTEMA
+# ==========================================
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
 .DS_Store
-*.pem
+.AppleDouble
+.LSOverride
 
-# debug
+# Linux
+*~
+.fuse_hidden*
+.directory
+.trash/
+
+# ==========================================
+# DEPENDENCIAS Y PAQUETES (Caché de Nuget/Node)
+# ==========================================
+node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
-*.env
+# NuGet y paquetes de .NET
+*.nuget.props
+*.nuget.targets
+packages/
+# Opcional: Descomenta la siguiente línea si usas almacenamiento local de herramientas .NET
+# .dotnet/
 
-# vercel
-.vercel
+# ==========================================
+# LOGS Y CACHÉ DE COMPILACIÓN GENERAL
+# ==========================================
+*.log
+*.bak
+*.cache
+*.tmp
+*.temp
+.sass-cache/
+.eslintcache
+.parcel-cache/
+.next/
+.nuxt/
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
-
-*.md
+# ==========================================
+# ENTORNO Y SECRETOS (¡Nunca commitear!)
+# ==========================================
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx

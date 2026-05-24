@@ -1,4 +1,5 @@
-﻿using API.Domain.Common.Model;
+﻿
+using API.Domain.Common.Model;
 
 namespace API.Domain.Model.Bussiness
 {
