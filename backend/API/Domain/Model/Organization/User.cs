@@ -1,7 +1,7 @@
 ﻿using API.Domain.Common.Model;
 using API.Domain.Model.Organization;
 
-namespace API.Domain.Model
+namespace API.Domain.Model.Organization
 {
     public class User : BaseModel
     {

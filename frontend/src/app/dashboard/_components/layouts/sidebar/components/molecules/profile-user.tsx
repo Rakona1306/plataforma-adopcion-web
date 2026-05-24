@@ -1,0 +1,38 @@
+'use client'
+import { Badge, Menu } from "@mantine/core";
+import { BiLogOut, BiUser } from "react-icons/bi";
+import { CgChevronRight } from "react-icons/cg";
+import { MdPets } from "react-icons/md";
+
+export default function ProfileUser() {
+
+  return (
+    <Menu shadow="md" width={200} position="right">
+      <Menu.Target>
+        <div className="w-full rounded-xl border shadow shadow-black/30 border-slate-200 hover:bg-slate-200  p-2 px-4 flex gap-2 items-center justify-between cursor-pointer transition-all duration-300">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+              <MdPets className="text-white" size={15} />
+            </div>
+            <div>
+              <p className="font-medium line-clamp-1">Juan Carlos Cajas</p>
+              <Badge className="bg-primary!">Usuario</Badge>
+            </div>
+          </div>
+          <CgChevronRight size={15} />
+        </div>
+      </Menu.Target>
+
+      <Menu.Dropdown>
+        <Menu.Label>Perfil</Menu.Label>
+        <Menu.Divider />
+        <Menu.Item leftSection={<BiUser size={15} />} >
+          Mi información
+        </Menu.Item>
+        <Menu.Item className="text-red-500!" leftSection={<BiLogOut size={15} className="text-red-500" />} >
+          Cerrar sesión
+        </Menu.Item>
+      </Menu.Dropdown>
+    </Menu>
+  )
+}
