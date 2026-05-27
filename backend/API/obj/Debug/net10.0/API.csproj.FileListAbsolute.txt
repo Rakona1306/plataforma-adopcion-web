@@ -138,7 +138,6 @@ C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\obj\De
 C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\obj\Debug\net10.0\ref\API.dll
 C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\bin\Debug\net10.0\FluentValidation.AspNetCore.dll
 C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\bin\Debug\net10.0\BCrypt-Net-Next.dll
-C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
 E:\ProyectosPersonales\plataforma-adopcion-web\backend\API\bin\Debug\net10.0\appsettings.Development.json
 E:\ProyectosPersonales\plataforma-adopcion-web\backend\API\bin\Debug\net10.0\appsettings.json
 E:\ProyectosPersonales\plataforma-adopcion-web\backend\API\bin\Debug\net10.0\API.staticwebassets.endpoints.json
@@ -431,3 +430,14 @@ D:\ProyectosPersonales\plataforma-adopcion-web\backend\API\obj\Debug\net10.0\API
 D:\ProyectosPersonales\plataforma-adopcion-web\backend\API\obj\Debug\net10.0\API.genruntimeconfig.cache
 D:\ProyectosPersonales\plataforma-adopcion-web\backend\API\obj\Debug\net10.0\ref\API.dll
 D:\ProyectosPersonales\plataforma-adopcion-web\backend\API\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
+C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\bin\Debug\net10.0\Supabase.Functions.dll
+C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\bin\Debug\net10.0\Supabase.Gotrue.dll
+C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\bin\Debug\net10.0\MimeMapping.dll
+C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\bin\Debug\net10.0\Supabase.Postgrest.dll
+C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\bin\Debug\net10.0\Supabase.Realtime.dll
+C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\bin\Debug\net10.0\Supabase.Core.dll
+C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\bin\Debug\net10.0\Supabase.dll
+C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\bin\Debug\net10.0\Supabase.Storage.dll
+C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\bin\Debug\net10.0\System.Reactive.dll
+C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\bin\Debug\net10.0\Websocket.Client.dll
+C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt

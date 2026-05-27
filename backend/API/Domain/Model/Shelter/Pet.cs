@@ -50,5 +50,7 @@ namespace API.Domain.Model.Shelter
         // MEDICAL RECORDS
 
         public ICollection<MedicalRecord> MedicalRecords { get; set; } = [];
+
+        public ICollection<PetSponsor> PetSponsors { get; set; } = [];
     }
 }

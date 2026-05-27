@@ -1,7 +1,52 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\ProyectosPersonales\\plataforma-adopcion-web\\backend\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\application\\features\\organization\\permissions\\dtos\\permissionresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\application\\features\\organization\\permissions\\dtos\\permissionresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\application\\features\\organization\\roles\\mappers\\rolemapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\application\\features\\organization\\roles\\mappers\\rolemapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\application\\features\\organization\\roles\\dtos\\roleresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\application\\features\\organization\\roles\\dtos\\roleresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\application\\services\\organization\\roles\\rolesservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\application\\services\\organization\\roles\\rolesservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\infrastructure\\common\\repositoryimpl\\baserepositoryimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\infrastructure\\common\\repositoryimpl\\baserepositoryimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\infrastructure\\repositoryimpl\\organization\\rolerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\infrastructure\\repositoryimpl\\organization\\rolerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\domain\\model\\organization\\rolepermision.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\domain\\model\\organization\\rolepermision.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\domain\\model\\organization\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\domain\\model\\organization\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\infrastructure\\repositoryimpl\\organization\\rolepermissionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\infrastructure\\repositoryimpl\\organization\\rolepermissionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\infrastructure\\repositoryimpl\\organization\\permissionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\infrastructure\\repositoryimpl\\organization\\permissionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\domain\\model\\organization\\permission.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\domain\\model\\organization\\permission.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +54,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -18,6 +63,149 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PermissionResponse.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Organization\\Permissions\\Dtos\\PermissionResponse.cs",
+              "RelativeDocumentMoniker": "API\\Application\\Features\\Organization\\Permissions\\Dtos\\PermissionResponse.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Organization\\Permissions\\Dtos\\PermissionResponse.cs",
+              "RelativeToolTip": "API\\Application\\Features\\Organization\\Permissions\\Dtos\\PermissionResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T23:48:22.57Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RoleMapper.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Organization\\Roles\\Mappers\\RoleMapper.cs",
+              "RelativeDocumentMoniker": "API\\Application\\Features\\Organization\\Roles\\Mappers\\RoleMapper.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Organization\\Roles\\Mappers\\RoleMapper.cs",
+              "RelativeToolTip": "API\\Application\\Features\\Organization\\Roles\\Mappers\\RoleMapper.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAywCsAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T23:47:59.155Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RoleResponse.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Organization\\Roles\\Dtos\\RoleResponse.cs",
+              "RelativeDocumentMoniker": "API\\Application\\Features\\Organization\\Roles\\Dtos\\RoleResponse.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Organization\\Roles\\Dtos\\RoleResponse.cs",
+              "RelativeToolTip": "API\\Application\\Features\\Organization\\Roles\\Dtos\\RoleResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T23:47:55.717Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "BaseRepositoryImpl.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Infrastructure\\Common\\RepositoryImpl\\BaseRepositoryImpl.cs",
+              "RelativeDocumentMoniker": "API\\Infrastructure\\Common\\RepositoryImpl\\BaseRepositoryImpl.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Infrastructure\\Common\\RepositoryImpl\\BaseRepositoryImpl.cs",
+              "RelativeToolTip": "API\\Infrastructure\\Common\\RepositoryImpl\\BaseRepositoryImpl.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAywEUAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T23:42:46.177Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "RolePermissionRepository.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Infrastructure\\RepositoryImpl\\Organization\\RolePermissionRepository.cs",
+              "RelativeDocumentMoniker": "API\\Infrastructure\\RepositoryImpl\\Organization\\RolePermissionRepository.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Infrastructure\\RepositoryImpl\\Organization\\RolePermissionRepository.cs",
+              "RelativeToolTip": "API\\Infrastructure\\RepositoryImpl\\Organization\\RolePermissionRepository.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAYwEEAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T23:01:44.444Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "PermissionRepository.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Infrastructure\\RepositoryImpl\\Organization\\PermissionRepository.cs",
+              "RelativeDocumentMoniker": "API\\Infrastructure\\RepositoryImpl\\Organization\\PermissionRepository.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Infrastructure\\RepositoryImpl\\Organization\\PermissionRepository.cs",
+              "RelativeToolTip": "API\\Infrastructure\\RepositoryImpl\\Organization\\PermissionRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T23:01:39.046Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "RolesService.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Services\\Organization\\Roles\\RolesService.cs",
+              "RelativeDocumentMoniker": "API\\Application\\Services\\Organization\\Roles\\RolesService.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Services\\Organization\\Roles\\RolesService.cs",
+              "RelativeToolTip": "API\\Application\\Services\\Organization\\Roles\\RolesService.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAwwCIAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T23:01:20.753Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "RoleRepository.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Infrastructure\\RepositoryImpl\\Organization\\RoleRepository.cs",
+              "RelativeDocumentMoniker": "API\\Infrastructure\\RepositoryImpl\\Organization\\RoleRepository.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Infrastructure\\RepositoryImpl\\Organization\\RoleRepository.cs",
+              "RelativeToolTip": "API\\Infrastructure\\RepositoryImpl\\Organization\\RoleRepository.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAkAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T23:01:09.444Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "RolePermision.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Domain\\Model\\Organization\\RolePermision.cs",
+              "RelativeDocumentMoniker": "API\\Domain\\Model\\Organization\\RolePermision.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Domain\\Model\\Organization\\RolePermision.cs",
+              "RelativeToolTip": "API\\Domain\\Model\\Organization\\RolePermision.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T23:00:37.784Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Role.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Domain\\Model\\Organization\\Role.cs",
+              "RelativeDocumentMoniker": "API\\Domain\\Model\\Organization\\Role.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Domain\\Model\\Organization\\Role.cs",
+              "RelativeToolTip": "API\\Domain\\Model\\Organization\\Role.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T23:00:31.974Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Permission.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Domain\\Model\\Organization\\Permission.cs",
+              "RelativeDocumentMoniker": "API\\Domain\\Model\\Organization\\Permission.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Domain\\Model\\Organization\\Permission.cs",
+              "RelativeToolTip": "API\\Domain\\Model\\Organization\\Permission.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T23:00:07.728Z",
+              "EditorCaption": ""
             }
           ]
         }

@@ -1,5 +1,5 @@
 ﻿using API.Application.Features.System.Auths.Dtos;
-using API.Domain.Model;
+using API.Domain.Model.Organization;
 using Riok.Mapperly.Abstractions;
 
 namespace API.Application.Features.System.Auths.Mappers

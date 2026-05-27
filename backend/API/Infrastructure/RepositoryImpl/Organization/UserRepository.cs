@@ -1,5 +1,4 @@
-﻿using API.Domain.Common.Model;
-using API.Domain.Model;
+﻿using API.Domain.Model.Organization;
 using API.Domain.Repository.Organization;
 using API.Domain.Repository.System;
 using API.Infrastructure.Common.RepositoryImpl;

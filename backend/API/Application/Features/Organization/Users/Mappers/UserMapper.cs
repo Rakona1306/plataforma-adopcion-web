@@ -1,5 +1,5 @@
 ﻿using API.Application.Features.Organization.Users.Dtos;
-using API.Domain.Model;
+using API.Domain.Model.Organization;
 using Riok.Mapperly.Abstractions;
 
 namespace API.Application.Features.Organization.Users.Mappers

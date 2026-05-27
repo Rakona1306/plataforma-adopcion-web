@@ -69,14 +69,6 @@ namespace API.Infrastructure.Common.RepositoryImpl
 
             await DbSet.AddAsync(entity);
 
-            await _auditLogRepository.CreateAsync(
-                AuditEnum.CREATE,
-                entity.Id,
-                typeof(T).Name,
-                userId,
-                entity
-            );
-
             return entity;
         }
 

@@ -113,7 +113,7 @@ namespace API.Application.Services.Shelter.PetPhotos
             var imageUrl =
                 await _storage.UploadImageAsync(
                     dto.File,
-                    "pets"
+                    "MASKOTS"
                 );
 
             var entity = new PetPhoto
@@ -169,7 +169,7 @@ namespace API.Application.Services.Shelter.PetPhotos
             {
                 // DELETE OLD IMAGE
                 await _storage.DeleteFileAsync(
-                    "pets",
+                    "MASKOTS",
                     entity.Url
                 );
 
@@ -177,7 +177,7 @@ namespace API.Application.Services.Shelter.PetPhotos
                 var newUrl =
                     await _storage.UploadImageAsync(
                         dto.File,
-                        "pets"
+                        "MASKOTS"
                     );
 
                 entity.Url = newUrl;
@@ -221,7 +221,7 @@ namespace API.Application.Services.Shelter.PetPhotos
             // =========================
 
             await _storage.DeleteFileAsync(
-                "pets",
+                "MASKOTS",
                 entity.Url
             );
 

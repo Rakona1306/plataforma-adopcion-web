@@ -339,6 +339,554 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "API.Presentation.Controllers.Organization.PermissionController",
+    "Method": "GetAll",
+    "RelativePath": "api/permissions",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Search",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Module",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Organization.PermissionController",
+    "Method": "Create",
+    "RelativePath": "api/permissions",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "API.Application.Features.Bussiness.Permissions.Dtos.CreatePermissionDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Organization.PermissionController",
+    "Method": "GetById",
+    "RelativePath": "api/permissions/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Organization.PermissionController",
+    "Method": "Update",
+    "RelativePath": "api/permissions/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "API.Application.Features.Bussiness.Permissions.Dtos.UpdatePermissionDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Organization.PermissionController",
+    "Method": "Delete",
+    "RelativePath": "api/permissions/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Organization.PermissionController",
+    "Method": "GetInteractions",
+    "RelativePath": "api/permissions/{id}/interactions",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Organization.PermissionController",
+    "Method": "GetAllSimple",
+    "RelativePath": "api/permissions/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Shelter.PetTraitController",
+    "Method": "GetAll",
+    "RelativePath": "api/pet-traits",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PetId",
+        "Type": "System.Nullable\u00601[[System.Guid, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "TraitId",
+        "Type": "System.Nullable\u00601[[System.Guid, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Shelter.PetTraitController",
+    "Method": "Create",
+    "RelativePath": "api/pet-traits",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "API.Application.Features.Shelter.PetTraits.Dtos.CreatePetTraitDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Shelter.PetTraitController",
+    "Method": "GetById",
+    "RelativePath": "api/pet-traits/{petId}/{traitId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "petId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "traitId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Shelter.PetTraitController",
+    "Method": "Update",
+    "RelativePath": "api/pet-traits/{petId}/{traitId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "petId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "traitId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "API.Application.Features.Shelter.PetTraits.Dtos.UpdatePetTraitDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Shelter.PetTraitController",
+    "Method": "Delete",
+    "RelativePath": "api/pet-traits/{petId}/{traitId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "petId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "traitId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Shelter.PetTraitController",
+    "Method": "GetInteractions",
+    "RelativePath": "api/pet-traits/{petId}/{traitId}/interactions",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "petId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "traitId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Shelter.PetVaccineController",
+    "Method": "GetAll",
+    "RelativePath": "api/pet-vaccines",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PetId",
+        "Type": "System.Nullable\u00601[[System.Guid, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "VaccineId",
+        "Type": "System.Nullable\u00601[[System.Guid, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Expired",
+        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Shelter.PetVaccineController",
+    "Method": "Create",
+    "RelativePath": "api/pet-vaccines",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "API.Application.Features.Shelter.PetVaccines.Dtos.CreatePetVaccineDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Shelter.PetVaccineController",
+    "Method": "GetById",
+    "RelativePath": "api/pet-vaccines/{petId}/{vaccineId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "petId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "vaccineId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Shelter.PetVaccineController",
+    "Method": "Update",
+    "RelativePath": "api/pet-vaccines/{petId}/{vaccineId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "petId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "vaccineId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "API.Application.Features.Shelter.PetVaccines.Dtos.UpdatePetVaccineDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Shelter.PetVaccineController",
+    "Method": "Delete",
+    "RelativePath": "api/pet-vaccines/{petId}/{vaccineId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "petId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "vaccineId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Shelter.PetVaccineController",
+    "Method": "GetInteractions",
+    "RelativePath": "api/pet-vaccines/{petId}/{vaccineId}/interactions",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "petId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "vaccineId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Shelter.PetBreedController",
+    "Method": "GetAll",
+    "RelativePath": "api/PetBreed",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PetId",
+        "Type": "System.Nullable\u00601[[System.Guid, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "BreedId",
+        "Type": "System.Nullable\u00601[[System.Guid, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Shelter.PetBreedController",
+    "Method": "Create",
+    "RelativePath": "api/PetBreed",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "API.Application.Features.Shelter.PetBreeds.Dtos.CreatePetBreedDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Shelter.PetBreedController",
+    "Method": "GetById",
+    "RelativePath": "api/PetBreed/{petId}/{breedId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "petId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "breedId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Shelter.PetBreedController",
+    "Method": "Update",
+    "RelativePath": "api/PetBreed/{petId}/{breedId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "petId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "breedId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "API.Application.Features.Shelter.PetBreeds.Dtos.UpdatePetBreedDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Shelter.PetBreedController",
+    "Method": "Delete",
+    "RelativePath": "api/PetBreed/{petId}/{breedId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "petId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "breedId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "API.Presentation.Controllers.Shelter.PetPhotosController",
     "Method": "GetAll",
     "RelativePath": "api/PetPhotos",
@@ -586,7 +1134,7 @@
   {
     "ContainingType": "API.Presentation.Controllers.Organization.RolesController",
     "Method": "Create",
-    "RelativePath": "api/Roles",
+    "RelativePath": "api/roles",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -602,7 +1150,7 @@
   {
     "ContainingType": "API.Presentation.Controllers.Organization.RolesController",
     "Method": "GetAll",
-    "RelativePath": "api/Roles",
+    "RelativePath": "api/roles",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -633,7 +1181,7 @@
   {
     "ContainingType": "API.Presentation.Controllers.Organization.RolesController",
     "Method": "GetById",
-    "RelativePath": "api/Roles/{id}",
+    "RelativePath": "api/roles/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -649,7 +1197,7 @@
   {
     "ContainingType": "API.Presentation.Controllers.Organization.RolesController",
     "Method": "Update",
-    "RelativePath": "api/Roles/{id}",
+    "RelativePath": "api/roles/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -670,7 +1218,7 @@
   {
     "ContainingType": "API.Presentation.Controllers.Organization.RolesController",
     "Method": "Delete",
-    "RelativePath": "api/Roles/{id}",
+    "RelativePath": "api/roles/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -686,7 +1234,7 @@
   {
     "ContainingType": "API.Presentation.Controllers.Organization.RolesController",
     "Method": "GetInteractions",
-    "RelativePath": "api/Roles/{id}/interactions",
+    "RelativePath": "api/roles/{id}/interactions",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -1029,6 +1577,127 @@
     "ContainingType": "API.Presentation.Controllers.Shelter.TraitsController",
     "Method": "GetInteractions",
     "RelativePath": "api/Traits/{id}/interactions",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Shelter.VaccineController",
+    "Method": "GetAll",
+    "RelativePath": "api/vaccines",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Search",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Shelter.VaccineController",
+    "Method": "Create",
+    "RelativePath": "api/vaccines",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "API.Application.Features.Shelter.Vaccines.Dtos.CreateVaccineDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Shelter.VaccineController",
+    "Method": "GetById",
+    "RelativePath": "api/vaccines/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Shelter.VaccineController",
+    "Method": "Update",
+    "RelativePath": "api/vaccines/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "API.Application.Features.Shelter.Vaccines.Dtos.UpdateVaccineDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Shelter.VaccineController",
+    "Method": "Delete",
+    "RelativePath": "api/vaccines/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Shelter.VaccineController",
+    "Method": "GetInteractions",
+    "RelativePath": "api/vaccines/{id}/interactions",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
