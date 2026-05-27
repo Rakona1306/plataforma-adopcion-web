@@ -1,10 +1,11 @@
-import { RolePermission } from "./role-permission"
+import { Permission } from "./permission"
 
 export interface Role {
   id: string
   name: string
   description?: string | null
   toDashboard: boolean
-
-  rolePermissions: RolePermission[]
+  notDelete: boolean
+  createdAt: Date
+  permissions: Permission[]
 }

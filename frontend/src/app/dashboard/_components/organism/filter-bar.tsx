@@ -23,7 +23,7 @@ export default function FilterBar({ filters, onClearAll }: FilterBarProps) {
                   key={`search-${index}`}
                   label={filter.label}
                   placeholder={filter.placeholder}
-                  value={filter.value}
+                  value={filter.value ?? ""}
                   onChange={filter.onChange}
                 />
               );
@@ -61,9 +61,9 @@ export default function FilterBar({ filters, onClearAll }: FilterBarProps) {
           <button
             onClick={onClearAll}
             type="button"
-            className="py-3 px-3 text-xs flex gap-2 items-center font-medium text-white hover:bg-red-700 transition-colors rounded-lg bg-red-600 border border-gray-200 shadow-sm cursor-pointer"
+            className="py-3 px-3 text-xs flex gap-2 items-center font-bold! text-white hover:bg-red-700 transition-colors rounded-lg bg-red-600 shadow-sm cursor-pointer"
           >
-            <BiTrash size={17} />
+            <BiTrash size={19} />
             Limpiar filtros
           </button>
         )}

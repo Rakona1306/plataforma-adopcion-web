@@ -12,11 +12,12 @@ export default function Textarea({
   rows = 5,
   onChange,
   onBlur,
+  errorMessage,
   ...props
 }: TextareaFormikProps) {
   const [field, meta] = useField(props.name)
   const textareaId = id ?? props.name
-  const hasError = Boolean(meta.touched && meta.error)
+  const hasError = Boolean(meta.touched && meta.error) || errorMessage !== "" && errorMessage !== undefined
   const helperId = helperText ? `${textareaId}-helper` : undefined
   const errorId = hasError ? `${textareaId}-error` : undefined
   const describedBy = [helperId, errorId].filter(Boolean).join(' ') || undefined
@@ -51,10 +52,10 @@ export default function Textarea({
           'w-full rounded-xl border bg-white px-4 py-3 text-sm text-slate-900 outline-none transition resize-none',
           'placeholder:text-slate-400',
           'focus:border-slate-900 focus:ring-2 focus:ring-slate-200',
-          !hasError ? 'hover:border-slate-400' : '',
+          !hasError ? 'hover:border-slate-700' : '',
           hasError
             ? 'border-red-400 focus:border-red-500 focus:ring-red-100 ring-4 ring-red-100'
-            : 'border-slate-200',
+            : 'border-slate-400',
           className,
         )}
       />
@@ -67,7 +68,7 @@ export default function Textarea({
 
       {hasError ? (
         <p id={errorId} className="text-xs font-medium text-red-600">
-          {meta.error}
+          {meta.error || errorMessage}
         </p>
       ) : null}
     </div>
@@ -80,6 +81,7 @@ interface TextareaFormikProps
   label: string
   helperText?: string
   containerClassName?: string
+  errorMessage?: string
 }
 
 function joinClasses(...classNames: Array<string | undefined>) {

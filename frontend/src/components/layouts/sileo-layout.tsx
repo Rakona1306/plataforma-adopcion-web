@@ -5,10 +5,8 @@ export default function SileoLayout({ children }: { children: React.ReactNode })
     <div>
       <Toaster 
         position="top-center"
-        theme="dark"
         options={{
-          fill: "#171717",
-          styles: { description: "text-white/75!" },
+          fill: "#EEEEEE"
         }}
       />
       {children}

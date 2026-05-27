@@ -73,15 +73,15 @@ export default function Input({
           onBlur={handleBlur}
           aria-describedby={describedBy}
           className={joinClasses(
-            'w-full rounded-xl border bg-white px-4 py-3 text-sm text-slate-900 outline-none transition-all duration-300 disabled:bg-gray-200 disabled:text-slate-600 disabled:cursor-not-allowed',
+            'w-full rounded-xl border-2 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition-all duration-300 disabled:bg-gray-200 disabled:text-slate-600 disabled:cursor-not-allowed',
             'placeholder:text-slate-400',
-            'focus:border-primary focus:ring-4 focus:ring-secondary/30',
-            !hasError ? 'hover:border-slate-400' : '',
+            'focus:border-primary focus:ring-4 focus:ring-secondary',
+            !hasError ? 'hover:border-slate-700' : '',
             hasLeftIcon ? 'pl-11' : undefined,
             hasRightIcon ? 'pr-11' : undefined,
             hasError
               ? 'border-red-400 focus:border-red-500 focus:ring-red-100 ring-4 ring-red-100 hover:border-red-500 hover:ring-red-100'
-              : 'border-slate-200',
+              : 'border-slate-400',
             className,
           )}
         />

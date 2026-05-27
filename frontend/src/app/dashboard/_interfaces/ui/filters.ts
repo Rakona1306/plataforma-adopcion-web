@@ -3,7 +3,7 @@ export interface SearchFilterConfig {
   type: 'search';
   label: string;
   placeholder?: string;
-  value: string;
+  value: string | undefined;
   onChange: (val: string) => void;
 }
 

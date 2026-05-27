@@ -23,7 +23,7 @@ export function ActionButtons({ title = "Acciones", buttons }: IActionButtons) {
         {buttons.map((button, index) => {
           if (button.href) {
             return (
-              <Link href={button.href}>
+              <Link href={button.href} key={index}>
                 <Button
                   key={index}
                   size="md"

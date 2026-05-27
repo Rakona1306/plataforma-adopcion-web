@@ -1,7 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // src/components/organisms/custom-table.tsx
 import TableHeaderCell from "../atoms/table-header-cell";
 import TableBodyCell from "../atoms/table-body-cell";
 import TableActions, { RowAction } from "../molecules/table-actions";
+import { montserrat } from "@/lib/fonts/monserrat";
+import { TableSkeleton } from "../atoms/table-skeleton";
+import { TablePagination } from "../atoms/table-pagination";
+import { Skeleton } from "@mantine/core";
 
 export interface TableColumn<T> {
   key: string;
@@ -15,9 +20,24 @@ interface CustomTableProps<T> {
   data: T[];
   actions?: RowAction<T>[];
   keyExtractor: (row: T) => string | number;
+  isLoading?: boolean;
+  isError?: boolean;
+  page?: number;
+  totalItems?: number;
+  onPageChange?: (page: number) => void;
 }
 
-export default function CustomTable<T>({ columns, data, actions, keyExtractor }: CustomTableProps<T>) {
+export default function CustomTable<T>({ 
+  columns, 
+  data, 
+  actions, 
+  keyExtractor, 
+  isLoading, 
+  isError, 
+  page, 
+  totalItems, 
+  onPageChange 
+}: CustomTableProps<T>) {
   return (
     <div className="w-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
       <div className="overflow-x-auto">
@@ -30,19 +50,30 @@ export default function CustomTable<T>({ columns, data, actions, keyExtractor }:
                 <TableHeaderCell key={col.key} label={col.label} />
               ))}
               {actions && actions.length > 0 && (
-                <th className="px-6 py-4 bg-primary text-right w-16" />
+                <th className={`px-6 py-4 bg-primary text-right w-16 text-white font-semibold ${montserrat.className}`} >
+                  Acciones
+                </th>
               )}
             </tr>
           </thead>
 
           {/* CUERPO: Se transforma en bloques apilados en móvil */}
           <tbody className="block md:table-row-group divide-y divide-gray-100">
-            {data.length === 0 ? (
+            {isError ? (
+              <tr><td colSpan={columns.length} className="p-10 text-center text-red-500">Error al cargar datos.</td></tr>
+            ) : isLoading ? (
               <tr>
-                <td colSpan={columns.length + (actions ? 1 : 0)} className="px-6 py-12 text-center text-sm text-gray-400">
-                  No se encontraron registros.
-                </td>
+                {
+                  columns.map((col) => (
+                    <td key={col.key} className="p-12 text-center text-gray-400">
+                      <Skeleton height={40} width={"100%"} />
+                    </td>
+                  ))
+                }
+                <td><Skeleton height={40} width={"100%"} /></td>
               </tr>
+            ) : data.length === 0 ? (
+              <tr><td colSpan={columns.length} className="p-12 text-center text-gray-400">Sin registros.</td></tr>
             ) : (
               data.map((row) => (
                 <tr
@@ -51,7 +82,7 @@ export default function CustomTable<T>({ columns, data, actions, keyExtractor }:
                 >
                   {columns.map((col) => (
                     <TableBodyCell key={col.key} label={col.label}>
-                      {col.render ? col.render(row) : (row as any)[col.key]}
+                      {col.render ? col.render(row) : (row as any)[col.key] !== "" && (row as any)[col.key] !== null ? (row as any)[col.key] : "N/A" }
                     </TableBodyCell>
                   ))}
 
@@ -71,6 +102,10 @@ export default function CustomTable<T>({ columns, data, actions, keyExtractor }:
 
         </table>
       </div>
+
+      {totalItems && page && onPageChange && (
+        <TablePagination total={totalItems} value={page} onChange={onPageChange} />
+      )}
     </div>
   );
 }
