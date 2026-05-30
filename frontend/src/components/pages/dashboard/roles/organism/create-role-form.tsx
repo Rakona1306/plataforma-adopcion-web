@@ -19,7 +19,7 @@ export default function CreateRoleForm() {
     description: "",
     notDelete: false,
     toDashboard: true,
-    permissionIds: [],
+    currentPermissions: [],
   };
 
   const handleSubmit = (values: RoleCreateDto) => {
@@ -54,7 +54,7 @@ export default function CreateRoleForm() {
         />
       </section>
 
-      <PermissionConditional initialPermissions={[]} />
+      <PermissionConditional name='currentPermissions' type="create" initialPermissions={[]} />
 
       <section className="w-full">
         <Textarea
@@ -66,8 +66,7 @@ export default function CreateRoleForm() {
 
       <Button
         type="submit"
-        className="w-full! bg-primary h-10!"
-        disabled={isPending}
+        loading={isPending}
       >
         Crear
       </Button>

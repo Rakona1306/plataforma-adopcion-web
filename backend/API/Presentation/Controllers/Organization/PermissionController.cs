@@ -1,4 +1,5 @@
-﻿using API.Application.Features.Bussiness.Permissions.Dtos;
+﻿using API.Application.Attributes;
+using API.Application.Features.Bussiness.Permissions.Dtos;
 using API.Application.Services.Organization.Permissions;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,7 +7,7 @@ namespace API.Presentation.Controllers.Organization
 {
     [ApiController]
     [Route("api/permissions")]
-    // [AuthorizeJwt]
+    [AuthorizeJwt]
     public class PermissionController : ControllerBase
     {
         private readonly IPermissionService _service;

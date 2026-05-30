@@ -19,12 +19,14 @@ namespace API.Application.Features.Organization.Users.Mappers
 
         [MapProperty(
             nameof(User.Role.Name),
-            nameof(UserResponse.Role)
+            nameof(UserResponse.RoleName)
         )]
+        [MapperIgnoreTarget(nameof(User.Password))]
         public partial UserResponse ToResponse(
             User entity
         );
 
+        [MapperIgnoreTarget(nameof(User.Password))]
         public partial List<UserResponse> ToResponseList(
             List<User> entities
         );

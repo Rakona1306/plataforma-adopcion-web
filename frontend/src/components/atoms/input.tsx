@@ -19,6 +19,7 @@ export default function Input({
   onBlur,
   error,
   hasErrorActive,
+  required,
   ...props
 }: InputFormikProps) {
   const [field, meta] = useField(props.name)
@@ -51,7 +52,7 @@ export default function Input({
   return (
     <div className={joinClasses('flex w-full flex-col gap-2', containerClassName)}>
       <label htmlFor={inputId} className="text-sm font-semibold text-slate-700 text-start">
-        {label}
+        {label} {required && <span className="text-red-500">*</span>}
       </label>
 
       <div className="relative">
@@ -124,6 +125,7 @@ interface InputFormikProps extends InputHTMLAttributes<HTMLInputElement> {
   rightIconAriaLabel?: string
   error?: string
   hasErrorActive?: boolean
+  reequired?: boolean
 }
 
 function joinClasses(...classNames: Array<string | undefined>) {

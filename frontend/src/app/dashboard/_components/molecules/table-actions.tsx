@@ -18,7 +18,7 @@ export default function TableActions<T>({ actions, rowData }: TableActionsProps<
   if (!actions || actions.length === 0) return null;
 
   return (
-    <Menu shadow="md" width={160} position="bottom-end">
+    <Menu shadow="md" width={260} position="bottom-end">
       <Menu.Target>
         <ActionIcon variant="subtle" color="gray" radius="xl" size="lg">
           <BiDotsVerticalRounded size={20} />

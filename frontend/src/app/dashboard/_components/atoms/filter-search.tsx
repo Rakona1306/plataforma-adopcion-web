@@ -11,12 +11,13 @@ interface FilterSearchProps {
 
 export default function FilterSearch({ label, placeholder, value, onChange }: FilterSearchProps) {
   return (
-    <div className="flex-1 min-w-60">
+    <div className="flex-1">
       <TextInput
         label={label}
         placeholder={placeholder || "Buscar..."}
         leftSection={<BiSearch size={16} />}
         value={value}
+        className="w-full"
         onChange={(e) => onChange(e.currentTarget.value)}
       />
     </div>

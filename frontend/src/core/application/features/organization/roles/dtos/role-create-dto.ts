@@ -5,7 +5,7 @@ export const RoleCreateSchema = Yup.object().shape({
   description: Yup.string(),
   notDelete: Yup.boolean().default(false),
   toDashboard: Yup.boolean().default(true),
-  permissionIds: Yup.array().of(Yup.string())
+  currentPermissions: Yup.array().of(Yup.string().required("El permiso es requerido")),
 })
 
 export type RoleCreateDto = Yup.InferType<typeof RoleCreateSchema>

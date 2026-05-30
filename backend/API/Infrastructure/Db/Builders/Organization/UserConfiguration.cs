@@ -18,7 +18,6 @@ namespace API.Infrastructure.Db.Builders.Organization
 
             // 2. Índices únicos para búsquedas rápidas y validación
             builder.HasIndex(u => u.Email).IsUnique();
-            builder.HasIndex(u => u.Dni).IsUnique(); // Solo si el DNI es obligatorio para todos
 
             // 3. Propiedades opcionales
             builder.Property(u => u.Dni).HasMaxLength(20);

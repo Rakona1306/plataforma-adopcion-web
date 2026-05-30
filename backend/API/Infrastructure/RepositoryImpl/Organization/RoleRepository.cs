@@ -36,9 +36,8 @@ namespace API.Infrastructure.RepositoryImpl.Organization
         public IQueryable<Role> QueryWithPermissions()
         {
             return Context.Roles
-                .Include(r => r.RolePermissions)
-                    .ThenInclude(rp => rp.Permission)
-                .AsNoTracking();
+                .Include(x => x.RolePermissions)
+                .ThenInclude(x => x.Permission);
         }
     }
 }

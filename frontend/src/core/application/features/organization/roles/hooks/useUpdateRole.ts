@@ -1,12 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useModal } from "@/core/application/hooks/ui/useModal";
 import { roleContainer } from "@/core/infrastructure/container/organization/role-container";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { RoleUpdateDto } from "../dtos/role-update-dto";
 import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 export function useUpdateRole() {
   const queryClient = useQueryClient();
   const { handleCloseModal } = useModal() || {};
+  const router = useRouter();
 
   const mutation = useMutation({
     // Recibimos un objeto con id y dto
@@ -24,8 +27,20 @@ export function useUpdateRole() {
         showConfirmButton: true,
       });
     },
-    onError: (error) => {
-      console.error("Error al actualizar el rol:", error);
+    onError: (error: any) => {
+      const status = error.response?.status || error.status;
+      if (status === 401) {
+        Swal.fire({
+          title: "Sesión expirada",
+          text: "Tu sesión ha caducado. Serás redirigido al login.",
+          icon: "warning",
+          confirmButtonText: "Ir al Login",
+        }).then(() => {
+          // 2. Redirigimos al login
+          router.push("/login");
+        });
+        return;
+      }
     },
   });
 
@@ -33,6 +48,6 @@ export function useUpdateRole() {
     update: mutation.mutate,
     isPending: mutation.isPending,
     isError: mutation.isError,
-    error: mutation.error
+    error: mutation.error,
   };
 }

@@ -11,6 +11,7 @@ export interface NavLink {
   module: string;
   icon: IconType;
   items: NavLinkItem[];
+  onClose?: () => void;
 }
 export const navLinks: NavLink[] = [
   {

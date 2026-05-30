@@ -1,0 +1,13 @@
+.button-primary {
+  border-radius: var(--radius-lg);
+  background-color: var(--color-primary);
+  color: white;
+  padding-inline: calc(var(--spacing) * 6);
+  padding-block: calc(var(--spacing) * 4);
+  width: 100%;
+  height: auto;
+}
+
+.button-primary:hover {
+  background-color: var(--color-secondary);
+}

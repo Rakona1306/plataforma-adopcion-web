@@ -16,7 +16,7 @@ export class RoleRepository implements IRoleRepository {
   
     const params = new URLSearchParams();
     if (filter.search) params.append("search", filter.search);
-    if (filter.toDashboard !== undefined) params.append("toDashboard", filter.toDashboard.toString());
+    if (filter.toDashboard !== undefined && filter.toDashboard !== "todos") params.append("toDashboard", filter.toDashboard);
     params.append("page", filter.page.toString());
     params.append("pageSize", filter.pageSize.toString());
 

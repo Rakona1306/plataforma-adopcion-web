@@ -1,5 +1,6 @@
 import { RoleCreateDto } from "@/core/application/features/organization/roles/dtos/role-create-dto";
 import { RoleFilterDto } from "@/core/application/features/organization/roles/dtos/role-filter-dto";
+import { RoleUpdateDto } from "@/core/application/features/organization/roles/dtos/role-update-dto";
 import { IRoleRepository } from "@/core/domain/repository/organization/IRoleRepository";
 
 export class RoleService {
@@ -17,7 +18,7 @@ export class RoleService {
     return await this.roleRepository.delete(id);
   }
 
-  async updateRole(id: string, update: RoleCreateDto) {
+  async updateRole(id: string, update: RoleUpdateDto) {
     return await this.roleRepository.update(id, update);
   }
 }

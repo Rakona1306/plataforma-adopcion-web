@@ -7,6 +7,6 @@
         public bool? NotDelete { get; set; } = false;
         public bool? ToDashboard { get; set; } = true;
 
-        public List<Guid>? PermissionIds { get; set; }
+        public List<Guid>? CurrentPermissions { get; set; }
     }
 }

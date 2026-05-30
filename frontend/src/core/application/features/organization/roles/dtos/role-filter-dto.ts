@@ -1,6 +1,6 @@
 export interface RoleFilterDto {
   search?: string;
-  toDashboard?: boolean;
+  toDashboard?: string;
   page: number;
   pageSize: number;
 }

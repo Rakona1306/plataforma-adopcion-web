@@ -16,9 +16,8 @@ import { useGetAllRoles } from "@/core/application/features/organization/roles/h
 import { Role } from "@/core/domain/models/organization/role";
 import { useDeleteRole } from "@/core/application/features/organization/roles/hooks/useDeleteRole";
 import { BsViewList } from "react-icons/bs";
-import { AiOutlineAudit } from "react-icons/ai";
 import { useModal } from "@/core/application/hooks/ui/useModal";
-import { UpdateRoleForm } from "./organism";
+import { UpdateRoleForm, ViewRole } from "./organism";
 
 export default function RolesPage() {
   const { actionsRoles } = useActionsRole();
@@ -47,12 +46,12 @@ export default function RolesPage() {
     {
       label: "Ver",
       icon: <BsViewList size={16} />,
-      onClick: (user) => console.log("Ver a:", user.name),
-    },
-    {
-      label: "Auditoría",
-      icon: <AiOutlineAudit size={16} />,
-      onClick: (user) => console.log("Auditoría de:", user.name),
+      onClick: (user) => {
+        handleOpenModal?.({
+          header: `Ver rol - #${user.id}`,
+          content: <ViewRole role={user} />,
+        }) 
+      },
     },
     {
       label: "Eliminar",
@@ -78,18 +77,18 @@ export default function RolesPage() {
       options: [
         { label: "Sí", value: "true" },
         { label: "No", value: "false" },
-        { label: "Todos", value: "null" },
+        { label: "Todos", value: "todos" },
       ],
       value: filter.toDashboard?.toString() ?? null,
-      onChange: (val) => updateFilter({ toDashboard: val === "true" }),
+      onChange: (val) => updateFilter({ toDashboard: val ?? "todos" }),
     },
   ];
 
   return (
     <>
       <HeaderDashboard>
-        <h1 className="text-2xl font-bold text-slate-800">Sistema de Roles</h1>
-        <p className="text-gray-500">
+        <h1 className="text-lg md:text-2xl font-bold text-slate-800">Sistema de Roles</h1>
+        <p className="text-sm md:text-base text-gray-500">
           Gestion roles y permisos para los usuarios
         </p>
       </HeaderDashboard>

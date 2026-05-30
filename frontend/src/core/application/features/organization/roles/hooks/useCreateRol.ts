@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// src/presentation/hooks/organization/useCreateRole.ts
 "use client";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -8,9 +7,11 @@ import { roleContainer } from "@/core/infrastructure/container/organization/role
 import { useModal } from "@/core/application/hooks/ui/useModal";
 import Swal from "sweetalert2";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export function useCreateRole() {
   const queryClient = useQueryClient();
+  const router = useRouter();
   const { handleCloseModal } = useModal() || {};
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [errorValidation, setErrorValidation] = useState<
@@ -34,7 +35,19 @@ export function useCreateRole() {
     },
     onError: (error: any) => {
       // LOG CRÍTICO: Mira qué trae 'error' completo en la consola
-      console.log("Error completo recibido:", error);
+      const status = error.response?.status || error.status;
+      if (status === 401) {
+        Swal.fire({
+          title: "Sesión expirada",
+          text: "Tu sesión ha caducado. Serás redirigido al login.",
+          icon: "warning",
+          confirmButtonText: "Ir al Login",
+        }).then(() => {
+          // 2. Redirigimos al login
+          router.push("/login");
+        });
+        return;
+      }
 
       // A veces el objeto response de Axios/Fetch está estructurado diferente
       const data = error.response?.data || error.data;

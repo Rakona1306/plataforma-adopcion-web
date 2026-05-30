@@ -6,7 +6,7 @@ import { BiChevronDown } from "react-icons/bi";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-export default function NavLinksItem({ icon, items, module }: NavLink) {
+export default function NavLinksItem({ icon, items, module, onClose }: NavLink) {
   const pathname = usePathname();
   const shouldBeExpanded = items.some((item) => pathname === item.href);
   const [expanded, { toggle }] = useDisclosure(shouldBeExpanded);

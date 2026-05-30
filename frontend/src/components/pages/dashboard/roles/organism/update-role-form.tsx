@@ -9,12 +9,15 @@ import {
 import { Role } from "@/core/domain/models/organization/role";
 import { PermissionConditional } from "../molecules/permission-conditional";
 import { Button } from "@mantine/core";
+import { useUpdateRole } from "@/core/application/features/organization/roles/hooks/useUpdateRole";
 
 interface UpdateRoleFormProps {
   role: Role;
 }
 
 export function UpdateRoleForm({ role }: UpdateRoleFormProps) {
+  const { update, isPending } = useUpdateRole();
+
   const initialPermissionIds = role.permissions.map((p) => p.id);
 
   const initialValues: RoleUpdateDto = {
@@ -28,9 +31,10 @@ export function UpdateRoleForm({ role }: UpdateRoleFormProps) {
 
   const handleSubmit = (values: RoleUpdateDto) => {
     const current = values.currentPermissions || [];
-
+    console.log("Current:", current);
     const permissionsToAdd = current.filter(
-      (id: string) => !initialPermissionIds.includes(id),
+      (id): id is string =>
+        typeof id === "string" && !initialPermissionIds.includes(id),
     );
 
     const permissionsToRemove = initialPermissionIds.filter(
@@ -44,6 +48,7 @@ export function UpdateRoleForm({ role }: UpdateRoleFormProps) {
     };
 
     console.log("Payload para backend:", payload);
+    update({ id: role.id, dto: payload });
   };
 
   return (
@@ -64,14 +69,18 @@ export function UpdateRoleForm({ role }: UpdateRoleFormProps) {
         />
       </section>
 
-      <PermissionConditional initialPermissions={initialPermissionIds} />
+      <PermissionConditional name="currentPermissions" type="update" initialPermissions={initialPermissionIds} />
 
       <section className="w-full">
         <Textarea name="description" label="Descripción del rol:" />
       </section>
 
-      <Button type="submit" className="w-full! bg-primary h-10!">
-        Crear
+      <Button 
+        type="submit" 
+        className="w-full! bg-primary! h-13!"
+        loading={isPending}
+      >
+        Editar
       </Button>
     </FormContainer>
   );

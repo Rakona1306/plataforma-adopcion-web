@@ -4,8 +4,10 @@ using API.Application.Features.Roles.Mappers;
 using API.Application.Features.System.AuditLogs.Mappers;
 using API.Application.Helpers;
 using API.Domain.Common.Model;
+using API.Domain.Model.Enums;
 using API.Domain.Model.Organization;
 using API.Domain.Repository.Organization;
+using API.Domain.Repository.System;
 using API.Infrastructure.Db; // Necesario para acceder al contexto si buscas permisos
 using API.Infrastructure.Exceptions;
 using Microsoft.EntityFrameworkCore;
@@ -18,20 +20,22 @@ namespace API.Application.Services.Organization.Roles
         private readonly IRolePermissionRepository _rolePermissionRepository;
         private readonly RoleMapper _mapper;
         private readonly ConnDbContext _context;
-
+        private readonly IAuditLogRepository _auditLogRepository;
 
         public RolesService(
             IRoleRepository repository,
             IRolePermissionRepository rolePermissionRepository,
             RoleMapper mapper,
             AuditLogMapper auditLogMapper,
-            ConnDbContext context
+            ConnDbContext context,
+            IAuditLogRepository auditLogRepository
         ) : base(repository, auditLogMapper)
         {
             _repository = repository;
             _rolePermissionRepository = rolePermissionRepository;
             _mapper = mapper;
             _context = context;
+            _auditLogRepository = auditLogRepository;
         }
 
         public async Task<Paginate<RoleResponse>> GetAllAsync(RoleFilterDto filter)
@@ -87,26 +91,18 @@ namespace API.Application.Services.Organization.Roles
                 );
             }
 
-            // =========================================
-            // CREAR ROLE
-            // =========================================
-
             var entity =
                 _mapper.ToEntity(dto);
-
-            // =========================================
-            // RELACIONES
-            // =========================================
 
             entity.RolePermissions = [];
 
             if (
-                dto.PermissionIds != null
-                && dto.PermissionIds.Any()
+                dto.CurrentPermissions != null
+                && dto.CurrentPermissions.Any()
             )
             {
                 entity.RolePermissions =
-                    dto.PermissionIds
+                    dto.CurrentPermissions
                         .Distinct()
                         .Select(
                             permissionId =>
@@ -119,18 +115,10 @@ namespace API.Application.Services.Organization.Roles
                         .ToList();
             }
 
-            // =========================================
-            // AUDITORÍA
-            // =========================================
-
             AuditHelper.CreateAudit(
                 entity,
                 userId
             );
-
-            // =========================================
-            // GUARDAR TODO
-            // =========================================
 
             await _repository.CreateAsync(
                 entity,
@@ -138,10 +126,6 @@ namespace API.Application.Services.Organization.Roles
             );
 
             await _repository.SaveChangesAsync();
-
-            // =========================================
-            // RECARGAR
-            // =========================================
 
             var createdRole =
                 await _repository
@@ -161,10 +145,6 @@ namespace API.Application.Services.Organization.Roles
             Guid? userId
         )
         {
-            // =========================================
-            // OBTENER ROLE CON RELACIONES
-            // =========================================
-
             var entity =
                 await _repository
                     .QueryWithPermissions()
@@ -174,10 +154,6 @@ namespace API.Application.Services.Organization.Roles
                 ?? throw new NotFoundException(
                     "Rol no encontrado"
                 );
-
-            // =========================================
-            // VALIDAR NOMBRE ÚNICO
-            // =========================================
 
             var exists =
                 await _repository.ExistsAsync(
@@ -194,10 +170,6 @@ namespace API.Application.Services.Organization.Roles
                 );
             }
 
-            // =========================================
-            // ACTUALIZAR DATOS
-            // =========================================
-
             var oldValues = new
             {
                 entity.Name,
@@ -205,6 +177,10 @@ namespace API.Application.Services.Organization.Roles
                 entity.NotDelete,
                 entity.ToDashboard
             };
+
+            // =========================================
+            // UPDATE DATA
+            // =========================================
 
             _mapper.Update(dto, entity);
 
@@ -217,16 +193,21 @@ namespace API.Application.Services.Organization.Roles
                 && dto.PermissionsToRemove.Any()
             )
             {
-                entity.RolePermissions =
-                    entity.RolePermissions
+                var relationsToRemove =
+                    await _context.RolePermissions
                         .Where(
                             rp =>
-                                !dto.PermissionsToRemove
+                                rp.RoleId == id
+                                && dto.PermissionsToRemove
                                     .Contains(
                                         rp.PermissionId
                                     )
                         )
-                        .ToList();
+                        .ToListAsync();
+
+                _context.RolePermissions.RemoveRange(
+                    relationsToRemove
+                );
             }
 
             // =========================================
@@ -238,46 +219,34 @@ namespace API.Application.Services.Organization.Roles
                 && dto.PermissionsToAdd.Any()
             )
             {
-                // Evitar duplicados
-
-                var currentPermissionIds =
-                    entity.RolePermissions
-                        .Select(x => x.PermissionId)
-                        .ToHashSet();
-
-                // Validar permisos existentes
-
-                var validPermissions =
-                    await _context.Permissions
+                var existingPermissionIds =
+                    await _context.RolePermissions
                         .Where(
-                            x =>
-                                dto.PermissionsToAdd
-                                    .Contains(x.Id)
-                        )
-                        .Select(x => x.Id)
-                        .ToListAsync();
-
-                var newRelations =
-                    validPermissions
-                        .Where(
-                            permissionId =>
-                                !currentPermissionIds
-                                    .Contains(permissionId)
+                            rp => rp.RoleId == id
                         )
                         .Select(
+                            rp => rp.PermissionId
+                        )
+                        .ToListAsync();
+
+                var permissionsToAdd =
+                    dto.PermissionsToAdd
+                        .Distinct()
+                        .Where(
                             permissionId =>
-                                new RolePermission
-                                {
-                                    RoleId = entity.Id,
-                                    PermissionId = permissionId
-                                }
+                                !existingPermissionIds
+                                    .Contains(permissionId)
                         )
                         .ToList();
 
-                foreach (var relation in newRelations)
+                foreach (var permissionId in permissionsToAdd)
                 {
-                    entity.RolePermissions.Add(
-                        relation
+                    await _context.RolePermissions.AddAsync(
+                        new RolePermission
+                        {
+                            RoleId = id,
+                            PermissionId = permissionId
+                        }
                     );
                 }
             }
@@ -291,20 +260,22 @@ namespace API.Application.Services.Organization.Roles
                 userId
             );
 
-            // =========================================
-            // UPDATE
-            // =========================================
-
-            await _repository.UpdateAsync(
-                entity,
+            await _auditLogRepository.CreateAsync(
+                AuditEnum.UPDATE,
+                entity.Id,
+                nameof(Role),
                 userId,
                 oldValues
             );
 
+            // =========================================
+            // SAVE
+            // =========================================
+
             await _repository.SaveChangesAsync();
 
             // =========================================
-            // RECARGAR
+            // RETURN UPDATED
             // =========================================
 
             var updatedRole =

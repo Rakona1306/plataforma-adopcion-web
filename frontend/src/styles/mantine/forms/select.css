@@ -1,0 +1,19 @@
+.select-input {
+  background-color: white;
+  border-color: var(--color-slate-400);
+  color: var(--color-slate-900);
+  border-radius: var(--radius-xl);
+  padding-inline: calc(var(--spacing) * 4);
+  padding-block: calc(var(--spacing) * 2);
+  height: auto;
+  font-size: var(--text-base);
+  min-height: auto;
+  line-height: 2;
+}
+.select-input:hover {
+  border-color: var(--color-slate-700);
+}
+
+.select-option {
+  font-size: var(--text-sm);
+}

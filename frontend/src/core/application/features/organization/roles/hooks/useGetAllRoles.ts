@@ -1,10 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // src/presentation/hooks/useRoles.ts
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { RoleFilterDto } from "../dtos/role-filter-dto";
 import { roleContainer } from "@/core/infrastructure/container/organization/role-container";
+import { useRouter } from "next/navigation";
 
 export function useGetAllRoles() {
+  const router = useRouter();
   const [filter, setFilter] = useState<RoleFilterDto>({
     page: 1,
     pageSize: 10,
@@ -14,19 +17,23 @@ export function useGetAllRoles() {
   const debouncedFilter = useMemo(() => {
     const { search, ...rest } = filter;
 
-    // Si la búsqueda tiene contenido pero es menor a 3,
-    // ignoramos el filtro de búsqueda para no llamar a la API
     return {
       ...rest,
       search: search && search.length >= 3 ? search : "",
     };
   }, [filter]);
-  // La magia de React Query: la key incluye el filtro,
-  // así que cada combinación de filtros genera un caché único.
+
   const query = useQuery({
     queryKey: ["roles", debouncedFilter],
     queryFn: () => roleContainer.getRoles(filter),
     placeholderData: (previousData) => previousData,
+    throwOnError: (error: any) => {
+      if (error.response?.status === 401 || error.status === 401) {
+        router.push("/login");
+        return false; // Evitamos que React Query propague el error al Boundary si no queremos
+      }
+      return true; // Propaga otros errores
+    },
     enabled: !filter.search || filter.search.length >= 3,
   });
 

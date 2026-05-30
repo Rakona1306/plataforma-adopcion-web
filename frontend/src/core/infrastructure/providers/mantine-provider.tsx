@@ -1,10 +1,31 @@
+"use client";
 import { manrope } from '@/lib/fonts/manrope';
-import { createTheme, MantineProvider } from '@mantine/core';
+import { Autocomplete, Button, createTheme, MantineProvider, Select } from '@mantine/core';
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
+import '../../../styles/mantine/forms/select.css';
+import '../../../styles/mantine/forms/button.css';
 
 const theme = createTheme({
   fontFamily: manrope.style.fontFamily,
+  components: {
+    Select: Select.extend({
+      classNames: {
+        input: "select-input",
+        option: "select-option",
+      }
+    }),
+    Autocomplete: Autocomplete.extend({
+      classNames: {
+        input: "select-input",
+      }
+    }),
+    Button: Button.extend({
+      classNames: {
+        root: "button-primary",
+      }
+    }),
+  }
 })
 
 export default function MantineUIProvider({ children }: { children: React.ReactNode }) {

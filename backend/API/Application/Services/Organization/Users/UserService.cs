@@ -4,7 +4,6 @@ using API.Application.Features.Organization.Users.Mappers;
 using API.Application.Features.System.AuditLogs.Mappers;
 using API.Application.Helpers;
 using API.Domain.Common.Model;
-using API.Domain.Model;
 using API.Domain.Model.Organization;
 using API.Domain.Repository.Organization;
 using Microsoft.AspNetCore.Identity;
@@ -38,8 +37,7 @@ namespace API.Application.Services.Organization.Users
             UserFilterDto filter
         )
         {
-            IQueryable<User> query = _repository.Query()
-    .Include(x => x.Role);
+            IQueryable<User> query = _repository.Query().Include(x => x.Role);
 
             if (!string.IsNullOrWhiteSpace(filter.Search))
             {
