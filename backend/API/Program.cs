@@ -23,7 +23,8 @@ builder.Services.Configure<JwtOptions>(
 
 builder.Services.AddSwaggerGen();
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+// var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection");
 builder.Services.AddDbContext<ConnDbContext>(options =>
     options.UseNpgsql(
         connectionString,

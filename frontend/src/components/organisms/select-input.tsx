@@ -27,9 +27,10 @@ export default function SelectInput({
   console.log("field.value", field.value);
 
   useEffect(() => {
-    console.log("field.name", field.name)
-    console.log("field.value", field.value);
-  }, [field.value]);
+    if (defaultValue) {
+      setFieldValue(name ,defaultValue)
+    }
+  }, [defaultValue]);
 
   return (
     <FormSelect

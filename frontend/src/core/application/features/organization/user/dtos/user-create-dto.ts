@@ -11,6 +11,7 @@ export const UserCreateSchema = Yup.object().shape({
   district: Yup.string().optional(),
   isBlocked: Yup.boolean().default(false),
   roleId: Yup.string().required("El rol es requerido"),
+  document: Yup.string().optional()
 })
 
 export type UserCreateDto = Yup.InferType<typeof UserCreateSchema>

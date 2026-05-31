@@ -17,6 +17,7 @@ import { Role } from "@/core/domain/models/organization/role";
 import { User } from "@/core/domain/models/organization/user";
 import { limaDistricts } from "@/core/shared/constants/distritcts";
 import { Button, Grid } from "@mantine/core";
+import { DniOrRuc } from "../molecules/dni-or-ruc";
 
 interface Props {
   user: User; // El usuario que viene de la tabla/lista
@@ -80,10 +81,24 @@ export default function UpdateUserForm({ user }: Props) {
 
       <Grid>
         <Grid.Col span={6}>
-          <Input name="dni" label="DNI:" error={errorValidation.dni} />
+          <SelectInput
+            label="Documento de Identidad"
+            name="document"
+            options={[
+              {
+                label: 'DNI',
+                value: "DNI"
+              },
+              {
+                label: 'RUC',
+                value: 'RUC'
+              }
+            ]}
+            defaultValue={initialValues.dni ? 'DNI' : 'RUC'}
+          />
         </Grid.Col>
         <Grid.Col span={6}>
-          <Input name="ruc" label="RUC:" error={errorValidation.ruc} />
+          <DniOrRuc errorValidation={errorValidation} />
         </Grid.Col>
       </Grid>
 
@@ -97,7 +112,7 @@ export default function UpdateUserForm({ user }: Props) {
             label="Distrito"
             placeholder="Seleccione un distrito"
             options={limaDistricts}
-            
+
           />
         </Grid.Col>
       </Grid>

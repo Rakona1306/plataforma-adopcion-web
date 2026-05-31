@@ -41,6 +41,7 @@ export const useAuth = () => {
         router.push("/");
       }
     } catch (error) {
+      console.error(error);
       if (error instanceof HttpError) {
         setError(error);
       } else if (error instanceof Error) {

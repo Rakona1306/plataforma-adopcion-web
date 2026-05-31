@@ -20,6 +20,7 @@ import { Button, Grid, Select } from "@mantine/core";
 import { useField } from "formik";
 import { useState } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
+import { DniOrRuc } from "../molecules/dni-or-ruc";
 
 export default function CreateUserForm() {
   const { create, isPending, errorMessage, errorValidation } = useCreateUser();
@@ -37,6 +38,7 @@ export default function CreateUserForm() {
     district: "",
     isBlocked: false,
     roleId: "",
+    document: ''
   };
 
   const handleSubmit = (values: UserCreateDto) => {
@@ -102,10 +104,24 @@ export default function CreateUserForm() {
 
       <Grid>
         <Grid.Col span={6}>
-          <Input name="dni" label="DNI:" error={errorValidation.dni} />
+          <SelectInput
+            label="Documento de Identidad"
+            name="document"
+            options={[
+              {
+                label: 'DNI',
+                value: "DNI"
+              },
+              {
+                label: 'RUC',
+                value: 'RUC'
+              }
+            ]}
+            defaultValue="DNI"
+          />
         </Grid.Col>
         <Grid.Col span={6}>
-          <Input name="ruc" label="RUC:" error={errorValidation.ruc} />
+          <DniOrRuc errorValidation={errorValidation} />
         </Grid.Col>
       </Grid>
 
@@ -145,19 +161,3 @@ export default function CreateUserForm() {
   );
 }
 
-// Subcomponente simple para el select de roles
-function RoleSelect({ name, error }: { name: string; error?: string }) {
-  const [field, _, helpers] = useField(name);
-  // Reemplaza con tu hook real de opciones
-  // const { options } = useRoleOptions();
-
-  return (
-    <Select
-      label="Rol del usuario"
-      data={[]} // Aquí irían tus opciones mapeadas
-      value={field.value}
-      onChange={(val) => helpers.setValue(val)}
-      error={error}
-    />
-  );
-}

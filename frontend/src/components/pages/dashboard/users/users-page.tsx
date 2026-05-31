@@ -90,7 +90,7 @@ export default function UsersPage() {
     },
     {
       type: "select",
-      label: "Dashboard",
+      label: "Bloqueados",
       options: [
         { label: "Sí", value: "true" },
         { label: "No", value: "false" },

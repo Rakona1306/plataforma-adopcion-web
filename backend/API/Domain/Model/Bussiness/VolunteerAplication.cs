@@ -16,10 +16,9 @@ namespace API.Domain.Model.Bussiness
         public VolunteerArea VolunteerArea { get; set; }
             = null!;
 
-        public string Motivation { get; set; }
-            = string.Empty;
+        public string Motivation { get; set; } = string.Empty;
 
-        public VolunteerStatus Status { get; set; }
+        public VolunteerStatus? Status { get; set; }
 
         public DateTime? ApprovedAt { get; set; }
 

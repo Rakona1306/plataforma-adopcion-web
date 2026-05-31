@@ -3203,13 +3203,25 @@
             "type": "string",
             "nullable": true
           },
+          "ruc": {
+            "type": "string",
+            "nullable": true
+          },
           "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "district": {
             "type": "string",
             "nullable": true
           },
           "roleId": {
             "type": "string",
             "format": "uuid"
+          },
+          "isBlocked": {
+            "type": "boolean",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -3500,11 +3512,11 @@
             "type": "string",
             "nullable": true
           },
-          "password": {
+          "dni": {
             "type": "string",
             "nullable": true
           },
-          "dni": {
+          "ruc": {
             "type": "string",
             "nullable": true
           },
@@ -3512,9 +3524,17 @@
             "type": "string",
             "nullable": true
           },
+          "district": {
+            "type": "string",
+            "nullable": true
+          },
           "roleId": {
             "type": "string",
             "format": "uuid"
+          },
+          "isBlocked": {
+            "type": "boolean",
+            "nullable": true
           }
         },
         "additionalProperties": false

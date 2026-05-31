@@ -35,12 +35,14 @@ class HttpClient {
 
     retryAttempt = 0,
   ): Promise<T> {
-    const storageToken =
-      typeof window !== "undefined" ? localStorage.getItem(LOCAL_STORAGE.NAMESESSION) : null;
+    let token = null
+    const storageToken = typeof window !== "undefined" ? localStorage.getItem(LOCAL_STORAGE.NAMESESSION) : null;
 
-    const rawState = JSON.parse(storageToken || "{}");
+    if (storageToken) {
+      const rawState = JSON.parse(storageToken || "{}");
 
-    const token = rawState.state.token;
+      token = rawState.state.token;
+    }
 
     const headers = {
       ...getDefaultHeaders(),

@@ -1,10 +1,11 @@
 "use client";
 import { manrope } from '@/lib/fonts/manrope';
-import { Autocomplete, Button, createTheme, MantineProvider, Select } from '@mantine/core';
+import { Autocomplete, Button, createTheme, MantineProvider, Select, TextInput } from '@mantine/core';
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
 import '../../../styles/mantine/forms/select.css';
 import '../../../styles/mantine/forms/button.css';
+import '../../../styles/mantine/forms/input.css'
 
 const theme = createTheme({
   fontFamily: manrope.style.fontFamily,
@@ -25,6 +26,11 @@ const theme = createTheme({
         root: "button-primary",
       }
     }),
+    TextInput: TextInput.extend({
+      classNames: {
+        input: "text-input",
+      }
+    })
   }
 })
 
