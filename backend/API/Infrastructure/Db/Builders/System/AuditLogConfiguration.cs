@@ -19,7 +19,7 @@ namespace API.Infrastructure.Db.Builders.System
                 .HasMaxLength(100);
 
             builder.Property(al => al.OldValues)
-                .HasColumnType("nvarchar(max)");
+                .HasColumnType("text");
 
             // 3. Índices para rendimiento
             // Fundamental: Buscaremos frecuentemente por tabla y registro para ver el historial

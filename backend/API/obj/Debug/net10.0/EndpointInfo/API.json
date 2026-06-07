@@ -91,7 +91,7 @@
         }
       }
     },
-    "/api/Breed": {
+    "/api/breeds": {
       "get": {
         "tags": [
           "Breed"
@@ -165,7 +165,7 @@
         }
       }
     },
-    "/api/Breed/{id}": {
+    "/api/breeds/{id}": {
       "get": {
         "tags": [
           "Breed"
@@ -249,7 +249,7 @@
         }
       }
     },
-    "/api/Breed/{id}/interactions": {
+    "/api/breeds/{id}/interactions": {
       "get": {
         "tags": [
           "Breed"
@@ -928,7 +928,7 @@
         }
       }
     },
-    "/api/PetPhotos": {
+    "/api/pet-photos": {
       "get": {
         "tags": [
           "PetPhotos"
@@ -1016,7 +1016,7 @@
         }
       }
     },
-    "/api/PetPhotos/{id}": {
+    "/api/pet-photos/{id}": {
       "get": {
         "tags": [
           "PetPhotos"
@@ -1107,7 +1107,70 @@
         }
       }
     },
-    "/api/Pets": {
+    "/api/pet-photos/{petId}/sync-photos": {
+      "post": {
+        "tags": [
+          "PetPhotos"
+        ],
+        "parameters": [
+          {
+            "name": "petId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Files": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  },
+                  "MainPhotoId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "PhotoIdsToRemove": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "Files": {
+                  "style": "form"
+                },
+                "MainPhotoId": {
+                  "style": "form"
+                },
+                "PhotoIdsToRemove": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/pets": {
       "get": {
         "tags": [
           "Pets"
@@ -1223,7 +1286,7 @@
         }
       }
     },
-    "/api/Pets/{id}": {
+    "/api/pets/{id}": {
       "get": {
         "tags": [
           "Pets"
@@ -2134,197 +2197,6 @@
         }
       }
     },
-    "/api/TraitCategories": {
-      "get": {
-        "tags": [
-          "TraitCategories"
-        ],
-        "parameters": [
-          {
-            "name": "Page",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "PageSize",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "Search",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "TraitCategories"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateTraitCategoryDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateTraitCategoryDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateTraitCategoryDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/TraitCategories/{id}": {
-      "get": {
-        "tags": [
-          "TraitCategories"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "TraitCategories"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateTraitCategoryDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateTraitCategoryDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateTraitCategoryDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "TraitCategories"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/TraitCategories/{id}/interactions": {
-      "get": {
-        "tags": [
-          "TraitCategories"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "page",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "default": 1
-            }
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "default": 10
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/api/Traits": {
       "get": {
         "tags": [
@@ -2352,14 +2224,6 @@
             "in": "query",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "name": "CategoryId",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "uuid"
             }
           }
         ],
@@ -2517,6 +2381,37 @@
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/users/change-password": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangePasswordDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangePasswordDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangePasswordDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -2924,6 +2819,24 @@
   },
   "components": {
     "schemas": {
+      "ChangePasswordDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "confirmPassword": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "CreateAccountDto": {
         "type": "object",
         "properties": {
@@ -3032,9 +2945,14 @@
             "type": "string",
             "nullable": true
           },
-          "speciesId": {
+          "rescueStory": {
             "type": "string",
-            "format": "uuid"
+            "nullable": true
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
           },
           "weightKg": {
             "type": "number",
@@ -3055,6 +2973,10 @@
           },
           "status": {
             "$ref": "#/components/schemas/PetStatus"
+          },
+          "speciesId": {
+            "type": "string",
+            "format": "uuid"
           },
           "breedIds": {
             "type": "array",
@@ -3152,30 +3074,12 @@
         },
         "additionalProperties": false
       },
-      "CreateTraitCategoryDto": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "CreateTraitDto": {
         "type": "object",
         "properties": {
           "name": {
             "type": "string",
             "nullable": true
-          },
-          "categoryId": {
-            "type": "string",
-            "format": "uuid"
           }
         },
         "additionalProperties": false
@@ -3364,9 +3268,14 @@
             "type": "string",
             "nullable": true
           },
-          "speciesId": {
+          "rescueStory": {
             "type": "string",
-            "format": "uuid"
+            "nullable": true
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
           },
           "weightKg": {
             "type": "number",
@@ -3379,9 +3288,6 @@
           "isSterilized": {
             "type": "boolean"
           },
-          "isAdopted": {
-            "type": "boolean"
-          },
           "gender": {
             "$ref": "#/components/schemas/PetGender"
           },
@@ -3390,6 +3296,38 @@
           },
           "status": {
             "$ref": "#/components/schemas/PetStatus"
+          },
+          "speciesId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "breeds": {
+            "$ref": "#/components/schemas/UpdatePetRelationDto"
+          },
+          "traits": {
+            "$ref": "#/components/schemas/UpdatePetRelationDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdatePetRelationDto": {
+        "type": "object",
+        "properties": {
+          "addIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "nullable": true
+          },
+          "removeIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -3469,30 +3407,12 @@
         },
         "additionalProperties": false
       },
-      "UpdateTraitCategoryDto": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "UpdateTraitDto": {
         "type": "object",
         "properties": {
           "name": {
             "type": "string",
             "nullable": true
-          },
-          "categoryId": {
-            "type": "string",
-            "format": "uuid"
           }
         },
         "additionalProperties": false
@@ -3587,9 +3507,6 @@
     },
     {
       "name": "Species"
-    },
-    {
-      "name": "TraitCategories"
     },
     {
       "name": "Traits"

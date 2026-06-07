@@ -35,7 +35,7 @@ export function PermissionConditional({
                     variant="subtle"
                     size="xs"
                     onClick={handleReset}
-                    className=""
+                    className="w-fit! hover:text-white!"
                   >
                     Resetear
                   </Button>

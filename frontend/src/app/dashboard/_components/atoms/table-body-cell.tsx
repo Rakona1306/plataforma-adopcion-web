@@ -9,7 +9,7 @@ interface TableBodyCellProps {
 export default function TableBodyCell({ children, label }: TableBodyCellProps) {
   return (
     <td
-      className={`px-6 line-clamp-1 font-medium whitespace-nowrap text-sm text-gray-800 block md:table-cell text-right md:text-left border-b border-gray-100 md:border-none py-3 before:content-[attr(data-label)] before:float-left before:font-semibold before:text-gray-500 md:before:hidden`}
+      className={`px-6 line-clamp-1 font-medium whitespace-nowrap text-sm text-gray-800 block lg:table-cell text-right lg:text-left border-b border-gray-100 lg:border-none py-3 before:content-[attr(data-label)] before:float-left before:font-semibold before:text-gray-500 lg:before:hidden`}
       data-label={label}
     >
       {children}

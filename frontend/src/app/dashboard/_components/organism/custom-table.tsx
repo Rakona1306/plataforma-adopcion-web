@@ -41,10 +41,10 @@ export default function CustomTable<T>({
   return (
     <div className="w-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
       <div className="overflow-x-auto">
-        <table className="w-full block md:table">
+        <table className="w-full block lg:table">
 
           {/* ENCABEZADO: Se oculta por completo en móviles */}
-          <thead className="hidden md:table-header-group">
+          <thead className="hidden lg:table-header-group">
             <tr>
               {columns.map((col) => (
                 <TableHeaderCell key={col.key} label={col.label} />
@@ -58,7 +58,7 @@ export default function CustomTable<T>({
           </thead>
 
           {/* CUERPO: Se transforma en bloques apilados en móvil */}
-          <tbody className="block md:table-row-group divide-y divide-gray-100">
+          <tbody className="block lg:table-row-group divide-y divide-gray-100">
             {isError ? (
               <tr><td colSpan={columns.length} className="p-10 text-center text-red-500">Error al cargar datos.</td></tr>
             ) : isLoading ? (
@@ -78,7 +78,7 @@ export default function CustomTable<T>({
               data.map((row) => (
                 <tr
                   key={keyExtractor(row)}
-                  className="block md:table-row md:hover:bg-gray-50/50 transition-colors p-4 md:p-0 mb-4 md:mb-0 border border-gray-200 md:border-none rounded-xl md:rounded-none bg-white relative"
+                  className="block lg:table-row lg:hover:bg-gray-50/50 transition-colors p-4 lg:p-0 mb-4 lg:mb-0 border border-gray-200 lg:border-none rounded-xl lg:rounded-none bg-white relative"
                 >
                   {columns.map((col) => (
                     <TableBodyCell key={col.key} label={col.label}>
@@ -88,9 +88,9 @@ export default function CustomTable<T>({
 
                   {/* Acciones de la fila */}
                   {actions && actions.length > 0 && (
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-right block md:table-cell border-none pt-4 md:pt-4">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-right block lg:table-cell border-none pt-4 lg:pt-4">
                       {/* En móvil posicionamos el menú flotante arriba a la derecha */}
-                      <div className="absolute top-2 right-2 md:relative md:top-0 md:right-0">
+                      <div className="absolute top-2 right-2 lg:relative lg:top-0 lg:right-0">
                         <TableActions actions={actions} rowData={row} />
                       </div>
                     </td>

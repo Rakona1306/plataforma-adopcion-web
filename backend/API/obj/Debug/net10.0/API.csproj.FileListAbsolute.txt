@@ -440,7 +440,6 @@ C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\bin\De
 C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\bin\Debug\net10.0\Supabase.Storage.dll
 C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\bin\Debug\net10.0\System.Reactive.dll
 C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\bin\Debug\net10.0\Websocket.Client.dll
-C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
 C:\Users\Chicho\Desktop\COSAS DE MI ENAMORADO XD\plataforma-adopcion-web\backend\API\bin\Debug\net10.0\appsettings.Development.json
 C:\Users\Chicho\Desktop\COSAS DE MI ENAMORADO XD\plataforma-adopcion-web\backend\API\bin\Debug\net10.0\appsettings.json
 C:\Users\Chicho\Desktop\COSAS DE MI ENAMORADO XD\plataforma-adopcion-web\backend\API\bin\Debug\net10.0\API.staticwebassets.endpoints.json
@@ -592,3 +591,4 @@ C:\Users\Chicho\Desktop\COSAS DE MI ENAMORADO XD\plataforma-adopcion-web\backend
 C:\Users\Chicho\Desktop\COSAS DE MI ENAMORADO XD\plataforma-adopcion-web\backend\API\obj\Debug\net10.0\API.genruntimeconfig.cache
 C:\Users\Chicho\Desktop\COSAS DE MI ENAMORADO XD\plataforma-adopcion-web\backend\API\obj\Debug\net10.0\ref\API.dll
 C:\Users\Chicho\Desktop\COSAS DE MI ENAMORADO XD\plataforma-adopcion-web\backend\API\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
+C:\Users\juanc\Desktop\PROYECTOS MONOREPO\albergue-plataforma\backend\API\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt

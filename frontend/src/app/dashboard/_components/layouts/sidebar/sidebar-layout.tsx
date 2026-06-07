@@ -29,7 +29,7 @@ export const SidebarContent = ({ onClose }: { onClose?: () => void }) => (
 
 export function SidebarLayout({ onClose }: { onClose?: () => void }) {
   return (
-    <div className="hidden md:flex w-64 h-screen flex-col overflow-hidden bg-white border-r border-gray-200">
+    <div className="hidden lg:flex w-64 h-screen flex-col overflow-hidden bg-white border-r border-gray-200">
       <SidebarContent onClose={onClose} />
     </div>
   );

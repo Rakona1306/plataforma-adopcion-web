@@ -22,7 +22,7 @@ import { UpdateRoleForm, ViewRole } from "./organism";
 export default function RolesPage() {
   const { actionsRoles } = useActionsRole();
   const { data, updateFilter, filter, handleClear, isLoading, isError } = useGetAllRoles();
-  const { deleteRoleWithConfirmation } = useDeleteRole();
+  const { deleteRoleWithConfirmation, isPending } = useDeleteRole();
   const { handleOpenModal } = useModal() || {};
 
   const columns: TableColumn<Role>[] = [
@@ -109,7 +109,7 @@ export default function RolesPage() {
             data={data?.items || []}
             actions={actions}
             keyExtractor={(user) => user.id}
-            isLoading={isLoading}
+            isLoading={isLoading || isPending}
             isError={isError}
             onPageChange={(page) => updateFilter({ page })}
             totalItems={data?.totalCount || 0}

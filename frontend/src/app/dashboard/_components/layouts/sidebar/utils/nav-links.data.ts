@@ -41,11 +41,27 @@ export const navLinks: NavLink[] = [
     items: [
       {
         name: 'Mascotas',
-        href: '/dashboard/shelters'
+        href: '/dashboard/mascotas'
       },
       {
         name: 'Caracteristicas',
-        href: '/dashboard/areas'
+        href: '/dashboard/caracteristicas'
+      },
+      {
+        name: 'Razas',
+        href: '/dashboard/razas'
+      },
+      {
+        name: 'Historial Medico',
+        href: '/dashboard/historial-medico'
+      },
+      {
+        name: "Especies",
+        href: '/dashboard/especies'
+      },
+      {
+        name: "Vacunas",
+        href: '/dashboard/vacunas'
       }
     ]
   },

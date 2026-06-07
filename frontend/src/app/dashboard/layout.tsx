@@ -24,7 +24,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       </main>
 
       {/* Botón Flotante (Solo visible en móvil) */}
-      <div className="md:hidden fixed bottom-6 right-6 z-50">
+      <div className="lg:hidden fixed bottom-6 right-6 z-50">
         <div className="bg-white p-3 rounded-full shadow-xl border border-gray-200">
           <Burger opened={opened} onClick={open} size="md" />
         </div>

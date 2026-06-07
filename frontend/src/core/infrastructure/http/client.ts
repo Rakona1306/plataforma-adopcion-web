@@ -35,8 +35,11 @@ class HttpClient {
 
     retryAttempt = 0,
   ): Promise<T> {
-    let token = null
-    const storageToken = typeof window !== "undefined" ? localStorage.getItem(LOCAL_STORAGE.NAMESESSION) : null;
+    let token = null;
+    const storageToken =
+      typeof window !== "undefined"
+        ? localStorage.getItem(LOCAL_STORAGE.NAMESESSION)
+        : null;
 
     if (storageToken) {
       const rawState = JSON.parse(storageToken || "{}");
@@ -49,6 +52,10 @@ class HttpClient {
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
       ...options.headers,
     };
+
+    if (options.body instanceof FormData) {
+      delete (headers as any)["Content-Type"];
+    }
 
     const controller = new AbortController();
 
@@ -119,6 +126,8 @@ class HttpClient {
   ): Promise<T> {
     const url = buildUrl(this.baseUrl, endpoint);
 
+    const isFormData = body instanceof FormData;
+
     return this.request<T>(url, {
       method: "POST",
 
@@ -128,7 +137,10 @@ class HttpClient {
 
       retry: config?.retry ?? false,
 
-      headers: config?.headers,
+      headers: {
+        ...(isFormData ? {} : { "Content-Type": "application/json" }),
+        ...config?.headers,
+      },
     });
   }
 
@@ -139,6 +151,8 @@ class HttpClient {
   ): Promise<T> {
     const url = buildUrl(this.baseUrl, endpoint);
 
+    const isFormData = body instanceof FormData;
+
     return this.request<T>(url, {
       method: "PUT",
 
@@ -148,7 +162,10 @@ class HttpClient {
 
       retry: config?.retry ?? false,
 
-      headers: config?.headers,
+      headers: {
+        ...(isFormData ? {} : { "Content-Type": "application/json" }),
+        ...config?.headers,
+      },
     });
   }
 

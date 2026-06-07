@@ -126,6 +126,7 @@ export default function UpdateUserForm({ user }: Props) {
         options={data?.items || []}
         onSearch={(search) => updateFilter({ search })}
         isLoading={isLoading || isPending}
+        defaultValue={user.role?.name || ""}
       />
 
       <BooleanSelect name="isBlocked" label="¿Usuario bloqueado?" />

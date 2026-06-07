@@ -20,6 +20,19 @@ namespace API.Presentation.Controllers.Organization
             _service = service;
         }
 
+        [HttpPost("change-password")]
+        public async Task<IActionResult> ChangePassword(
+            [FromBody] ChangePasswordDto changePasswordDto
+        )
+        {
+            await _service.ChangePassword(changePasswordDto);
+
+            return Ok(new
+            {
+                message = "Contraseña cambiada correctamente"
+            });
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetAll(
             [FromQuery] UserFilterDto filter

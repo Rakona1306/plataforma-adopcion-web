@@ -7,26 +7,26 @@ namespace API.Application.Features.Shelter.Breeds.Mappers
     [Mapper]
     public partial class BreedMapper
     {
-        public partial Breed ToEntity(
-            CreateBreedDto dto
-        );
+        public partial Breed ToEntity(CreateBreedDto dto);
 
-        public partial void Update(
-            UpdateBreedDto dto,
-            [MappingTarget] Breed entity
-        );
+        public partial void Update(UpdateBreedDto dto, [MappingTarget] Breed entity);
 
-        [MapProperty(
-            nameof(Breed.Species.Name),
-            nameof(BreedResponse.SpeciesName)
-        )]
-        public partial BreedResponse ToResponse(
-            Breed entity
-        );
+        // Mapeo manual para controlar el null de Species
+        public BreedResponse ToResponse(Breed entity)
+        {
+            // Llamamos al mapeo generado automáticamente para las propiedades básicas
+            var response = ToResponseInternal(entity);
 
-        public partial List<BreedResponse>
-            ToResponseList(
-                List<Breed> entities
-            );
+            // Manejamos la lógica del null manualmente
+            response.SpeciesName = entity.Species?.Name ?? "Sin especie";
+
+            return response;
+        }
+
+        // Mapperly generará esta parte automáticamente para las propiedades que coincidan
+        [MapperIgnoreTarget(nameof(BreedResponse.SpeciesName))]
+        private partial BreedResponse ToResponseInternal(Breed entity);
+
+        public partial List<BreedResponse> ToResponseList(List<Breed> entities);
     }
 }

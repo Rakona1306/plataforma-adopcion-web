@@ -1,15 +1,13 @@
-﻿using API.Application.Features.Shelter.Pets.Dtos;
-using API.Application.Features.Shelter.Species.Dtos;
+﻿using API.Application.Attributes;
+using API.Application.Features.Shelter.Pets.Dtos;
 using API.Application.Services.Shelter.Pets;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
-using Microsoft.AspNetCore.RateLimiting;
 
 namespace API.Presentation.Controllers.Shelter
 {
     [ApiController]
-    [Route("api/[controller]")]
-    [EnableRateLimiting("InteractionsPolicy")]
+    [Route("api/pets")]
     public class PetsController : ControllerBase
     {
         private readonly IPetService _service;
@@ -40,6 +38,7 @@ namespace API.Presentation.Controllers.Shelter
         }
 
         [HttpPost]
+        [AuthorizeJwt]
         public async Task<IActionResult> Create(
             CreatePetDto dto
         )
@@ -48,6 +47,7 @@ namespace API.Presentation.Controllers.Shelter
         }
 
         [HttpPut("{id}")]
+        [AuthorizeJwt]
         public async Task<IActionResult> Update(
             Guid id,
             UpdatePetDto dto
@@ -57,6 +57,7 @@ namespace API.Presentation.Controllers.Shelter
         }
 
         [HttpDelete("{id}")]
+        [AuthorizeJwt]
         public async Task<IActionResult> Delete(Guid id)
         {
             await _service.DeleteAsync(id);

@@ -19,15 +19,11 @@ namespace API.Application.Services.Shelter.Traits
         private readonly ITraitRepository
             _repository;
 
-        private readonly ITraitCategoryRepository
-            _categoryRepository;
-
         private readonly TraitMapper
             _mapper;
 
         public TraitService(
             ITraitRepository repository,
-            ITraitCategoryRepository categoryRepository,
             TraitMapper mapper,
             AuditLogMapper auditLogMapper
         )
@@ -37,10 +33,6 @@ namespace API.Application.Services.Shelter.Traits
             )
         {
             _repository = repository;
-
-            _categoryRepository =
-                categoryRepository;
-
             _mapper = mapper;
         }
 
@@ -51,8 +43,7 @@ namespace API.Application.Services.Shelter.Traits
         )
         {
             IQueryable<Trait> query =
-                _repository.Query()
-                    .Include(x => x.Category);
+                _repository.Query();
 
             if (!string.IsNullOrWhiteSpace(
                 filter.Search
@@ -62,14 +53,6 @@ namespace API.Application.Services.Shelter.Traits
                     x.Name.Contains(
                         filter.Search
                     )
-                );
-            }
-
-            if (filter.CategoryId.HasValue)
-            {
-                query = query.Where(x =>
-                    x.CategoryId ==
-                    filter.CategoryId
                 );
             }
 
@@ -108,7 +91,6 @@ namespace API.Application.Services.Shelter.Traits
         {
             var entity =
                 await _repository.Query()
-                    .Include(x => x.Category)
                     .FirstOrDefaultAsync(x =>
                         x.Id == id
                     );
@@ -129,18 +111,6 @@ namespace API.Application.Services.Shelter.Traits
                 Guid? userId = null
             )
         {
-            var categoryExists =
-                await _categoryRepository
-                    .ExistsAsync(x =>
-                        x.Id == dto.CategoryId
-                    );
-
-            if (!categoryExists)
-            {
-                throw new Exception(
-                    "La categoría no fue encontrada"
-                );
-            }
 
             var exists =
                 await _repository.ExistsAsync(x =>
@@ -190,23 +160,9 @@ namespace API.Application.Services.Shelter.Traits
                 );
             }
 
-            var categoryExists =
-                await _categoryRepository
-                    .ExistsAsync(x =>
-                        x.Id == dto.CategoryId
-                    );
-
-            if (!categoryExists)
-            {
-                throw new Exception(
-                    "La categoría no fue encontrada"
-                );
-            }
-
             var oldValues = new
             {
                 entity.Name,
-                entity.CategoryId
             };
 
             _mapper.Update(dto, entity);

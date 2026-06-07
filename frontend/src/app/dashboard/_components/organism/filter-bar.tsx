@@ -4,6 +4,7 @@ import FilterSelect from "../atoms/filter-select";
 import FilterDate from "../atoms/filter-date";
 import { FilterItemConfig } from "../../_interfaces/ui/filters";
 import { BiTrash } from "react-icons/bi";
+import { SearchSelectComp } from "@/components/organisms/search-select-comp";
 
 interface FilterBarProps {
   filters: FilterItemConfig[];
@@ -48,6 +49,20 @@ export default function FilterBar({ filters, onClearAll }: FilterBarProps) {
                   placeholder={filter.placeholder}
                   value={filter.value}
                   onChange={filter.onChange}
+                />
+              );
+            case "select-search":
+              return (
+                <SearchSelectComp
+                  key={`select-search-${index}`}
+                  label={filter.label}
+                  placeholder={filter.placeholder}
+                  filterValue={filter.value ?? ""}
+                  options={filter.options}
+                  displayField={filter.displayField}
+                  valueField={filter.valueField}
+                  onChange={filter.onChange}
+                  className="flex-1"
                 />
               );
 

@@ -17,8 +17,6 @@ namespace API.Application.Features.Shelter.PetTraits.Mappers
 
         // 2. Mapeo explícito usando la notación de puntos
         [MapProperty(nameof(PetTrait.Trait) + "." + nameof(Trait.Name), nameof(PetTraitResponse.TraitName))]
-        [MapProperty(nameof(PetTrait.Trait) + "." + nameof(Trait.CategoryId), nameof(PetTraitResponse.TraitCategoryId))]
-        [MapProperty(nameof(PetTrait.Trait) + "." + nameof(Trait.Category) + "." + nameof(TraitCategory.Name), nameof(PetTraitResponse.TraitCategoryName))]
         public partial PetTraitResponse ToResponse(PetTrait entity);
 
         [MapperIgnoreTarget(nameof(PetTrait.Pet))]

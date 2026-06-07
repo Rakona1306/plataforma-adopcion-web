@@ -20,12 +20,13 @@ import UpdateUserForm from "./organism/update-user-form";
 import { User } from "@/core/domain/models/organization/user";
 import { ViewUser } from "./organism";
 import { CgPassword } from "react-icons/cg";
+import { ChangePasswordForm } from "./organism/change-password-form";
 
 export default function UsersPage() {
   const { data, updateFilter, filter, handleClear, isLoading, isError } =
     useGetAllUser();
   const { handleOpenModal } = useModal() || {};
-  const { deleteUserWithConfirmation } = useDeleteUser();
+  const { deleteUserWithConfirmation, isPending } = useDeleteUser();
   const { actionsI } = useActionsUser();
 
   const columns: TableColumn<User>[] = [
@@ -56,7 +57,7 @@ export default function UsersPage() {
       onClick: (user) => {
         handleOpenModal?.({
           header: "Cambiar contraseña",
-          content: <ViewUser user={user} />,
+          content: <ChangePasswordForm user={user} />,
         });
       },
     },
@@ -125,7 +126,7 @@ export default function UsersPage() {
             data={data?.items || []}
             actions={actions}
             keyExtractor={(user) => user.id}
-            isLoading={isLoading}
+            isLoading={isLoading || isPending}
             isError={isError}
             onPageChange={(page) => updateFilter({ page })}
             totalItems={data?.totalCount || 0}

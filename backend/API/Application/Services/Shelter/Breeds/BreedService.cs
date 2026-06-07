@@ -68,8 +68,7 @@ namespace API.Application.Services.Shelter.Breeds
             if (filter.SpeciesId.HasValue)
             {
                 query = query.Where(x =>
-                    x.SpeciesId ==
-                    filter.SpeciesId
+                    x.SpeciesId == filter.SpeciesId
                 );
             }
 
@@ -167,8 +166,8 @@ namespace API.Application.Services.Shelter.Breeds
                 entity,
                 userId
             );
-
             await _repository.SaveChangesAsync();
+
 
             return _mapper.ToResponse(entity);
         }

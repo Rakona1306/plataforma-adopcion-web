@@ -38,7 +38,6 @@ namespace API.Infrastructure.Db
         public DbSet<PetVaccine> PetVaccines { get; set; }
         public DbSet<Specie> Species { get; set; }
         public DbSet<Trait> Traits { get; set; }
-        public DbSet<TraitCategory> TraitCategories { get; set; }
         public DbSet<Vaccine> Vacines { get; set; } // Nota: Corregí el nombre basado en tu archivo 'Vacine.cs'
 
         // --- Módulo: Checkout ---

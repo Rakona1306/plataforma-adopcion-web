@@ -7,6 +7,7 @@ namespace API.Presentation.Controllers.Shelter
 {
     [ApiController]
     [Route("api/vaccines")]
+    [AuthorizeJwt]
     public class VaccineController
     : ControllerBase
     {
@@ -46,7 +47,6 @@ namespace API.Presentation.Controllers.Shelter
         }
 
         [HttpPost]
-        [AuthorizedUser]
         public async Task<IActionResult>
             Create(
                 [FromBody]
@@ -80,7 +80,6 @@ namespace API.Presentation.Controllers.Shelter
         }
 
         [HttpPut("{id:guid}")]
-        [AuthorizedUser]
         public async Task<IActionResult>
             Update(
                 Guid id,
@@ -116,7 +115,6 @@ namespace API.Presentation.Controllers.Shelter
         }
 
         [HttpDelete("{id:guid}")]
-        [AuthorizedUser]
         public async Task<IActionResult>
             Delete(Guid id)
         {
@@ -150,7 +148,6 @@ namespace API.Presentation.Controllers.Shelter
         }
 
         [HttpGet("{id:guid}/interactions")]
-        [AuthorizedUser]
         public async Task<IActionResult>
             GetInteractions(
                 Guid id,

@@ -6,12 +6,14 @@ namespace API.Application.Services.Adapter.SupabaseS3
     public class SupabaseStorageService : ISupabaseStorageService
     {
         private readonly Client _client;
+        // Guarda estos valores manualmente al inyectar el cliente
+        private readonly string _url;
 
-        public SupabaseStorageService(
-            Client client
-        )
+        public SupabaseStorageService(Client client, IConfiguration config)
         {
             _client = client;
+            // Obtenlos directamente de IConfiguration para depurar
+            _url = config["SUPABASE_URL"] ?? "NO_URL_ENCONTRADA";
         }
 
         public async Task<string> UploadImageAsync(
@@ -19,6 +21,7 @@ namespace API.Application.Services.Adapter.SupabaseS3
             string bucket
         )
         {
+            Console.WriteLine($"URL configurada: {_url}");
             using var memoryStream =
                 new MemoryStream();
 

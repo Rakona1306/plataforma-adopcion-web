@@ -8,6 +8,5 @@
 
         public string? Search { get; set; }
 
-        public Guid? CategoryId { get; set; }
     }
 }

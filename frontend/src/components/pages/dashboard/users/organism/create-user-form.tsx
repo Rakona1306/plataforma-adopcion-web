@@ -16,8 +16,7 @@ import {
 import { useCreateUser } from "@/core/application/features/organization/user/hooks/useCreateUser";
 import { Role } from "@/core/domain/models/organization/role";
 import { limaDistricts } from "@/core/shared/constants/distritcts";
-import { Button, Grid, Select } from "@mantine/core";
-import { useField } from "formik";
+import { Button, Grid } from "@mantine/core";
 import { useState } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { DniOrRuc } from "../molecules/dni-or-ruc";

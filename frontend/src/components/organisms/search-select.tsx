@@ -2,7 +2,7 @@
 
 import { Autocomplete, Loader } from "@mantine/core";
 import { useField } from "formik";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 interface Props<T> {
   name: string;
@@ -17,6 +17,7 @@ interface Props<T> {
   isLoading?: boolean;
   placeholder?: string;
   className?: string;
+  defaultValue?: string;
 }
 
 export function SearchSelect<T>({
@@ -29,6 +30,7 @@ export function SearchSelect<T>({
   isLoading,
   placeholder,
   className,
+  defaultValue,
 }: Props<T>) {
   const [field, meta, helpers] = useField(name);
 
@@ -39,7 +41,7 @@ export function SearchSelect<T>({
   }, [options, field.value, valueField]);
 
   const [searchValue, setSearchValue] = useState(
-    selectedOption ? String(selectedOption[displayField]) : ""
+    selectedOption ? String(selectedOption[displayField]) : defaultValue || ""
   );
 
   const data = useMemo(

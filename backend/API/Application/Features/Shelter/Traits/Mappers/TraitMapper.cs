@@ -16,10 +16,6 @@ namespace API.Application.Features.Shelter.Traits.Mappers
             [MappingTarget] Trait entity
         );
 
-        [MapProperty(
-            nameof(Trait.Category.Name),
-            nameof(TraitResponse.CategoryName)
-        )]
         public partial TraitResponse ToResponse(
             Trait entity
         );

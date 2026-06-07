@@ -1,8 +1,9 @@
+import { ChangePasswordDto } from "@/core/application/features/organization/user/dtos/change-password-dto";
 import { UserCreateDto } from "@/core/application/features/organization/user/dtos/user-create-dto";
 import { UserFilterDto } from "@/core/application/features/organization/user/dtos/user-filter-dto";
 import { UserUpdateDto } from "@/core/application/features/organization/user/dtos/user-update-dto";
+import { User } from "@/core/domain/models/organization/user";
 import { Paginate } from "@/core/domain/models/system/paginate";
-import { User } from "@/core/domain/models/User";
 import { IUserRepository } from "@/core/domain/repository/organization/IUserRepository";
 
 export class UserService {
@@ -24,5 +25,9 @@ export class UserService {
 
   async updateUser(id: string, update: UserUpdateDto) {
     return await this.userRepository.update(id, update);
+  }
+
+  async changePassword(dto: ChangePasswordDto) {
+    return await this.userRepository.changePassword(dto);
   }
 }

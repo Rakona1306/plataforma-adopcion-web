@@ -17,10 +17,6 @@ namespace API.Application.Features.Shelter.Traits.Validators
 
                 .MaximumLength(100)
                 .WithMessage("El nombre debe tener máximo 100 caracteres");
-
-            RuleFor(x => x.CategoryId)
-                .NotEmpty()
-                .WithMessage("La categoría es requerida");
         }
     }
 }

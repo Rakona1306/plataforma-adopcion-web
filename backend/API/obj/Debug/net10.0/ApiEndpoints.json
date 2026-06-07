@@ -54,7 +54,7 @@
   {
     "ContainingType": "API.Presentation.Controllers.Shelter.BreedController",
     "Method": "GetAll",
-    "RelativePath": "api/Breed",
+    "RelativePath": "api/breeds",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -85,7 +85,7 @@
   {
     "ContainingType": "API.Presentation.Controllers.Shelter.BreedController",
     "Method": "Create",
-    "RelativePath": "api/Breed",
+    "RelativePath": "api/breeds",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -101,7 +101,7 @@
   {
     "ContainingType": "API.Presentation.Controllers.Shelter.BreedController",
     "Method": "GetById",
-    "RelativePath": "api/Breed/{id}",
+    "RelativePath": "api/breeds/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -117,7 +117,7 @@
   {
     "ContainingType": "API.Presentation.Controllers.Shelter.BreedController",
     "Method": "Update",
-    "RelativePath": "api/Breed/{id}",
+    "RelativePath": "api/breeds/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -138,7 +138,7 @@
   {
     "ContainingType": "API.Presentation.Controllers.Shelter.BreedController",
     "Method": "Delete",
-    "RelativePath": "api/Breed/{id}",
+    "RelativePath": "api/breeds/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -154,7 +154,7 @@
   {
     "ContainingType": "API.Presentation.Controllers.Shelter.BreedController",
     "Method": "GetInteractions",
-    "RelativePath": "api/Breed/{id}/interactions",
+    "RelativePath": "api/breeds/{id}/interactions",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -472,6 +472,152 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Shelter.PetPhotosController",
+    "Method": "GetAll",
+    "RelativePath": "api/pet-photos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PetId",
+        "Type": "System.Nullable\u00601[[System.Guid, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "IsMain",
+        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Shelter.PetPhotosController",
+    "Method": "Create",
+    "RelativePath": "api/pet-photos",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PetId",
+        "Type": "System.Guid",
+        "IsRequired": false
+      },
+      {
+        "Name": "File",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "IsMain",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Shelter.PetPhotosController",
+    "Method": "GetById",
+    "RelativePath": "api/pet-photos/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Shelter.PetPhotosController",
+    "Method": "Update",
+    "RelativePath": "api/pet-photos/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "File",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "IsMain",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Shelter.PetPhotosController",
+    "Method": "Delete",
+    "RelativePath": "api/pet-photos/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Shelter.PetPhotosController",
+    "Method": "SyncPhotos",
+    "RelativePath": "api/pet-photos/{petId}/sync-photos",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "petId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "Files",
+        "Type": "System.Collections.Generic.List\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=10.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "MainPhotoId",
+        "Type": "System.Nullable\u00601[[System.Guid, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "PhotoIdsToRemove",
+        "Type": "System.Collections.Generic.List\u00601[[System.Guid, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -887,124 +1033,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "API.Presentation.Controllers.Shelter.PetPhotosController",
-    "Method": "GetAll",
-    "RelativePath": "api/PetPhotos",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "Page",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "PageSize",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "PetId",
-        "Type": "System.Nullable\u00601[[System.Guid, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "IsMain",
-        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "API.Presentation.Controllers.Shelter.PetPhotosController",
-    "Method": "Create",
-    "RelativePath": "api/PetPhotos",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "PetId",
-        "Type": "System.Guid",
-        "IsRequired": false
-      },
-      {
-        "Name": "File",
-        "Type": "Microsoft.AspNetCore.Http.IFormFile",
-        "IsRequired": false
-      },
-      {
-        "Name": "IsMain",
-        "Type": "System.Boolean",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "API.Presentation.Controllers.Shelter.PetPhotosController",
-    "Method": "GetById",
-    "RelativePath": "api/PetPhotos/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "API.Presentation.Controllers.Shelter.PetPhotosController",
-    "Method": "Update",
-    "RelativePath": "api/PetPhotos/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": true
-      },
-      {
-        "Name": "File",
-        "Type": "Microsoft.AspNetCore.Http.IFormFile",
-        "IsRequired": false
-      },
-      {
-        "Name": "IsMain",
-        "Type": "System.Boolean",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "API.Presentation.Controllers.Shelter.PetPhotosController",
-    "Method": "Delete",
-    "RelativePath": "api/PetPhotos/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "API.Presentation.Controllers.Shelter.PetsController",
     "Method": "GetAll",
-    "RelativePath": "api/Pets",
+    "RelativePath": "api/pets",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -1065,7 +1096,7 @@
   {
     "ContainingType": "API.Presentation.Controllers.Shelter.PetsController",
     "Method": "Create",
-    "RelativePath": "api/Pets",
+    "RelativePath": "api/pets",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -1081,7 +1112,7 @@
   {
     "ContainingType": "API.Presentation.Controllers.Shelter.PetsController",
     "Method": "GetById",
-    "RelativePath": "api/Pets/{id}",
+    "RelativePath": "api/pets/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -1097,7 +1128,7 @@
   {
     "ContainingType": "API.Presentation.Controllers.Shelter.PetsController",
     "Method": "Update",
-    "RelativePath": "api/Pets/{id}",
+    "RelativePath": "api/pets/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -1118,7 +1149,7 @@
   {
     "ContainingType": "API.Presentation.Controllers.Shelter.PetsController",
     "Method": "Delete",
-    "RelativePath": "api/Pets/{id}",
+    "RelativePath": "api/pets/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -1353,127 +1384,6 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "API.Presentation.Controllers.Shelter.TraitCategoriesController",
-    "Method": "GetAll",
-    "RelativePath": "api/TraitCategories",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "Page",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "PageSize",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Search",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "API.Presentation.Controllers.Shelter.TraitCategoriesController",
-    "Method": "Create",
-    "RelativePath": "api/TraitCategories",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "dto",
-        "Type": "API.Application.Features.Shelter.TraitCategories.Dtos.CreateTraitCategoryDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "API.Presentation.Controllers.Shelter.TraitCategoriesController",
-    "Method": "GetById",
-    "RelativePath": "api/TraitCategories/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "API.Presentation.Controllers.Shelter.TraitCategoriesController",
-    "Method": "Update",
-    "RelativePath": "api/TraitCategories/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": true
-      },
-      {
-        "Name": "dto",
-        "Type": "API.Application.Features.Shelter.TraitCategories.Dtos.UpdateTraitCategoryDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "API.Presentation.Controllers.Shelter.TraitCategoriesController",
-    "Method": "Delete",
-    "RelativePath": "api/TraitCategories/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "API.Presentation.Controllers.Shelter.TraitCategoriesController",
-    "Method": "GetInteractions",
-    "RelativePath": "api/TraitCategories/{id}/interactions",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": true
-      },
-      {
-        "Name": "page",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "pageSize",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "API.Presentation.Controllers.Shelter.TraitsController",
     "Method": "GetAll",
     "RelativePath": "api/Traits",
@@ -1494,11 +1404,6 @@
       {
         "Name": "Search",
         "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "CategoryId",
-        "Type": "System.Nullable\u00601[[System.Guid, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       }
     ],
@@ -1726,6 +1631,22 @@
         "Name": "pageSize",
         "Type": "System.Int32",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Presentation.Controllers.Organization.UsersController",
+    "Method": "ChangePassword",
+    "RelativePath": "api/users/change-password",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "changePasswordDto",
+        "Type": "API.Application.Features.Organization.Users.Dtos.ChangePasswordDto",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

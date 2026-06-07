@@ -1,10 +1,62 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Chicho\\Desktop\\COSAS DE MI ENAMORADO XD\\plataforma-adopcion-web\\backend\\",
+  "WorkspaceRootPath": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\chicho\\desktop\\cosas de mi enamorado xd\\plataforma-adopcion-web\\backend\\api\\.env.example||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\application\\features\\shelter\\pets\\mappers\\petmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\application\\features\\shelter\\pets\\mappers\\petmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\application\\features\\shelter\\pets\\dtos\\petresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\application\\features\\shelter\\pets\\dtos\\petresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\application\\features\\shelter\\traits\\dtos\\optiontraitresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\application\\features\\shelter\\traits\\dtos\\optiontraitresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\application\\features\\shelter\\breeds\\dtos\\optionbreedresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\application\\features\\shelter\\breeds\\dtos\\optionbreedresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\application\\features\\shelter\\petbreeds\\dtos\\optionpetbreeddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\application\\features\\shelter\\petbreeds\\dtos\\optionpetbreeddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\domain\\model\\shelter\\pet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\domain\\model\\shelter\\pet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\.env.example||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\.env.example||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\presentation\\controllers\\shelter\\petphotoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\presentation\\controllers\\shelter\\petphotoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\application\\services\\shelter\\petphotos\\petphotoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\application\\services\\shelter\\petphotos\\petphotoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\application\\features\\shelter\\petphotos\\dtos\\syncpetphotosdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\application\\features\\shelter\\petphotos\\dtos\\syncpetphotosdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\application\\features\\shelter\\petphotos\\dtos\\syncpetphotorequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\application\\features\\shelter\\petphotos\\dtos\\syncpetphotorequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\presentation\\controllers\\shelter\\petscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\presentation\\controllers\\shelter\\petscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\infrastructure\\extensions\\supabase\\supabaseconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\infrastructure\\extensions\\supabase\\supabaseconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,23 +66,196 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "OptionTraitResponse.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Shelter\\Traits\\Dtos\\OptionTraitResponse.cs",
+              "RelativeDocumentMoniker": "API\\Application\\Features\\Shelter\\Traits\\Dtos\\OptionTraitResponse.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Shelter\\Traits\\Dtos\\OptionTraitResponse.cs",
+              "RelativeToolTip": "API\\Application\\Features\\Shelter\\Traits\\Dtos\\OptionTraitResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-06T18:04:13.523Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "OptionBreedResponse.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Shelter\\Breeds\\Dtos\\OptionBreedResponse.cs",
+              "RelativeDocumentMoniker": "API\\Application\\Features\\Shelter\\Breeds\\Dtos\\OptionBreedResponse.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Shelter\\Breeds\\Dtos\\OptionBreedResponse.cs",
+              "RelativeToolTip": "API\\Application\\Features\\Shelter\\Breeds\\Dtos\\OptionBreedResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-06T16:52:56.209Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "OptionPetBreedDto.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Shelter\\PetBreeds\\Dtos\\OptionPetBreedDto.cs",
+              "RelativeDocumentMoniker": "API\\Application\\Features\\Shelter\\PetBreeds\\Dtos\\OptionPetBreedDto.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Shelter\\PetBreeds\\Dtos\\OptionPetBreedDto.cs",
+              "RelativeToolTip": "API\\Application\\Features\\Shelter\\PetBreeds\\Dtos\\OptionPetBreedDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-06T16:52:00.973Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Pet.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Domain\\Model\\Shelter\\Pet.cs",
+              "RelativeDocumentMoniker": "API\\Domain\\Model\\Shelter\\Pet.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Domain\\Model\\Shelter\\Pet.cs",
+              "RelativeToolTip": "API\\Domain\\Model\\Shelter\\Pet.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-06T16:44:48.745Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "PetMapper.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Shelter\\Pets\\Mappers\\PetMapper.cs",
+              "RelativeDocumentMoniker": "API\\Application\\Features\\Shelter\\Pets\\Mappers\\PetMapper.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Shelter\\Pets\\Mappers\\PetMapper.cs",
+              "RelativeToolTip": "API\\Application\\Features\\Shelter\\Pets\\Mappers\\PetMapper.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAYwDIAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-06T16:43:17.138Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PetResponse.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Shelter\\Pets\\Dtos\\PetResponse.cs",
+              "RelativeDocumentMoniker": "API\\Application\\Features\\Shelter\\Pets\\Dtos\\PetResponse.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Shelter\\Pets\\Dtos\\PetResponse.cs",
+              "RelativeToolTip": "API\\Application\\Features\\Shelter\\Pets\\Dtos\\PetResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwBkAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-06T16:43:11.271Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": ".env.example",
-              "DocumentMoniker": "C:\\Users\\Chicho\\Desktop\\COSAS DE MI ENAMORADO XD\\plataforma-adopcion-web\\backend\\API\\.env.example",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\.env.example",
               "RelativeDocumentMoniker": "API\\.env.example",
-              "ToolTip": "C:\\Users\\Chicho\\Desktop\\COSAS DE MI ENAMORADO XD\\plataforma-adopcion-web\\backend\\API\\.env.example",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\.env.example",
               "RelativeToolTip": "API\\.env.example",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAtAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-05-31T03:18:08.344Z",
+              "WhenOpened": "2026-06-06T14:57:30.935Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "PetPhotoService.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Services\\Shelter\\PetPhotos\\PetPhotoService.cs",
+              "RelativeDocumentMoniker": "API\\Application\\Services\\Shelter\\PetPhotos\\PetPhotoService.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Services\\Shelter\\PetPhotos\\PetPhotoService.cs",
+              "RelativeToolTip": "API\\Application\\Services\\Shelter\\PetPhotos\\PetPhotoService.cs",
+              "ViewState": "AgIAAPMAAAAAAAAAAAAkwPkAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-06T13:57:27.327Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "SyncPetPhotosDto.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Shelter\\PetPhotos\\Dtos\\SyncPetPhotosDto.cs",
+              "RelativeDocumentMoniker": "API\\Application\\Features\\Shelter\\PetPhotos\\Dtos\\SyncPetPhotosDto.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Shelter\\PetPhotos\\Dtos\\SyncPetPhotosDto.cs",
+              "RelativeToolTip": "API\\Application\\Features\\Shelter\\PetPhotos\\Dtos\\SyncPetPhotosDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-06T13:55:03.159Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "SupabaseConfig.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Infrastructure\\Extensions\\Supabase\\SupabaseConfig.cs",
+              "RelativeDocumentMoniker": "API\\Infrastructure\\Extensions\\Supabase\\SupabaseConfig.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Infrastructure\\Extensions\\Supabase\\SupabaseConfig.cs",
+              "RelativeToolTip": "API\\Infrastructure\\Extensions\\Supabase\\SupabaseConfig.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-06T13:29:51.882Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Program.cs",
+              "RelativeDocumentMoniker": "API\\Program.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Program.cs",
+              "RelativeToolTip": "API\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAABiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-06T13:28:39.599Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "PetsController.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Presentation\\Controllers\\Shelter\\PetsController.cs",
+              "RelativeDocumentMoniker": "API\\Presentation\\Controllers\\Shelter\\PetsController.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Presentation\\Controllers\\Shelter\\PetsController.cs",
+              "RelativeToolTip": "API\\Presentation\\Controllers\\Shelter\\PetsController.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAywEQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-06T13:17:44.344Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "SyncPetPhotoRequest.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Shelter\\PetPhotos\\Dtos\\SyncPetPhotoRequest.cs",
+              "RelativeDocumentMoniker": "API\\Application\\Features\\Shelter\\PetPhotos\\Dtos\\SyncPetPhotoRequest.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Shelter\\PetPhotos\\Dtos\\SyncPetPhotoRequest.cs",
+              "RelativeToolTip": "API\\Application\\Features\\Shelter\\PetPhotos\\Dtos\\SyncPetPhotoRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAcAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-06T12:15:19.421Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "PetPhotosController.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Presentation\\Controllers\\Shelter\\PetPhotosController.cs",
+              "RelativeDocumentMoniker": "API\\Presentation\\Controllers\\Shelter\\PetPhotosController.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Presentation\\Controllers\\Shelter\\PetPhotosController.cs",
+              "RelativeToolTip": "API\\Presentation\\Controllers\\Shelter\\PetPhotosController.cs",
+              "ViewState": "AgIAAH0AAAAAAAAAAAAhwJMAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-06T12:13:01.218Z",
               "EditorCaption": ""
             }
           ]

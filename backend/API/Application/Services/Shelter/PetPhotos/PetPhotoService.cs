@@ -236,5 +236,53 @@ namespace API.Application.Services.Shelter.PetPhotos
 
             await _repository.SaveChangesAsync();
         }
+
+
+        public async Task SyncPhotosAsync(Guid petId, SyncPetPhotosDto dto, Guid? userId = null)
+        {
+            // 1. Validación
+            var petExists = await _petRepository.ExistsAsync(x => x.Id == petId);
+            if (!petExists) throw new Exception("La mascota no existe");
+
+            // 2. Eliminación (Delta Remove)
+            foreach (var photoId in dto.PhotoIdsToRemove)
+            {
+                var photo = await _repository.GetByIdAsync(photoId);
+                if (photo != null && photo.PetId == petId)
+                {
+                    await _storage.DeleteFileAsync("MASKOTS", photo.Url);
+                    await _repository.DeleteAsync(photo, userId);
+                }
+            }
+
+            // 3. Subida (Delta Add) - Sin lógica de "Main" aquí
+            foreach (var upload in dto.PhotosToAdd)
+            {
+                var imageUrl = await _storage.UploadImageAsync(upload.File, "MASKOTS");
+                var newPhoto = new PetPhoto { PetId = petId, Url = imageUrl, IsMain = false };
+
+                AuditHelper.CreateAudit(newPhoto, userId);
+                await _repository.CreateAsync(newPhoto, userId);
+            }
+
+            // 4. Ajuste final de "Main" (Operación Atómica)
+            // Buscamos todas las fotos que quedaron asociadas a la mascota
+            var allPhotos = await _repository.Query()
+                .Where(x => x.PetId == petId)
+                .ToListAsync();
+
+            foreach (var p in allPhotos)
+            {
+                bool shouldBeMain = dto.NewMainPhotoId.HasValue && p.Id == dto.NewMainPhotoId.Value;
+
+                if (p.IsMain != shouldBeMain)
+                {
+                    p.IsMain = shouldBeMain;
+                    await _repository.UpdateAsync(p, userId);
+                }
+            }
+
+            await _repository.SaveChangesAsync();
+        }
     }
 }

@@ -31,7 +31,7 @@ namespace API.Infrastructure.Db.Builders.Checkout
             // RawResponse suele contener JSONs de la API de pagos (ej: Stripe/PayPal)
             // Usamos HasMaxLength(-1) o un valor grande si esperas mucha data
             builder.Property(ph => ph.RawResponse)
-                .HasColumnType("nvarchar(max)");
+                .HasColumnType("text");
 
             // 3. Relaciones
             builder.HasOne(ph => ph.User)

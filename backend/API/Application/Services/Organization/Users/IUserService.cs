@@ -10,5 +10,6 @@ namespace API.Application.Services.Organization.Users
         UpdateUserDto,
         UserFilterDto>
     {
+        Task ChangePassword(ChangePasswordDto changePasswordDto);
     }
 }
