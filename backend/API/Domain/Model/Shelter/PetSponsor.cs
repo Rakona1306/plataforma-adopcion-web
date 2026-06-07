@@ -1,6 +1,6 @@
 ﻿using API.Domain.Common.Model;
 using API.Domain.Model.Enums;
-using Supabase.Gotrue;
+using API.Domain.Model.Organization;
 
 namespace API.Domain.Model.Shelter
 {

@@ -1,5 +1,6 @@
 ﻿using API.Domain.Common.Model;
 using API.Domain.Model.Enums;
+using API.Domain.Model.Organization;
 using API.Domain.Model.Shelter;
 
 namespace API.Domain.Model.Bussiness

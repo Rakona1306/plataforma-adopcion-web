@@ -31,7 +31,7 @@ namespace API.Infrastructure.RepositoryImpl.System
             };
 
             await query.AddAsync(entity);
-            await _context.SaveChangesAsync();
+            // await _context.SaveChangesAsync();
         }
 
         public async Task<List<AuditLog>> GetAllAsync()

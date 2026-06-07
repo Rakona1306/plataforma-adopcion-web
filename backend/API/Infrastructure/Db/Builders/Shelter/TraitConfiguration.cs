@@ -10,11 +10,6 @@ namespace API.Infrastructure.Db.Builders.Shelter
         {
             builder.HasKey(t => t.Id);
             builder.Property(t => t.Name).IsRequired().HasMaxLength(100);
-
-            // Relación 1:N con TraitCategory
-            builder.HasOne(t => t.Category)
-                   .WithMany(tc => tc.Traits)
-                   .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

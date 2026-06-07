@@ -2,14 +2,13 @@
 using API.Application.Features.Shelter.Species.Dtos;
 using API.Application.Services.Shelter.Species;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.OutputCaching;
-using Microsoft.AspNetCore.RateLimiting;
 
 namespace API.Presentation.Controllers.Shelter
 {
     [ApiController]
     [Route("api/[controller]")]
-    [EnableRateLimiting("InteractionsPolicy")]
+    [AuthorizeJwt]
+    // [EnableRateLimiting("InteractionsPolicy")]
     public class SpeciesController : ControllerBase
     {
         private readonly ISpeciesService _service;
@@ -35,7 +34,6 @@ namespace API.Presentation.Controllers.Shelter
         }
 
         [HttpGet]
-        [OutputCache(Duration = 60)]
         public async Task<IActionResult> GetAll(
             [FromQuery] SpeciesFilterDto filter
         )
@@ -46,7 +44,6 @@ namespace API.Presentation.Controllers.Shelter
         }
 
         [HttpGet("{id}")]
-        [OutputCache(Duration = 60)]
         public async Task<IActionResult> GetById(Guid id)
         {
             return Ok(
@@ -55,7 +52,6 @@ namespace API.Presentation.Controllers.Shelter
         }
 
         [HttpPost]
-        [AuthorizedUser]
         public async Task<IActionResult> Create(
             CreateSpeciesDto dto
         )
@@ -69,7 +65,6 @@ namespace API.Presentation.Controllers.Shelter
         }
 
         [HttpPut("{id}")]
-        [AuthorizedUser]
         public async Task<IActionResult> Update(
             Guid id,
             UpdateSpeciesDto dto
@@ -85,7 +80,6 @@ namespace API.Presentation.Controllers.Shelter
         }
 
         [HttpDelete("{id}")]
-        [AuthorizedUser]
         public async Task<IActionResult> Delete(Guid id)
         {
             await _service.DeleteAsync(

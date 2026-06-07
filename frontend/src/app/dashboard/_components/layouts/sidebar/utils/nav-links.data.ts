@@ -1,6 +1,7 @@
 
 import { IconType } from "react-icons";
 import { FaDog, FaHome, FaMoneyCheck, FaUserPlus, FaUsers, FaUserTie } from "react-icons/fa";
+import { MdDashboard } from "react-icons/md";
 
 export interface NavLinkItem {
   name: string;
@@ -10,9 +11,16 @@ export interface NavLinkItem {
 export interface NavLink {
   module: string;
   icon: IconType;
-  items: NavLinkItem[];
+  href?: string;
+  items?: NavLinkItem[];
+  onClose?: () => void;
 }
 export const navLinks: NavLink[] = [
+  {
+    module: "Dashboard",
+    icon: MdDashboard,
+    href: "/dashboard"
+  },
   {
     module: 'Organización',
     icon: FaUsers,
@@ -33,11 +41,27 @@ export const navLinks: NavLink[] = [
     items: [
       {
         name: 'Mascotas',
-        href: '/dashboard/shelters'
+        href: '/dashboard/mascotas'
       },
       {
         name: 'Caracteristicas',
-        href: '/dashboard/areas'
+        href: '/dashboard/caracteristicas'
+      },
+      {
+        name: 'Razas',
+        href: '/dashboard/razas'
+      },
+      {
+        name: 'Historial Medico',
+        href: '/dashboard/historial-medico'
+      },
+      {
+        name: "Especies",
+        href: '/dashboard/especies'
+      },
+      {
+        name: "Vacunas",
+        href: '/dashboard/vacunas'
       }
     ]
   },

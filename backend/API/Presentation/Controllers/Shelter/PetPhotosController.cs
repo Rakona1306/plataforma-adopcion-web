@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Presentation.Controllers.Shelter
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/pet-photos")]
     public class PetPhotosController : ControllerBase
     {
         private readonly IPetPhotoService _service;
@@ -37,7 +37,7 @@ namespace API.Presentation.Controllers.Shelter
         // =========================
 
         [HttpGet]
-        [AuthorizedUser]
+        [AuthorizeJwt]
         public async Task<IActionResult> GetAll(
             [FromQuery] PetPhotoFilterDto filter
         )
@@ -53,7 +53,7 @@ namespace API.Presentation.Controllers.Shelter
         // =========================
 
         [HttpGet("{id:guid}")]
-        [AuthorizedUser]
+        [AuthorizeJwt]
         public async Task<IActionResult> GetById(
             Guid id
         )
@@ -76,10 +76,10 @@ namespace API.Presentation.Controllers.Shelter
         )
         {
             var response =
-                await _service.CreateAsync(
-                    dto,
-                    GetUserId()
-                );
+            await _service.CreateAsync(
+                dto,
+                GetUserId()
+            );
 
             return Ok(response);
         }
@@ -121,6 +121,30 @@ namespace API.Presentation.Controllers.Shelter
                 GetUserId()
             );
 
+            return NoContent();
+        }
+
+
+        [HttpPost("{petId}/sync-photos")]
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> SyncPhotos(
+    Guid petId,
+    [FromForm] SyncPetPhotosRequest request)
+        {
+            var dto = new SyncPetPhotosDto
+            {
+                // Los archivos ahora los subimos todos como "no main" por defecto
+                // y dejamos que el servicio gestione el Main al final.
+                PhotosToAdd = request.Files?.Select(f => new PetPhotoUploadDto
+                {
+                    File = f,
+                }).ToList() ?? new(),
+
+                PhotoIdsToRemove = request.PhotoIdsToRemove ?? new(),
+                NewMainPhotoId = request.MainPhotoId // El ID que viene del frontend
+            };
+
+            await _service.SyncPhotosAsync(petId, dto, GetUserId());
             return NoContent();
         }
     }

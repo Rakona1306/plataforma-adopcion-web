@@ -59,7 +59,7 @@ namespace API.Presentation.Controllers.Shelter
         // =====================================
 
         [HttpPost]
-        [AuthorizedUser]
+        [AuthorizeJwt]
         public async Task<IActionResult>
             Create(
                 [FromBody]
@@ -97,7 +97,7 @@ namespace API.Presentation.Controllers.Shelter
         // =====================================
 
         [HttpPut("{id:guid}")]
-        [AuthorizedUser]
+        [AuthorizeJwt]
         public async Task<IActionResult>
             Update(
                 Guid id,
@@ -137,7 +137,7 @@ namespace API.Presentation.Controllers.Shelter
         // =====================================
 
         [HttpDelete("{id:guid}")]
-        [AuthorizedUser]
+        [AuthorizeJwt]
         public async Task<IActionResult>
             Delete(Guid id)
         {
@@ -177,7 +177,7 @@ namespace API.Presentation.Controllers.Shelter
         // =====================================
 
         [HttpGet("{id:guid}/interactions")]
-        [AuthorizedUser]
+        [AuthorizeJwt]
         public async Task<IActionResult>
             GetInteractions(
                 Guid id,

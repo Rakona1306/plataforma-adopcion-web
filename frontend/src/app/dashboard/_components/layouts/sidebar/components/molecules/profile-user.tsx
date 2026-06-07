@@ -1,10 +1,19 @@
 'use client'
+import { useAuth } from "@/core/application/features/system/auth/hooks/useAuth";
+import { useProfile } from "@/core/application/features/system/auth/hooks/useProfile";
 import { Badge, Menu } from "@mantine/core";
 import { BiLogOut, BiUser } from "react-icons/bi";
 import { CgChevronRight } from "react-icons/cg";
 import { MdPets } from "react-icons/md";
 
 export default function ProfileUser() {
+  const { isLoading, data } = useProfile()
+
+  if (isLoading) {
+    return <div className="w-full h-full flex items-center justify-center">
+      <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-slate-200 border-r-2 border-l-2" />
+    </div>
+  }
 
   return (
     <Menu shadow="md" width={200} position="right">
@@ -15,8 +24,8 @@ export default function ProfileUser() {
               <MdPets className="text-white" size={15} />
             </div>
             <div>
-              <p className="font-medium line-clamp-1">Juan Carlos Cajas</p>
-              <Badge className="bg-primary!">Usuario</Badge>
+              <p className="font-medium line-clamp-1">{data?.name} {data?.lastName}</p>
+              <Badge className="bg-primary!">{data?.role?.name}</Badge>
             </div>
           </div>
           <CgChevronRight size={15} />

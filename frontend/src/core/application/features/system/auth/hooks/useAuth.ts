@@ -30,8 +30,9 @@ export const useAuth = () => {
 
       Swal.fire({
         icon: "success",
-        title: `Bienvenido ${auth.email}`,
+        title: `Bienvenido ${data.user.name} ${data.user.lastName}`,
         timer: 3000,
+        width: 600
       });
 
       if (data.user.toDashboard) {
@@ -40,6 +41,7 @@ export const useAuth = () => {
         router.push("/");
       }
     } catch (error) {
+      console.error(error);
       if (error instanceof HttpError) {
         setError(error);
       } else if (error instanceof Error) {
@@ -61,8 +63,9 @@ export const useAuth = () => {
 
       Swal.fire({
         icon: "success",
-        title: `Bienvenido ${register.email}`,
+        title: `Bienvenido ${register.name} ${register.lastName}`,
         timer: 3000,
+        width: 400,
       });
 
       router.push("/");

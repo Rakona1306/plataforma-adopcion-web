@@ -32,5 +32,12 @@ namespace API.Infrastructure.RepositoryImpl.Organization
                     name.ToLower()
                 );
         }
+
+        public IQueryable<Role> QueryWithPermissions()
+        {
+            return Context.Roles
+                .Include(x => x.RolePermissions)
+                .ThenInclude(x => x.Permission);
+        }
     }
 }

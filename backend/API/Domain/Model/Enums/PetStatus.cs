@@ -2,10 +2,10 @@
 {
     public enum PetStatus
     {
-        Available = 1,
-        InTreatment = 2,
-        Reserved = 3,
-        Adopted = 4,
-        FosterCare = 5
+        Habilitado = 1,
+        En_Tratamiento = 2,
+        Reservado = 3,
+        Adoptado = 4,
+        En_Cuidados = 5
     }
 }

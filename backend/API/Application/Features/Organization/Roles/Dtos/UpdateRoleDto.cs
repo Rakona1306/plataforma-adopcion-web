@@ -9,5 +9,8 @@
         public bool NotDelete { get; set; }
 
         public bool ToDashboard { get; set; }
+
+        public List<Guid> PermissionsToAdd { get; set; } = new();
+        public List<Guid> PermissionsToRemove { get; set; } = new();
     }
 }

@@ -4,10 +4,9 @@ using API.Application.Features.Organization.Users.Mappers;
 using API.Application.Features.System.AuditLogs.Mappers;
 using API.Application.Helpers;
 using API.Domain.Common.Model;
-using API.Domain.Model;
 using API.Domain.Model.Organization;
 using API.Domain.Repository.Organization;
-using Microsoft.AspNetCore.Identity;
+using API.Domain.Repository.System;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Application.Services.Organization.Users
@@ -15,31 +14,29 @@ namespace API.Application.Services.Organization.Users
     public class UserService : BaseService<Role, IRoleRepository>, IUserService
     {
         private readonly IUserRepository _repository;
-
+        private readonly IAuthRepository _authRepository;
         private readonly IRoleRepository _roleRepository;
-
         private readonly UserMapper _mapper;
-        private readonly PasswordHasher<User> _passwordHasher;
 
         public UserService(
+            IAuthRepository authRespository,
             IUserRepository repository,
             IRoleRepository roleRepository,
             UserMapper mapper,
             AuditLogMapper auditLogMapper
         ) : base(roleRepository, auditLogMapper)
         {
+            _authRepository = authRespository;
             _repository = repository;
             _roleRepository = roleRepository;
             _mapper = mapper;
-            _passwordHasher = new PasswordHasher<User>();
         }
 
         public async Task<Paginate<UserResponse>> GetAllAsync(
             UserFilterDto filter
         )
         {
-            IQueryable<User> query = _repository.Query()
-    .Include(x => x.Role);
+            IQueryable<User> query = _repository.Query().Include(x => x.Role);
 
             if (!string.IsNullOrWhiteSpace(filter.Search))
             {
@@ -115,8 +112,7 @@ namespace API.Application.Services.Organization.Users
             var entity = _mapper.ToEntity(dto);
 
             entity.Password =
-                _passwordHasher.HashPassword(
-                    entity,
+                _authRepository.HashPassword(
                     dto.Password
                 );
 
@@ -181,6 +177,28 @@ namespace API.Application.Services.Organization.Users
                 userId
             );
 
+            await _repository.SaveChangesAsync();
+        }
+
+        public async Task ChangePassword(ChangePasswordDto changePasswordDto)
+        {
+            var entity = await _repository.Query()
+                .FirstOrDefaultAsync(x => x.Email == changePasswordDto.Email);
+            if (entity is null)
+                throw new Exception("Usuario no encontrado");
+            /*
+            var result = _passwordHasher.VerifyHashedPassword(
+                entity,
+                entity.Password,
+                changePasswordDto.Password
+            );
+            if (result == PasswordVerificationResult.Failed)
+                throw new Exception("Contraseña actual incorrecta");
+            */
+            entity.Password = _authRepository.HashPassword(
+                changePasswordDto.Password
+            );
+            await _repository.UpdateAsync(entity, null);
             await _repository.SaveChangesAsync();
         }
     }

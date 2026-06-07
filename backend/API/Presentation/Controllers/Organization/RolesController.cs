@@ -3,13 +3,11 @@ using API.Application.Features.Organization.Roles.Dtos;
 using API.Application.Services.Organization.Roles;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
-using Microsoft.AspNetCore.RateLimiting;
 
 namespace API.Presentation.Controllers.Organization
 {
     [ApiController]
-    [Route("api/[controller]")]
-    [EnableRateLimiting("InteractionsPolicy")]
+    [Route("api/roles")]
     [AuthorizeJwt]
     public class RolesController : ControllerBase
     {

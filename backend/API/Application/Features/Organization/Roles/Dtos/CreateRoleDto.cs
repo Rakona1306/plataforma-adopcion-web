@@ -6,5 +6,7 @@
         public string? Description { get; set; } = string.Empty;
         public bool? NotDelete { get; set; } = false;
         public bool? ToDashboard { get; set; } = true;
+
+        public List<Guid>? CurrentPermissions { get; set; }
     }
 }

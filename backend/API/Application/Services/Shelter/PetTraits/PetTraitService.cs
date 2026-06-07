@@ -57,8 +57,7 @@ namespace API.Application.Services.Shelter.PetTraits
         {
             IQueryable<PetTrait> query =
                 _repository.Query()
-                .Include(x => x.Trait)
-                    .ThenInclude(x => x.Category);
+                .Include(x => x.Trait);
 
             if (filter.PetId.HasValue)
             {
@@ -111,7 +110,6 @@ namespace API.Application.Services.Shelter.PetTraits
             var entity =
                 await _repository.Query()
                 .Include(x => x.Trait)
-                    .ThenInclude(x => x.Category)
                 .FirstOrDefaultAsync(x =>
                     x.PetId == petId
                     &&
@@ -191,7 +189,6 @@ namespace API.Application.Services.Shelter.PetTraits
             var created =
                 await _repository.Query()
                 .Include(x => x.Trait)
-                    .ThenInclude(x => x.Category)
                 .FirstAsync(x =>
                     x.PetId == dto.PetId
                     &&
@@ -263,7 +260,6 @@ namespace API.Application.Services.Shelter.PetTraits
             var updated =
                 await _repository.Query()
                 .Include(x => x.Trait)
-                    .ThenInclude(x => x.Category)
                 .FirstAsync(x =>
                     x.PetId == entity.PetId
                     &&

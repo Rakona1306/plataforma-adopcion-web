@@ -10,7 +10,7 @@ interface FilterDateProps {
 
 export default function FilterDate({ label, placeholder, value, onChange }: FilterDateProps) {
   return (
-    <div className="w-52 min-w-40">
+    <div className="md:w-52 md:min-w-40 flex-1 md:flex-none">
       <DateInput
         label={label}
         placeholder={placeholder || "Elija una fecha"}

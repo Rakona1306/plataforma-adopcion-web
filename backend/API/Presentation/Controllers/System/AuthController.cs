@@ -100,7 +100,6 @@ namespace API.Presentation.Controllers.System
 
         [HttpGet("profile")]
         [AuthorizeJwt]
-        [AuthorizedUser]
         public IActionResult Profile()
         {
             var user = HttpContext.Items["User"];

@@ -25,6 +25,7 @@ namespace API.Infrastructure.Middlewares
             }
             catch (NotAuthorizedException ex)
             {
+                Console.WriteLine(ex);
                 await HandleExceptionAsync(
                     context,
                     HttpStatusCode.Unauthorized,
@@ -33,6 +34,7 @@ namespace API.Infrastructure.Middlewares
             }
             catch (BadRequestException ex)
             {
+                Console.WriteLine(ex);
                 await HandleExceptionAsync(
                     context,
                     HttpStatusCode.BadRequest,
@@ -41,14 +43,16 @@ namespace API.Infrastructure.Middlewares
             }
             catch (NotFoundException ex)
             {
+                Console.WriteLine(ex);
                 await HandleExceptionAsync(
                     context,
                     HttpStatusCode.NotFound,
                     ex.Message
                 );
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Console.WriteLine(e);
                 await HandleExceptionAsync(
                     context,
                     HttpStatusCode.InternalServerError,

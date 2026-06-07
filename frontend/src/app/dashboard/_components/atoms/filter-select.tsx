@@ -11,7 +11,7 @@ interface FilterSelectProps {
 
 export default function FilterSelect({ label, placeholder, options, value, onChange }: FilterSelectProps) {
   return (
-    <div className="w-56 min-w-45">
+    <div className="md:w-56 md:min-w-45 flex-1 md:flex-none">
       <Select
         label={label}
         placeholder={placeholder || "Seleccionar..."}

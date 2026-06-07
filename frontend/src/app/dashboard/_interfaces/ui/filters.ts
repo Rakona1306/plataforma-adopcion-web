@@ -3,7 +3,7 @@ export interface SearchFilterConfig {
   type: 'search';
   label: string;
   placeholder?: string;
-  value: string;
+  value: string | undefined;
   onChange: (val: string) => void;
 }
 
@@ -24,5 +24,16 @@ export interface DateFilterConfig {
   onChange: (val: string | null) => void;
 }
 
+export interface SelectSearchFilterConfig<T> {
+  type: 'select-search';
+  label: string;
+  placeholder?: string;
+  options: T[];
+  displayField: keyof T;
+  valueField: keyof T;
+  onChange: (val: string | null) => void;
+  value: string | null;
+}
+
 // Unión de todos los tipos posibles de filtros
-export type FilterItemConfig = SearchFilterConfig | SelectFilterConfig | DateFilterConfig;
+export type FilterItemConfig = SearchFilterConfig | SelectFilterConfig | DateFilterConfig | SelectSearchFilterConfig<any>;

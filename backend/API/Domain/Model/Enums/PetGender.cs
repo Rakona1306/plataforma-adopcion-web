@@ -2,7 +2,7 @@
 {
     public enum PetGender
     {
-        Male = 1,
-        Female = 2
+        Macho = 1,
+        Hembra = 2
     }
 }
