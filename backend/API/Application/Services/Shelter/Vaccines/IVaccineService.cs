@@ -8,7 +8,8 @@ namespace API.Application.Services.Shelter.Vaccines
         VaccineResponse,
         CreateVaccineDto,
         UpdateVaccineDto,
-        VaccineFilterDto>
+        VaccineFilterDto,
+        VaccineResponse>
     {
     }
 }

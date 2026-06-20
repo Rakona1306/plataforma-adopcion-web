@@ -1,4 +1,6 @@
-﻿namespace API.Application.Features.Shelter.MedicalRecords.Dtos
+﻿using API.Application.Features.Shelter.Pets.Dtos;
+
+namespace API.Application.Features.Shelter.MedicalRecords.Dtos
 {
     public class MedicalRecordResponse
     {
@@ -6,8 +8,9 @@
 
         public Guid PetId { get; set; }
 
-        public string PetName { get; set; }
-            = string.Empty;
+        public string PetName { get; set; } = string.Empty;
+
+        public PetRelationResponse Pet { get; set; }
 
         public DateTime VisitDate { get; set; }
 

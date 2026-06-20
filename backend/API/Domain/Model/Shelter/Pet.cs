@@ -5,8 +5,7 @@ namespace API.Domain.Model.Shelter
 {
     public class Pet : BaseModel
     {
-        public string Name { get; set; }
-        = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
         public string? Description { get; set; }
 
@@ -21,6 +20,7 @@ namespace API.Domain.Model.Shelter
         public bool IsSterilized { get; set; }
 
         public bool IsAdopted { get; set; }
+        public int Age { get; set; }
 
         public PetGender Gender { get; set; }
 

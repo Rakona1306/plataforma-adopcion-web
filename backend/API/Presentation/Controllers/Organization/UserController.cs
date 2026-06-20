@@ -20,6 +20,20 @@ namespace API.Presentation.Controllers.Organization
             _service = service;
         }
 
+        protected Guid? GetUserId()
+        {
+            var user = HttpContext.Items["User"];
+
+            if (user == null)
+                return null;
+
+            var property = user
+                .GetType()
+                .GetProperty("Id");
+
+            return (Guid?)property?.GetValue(user);
+        }
+
         [HttpPost("change-password")]
         public async Task<IActionResult> ChangePassword(
             [FromBody] ChangePasswordDto changePasswordDto
@@ -127,6 +141,18 @@ namespace API.Presentation.Controllers.Organization
                 );
 
             return Ok(response);
+        }
+
+        [HttpPut("account/{id:guid}")]
+        [AuthorizeJwt]
+        public async Task<IActionResult> ChangeAccountInfo(
+            Guid id,
+            [FromBody] ChangeAccountInfoDto dto
+        )
+        {
+            await _service.ChangeAccountInfo(id, dto, GetUserId());
+
+            return NoContent();
         }
     }
 }

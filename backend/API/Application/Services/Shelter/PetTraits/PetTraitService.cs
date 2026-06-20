@@ -298,26 +298,14 @@ namespace API.Application.Services.Shelter.PetTraits
             await _repository.SaveChangesAsync();
         }
 
-        async Task<PetTraitResponse?>
-            IBaseService<
-                PetTraitResponse,
-                CreatePetTraitDto,
-                UpdatePetTraitDto,
-                PetTraitFilterDto
-            >.GetByIdAsync(Guid id)
+        public async Task<PetTraitResponse?> GetByIdAsync(Guid id)
         {
             throw new NotImplementedException(
                 "PetTrait utiliza llave compuesta"
             );
         }
 
-        async Task<PetTraitResponse>
-            IBaseService<
-                PetTraitResponse,
-                CreatePetTraitDto,
-                UpdatePetTraitDto,
-                PetTraitFilterDto
-            >.UpdateAsync(
+        public async Task<PetTraitResponse> UpdateAsync(
                 Guid id,
                 UpdatePetTraitDto dto,
                 Guid? userId
@@ -328,12 +316,7 @@ namespace API.Application.Services.Shelter.PetTraits
             );
         }
 
-        async Task IBaseService<
-            PetTraitResponse,
-            CreatePetTraitDto,
-            UpdatePetTraitDto,
-            PetTraitFilterDto
-        >.DeleteAsync(
+        public async Task DeleteAsync(
             Guid id,
             Guid? userId
         )

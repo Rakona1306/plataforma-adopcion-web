@@ -8,7 +8,8 @@ namespace API.Application.Services.Shelter.PetTraits
         PetTraitResponse,
         CreatePetTraitDto,
         UpdatePetTraitDto,
-        PetTraitFilterDto>
+        PetTraitFilterDto,
+        PetTraitResponse>
     {
         Task<PetTraitResponse?>
             GetByIdAsync(

@@ -8,7 +8,8 @@ namespace API.Application.Services.Shelter.Traits
         TraitResponse,
         CreateTraitDto,
         UpdateTraitDto,
-        TraitFilterDto>
+        TraitFilterDto,
+        TraitResponse>
     {
     }
 }

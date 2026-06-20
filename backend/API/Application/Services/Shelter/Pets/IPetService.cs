@@ -3,7 +3,7 @@ using API.Application.Features.Shelter.Pets.Dtos;
 
 namespace API.Application.Services.Shelter.Pets
 {
-    public interface IPetService : IBaseService<PetResponse, CreatePetDto, UpdatePetDto, PetFilterDto>
+    public interface IPetService : IBaseService<PetResponse, CreatePetDto, UpdatePetDto, PetFilterDto, PetResponse>
     {
     }
 }

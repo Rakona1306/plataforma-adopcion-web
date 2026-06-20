@@ -3,7 +3,7 @@ using API.Application.Features.Shelter.Species.Dtos;
 
 namespace API.Application.Services.Shelter.Species
 {
-    public interface ISpeciesService: IBaseService<SpeciesResponse, CreateSpeciesDto, UpdateSpeciesDto, SpeciesFilterDto>
+    public interface ISpeciesService : IBaseService<SpeciesResponse, CreateSpeciesDto, UpdateSpeciesDto, SpeciesFilterDto, SpeciesResponse>
     {
     }
 }

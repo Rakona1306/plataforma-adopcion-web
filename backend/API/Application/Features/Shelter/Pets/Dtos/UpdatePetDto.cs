@@ -8,6 +8,7 @@ namespace API.Application.Features.Shelter.Pets.Dtos
         public string? Description { get; set; }
         public string? RescueStory { get; set; }
         public DateOnly? BirthDate { get; set; }
+        public int Age { get; set; }
         public decimal? WeightKg { get; set; }
         public bool IsVaccinated { get; set; }
         public bool IsSterilized { get; set; }
@@ -16,13 +17,11 @@ namespace API.Application.Features.Shelter.Pets.Dtos
         public PetStatus Status { get; set; }
         public Guid SpeciesId { get; set; }
 
-        public UpdatePetRelationDto Breeds { get; set; } = new();
-        public UpdatePetRelationDto Traits { get; set; } = new();
+        public UpdatePetRelationDto BreedIds { get; set; }
+        public UpdatePetRelationDto TraitIds { get; set; }
     }
-    public class UpdatePetRelationDto
-    {
-        // Solo enviamos los IDs que se deben procesar
-        public List<Guid> AddIds { get; set; } = [];
-        public List<Guid> RemoveIds { get; set; } = [];
-    }
+    public record UpdatePetRelationDto(
+        IReadOnlyList<Guid> AddIds,
+        IReadOnlyList<Guid> RemoveIds
+    );
 }

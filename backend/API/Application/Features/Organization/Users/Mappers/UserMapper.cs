@@ -17,6 +17,11 @@ namespace API.Application.Features.Organization.Users.Mappers
             [MappingTarget] User entity
         );
 
+        public partial void UpdateInformation(
+            ChangeAccountInfoDto dto,
+            [MappingTarget] User entity
+        );
+
         [MapProperty(
             nameof(User.Role.Name),
             nameof(UserResponse.RoleName)

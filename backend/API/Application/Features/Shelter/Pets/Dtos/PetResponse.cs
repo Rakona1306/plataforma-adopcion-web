@@ -1,5 +1,7 @@
 ﻿using API.Application.Features.Shelter.Breeds.Dtos;
+using API.Application.Features.Shelter.PetPhotos.Dtos;
 using API.Application.Features.Shelter.Traits.Dtos;
+using API.Application.Features.Shelter.Vaccines.Dtos;
 using API.Application.Features.System.Enums.Dto;
 
 namespace API.Application.Features.Shelter.Pets.Dtos
@@ -12,21 +14,23 @@ namespace API.Application.Features.Shelter.Pets.Dtos
         public string? RescueStory { get; set; }
         public DateOnly? BirthDate { get; set; }
         public decimal? WeightKg { get; set; }
+        public int Age { get; set; }
 
         // Estados
         public bool IsVaccinated { get; set; }
         public bool IsSterilized { get; set; }
         public bool IsAdopted { get; set; }
-        public EnumResponse Gender { get; set; } // Mapeado desde el Enum
-        public EnumResponse Size { get; set; }   // Mapeado desde el Enum
-        public EnumResponse Status { get; set; } // Mapeado desde el Enum
+        public EnumResponse Gender { get; set; } = new();
+        public EnumResponse Size { get; set; } = new();
+        public EnumResponse Status { get; set; } = new();   // Mapeado desde el Enum
         public Guid SpeciesId { get; set; }
 
         // Relaciones (para que el frontend tenga contexto)
         public string SpeciesName { get; set; } = string.Empty;
         public List<OptionBreedResponse> Breeds { get; set; } = [];
         public List<OptionTraitResponse> Traits { get; set; } = [];
-        public List<string> PhotoUrls { get; set; } = [];
+        public List<OptionPetPhotoResponse> PhotoUrls { get; set; } = [];
+        public List<VaccineRelationResponse> Vaccines { get; set; } = [];
 
         public DateTime CreatedAt { get; set; }
     }
