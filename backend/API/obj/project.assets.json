@@ -1,7 +1,16 @@
 {
-  "version": 3,
+  "version": 4,
   "targets": {
     "net10.0": {
+      "BCrypt.Net-Next/4.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/net10.0/BCrypt-Net-Next.dll": {}
+        },
+        "runtime": {
+          "lib/net10.0/BCrypt-Net-Next.dll": {}
+        }
+      },
       "FluentValidation/12.1.1": {
         "type": "package",
         "compile": {
@@ -15,6 +24,26 @@
           }
         }
       },
+      "FluentValidation.AspNetCore/11.3.1": {
+        "type": "package",
+        "dependencies": {
+          "FluentValidation": "11.11.0",
+          "FluentValidation.DependencyInjectionExtensions": "11.11.0"
+        },
+        "compile": {
+          "lib/net6.0/FluentValidation.AspNetCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/FluentValidation.AspNetCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "FluentValidation.DependencyInjectionExtensions/12.1.1": {
         "type": "package",
         "dependencies": {
@@ -27,6 +56,41 @@
         },
         "runtime": {
           "lib/net8.0/FluentValidation.DependencyInjectionExtensions.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "functions-csharp/1.3.2": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3",
+          "supabase-core": "0.0.3"
+        },
+        "compile": {
+          "lib/netstandard2.0/Supabase.Functions.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Supabase.Functions.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "gotrue-csharp/4.2.7": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3",
+          "System.IdentityModel.Tokens.Jwt": "7.0.3",
+          "supabase-core": "0.0.3"
+        },
+        "compile": {
+          "lib/netstandard2.0/Supabase.Gotrue.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Supabase.Gotrue.dll": {
             "related": ".xml"
           }
         }
@@ -637,6 +701,19 @@
           }
         }
       },
+      "MimeMapping/2.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/MimeMapping.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/MimeMapping.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Mono.TextTemplating/3.0.0": {
         "type": "package",
         "dependencies": {
@@ -655,7 +732,7 @@
       "Newtonsoft.Json/13.0.3": {
         "type": "package",
         "compile": {
-          "lib/net6.0/_._": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
             "related": ".xml"
           }
         },
@@ -696,6 +773,42 @@
           }
         }
       },
+      "postgrest-csharp/3.5.1": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3",
+          "supabase-core": "0.0.3"
+        },
+        "compile": {
+          "lib/netstandard2.0/Supabase.Postgrest.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Supabase.Postgrest.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "realtime-csharp/6.0.4": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3",
+          "Websocket.Client": "4.6.1",
+          "postgrest-csharp": "3.2.2",
+          "supabase-core": "0.0.3"
+        },
+        "compile": {
+          "lib/netstandard2.0/Supabase.Realtime.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Supabase.Realtime.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Resend/0.5.0": {
         "type": "package",
         "compile": {
@@ -723,6 +836,59 @@
         },
         "build": {
           "build/Riok.Mapperly.targets": {}
+        }
+      },
+      "supabase-core/0.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Supabase.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Supabase.Core.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "supabase-csharp/0.16.2": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3",
+          "functions-csharp": "1.3.2",
+          "gotrue-csharp": "4.2.7",
+          "postgrest-csharp": "3.5.1",
+          "realtime-csharp": "6.0.4",
+          "supabase-core": "0.0.3",
+          "supabase-storage-csharp": "1.4.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Supabase.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Supabase.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "supabase-storage-csharp/1.4.0": {
+        "type": "package",
+        "dependencies": {
+          "MimeMapping": "2.0.0",
+          "Newtonsoft.Json": "13.0.3",
+          "supabase-core": "0.0.3"
+        },
+        "compile": {
+          "lib/netstandard2.0/Supabase.Storage.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Supabase.Storage.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Swashbuckle.AspNetCore/10.1.7": {
@@ -933,10 +1099,67 @@
             "related": ".xml"
           }
         }
+      },
+      "System.Reactive/5.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0/System.Reactive.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net5.0/System.Reactive.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net5.0/_._": {}
+        }
+      },
+      "Websocket.Client/4.6.1": {
+        "type": "package",
+        "dependencies": {
+          "System.Reactive": "5.0.0"
+        },
+        "compile": {
+          "lib/net6.0/Websocket.Client.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Websocket.Client.dll": {
+            "related": ".xml"
+          }
+        }
       }
     }
   },
   "libraries": {
+    "BCrypt.Net-Next/4.2.0": {
+      "sha512": "gwLD2KfCuwQesP17aVh4h6lpiMPEVt5Lbpndo0ej903hNUUTtyxt3ARdDjmuydBRTAUICc7OVKVbaOvc6SQYXA==",
+      "type": "package",
+      "path": "bcrypt.net-next/4.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "bcrypt.net-next.4.2.0.nupkg.sha512",
+        "bcrypt.net-next.nuspec",
+        "ico.png",
+        "lib/net10.0/BCrypt-Net-Next.dll",
+        "lib/net10.0/BCrypt.Net-Next.xml",
+        "lib/net462/BCrypt-Net-Next.dll",
+        "lib/net462/BCrypt.Net-Next.xml",
+        "lib/net472/BCrypt-Net-Next.dll",
+        "lib/net472/BCrypt.Net-Next.xml",
+        "lib/net48/BCrypt-Net-Next.dll",
+        "lib/net48/BCrypt.Net-Next.xml",
+        "lib/netstandard2.0/BCrypt-Net-Next.dll",
+        "lib/netstandard2.0/BCrypt.Net-Next.xml",
+        "lib/netstandard2.1/BCrypt-Net-Next.dll",
+        "lib/netstandard2.1/BCrypt.Net-Next.xml",
+        "readme.md"
+      ]
+    },
     "FluentValidation/12.1.1": {
       "sha512": "EPpkIe1yh1a0OXyC100oOA8WMbZvqUu5plwhvYcb7oSELfyUZzfxV48BLhvs3kKo4NwG7MGLNgy1RJiYtT8Dpw==",
       "type": "package",
@@ -952,6 +1175,25 @@
         "lib/net8.0/FluentValidation.xml"
       ]
     },
+    "FluentValidation.AspNetCore/11.3.1": {
+      "sha512": "FjkfrGGwC+25oH8QpX1ti3gxkFjDDtotkAQWyQz2CkwQwEfRKTANjhh77I79kY8dov2ydK1SY+e4jiOWsbbDdQ==",
+      "type": "package",
+      "path": "fluentvalidation.aspnetcore/11.3.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "fluent-validation-icon.png",
+        "fluentvalidation.aspnetcore.11.3.1.nupkg.sha512",
+        "fluentvalidation.aspnetcore.nuspec",
+        "lib/net5.0/FluentValidation.AspNetCore.dll",
+        "lib/net5.0/FluentValidation.AspNetCore.xml",
+        "lib/net6.0/FluentValidation.AspNetCore.dll",
+        "lib/net6.0/FluentValidation.AspNetCore.xml",
+        "lib/netcoreapp3.1/FluentValidation.AspNetCore.dll",
+        "lib/netcoreapp3.1/FluentValidation.AspNetCore.xml"
+      ]
+    },
     "FluentValidation.DependencyInjectionExtensions/12.1.1": {
       "sha512": "D0VXh4dtjjX2aQizuaa0g6R8X3U1JaVqJPfGCvLwZX9t/O2h7tkpbitbadQMfwcgSPdDbI2vDxuwRMv/Uf9dHA==",
       "type": "package",
@@ -965,6 +1207,36 @@
         "fluentvalidation.dependencyinjectionextensions.nuspec",
         "lib/net8.0/FluentValidation.DependencyInjectionExtensions.dll",
         "lib/net8.0/FluentValidation.DependencyInjectionExtensions.xml"
+      ]
+    },
+    "functions-csharp/1.3.2": {
+      "sha512": "7ktfO7+JJhi3QvcOkdTz/BGu++Am3HtYNqBOM1tLVoEAObXzKmx6y2Rwomc4V+7HFSxaqNQQFzVsX8MkSG7Xhw==",
+      "type": "package",
+      "path": "functions-csharp/1.3.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "functions-csharp.1.3.2.nupkg.sha512",
+        "functions-csharp.nuspec",
+        "icon.png",
+        "lib/netstandard2.0/Supabase.Functions.dll",
+        "lib/netstandard2.0/Supabase.Functions.xml"
+      ]
+    },
+    "gotrue-csharp/4.2.7": {
+      "sha512": "+sK5lze23W2BgPqZRmc3gffpYzEmakWpX05mfXIqtgPA4N53tgScsvJ3XP+ND1B9AsLMBbcXbT66M5848nX/lg==",
+      "type": "package",
+      "path": "gotrue-csharp/4.2.7",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "gotrue-csharp.4.2.7.nupkg.sha512",
+        "gotrue-csharp.nuspec",
+        "icon.png",
+        "lib/netstandard2.0/Supabase.Gotrue.dll",
+        "lib/netstandard2.0/Supabase.Gotrue.xml"
       ]
     },
     "Humanizer.Core/2.14.1": {
@@ -2639,6 +2911,22 @@
         "microsoft.visualstudio.solutionpersistence.nuspec"
       ]
     },
+    "MimeMapping/2.0.0": {
+      "sha512": "hJRJLm91AF3OSs61y3uVZ5e2NRbq9bj0X2FS5q2PKUifP0T2Eu0FsdRL9gXa537tFQIKf+2TANkzsW2s0BZenA==",
+      "type": "package",
+      "path": "mimemapping/2.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net461/MimeMapping.dll",
+        "lib/net461/MimeMapping.xml",
+        "lib/netstandard2.0/MimeMapping.dll",
+        "lib/netstandard2.0/MimeMapping.xml",
+        "mimemapping.2.0.0.nupkg.sha512",
+        "mimemapping.nuspec"
+      ]
+    },
     "Mono.TextTemplating/3.0.0": {
       "sha512": "YqueG52R/Xej4VVbKuRIodjiAhV0HR/XVbLbNrJhCZnzjnSjgMJ/dCdV0akQQxavX6hp/LC6rqLGLcXeQYU7XA==",
       "type": "package",
@@ -2720,6 +3008,36 @@
         "postgresql.png"
       ]
     },
+    "postgrest-csharp/3.5.1": {
+      "sha512": "w0LMx+lbixBnjeNeaD03e6890Sk/ItkFUOR/ga2OP7rXPF9fpUOFV21UEaGdWushc7mliDolazzwVPkljcnrow==",
+      "type": "package",
+      "path": "postgrest-csharp/3.5.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "icon.png",
+        "lib/netstandard2.0/Supabase.Postgrest.dll",
+        "lib/netstandard2.0/Supabase.Postgrest.xml",
+        "postgrest-csharp.3.5.1.nupkg.sha512",
+        "postgrest-csharp.nuspec"
+      ]
+    },
+    "realtime-csharp/6.0.4": {
+      "sha512": "Bahtvznvu4bDuJFTFYTUyfBT6fyAxtIJ8r8i7k60HBZvfC/OUZQv7TgbQ6lRQTYekuH4pFvAIHACW7lSWqkW8Q==",
+      "type": "package",
+      "path": "realtime-csharp/6.0.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "icon.png",
+        "lib/netstandard2.0/Supabase.Realtime.dll",
+        "lib/netstandard2.0/Supabase.Realtime.xml",
+        "realtime-csharp.6.0.4.nupkg.sha512",
+        "realtime-csharp.nuspec"
+      ]
+    },
     "Resend/0.5.0": {
       "sha512": "PL2tr3wbKHkkKj+I4tK3aDWrP2Unqntbzr0U7A8MzeiZk796Upp1xAg94YPyvkODp/KWezPXS57simSwyGp6QA==",
       "type": "package",
@@ -2763,6 +3081,51 @@
         "logo.png",
         "riok.mapperly.4.3.1.nupkg.sha512",
         "riok.mapperly.nuspec"
+      ]
+    },
+    "supabase-core/0.0.3": {
+      "sha512": "e6NxN3kShudlO9ts378CW3V94op6GsesrVanp6yXSf5K0iRzP36TFf3EpqaSOylgbvBUUfZnPlestCnJ8ULvjA==",
+      "type": "package",
+      "path": "supabase-core/0.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "icon.png",
+        "lib/netstandard2.0/Supabase.Core.dll",
+        "lib/netstandard2.0/Supabase.Core.xml",
+        "supabase-core.0.0.3.nupkg.sha512",
+        "supabase-core.nuspec"
+      ]
+    },
+    "supabase-csharp/0.16.2": {
+      "sha512": "+znegRHt1YizgJhlmBNu19l8qRssvZ5kHie+BLf1vpIpa4QlAv3ZIT3jS+DG9IIrIgPV31VUBZpUUwA34GlGfA==",
+      "type": "package",
+      "path": "supabase-csharp/0.16.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "icon.png",
+        "lib/netstandard2.0/Supabase.dll",
+        "lib/netstandard2.0/Supabase.xml",
+        "supabase-csharp.0.16.2.nupkg.sha512",
+        "supabase-csharp.nuspec"
+      ]
+    },
+    "supabase-storage-csharp/1.4.0": {
+      "sha512": "Q8bOtwgJYIyQt/y1yV4GA9bpzZLm6iBLTajck1N2rw+U7Ag9eyQvh4yaPkd5vxBkyiVAk9UUkwAUk6w1ZuhMzA==",
+      "type": "package",
+      "path": "supabase-storage-csharp/1.4.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "icon.png",
+        "lib/netstandard2.0/Supabase.Storage.dll",
+        "lib/netstandard2.0/Supabase.Storage.xml",
+        "supabase-storage-csharp.1.4.0.nupkg.sha512",
+        "supabase-storage-csharp.nuspec"
       ]
     },
     "Swashbuckle.AspNetCore/10.1.7": {
@@ -3050,11 +3413,63 @@
         "system.identitymodel.tokens.jwt.8.0.1.nupkg.sha512",
         "system.identitymodel.tokens.jwt.nuspec"
       ]
+    },
+    "System.Reactive/5.0.0": {
+      "sha512": "erBZjkQHWL9jpasCE/0qKAryzVBJFxGHVBAvgRN1bzM0q2s1S4oYREEEL0Vb+1kA/6BKb5FjUZMp5VXmy+gzkQ==",
+      "type": "package",
+      "path": "system.reactive/5.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/net5.0/_._",
+        "build/netcoreapp3.1/System.Reactive.dll",
+        "build/netcoreapp3.1/System.Reactive.targets",
+        "build/netcoreapp3.1/System.Reactive.xml",
+        "buildTransitive/net5.0/_._",
+        "buildTransitive/netcoreapp3.1/System.Reactive.targets",
+        "lib/net472/System.Reactive.dll",
+        "lib/net472/System.Reactive.xml",
+        "lib/net5.0-windows10.0.19041/System.Reactive.dll",
+        "lib/net5.0-windows10.0.19041/System.Reactive.xml",
+        "lib/net5.0/System.Reactive.dll",
+        "lib/net5.0/System.Reactive.xml",
+        "lib/netcoreapp3.1/_._",
+        "lib/netstandard2.0/System.Reactive.dll",
+        "lib/netstandard2.0/System.Reactive.xml",
+        "lib/uap10.0.16299/System.Reactive.dll",
+        "lib/uap10.0.16299/System.Reactive.pri",
+        "lib/uap10.0.16299/System.Reactive.xml",
+        "system.reactive.5.0.0.nupkg.sha512",
+        "system.reactive.nuspec"
+      ]
+    },
+    "Websocket.Client/4.6.1": {
+      "sha512": "6ccH+gNepmlQILnp8L+9J3PvN8Nk9qmdWWhb7aBZC8TvhisgK/JMq6H1evtzRJ3MRM/FWjumP6J/HPEt+DXwuQ==",
+      "type": "package",
+      "path": "websocket.client/4.6.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "icon.png",
+        "lib/net5.0/Websocket.Client.dll",
+        "lib/net5.0/Websocket.Client.xml",
+        "lib/net6.0/Websocket.Client.dll",
+        "lib/net6.0/Websocket.Client.xml",
+        "lib/netstandard2.0/Websocket.Client.dll",
+        "lib/netstandard2.0/Websocket.Client.xml",
+        "lib/netstandard2.1/Websocket.Client.dll",
+        "lib/netstandard2.1/Websocket.Client.xml",
+        "websocket.client.4.6.1.nupkg.sha512",
+        "websocket.client.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     "net10.0": [
+      "BCrypt.Net-Next >= 4.2.0",
       "FluentValidation >= 12.1.1",
+      "FluentValidation.AspNetCore >= 11.3.1",
       "FluentValidation.DependencyInjectionExtensions >= 12.1.1",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 10.0.7",
       "Microsoft.AspNetCore.OpenApi >= 10.0.6",
@@ -3063,27 +3478,28 @@
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 10.0.1",
       "Resend >= 0.5.0",
       "Riok.Mapperly >= 4.3.1",
-      "Swashbuckle.AspNetCore >= 10.1.7"
+      "Swashbuckle.AspNetCore >= 10.1.7",
+      "supabase-csharp >= 0.16.2"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Chicho\\.nuget\\packages\\": {},
+    "C:\\Users\\juanc\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Chicho\\Desktop\\COSAS DE MI ENAMORADO XD\\plataforma-adopcion-web\\backend\\API\\API.csproj",
+      "projectUniqueName": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "C:\\Users\\Chicho\\Desktop\\COSAS DE MI ENAMORADO XD\\plataforma-adopcion-web\\backend\\API\\API.csproj",
-      "packagesPath": "C:\\Users\\Chicho\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Chicho\\Desktop\\COSAS DE MI ENAMORADO XD\\plataforma-adopcion-web\\backend\\API\\obj\\",
+      "projectPath": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\API.csproj",
+      "packagesPath": "C:\\Users\\juanc\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Chicho\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\juanc\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -3092,6 +3508,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3111,16 +3528,24 @@
         "auditLevel": "low",
         "auditMode": "all"
       },
-      "SdkAnalysisLevel": "10.0.200"
+      "SdkAnalysisLevel": "10.0.300"
     },
     "frameworks": {
       "net10.0": {
         "framework": "net10.0",
         "targetAlias": "net10.0",
         "dependencies": {
+          "BCrypt.Net-Next": {
+            "target": "Package",
+            "version": "[4.2.0, )"
+          },
           "FluentValidation": {
             "target": "Package",
             "version": "[12.1.1, )"
+          },
+          "FluentValidation.AspNetCore": {
+            "target": "Package",
+            "version": "[11.3.1, )"
           },
           "FluentValidation.DependencyInjectionExtensions": {
             "target": "Package",
@@ -3159,6 +3584,10 @@
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[10.1.7, )"
+          },
+          "supabase-csharp": {
+            "target": "Package",
+            "version": "[0.16.2, )"
           }
         },
         "imports": [
@@ -3180,7 +3609,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.203/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.AspNetCore": "(,10.0.32767]",
           "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",

@@ -1,140 +1,304 @@
-﻿using API.Application.Features.Organization.Roles.Dtos;
+﻿using API.Application.Common.Services;
+using API.Application.Features.Organization.Roles.Dtos;
 using API.Application.Features.Roles.Mappers;
+using API.Application.Features.System.AuditLogs.Mappers;
+using API.Application.Helpers;
 using API.Domain.Common.Model;
 using API.Domain.Model.Enums;
 using API.Domain.Model.Organization;
 using API.Domain.Repository.Organization;
 using API.Domain.Repository.System;
-using System.Text.Json;
+using API.Infrastructure.Db; // Necesario para acceder al contexto si buscas permisos
+using API.Infrastructure.Exceptions;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Application.Services.Organization.Roles
 {
-    public class RolesService: IRolesService
+    public class RolesService : BaseService<Role, IRoleRepository>, IRolesService
     {
         private readonly IRoleRepository _repository;
+        private readonly IRolePermissionRepository _rolePermissionRepository;
         private readonly RoleMapper _mapper;
-        private readonly IAuditLogRepository _auditRepository;
-        private readonly string _tableName;
+        private readonly ConnDbContext _context;
+        private readonly IAuditLogRepository _auditLogRepository;
 
-        public RolesService (IRoleRepository roleRepository, IAuditLogRepository auditLogRepository)
+        public RolesService(
+            IRoleRepository repository,
+            IRolePermissionRepository rolePermissionRepository,
+            RoleMapper mapper,
+            AuditLogMapper auditLogMapper,
+            ConnDbContext context,
+            IAuditLogRepository auditLogRepository
+        ) : base(repository, auditLogMapper)
         {
-            _mapper = new RoleMapper();
-            _repository = roleRepository;
-            _auditRepository = auditLogRepository;
-            _tableName = "Roles";
+            _repository = repository;
+            _rolePermissionRepository = rolePermissionRepository;
+            _mapper = mapper;
+            _context = context;
+            _auditLogRepository = auditLogRepository;
         }
 
-        public async Task<RoleResponse> CreateAsync(CreateRoleDto request)
+        public async Task<Paginate<RoleResponse>> GetAllAsync(RoleFilterDto filter)
         {
-            var role = _mapper.ToEntity(request);
+            IQueryable<Role> query = _repository.QueryWithPermissions();
 
-            var created = await _repository.CreateAsync(role);
-            await _auditRepository.CreateAsync<Role>(
-                AuditEnum.CREATE, 
-                created.Id, 
-                _tableName, 
-                null, 
-                null
-            );
+            if (!string.IsNullOrWhiteSpace(filter.Search))
+                query = query.Where(x => x.Name.Contains(filter.Search));
 
-            return _mapper.ToResponse(created);
-        }
+            if (filter.ToDashboard.HasValue)
+                query = query.Where(x => x.ToDashboard == filter.ToDashboard);
 
-        public async Task DeleteAsync(Guid id, Guid? userId)
-        {
-            var role = await _repository.GetByIdAsync(id);
-
-            if (role is null)
-            {
-                throw new Exception("Role not found");
-            }
-            Role deletedRole = role;
-            await _repository.DeleteAsync(role, id);
-            await _auditRepository.CreateAsync<Role>(
-                    AuditEnum.DELETE,
-                    deletedRole.Id,
-                    _tableName,
-                    userId,
-                    deletedRole
-                );
-        }
-
-        public async Task<Paginate<RoleResponse>> GetAllAsync(
-            int page,
-            int pageSize,
-            string? search = null,
-            string? sort = null
-        )
-        {
-            Paginate<Role> paginateRole =
-                await _repository.GetAllAsync(
-                    page,
-                    pageSize,
-                    search,
-                    sort
-                );
+            var total = await query.CountAsync();
+            var items = await query.OrderByDescending(x => x.CreatedAt)
+                                   .Skip((filter.Page - 1) * filter.PageSize)
+                                   .Take(filter.PageSize)
+                                   .ToListAsync();
 
             return new Paginate<RoleResponse>
             {
-                Items = _mapper.ToResponseList(paginateRole.Items.ToList()),
-                TotalCount = paginateRole.TotalCount,
-                Page = paginateRole.Page,
-                PageSize = paginateRole.PageSize
+                Items = _mapper.ToResponseList(items),
+                TotalCount = total,
+                Page = filter.Page,
+                PageSize = filter.PageSize
             };
         }
 
         public async Task<RoleResponse?> GetByIdAsync(Guid id)
         {
-            var role = await _repository.GetByIdAsync(id);
+            var entity = await _repository.QueryWithPermissions()
+                .FirstOrDefaultAsync<Role>(x => x.Id == id);
 
-            if (role is null) {
-                return null;
-            }
-
-            return _mapper.ToResponse(role);
+            if (entity is null) throw new NotFoundException("Rol no encontrado");
+            return _mapper.ToResponse(entity);
         }
 
-        public async Task<RoleResponse> UpdateAsync(CreateRoleDto entity, Guid id, Guid? userId)
+        public async Task<RoleResponse> CreateAsync(
+            CreateRoleDto dto,
+            Guid? userId
+        )
         {
-            var existingRole =
-                await _repository.GetByIdAsync(id);
-
-            if (existingRole is null)
-            {
-                throw new Exception("Role not found");
-            }
-            var oldValue = JsonSerializer.Deserialize<Role>(
-                JsonSerializer.Serialize(existingRole)
-             );
-
-            _mapper.UpdateRole(
-                entity,
-                existingRole
-            );
-
-            existingRole.UpdatedBy = userId;
-
-            existingRole.LastUpdatedAt =
-                DateTime.UtcNow;
-
-            Console.WriteLine(existingRole.Name);
-            var roleUpdated =
-                await _repository.UpdateAsync(
-                    existingRole,
-                    id
+            var exists =
+                await _repository.ExistsAsync(
+                    x =>
+                        x.Name.ToLower()
+                        == dto.Name.ToLower()
                 );
-            Console.WriteLine("----------");
-            Console.WriteLine(oldValue);
-            Console.WriteLine("----------");
-            await _auditRepository.CreateAsync<Role>(
-                AuditEnum.UPDATE,
-                existingRole.Id,
-                _tableName,
-                userId,
-                oldValue
+
+            if (exists)
+            {
+                throw new Exception(
+                    "Este rol ya existe"
+                );
+            }
+
+            var entity =
+                _mapper.ToEntity(dto);
+
+            entity.RolePermissions = [];
+
+            if (
+                dto.CurrentPermissions != null
+                && dto.CurrentPermissions.Any()
+            )
+            {
+                entity.RolePermissions =
+                    dto.CurrentPermissions
+                        .Distinct()
+                        .Select(
+                            permissionId =>
+                                new RolePermission
+                                {
+                                    Role = entity,
+                                    PermissionId = permissionId
+                                }
+                        )
+                        .ToList();
+            }
+
+            AuditHelper.CreateAudit(
+                entity,
+                userId
             );
 
-            return _mapper.ToResponse(roleUpdated);
+            await _repository.CreateAsync(
+                entity,
+                userId
+            );
+
+            await _repository.SaveChangesAsync();
+
+            var createdRole =
+                await _repository
+                    .QueryWithPermissions()
+                    .FirstOrDefaultAsync(
+                        x => x.Id == entity.Id
+                    );
+
+            return _mapper.ToResponse(
+                createdRole!
+            );
+        }
+
+        public async Task<RoleResponse> UpdateAsync(
+            Guid id,
+            UpdateRoleDto dto,
+            Guid? userId
+        )
+        {
+            var entity =
+                await _repository
+                    .QueryWithPermissions()
+                    .FirstOrDefaultAsync(
+                        x => x.Id == id
+                    )
+                ?? throw new NotFoundException(
+                    "Rol no encontrado"
+                );
+
+            var exists =
+                await _repository.ExistsAsync(
+                    x =>
+                        x.Id != id
+                        && x.Name.ToLower()
+                            == dto.Name.ToLower()
+                );
+
+            if (exists)
+            {
+                throw new Exception(
+                    "Ya existe un rol con ese nombre"
+                );
+            }
+
+            var oldValues = new
+            {
+                entity.Name,
+                entity.Description,
+                entity.NotDelete,
+                entity.ToDashboard
+            };
+
+            // =========================================
+            // UPDATE DATA
+            // =========================================
+
+            _mapper.Update(dto, entity);
+
+            // =========================================
+            // REMOVE PERMISSIONS
+            // =========================================
+
+            if (
+                dto.PermissionsToRemove != null
+                && dto.PermissionsToRemove.Any()
+            )
+            {
+                var relationsToRemove =
+                    await _context.RolePermissions
+                        .Where(
+                            rp =>
+                                rp.RoleId == id
+                                && dto.PermissionsToRemove
+                                    .Contains(
+                                        rp.PermissionId
+                                    )
+                        )
+                        .ToListAsync();
+
+                _context.RolePermissions.RemoveRange(
+                    relationsToRemove
+                );
+            }
+
+            // =========================================
+            // ADD PERMISSIONS
+            // =========================================
+
+            if (
+                dto.PermissionsToAdd != null
+                && dto.PermissionsToAdd.Any()
+            )
+            {
+                var existingPermissionIds =
+                    await _context.RolePermissions
+                        .Where(
+                            rp => rp.RoleId == id
+                        )
+                        .Select(
+                            rp => rp.PermissionId
+                        )
+                        .ToListAsync();
+
+                var permissionsToAdd =
+                    dto.PermissionsToAdd
+                        .Distinct()
+                        .Where(
+                            permissionId =>
+                                !existingPermissionIds
+                                    .Contains(permissionId)
+                        )
+                        .ToList();
+
+                foreach (var permissionId in permissionsToAdd)
+                {
+                    await _context.RolePermissions.AddAsync(
+                        new RolePermission
+                        {
+                            RoleId = id,
+                            PermissionId = permissionId
+                        }
+                    );
+                }
+            }
+
+            // =========================================
+            // AUDITORÍA
+            // =========================================
+
+            AuditHelper.UpdateAudit(
+                entity,
+                userId
+            );
+
+            await _auditLogRepository.CreateAsync(
+                AuditEnum.UPDATE,
+                entity.Id,
+                nameof(Role),
+                userId,
+                oldValues
+            );
+
+            // =========================================
+            // SAVE
+            // =========================================
+
+            await _repository.SaveChangesAsync();
+
+            // =========================================
+            // RETURN UPDATED
+            // =========================================
+
+            var updatedRole =
+                await _repository
+                    .QueryWithPermissions()
+                    .FirstOrDefaultAsync(
+                        x => x.Id == id
+                    );
+
+            return _mapper.ToResponse(
+                updatedRole!
+            );
+        }
+
+        public async Task DeleteAsync(Guid id, Guid? userId)
+        {
+            var entity = await _repository.GetByIdAsync(id)
+                ?? throw new NotFoundException("Rol no encontrado");
+
+            if (entity.NotDelete) throw new Exception("Este rol no puede ser eliminado");
+
+            await _repository.DeleteAsync(entity, userId);
+            await _repository.SaveChangesAsync();
         }
     }
 }

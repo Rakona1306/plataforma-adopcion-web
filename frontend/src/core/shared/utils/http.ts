@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * HTTP Utility Functions
  */
 
-import { API_CONFIG } from '../constants';
-import { ApiResponse, ApiError, RequestConfig } from '../types';
+import { LOCAL_STORAGE } from '../constants/local-storage';
+import { HttpError } from '../errors/http-error';
 
 /**
  * Build Query String from Object
@@ -43,26 +44,6 @@ export function buildUrl(
 }
 
 /**
- * Handle HTTP Error
- */
-export async function handleHttpError(response: Response): Promise<never> {
-  let errorData: any;
-  try {
-    errorData = await response.json();
-  } catch {
-    errorData = { message: response.statusText };
-  }
-
-  const error = new ApiError(
-    response.status,
-    errorData.message || 'An error occurred',
-    errorData.errors
-  );
-
-  throw error;
-}
-
-/**
  * Default Fetch Options
  */
 export function getDefaultHeaders(): Record<string, string> {
@@ -83,7 +64,11 @@ export function getDefaultHeaders(): Record<string, string> {
  */
 export function getAuthToken(): string | null {
   if (typeof window === 'undefined') return null;
-  return localStorage.getItem('auth_token');
+  const local = localStorage.getItem(LOCAL_STORAGE.NAMESESSION);
+  if (!local) return null;
+  // Tipado Zustand
+  const jsonValue: { state: { token: string } } = JSON.parse(local);
+  return jsonValue.state.token;
 }
 
 /**
@@ -91,7 +76,7 @@ export function getAuthToken(): string | null {
  */
 export function setAuthToken(token: string): void {
   if (typeof window === 'undefined') return;
-  localStorage.setItem('auth_token', token);
+  localStorage.setItem(LOCAL_STORAGE.NAMESESSION, token);
 }
 
 /**
@@ -99,5 +84,51 @@ export function setAuthToken(token: string): void {
  */
 export function removeAuthToken(): void {
   if (typeof window === 'undefined') return;
-  localStorage.removeItem('auth_token');
+  localStorage.removeItem(LOCAL_STORAGE.NAMESESSION);
+}
+
+/**
+ * Handle HTTP Error
+ */
+export async function handleHttpError(
+  response: Response
+): Promise<never> {
+
+  let message =
+    "Error interno del servidor";
+
+  let data: unknown = null;
+
+  try {
+
+    data = await response.json();
+
+    if (
+      typeof data === "string"
+    ) {
+
+      message = data;
+
+    } else if (
+      typeof data === "object" &&
+      data !== null &&
+      "message" in data
+    ) {
+
+      message = String(data.message);
+
+    }
+
+  } catch {
+
+    message =
+      response.statusText ||
+      message;
+  }
+
+  throw new HttpError(
+    message,
+    response.status,
+    data
+  );
 }

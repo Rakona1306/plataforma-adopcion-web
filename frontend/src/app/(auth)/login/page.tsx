@@ -1,34 +1,17 @@
 'use client'
 
 import { useState } from 'react'
-import { motion, AnimatePresence, Variants } from 'motion/react'
+import { motion, AnimatePresence } from 'motion/react'
 import PetAnimation from '../_components/molecules/pet-animation'
 import LoginForm from '../_components/molecules/form/login-form'
 import RegisterForm from '../_components/molecules/form/register-form'
 import { companyInfo } from '@/app/(web)/_utils/data/companyInfo.data'
+import Link from 'next/link'
+import { containerVariants, itemVariants } from '@/core/shared/helpers/variants'
 
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true)
 
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  }
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: 'easeOut' },
-    },
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/30 via-white to-quaternary/20 flex items-center justify-center p-4 relative overflow-hidden">
@@ -46,7 +29,7 @@ export default function AuthPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           {/* Left side - Branding */}
           <motion.div variants={itemVariants} className="hidden md:flex flex-col gap-6">
-            <div className="text-center md:text-left">
+            <Link href='/' className="text-center md:text-left">
               <motion.h1
                 className="text-5xl font-bold text-primary mb-2"
                 initial={{ opacity: 0, x: -30 }}
@@ -63,7 +46,7 @@ export default function AuthPage() {
               >
                 Albergue de Mascotas
               </motion.p>
-            </div>
+            </Link>
 
             <motion.div
               className="space-y-4"

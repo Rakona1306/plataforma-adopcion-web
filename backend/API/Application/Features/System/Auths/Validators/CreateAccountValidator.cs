@@ -1,0 +1,47 @@
+﻿using API.Application.Features.System.Auths.Dtos;
+using FluentValidation;
+
+namespace API.Application.Features.System.Auths.Validators
+{
+    public class CreateAccountValidator : AbstractValidator<CreateAccountDto>
+    {
+        public CreateAccountValidator()
+        {
+            RuleFor(x => x.Name)
+                .NotEmpty()
+                .WithMessage("El nombre es requerido")
+                .MaximumLength(70)
+                .WithMessage("El nombre no puede superar los 70 caracteres");
+
+            RuleFor(x => x.LastName)
+                .NotEmpty()
+                .WithMessage("El apellido es requerido")
+                .MaximumLength(70)
+                .WithMessage("El apellido no puede superar los 70 caracteres");
+
+            RuleFor(x => x.Email)
+                .NotEmpty()
+                .WithMessage("El correo electrónico es requerido")
+                .EmailAddress()
+                .WithMessage("El formato del correo electrónico no es válido")
+                .MaximumLength(120)
+                .WithMessage("El correo electrónico no puede superar los 120 caracteres");
+
+            RuleFor(x => x.Password)
+                .NotEmpty()
+                .WithMessage("La contraseña es requerida")
+                .MinimumLength(8)
+                .WithMessage("La contraseña debe tener al menos 8 caracteres")
+                .MaximumLength(100)
+                .WithMessage("La contraseña no puede superar los 100 caracteres")
+                .Matches(@"[A-Z]")
+                .WithMessage("La contraseña debe contener al menos una letra mayúscula")
+                .Matches(@"[a-z]")
+                .WithMessage("La contraseña debe contener al menos una letra minúscula")
+                .Matches(@"[0-9]")
+                .WithMessage("La contraseña debe contener al menos un número")
+                .Matches(@"[\W_]")
+                .WithMessage("La contraseña debe contener al menos un carácter especial");
+        }
+    }
+}

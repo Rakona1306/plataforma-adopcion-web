@@ -5,10 +5,10 @@ import Image from "next/image";
 import { motion, type Variants } from "motion/react";
 import { paymentMethods } from "@/app/(web)/_utils/data/paymentMethods";
 import { MdPets, MdLocationOn, MdPhone } from "react-icons/md";
-import { headerData } from "@/shared/utils/web/data/header.data";
-import Container from "@/presentation/atoms/container";
 import { companyInfo } from "../../_utils/data/companyInfo.data";
-import { notSpace } from "@/shared/functions/notSpace";
+import Container from "@/components/atoms/container";
+import { headerData } from "@/core/shared/utils/web/data/header.data";
+import { notSpace } from "@/core/shared/helpers/notSpace";
 
 const CONTACT = {
   phone: "+51 955 288 116",

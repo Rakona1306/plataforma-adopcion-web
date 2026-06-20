@@ -2,8 +2,8 @@
 
 import { PetCardItem } from "@/app/(web)/_components/atoms/card/pet-card-item"
 import { petsData } from "@/app/(web)/_utils/data/pets.data"
-import { usePetSearch } from "@/application/hooks/pet/usePetSearch"
-import Container from "@/presentation/atoms/container"
+import Container from "@/components/atoms/container"
+import { usePetSearch } from "@/core/application/hooks/pet/usePetSearch"
 import { BiSearch, BiX } from "react-icons/bi"
 
 export default function PetListPage () {

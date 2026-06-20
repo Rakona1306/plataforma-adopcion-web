@@ -1,3 +1,5 @@
+import { cn } from "@/lib/utils";
+
 type HeadingTag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
 const selectTitleClass = (htmlTag: HeadingTag) => {
@@ -29,7 +31,7 @@ export default function Title({
   const classNameTitle = selectTitleClass(htmlTag);
 
   return (
-    <Tag className={`${classNameTitle} ${className}`}>
+    <Tag className={`${cn(classNameTitle, className)}`}>
       {children}
     </Tag>
   );

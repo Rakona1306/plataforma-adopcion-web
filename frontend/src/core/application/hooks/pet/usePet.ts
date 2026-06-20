@@ -2,7 +2,7 @@
 
 import { petsData } from "@/app/(web)/_utils/data/pets.data"
 
-export const usePet = (petId: number) => {
+export const usePet = (petId: string) => {
   const pet = petsData.find((p) => p.id === petId)
 
   return {

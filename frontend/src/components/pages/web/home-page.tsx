@@ -7,7 +7,7 @@ import AdoptionIntro from "@/app/(web)/_components/organisms/sections/adoption-i
 import PetsSection from "@/app/(web)/_components/organisms/sections/pets-section";
 import SponsorshipSection from "@/app/(web)/_components/organisms/sections/sponsorship-section";
 import SwiperUI from "@/app/(web)/_components/organisms/swiper-ui";
-import { bannerData, BannerHomeItem } from "@/shared/utils/web/data/banner.data";
+import { bannerData, BannerHomeItem } from "@/core/shared/utils/web/data/banner.data";
 
 export default function HomePage() {
   return (

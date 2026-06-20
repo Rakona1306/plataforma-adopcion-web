@@ -1,4 +1,5 @@
-import { AdoptInfoItem } from "@/shared/utils/web/data/adopt-info.data";
+import { AdoptInfoItem } from "@/core/shared/utils/web/data/adopt-info.data";
+
 
 export default function AdoptInfoCard({ Icon, title, description, phaseText }: AdoptInfoItem) {
   return (

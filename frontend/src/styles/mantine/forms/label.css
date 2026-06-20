@@ -1,0 +1,7 @@
+.label-input {
+    color: #314158;
+    font-weight: 600;
+    font-size: .875rem;
+    line-height: calc(1.25 / .875rem);
+    margin-bottom: calc(.25rem * 2);
+}

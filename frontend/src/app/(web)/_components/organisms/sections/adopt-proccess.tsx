@@ -1,8 +1,8 @@
-import Container from "@/presentation/atoms/container";
-import { adoptInfoData } from "@/shared/utils/web/data/adopt-info.data";
 import AdoptInfoCard from "../../molecules/card/adopt-info-card";
 import { GiCheckMark } from "react-icons/gi";
 import Title from "../../atoms/title";
+import Container from "@/components/atoms/container";
+import { adoptInfoData } from "@/core/shared/utils/web/data/adopt-info.data";
 
 export default function AdoptProccess() {
   return (

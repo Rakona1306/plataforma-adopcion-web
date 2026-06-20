@@ -1,19 +1,16 @@
 'use client'
 
-import { Pet } from '@/domain/models/Pet'
 import Link from 'next/link'
-import { useState } from 'react'
-import { BiHeart } from 'react-icons/bi'
 import { FaSyringe } from 'react-icons/fa'
 import Title from '../title'
 import Button from '../button/button'
+import { Pet } from '@/core/domain/models/shelter/pet'
 
 interface PetCardItemProps {
   pet: Pet
 }
 
 export function PetCardItem({ pet }: PetCardItemProps) {
-  const [isFavorite, setIsFavorite] = useState(false)
 
   const getGenderLabel = (gender: string) => {
     return gender === 'Macho' ? '♂️' : '♀️'
@@ -30,11 +27,11 @@ export function PetCardItem({ pet }: PetCardItemProps) {
           {/* Image Container */}
           <div className="relative h-64 md:h-72 overflow-hidden bg-gray-200">
             <img
-              src={pet.images[0]?.url || '/placeholder.jpg'}
+              src={pet.photoUrls[0]?.url || '/placeholder.jpg'}
               alt={pet.name}
               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
             />
-            
+
             {/* Overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
@@ -61,11 +58,11 @@ export function PetCardItem({ pet }: PetCardItemProps) {
                 <Title htmlTag='h3' className="text-2xl! md:text-xl! font-bold text-slate-800 group-hover:text-primary transition-colors">
                   {pet.name}
                 </Title>
-                <span className="text-xl">{getRaceIcon(pet.race.name)}</span>
+                <span className="text-xl">{getRaceIcon(pet.speciesName)}</span>
               </div>
               <p className="text-sm text-slate-600">
-                {pet.breed}
-                <span className="ml-2">{getGenderLabel(pet.gender)}</span>
+                {pet.breeds[0].name}
+                <span className="ml-2">{getGenderLabel(pet.gender.value)}</span>
               </p>
             </div>
 
@@ -76,7 +73,7 @@ export function PetCardItem({ pet }: PetCardItemProps) {
 
             {/* Characteristics */}
             <div className="flex flex-wrap gap-2">
-              {pet.characteristics.slice(0, 2).map((char) => (
+              {pet.traits.slice(0, 2).map((char) => (
                 <span
                   key={char.id}
                   className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold"
@@ -84,9 +81,9 @@ export function PetCardItem({ pet }: PetCardItemProps) {
                   {char.name}
                 </span>
               ))}
-              {pet.characteristics.length > 2 && (
+              {pet.traits.length > 2 && (
                 <span className="inline-block px-3 py-1 rounded-full bg-gray-100 text-primary text-xs font-semibold">
-                  +{pet.characteristics.length - 2} más
+                  +{pet.traits.length - 2} más
                 </span>
               )}
             </div>

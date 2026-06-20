@@ -1,0 +1,12 @@
+.text-input {
+  background-color: white;
+  border-color: var(--color-slate-400);
+  color: var(--color-slate-900);
+  border-radius: var(--radius-xl);
+  padding-inline: calc(var(--spacing) * 9);
+  padding-block: calc(var(--spacing) * 2);
+  height: auto;
+  font-size: var(--text-base);
+  min-height: auto;
+  line-height: 2;
+}

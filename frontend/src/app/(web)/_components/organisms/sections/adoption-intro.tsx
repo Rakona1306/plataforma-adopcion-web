@@ -1,12 +1,12 @@
-import Container from "@/presentation/atoms/container";
-import Tag from "@/presentation/atoms/tag";
-import { headerData } from "@/shared/utils/web/data/header.data";
+
 import Link from "next/link";
 import { FaStar } from "react-icons/fa";
 import { RxCaretRight } from "react-icons/rx";
 import Button from "../../atoms/button/button";
 import Title from "../../atoms/title";
 import { socialLinks } from "@/app/(web)/_utils/data/socialLinks";
+import Container from "@/components/atoms/container";
+import Tag from "@/components/atoms/tag";
 
 export default function AdoptionIntro() {
   return (

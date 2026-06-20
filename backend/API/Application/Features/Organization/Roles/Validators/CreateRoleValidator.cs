@@ -9,11 +9,15 @@ namespace API.Application.Features.Organization.Roles.Validators
         {
             RuleFor(x => x.Name)
                 .NotEmpty()
+                .WithMessage("Nombre es requerido")
                 .MinimumLength(3)
-                .MaximumLength(50);
+                .WithMessage("El nombre tiene 3 caracteres minimos")
+                .MaximumLength(50)
+                .WithMessage("El nombre tiene 50 caracteres maximos");
 
             RuleFor(x => x.Description)
-                .MaximumLength(200);
+                .MaximumLength(200)
+                .WithMessage("La descripcion tiene 200 caracteres maximos");
         }
     }
 }
