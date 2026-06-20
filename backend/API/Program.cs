@@ -48,7 +48,7 @@ builder.Services.AddCors(options =>
         policy =>
         {
             policy
-                .WithOrigins("http://localhost:3000")
+                .WithOrigins(["http://localhost:3000", "https://plataforma-adopcion-web.vercel.app"])
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials();
