@@ -25,6 +25,8 @@ namespace API.Infrastructure.RepositoryImpl.Shelter
                     .ThenInclude(x => x.Breed)
                 .Include(x => x.PetTraits)
                     .ThenInclude(x => x.Trait)
+                .Include(x => x.PetVaccines)
+                    .ThenInclude(x => x.Vaccine)
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
     }

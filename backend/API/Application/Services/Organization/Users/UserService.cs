@@ -201,5 +201,27 @@ namespace API.Application.Services.Organization.Users
             await _repository.UpdateAsync(entity, null);
             await _repository.SaveChangesAsync();
         }
+
+        public async Task ChangeAccountInfo(Guid id, ChangeAccountInfoDto dto, Guid? userId)
+        {
+            var entity = await _repository.GetByIdAsync(id);
+
+            if (entity is null)
+                throw new Exception("El usuario no ha sido encontrado");
+
+            _mapper.UpdateInformation(dto, entity);
+
+            if (entity.Id != userId)
+            {
+                throw new UnauthorizedAccessException();
+            }
+
+            await _repository.UpdateAsync(
+                entity,
+                null
+            );
+
+            await _repository.SaveChangesAsync();
+        }
     }
 }

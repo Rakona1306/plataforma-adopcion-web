@@ -4,7 +4,7 @@ using API.Domain.Common.Model;
 
 namespace API.Application.Services.Bussiness.Requests;
 
-public interface IRequestService : IBaseService<RequestResponse, CreateRequestDto, UpdateRequestDto, RequestFilterDto>
+public interface IRequestService : IBaseService<RequestResponse, CreateRequestDto, UpdateRequestDto, RequestFilterDto, RequestResponse>
 {
     // Métodos paginados e independientes por cada tipo
     Task<Paginate<RequestResponse>> GetAdoptionsPagedAsync(RequestFilterDto filter);

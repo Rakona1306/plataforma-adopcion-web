@@ -14,7 +14,7 @@ namespace API.Application.Features.Organization.Users.Dtos
         public string? Ruc { get; set; } = string.Empty;
         public string? Phone { get; set; } = string.Empty;
         public string? District { get; set; } = string.Empty;
-        public string isBlocked { get; set; }
+        public bool IsBlocked { get; set; } = false;
         public RoleResponse Role { get; set; }
 
         public string RoleName { get; set; } = string.Empty;

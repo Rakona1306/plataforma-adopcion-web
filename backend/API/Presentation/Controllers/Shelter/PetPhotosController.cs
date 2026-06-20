@@ -128,8 +128,8 @@ namespace API.Presentation.Controllers.Shelter
         [HttpPost("{petId}/sync-photos")]
         [Consumes("multipart/form-data")]
         public async Task<IActionResult> SyncPhotos(
-    Guid petId,
-    [FromForm] SyncPetPhotosRequest request)
+            Guid petId,
+            [FromForm] SyncPetPhotosRequest request)
         {
             var dto = new SyncPetPhotosDto
             {

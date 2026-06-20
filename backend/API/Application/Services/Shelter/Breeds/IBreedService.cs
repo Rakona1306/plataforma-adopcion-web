@@ -7,7 +7,8 @@ namespace API.Application.Services.Shelter.Breeds
         BreedResponse,
         CreateBreedDto,
         UpdateBreedDto,
-        BreedFilterDto>
+        BreedFilterDto,
+        BreedResponse>
     {
     }
 }

@@ -8,7 +8,8 @@ namespace API.Application.Services.Shelter.MedicalRecords
         MedicalRecordResponse,
         CreateMedicalRecordDto,
         UpdateMedicalRecordDto,
-        MedicalRecordFilterDto>
+        MedicalRecordFilterDto,
+        MedicalRecordResponse>
     {
     }
 }

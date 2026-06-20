@@ -1,4 +1,5 @@
 ﻿using API.Application.Common.Services;
+using API.Application.Features.Shelter.Pets.Mappers;
 using API.Application.Features.Shelter.PetVaccines.Dtos;
 using API.Application.Features.Shelter.PetVaccines.Mappers;
 using API.Application.Features.System.AuditLogs.Mappers;
@@ -10,23 +11,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Application.Services.Shelter.PetVaccines
 {
-    public class PetVaccineService
+    public partial class PetVaccineService
     : BaseService<
         PetVaccine,
         IPetVaccineRepository>,
       IPetVaccineService
     {
-        private readonly IPetVaccineRepository
-            _repository;
-
-        private readonly IPetRepository
-            _petRepository;
-
-        private readonly IVaccineRepository
-            _vaccineRepository;
-
-        private readonly PetVaccineMapper
-            _mapper;
+        private readonly IPetVaccineRepository _repository;
+        private readonly IPetRepository _petRepository;
+        private readonly IVaccineRepository _vaccineRepository;
+        private readonly PetVaccineMapper _mapper;
 
         public PetVaccineService(
             IPetVaccineRepository repository,
@@ -41,11 +35,8 @@ namespace API.Application.Services.Shelter.PetVaccines
             )
         {
             _repository = repository;
-
             _petRepository = petRepository;
-
             _vaccineRepository = vaccineRepository;
-
             _mapper = mapper;
         }
 
@@ -57,7 +48,8 @@ namespace API.Application.Services.Shelter.PetVaccines
         {
             IQueryable<PetVaccine> query =
                 _repository.Query()
-                .Include(x => x.Vaccine);
+                .Include(x => x.Vaccine)
+                .Include(x => x.Pet);
 
             if (filter.PetId.HasValue)
             {
@@ -148,12 +140,7 @@ namespace API.Application.Services.Shelter.PetVaccines
             return _mapper.ToResponse(entity);
         }
 
-        public async Task<
-            PetVaccineResponse
-        > CreateAsync(
-            CreatePetVaccineDto dto,
-            Guid? userId = null
-        )
+        public async Task<PetVaccineNoRelationsResponse> CreateAsync(CreatePetVaccineDto dto, Guid? userId = null)
         {
             var petExists =
                 await _petRepository.ExistsAsync(x =>
@@ -179,22 +166,18 @@ namespace API.Application.Services.Shelter.PetVaccines
                 );
             }
 
-            var exists =
-                await _repository.ExistsAsync(x =>
-                    x.PetId == dto.PetId
-                    &&
-                    x.VaccineId == dto.VaccineId
-                );
+            var entity = _mapper.ToEntity(dto);
 
-            if (exists)
+            if (entity.AppliedDate.Kind == DateTimeKind.Unspecified || entity.AppliedDate.Kind == DateTimeKind.Local)
             {
-                throw new Exception(
-                    "La mascota ya tiene registrada esta vacuna"
-                );
+                entity.AppliedDate = DateTime.SpecifyKind(entity.AppliedDate, DateTimeKind.Utc);
             }
 
-            var entity =
-                _mapper.ToEntity(dto);
+            if (entity.ExpirationDate.HasValue &&
+               (entity.ExpirationDate.Value.Kind == DateTimeKind.Unspecified || entity.ExpirationDate.Value.Kind == DateTimeKind.Local))
+            {
+                entity.ExpirationDate = DateTime.SpecifyKind(entity.ExpirationDate.Value, DateTimeKind.Utc);
+            }
 
             AuditHelper.CreateAudit(
                 entity,
@@ -208,84 +191,11 @@ namespace API.Application.Services.Shelter.PetVaccines
 
             await _repository.SaveChangesAsync();
 
-            var created =
-                await _repository.Query()
-                .Include(x => x.Vaccine)
-                .FirstAsync(x =>
-                    x.PetId == dto.PetId
-                    &&
-                    x.VaccineId == dto.VaccineId
-                );
 
-            return _mapper.ToResponse(created);
+            return _mapper.ToResponseWithoutRelations(entity);
         }
 
-        public async Task<
-            PetVaccineResponse
-        > UpdateAsync(
-            Guid petId,
-            Guid vaccineId,
-            UpdatePetVaccineDto dto,
-            Guid? userId = null
-        )
-        {
-            var entity =
-                await _repository.Query()
-                .FirstOrDefaultAsync(x =>
-                    x.PetId == petId
-                    &&
-                    x.VaccineId == vaccineId
-                );
-
-            if (entity is null)
-            {
-                throw new Exception(
-                    "La vacuna de la mascota no fue encontrada"
-                );
-            }
-
-            var oldValues = new
-            {
-                entity.VaccineId,
-                entity.AppliedDate,
-                entity.ExpirationDate
-            };
-
-            entity.VaccineId =
-                dto.VaccineId;
-
-            entity.AppliedDate =
-                dto.AppliedDate;
-
-            entity.ExpirationDate =
-                dto.ExpirationDate;
-
-            AuditHelper.UpdateAudit(
-                entity,
-                userId
-            );
-
-            await _repository.UpdateAsync(
-                entity,
-                userId,
-                oldValues
-            );
-
-            await _repository.SaveChangesAsync();
-
-            var updated =
-                await _repository.Query()
-                .Include(x => x.Vaccine)
-                .FirstAsync(x =>
-                    x.PetId == entity.PetId
-                    &&
-                    x.VaccineId == entity.VaccineId
-                );
-
-            return _mapper.ToResponse(updated);
-        }
-
-        public async Task DeleteAsync(
+        public async Task DeleteByPetIdAndVaccineIdAsync(
             Guid petId,
             Guid vaccineId,
             Guid? userId = null
@@ -314,49 +224,59 @@ namespace API.Application.Services.Shelter.PetVaccines
             await _repository.SaveChangesAsync();
         }
 
-        async Task<PetVaccineResponse?>
-            IBaseService<
-                PetVaccineResponse,
-                CreatePetVaccineDto,
-                UpdatePetVaccineDto,
-                PetVaccineFilterDto
-            >.GetByIdAsync(Guid id)
+        public async Task<PetVaccineResponse?>
+            GetByIdAsync(Guid id)
         {
             throw new NotImplementedException(
                 "PetVaccine utiliza llave compuesta"
             );
         }
 
-        async Task<PetVaccineResponse>
-            IBaseService<
-                PetVaccineResponse,
-                CreatePetVaccineDto,
-                UpdatePetVaccineDto,
-                PetVaccineFilterDto
-            >.UpdateAsync(
-                Guid id,
-                UpdatePetVaccineDto dto,
-                Guid? userId
-            )
+        public async Task<PetVaccineNoRelationsResponse> UpdateAsync(Guid id, UpdatePetVaccineDto dto, Guid? userId)
         {
-            throw new NotImplementedException(
-                "PetVaccine utiliza llave compuesta"
-            );
+            var entity = await _repository.Query()
+                .FirstOrDefaultAsync(x => x.Id == id)
+                ?? throw new Exception("El registro específico de la vacuna no fue encontrado");
+
+            var petExists = await _petRepository.ExistsAsync(x => x.Id == dto.PetId);
+            if (!petExists)
+            {
+                throw new Exception("La mascota no fue encontrada");
+            }
+
+            var vaccineExists = await _vaccineRepository.ExistsAsync(x => x.Id == dto.VaccineId);
+            if (!vaccineExists)
+            {
+                throw new Exception("La vacuna no fue encontrada");
+            }
+
+            _mapper.Update(dto, entity);
+
+            if (entity.AppliedDate.Kind == DateTimeKind.Unspecified || entity.AppliedDate.Kind == DateTimeKind.Local)
+            {
+                entity.AppliedDate = DateTime.SpecifyKind(entity.AppliedDate, DateTimeKind.Utc);
+            }
+
+            if (entity.ExpirationDate.HasValue &&
+               (entity.ExpirationDate.Value.Kind == DateTimeKind.Unspecified || entity.ExpirationDate.Value.Kind == DateTimeKind.Local))
+            {
+                entity.ExpirationDate = DateTime.SpecifyKind(entity.ExpirationDate.Value, DateTimeKind.Utc);
+            }
+
+
+            AuditHelper.UpdateAudit(entity, userId);
+
+            await _repository.UpdateAsync(entity, userId);
+            await _repository.SaveChangesAsync();
+
+            return _mapper.ToResponseWithoutRelations(entity);
         }
 
-        async Task IBaseService<
-            PetVaccineResponse,
-            CreatePetVaccineDto,
-            UpdatePetVaccineDto,
-            PetVaccineFilterDto
-        >.DeleteAsync(
-            Guid id,
-            Guid? userId
-        )
+        public async Task DeleteAsync(Guid id, Guid? userId)
         {
-            throw new NotImplementedException(
-                "PetVaccine utiliza llave compuesta"
-            );
+            var petVaccine = await _repository.GetByIdAsync(id) ?? throw new Exception("Relacion Mascota con Vacuna no encontrada");
+            await _repository.DeleteAsync(petVaccine, userId);
+            await _repository.SaveChangesAsync();
         }
     }
 }

@@ -5,6 +5,7 @@ using API.Application.Features.System.AuditLogs.Mappers;
 using API.Domain.Common.Model;
 using API.Domain.Model.Shelter;
 using API.Domain.Repository.Shelter;
+using API.Infrastructure.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Application.Services.Shelter.Pets
@@ -28,6 +29,7 @@ namespace API.Application.Services.Shelter.Pets
                 .Include(x => x.Species)
                 .Include(x => x.PetBreeds).ThenInclude(x => x.Breed)
                 .Include(x => x.PetTraits).ThenInclude(x => x.Trait)
+                .Include(x => x.PetVaccines).ThenInclude(x => x.Vaccine)
                 .Include(x => x.Photos);
 
             if (!string.IsNullOrWhiteSpace(filter.Search))
@@ -55,6 +57,7 @@ namespace API.Application.Services.Shelter.Pets
         }
 
         // --- CREATE ---
+        /*
         public async Task<PetResponse> CreateAsync(CreatePetDto dto, Guid? userId = null)
         {
             var entity = _mapper.ToEntity(dto);
@@ -68,8 +71,28 @@ namespace API.Application.Services.Shelter.Pets
 
             return await GetByIdAsync(entity.Id);
         }
+        */
+        public async Task<PetResponse> CreateAsync(CreatePetDto dto, Guid? userId = null)
+        {
+            var entity = _mapper.ToEntity(dto);
 
-        // --- UPDATE (Delta Sync) ---
+            // Solo AddIds aplica en creación
+            entity.PetBreeds = dto.BreedIds.AddIds
+                .Select(id => new PetBreed { BreedId = id })
+                .ToList();
+
+            entity.PetTraits = dto.TraitIds.AddIds
+                .Select(id => new PetTrait { TraitId = id })
+                .ToList();
+
+            await _petRepository.CreateAsync(entity, userId);
+            await _petRepository.SaveChangesAsync();
+
+            return await GetByIdAsync(entity.Id);
+        }
+
+        // --- UPDATE (Delta Sync) ---\
+        /*
         public async Task<PetResponse> UpdateAsync(Guid id, UpdatePetDto dto, Guid? userId = null)
         {
             var pet = await GetPetWithRelationsAsync(id);
@@ -85,7 +108,26 @@ namespace API.Application.Services.Shelter.Pets
 
             return await GetByIdAsync(id);
         }
+        */
+        public async Task<PetResponse> UpdateAsync(Guid id, UpdatePetDto dto, Guid? userId = null)
+        {
+            // Reemplaza GetByIdWithTrackingAsync con el query directo con relaciones
+            var entity = await _petRepository.Query()
+                .Include(x => x.PetBreeds)
+                .Include(x => x.PetTraits)
+                .FirstOrDefaultAsync(x => x.Id == id)
+                ?? throw new NotFoundException("No encontrado");
 
+            _mapper.Update(dto, entity);
+
+            SyncBreeds(entity.PetBreeds, dto.BreedIds);
+            SyncTraits(entity.PetTraits, dto.TraitIds);
+
+            await _petRepository.UpdateAsync(entity, userId);
+            await _petRepository.SaveChangesAsync();
+
+            return await GetByIdAsync(entity.Id);
+        }
         // --- DELETE ---
         public async Task DeleteAsync(Guid id, Guid? userId = null)
         {
@@ -102,6 +144,7 @@ namespace API.Application.Services.Shelter.Pets
                 .Include(x => x.Photos)
                 .Include(x => x.PetBreeds).ThenInclude(x => x.Breed)
                 .Include(x => x.PetTraits).ThenInclude(x => x.Trait)
+                .Include(x => x.PetVaccines).ThenInclude(x => x.Vaccine)
                 .FirstOrDefaultAsync(x => x.Id == id) ?? throw new Exception("Pet not found");
         }
 
@@ -115,6 +158,39 @@ namespace API.Application.Services.Shelter.Pets
             }
             foreach (var id in dto.AddIds.Where(id => !collection.Any(x => (EF.Property<Guid>(x, "BreedId") == id || EF.Property<Guid>(x, "TraitId") == id))))
                 collection.Add(factory(id));
+        }
+
+        private static void SyncBreeds(ICollection<PetBreed> collection, UpdatePetRelationDto dto)
+        {
+            var toRemove = collection
+                .Where(x => dto.RemoveIds.Contains(x.BreedId))
+                .ToList();
+
+            foreach (var item in toRemove)
+                collection.Remove(item);
+
+            var existing = collection.Select(x => x.BreedId).ToHashSet();
+
+            foreach (var id in dto.AddIds.Where(id => !existing.Contains(id)))
+                collection.Add(new PetBreed { BreedId = id });
+        }
+
+        // Traits: usa addIds y removeIds explícitos
+        private static void SyncTraits(ICollection<PetTrait> collection, UpdatePetRelationDto dto)
+        {
+            // Eliminar los indicados
+            var toRemove = collection
+                .Where(x => dto.RemoveIds.Contains(x.TraitId))
+                .ToList();
+
+            foreach (var item in toRemove)
+                collection.Remove(item);
+
+            // Agregar solo los que no existen ya
+            var existing = collection.Select(x => x.TraitId).ToHashSet();
+
+            foreach (var id in dto.AddIds.Where(id => !existing.Contains(id)))
+                collection.Add(new PetTrait { TraitId = id });
         }
     }
 }

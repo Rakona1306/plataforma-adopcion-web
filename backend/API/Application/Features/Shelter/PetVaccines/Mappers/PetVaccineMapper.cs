@@ -11,30 +11,31 @@ namespace API.Application.Features.Shelter.PetVaccines.Mappers
             CreatePetVaccineDto dto
         );
 
-        [MapProperty(
-            nameof(PetVaccine.Vaccine.Name),
-            nameof(PetVaccineResponse.VaccineName)
-        )]
+#pragma warning disable RMG020 // Source member is not mapped to any target member
+        [MapProperty(nameof(PetVaccine.ExpirationDate), nameof(PetVaccineResponse.IsExpired), Use = nameof(CalculateIsExpired))]
         public partial PetVaccineResponse ToResponse(
             PetVaccine entity
         );
+#pragma warning restore RMG020 // Source member is not mapped to any target member
+#pragma warning disable RMG012 // Source member was not found for target member
+        [MapProperty(nameof(PetVaccine.ExpirationDate), nameof(PetVaccineNoRelationsResponse.IsExpired), Use = nameof(CalculateIsExpired))]
+        public partial PetVaccineNoRelationsResponse ToResponseWithoutRelations(PetVaccine entity);
+#pragma warning restore RMG012 // Source member was not found for target member
 
-        public partial List<PetVaccineResponse>
-            ToResponseList(
-                List<PetVaccine> entities
-            );
+        public partial List<PetVaccineResponse> ToResponseList(List<PetVaccine> entities);
 
-        private bool MapIsExpired(
-            PetVaccine entity
-        )
+        [MapperIgnoreTarget(nameof(PetVaccine.Pet))]
+        [MapperIgnoreTarget(nameof(PetVaccine.Vaccine))]
+        public partial void Update(UpdatePetVaccineDto dto, [MappingTarget] PetVaccine entity);
+
+        private bool CalculateIsExpired(DateTime? expirationDate)
         {
-            if (!entity.ExpirationDate.HasValue)
+            if (!expirationDate.HasValue)
             {
                 return false;
             }
 
-            return entity.ExpirationDate.Value
-                < DateTime.UtcNow;
+            return expirationDate.Value < DateTime.UtcNow;
         }
     }
 }

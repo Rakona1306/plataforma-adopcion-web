@@ -3,7 +3,7 @@ using API.Application.Features.Shelter.PetPhotos.Dtos;
 using API.Application.Features.Shelter.PetPhotos.Mappers;
 using API.Application.Features.System.AuditLogs.Mappers;
 using API.Application.Helpers;
-using API.Application.Services.Adapter.SupabaseS3;
+using API.Application.Services.Adapter.CloudflareR2Storage;
 using API.Domain.Common.Model;
 using API.Domain.Model.Shelter;
 using API.Domain.Repository.Shelter;
@@ -17,14 +17,14 @@ namespace API.Application.Services.Shelter.PetPhotos
 
         private readonly IPetRepository _petRepository;
 
-        private readonly ISupabaseStorageService _storage;
+        private readonly ICloudflareR2StorageService _storage;
 
         private readonly PetPhotoMapper _mapper;
 
         public PetPhotoService(
             IPetPhotoRepository repository,
             IPetRepository petRepository,
-            ISupabaseStorageService storage,
+            ICloudflareR2StorageService storage,
             PetPhotoMapper mapper,
             AuditLogMapper auditLogMapper
         ) : base(repository, auditLogMapper)
@@ -113,6 +113,7 @@ namespace API.Application.Services.Shelter.PetPhotos
             var imageUrl =
                 await _storage.UploadImageAsync(
                     dto.File,
+                    dto.PetId,
                     "MASKOTS"
                 );
 
@@ -177,6 +178,7 @@ namespace API.Application.Services.Shelter.PetPhotos
                 var newUrl =
                     await _storage.UploadImageAsync(
                         dto.File,
+                        entity.PetId,
                         "MASKOTS"
                     );
 
@@ -250,7 +252,7 @@ namespace API.Application.Services.Shelter.PetPhotos
                 var photo = await _repository.GetByIdAsync(photoId);
                 if (photo != null && photo.PetId == petId)
                 {
-                    await _storage.DeleteFileAsync("MASKOTS", photo.Url);
+                    await _storage.DeleteFileAsync("alberguesalvavidas", photo.Url);
                     await _repository.DeleteAsync(photo, userId);
                 }
             }
@@ -258,7 +260,7 @@ namespace API.Application.Services.Shelter.PetPhotos
             // 3. Subida (Delta Add) - Sin lógica de "Main" aquí
             foreach (var upload in dto.PhotosToAdd)
             {
-                var imageUrl = await _storage.UploadImageAsync(upload.File, "MASKOTS");
+                var imageUrl = await _storage.UploadImageAsync(upload.File, petId, "alberguesalvavidas");
                 var newPhoto = new PetPhoto { PetId = petId, Url = imageUrl, IsMain = false };
 
                 AuditHelper.CreateAudit(newPhoto, userId);

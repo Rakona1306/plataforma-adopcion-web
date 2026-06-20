@@ -2,7 +2,6 @@ using API.Application.Configuration;
 using API.Infrastructure.Configuration;
 using API.Infrastructure.Db;
 using API.Infrastructure.Extensions.Jwt;
-using API.Infrastructure.Extensions.Supabase;
 using API.Infrastructure.Middlewares;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -21,6 +20,8 @@ builder.Services.Configure<JwtOptions>(
     builder.Configuration.GetSection("Jwt")
 );
 
+Console.WriteLine(Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection"));
+
 builder.Services.AddSwaggerGen();
 
 // var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -34,8 +35,6 @@ builder.Services.AddDbContext<ConnDbContext>(options =>
 // Add services to the container.
 builder.Services.AddApplicationServices();
 builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
-
-builder.Services.AddSupabase();
 
 builder.Services.AddControllers();
 builder.Services.AddFluentValidationAutoValidation();

@@ -16,15 +16,19 @@ namespace API.Application.Features.Shelter.Pets.Validators
             RuleFor(x => x.SpeciesId)
                 .NotEmpty();
 
+            RuleFor(x => x.Description)
+                .MaximumLength(500);
+            RuleFor(x => x.RescueStory)
+                .MaximumLength(1000);
+            RuleFor(x => x.Age)
+                .GreaterThanOrEqualTo(0)
+                .WithMessage("La edad debe ser un número positivo")
+                .NotEmpty()
+                .WithMessage("La edad es obligatoria");
+
             RuleFor(x => x.WeightKg)
                 .GreaterThan(0)
                 .When(x => x.WeightKg.HasValue);
-
-            RuleFor(x => x.BreedIds)
-                .NotEmpty();
-
-            RuleFor(x => x.TraitIds)
-                .NotEmpty();
         }
     }
 }

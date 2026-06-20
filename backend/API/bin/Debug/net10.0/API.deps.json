@@ -8,7 +8,9 @@
     ".NETCoreApp,Version=v10.0": {
       "API/1.0.0": {
         "dependencies": {
+          "AWSSDK.S3": "4.0.24.1",
           "BCrypt.Net-Next": "4.2.0",
+          "CloudinaryDotNet": "1.29.1",
           "FluentValidation": "12.1.1",
           "FluentValidation.AspNetCore": "11.3.1",
           "FluentValidation.DependencyInjectionExtensions": "12.1.1",
@@ -26,11 +28,41 @@
           "API.dll": {}
         }
       },
+      "AWSSDK.Core/4.0.8": {
+        "runtime": {
+          "lib/net8.0/AWSSDK.Core.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.0.8.0"
+          }
+        }
+      },
+      "AWSSDK.S3/4.0.24.1": {
+        "dependencies": {
+          "AWSSDK.Core": "4.0.8"
+        },
+        "runtime": {
+          "lib/net8.0/AWSSDK.S3.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.0.24.1"
+          }
+        }
+      },
       "BCrypt.Net-Next/4.2.0": {
         "runtime": {
           "lib/net10.0/BCrypt-Net-Next.dll": {
             "assemblyVersion": "4.2.0.0",
             "fileVersion": "4.2.0.0"
+          }
+        }
+      },
+      "CloudinaryDotNet/1.29.1": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "runtime": {
+          "lib/netstandard2.0/CloudinaryDotNet.dll": {
+            "assemblyVersion": "1.29.1.0",
+            "fileVersion": "1.29.1.0"
           }
         }
       },
@@ -809,12 +841,33 @@
       "serviceable": false,
       "sha512": ""
     },
+    "AWSSDK.Core/4.0.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JFq4sdtnlLePkISe5M0j1a5ushTrvwCGO1CNOGZaoBv33dscHls14m5dsPzyrN54xn924MtAP+s5xTdfNGNTUQ==",
+      "path": "awssdk.core/4.0.8",
+      "hashPath": "awssdk.core.4.0.8.nupkg.sha512"
+    },
+    "AWSSDK.S3/4.0.24.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-SM1h5MobQMs/Xvl3L3G0wbPpOZtcaemoS4AD35qfz/QRndZQyk+ryZ6kowBc5dhIEiy1g9Le9WFaIksvIpq0dw==",
+      "path": "awssdk.s3/4.0.24.1",
+      "hashPath": "awssdk.s3.4.0.24.1.nupkg.sha512"
+    },
     "BCrypt.Net-Next/4.2.0": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-gwLD2KfCuwQesP17aVh4h6lpiMPEVt5Lbpndo0ej903hNUUTtyxt3ARdDjmuydBRTAUICc7OVKVbaOvc6SQYXA==",
       "path": "bcrypt.net-next/4.2.0",
       "hashPath": "bcrypt.net-next.4.2.0.nupkg.sha512"
+    },
+    "CloudinaryDotNet/1.29.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JaV1JhjsvArTu1n7dzawflTGLqyNMGCEmGSNAiIlHOObqoIAh0cKIZOu5stG1CaPFgF3S1jv1Jn+vTmTqUvCNg==",
+      "path": "cloudinarydotnet/1.29.1",
+      "hashPath": "cloudinarydotnet.1.29.1.nupkg.sha512"
     },
     "FluentValidation/12.1.1": {
       "type": "package",

@@ -13,6 +13,8 @@ namespace API.Infrastructure.Db.Builders.Shelter
             builder.Property(p => p.Name).IsRequired().HasMaxLength(100);
             builder.Property(p => p.Description).HasMaxLength(500);
             builder.Property(p => p.RescueStory).HasMaxLength(1000);
+            builder.Property(p => p.BirthDate).HasColumnType("date");
+            builder.Property(p => p.Age).IsRequired();
 
             // Configuración de precisión para el peso (ej. 999.99 kg)
             builder.Property(p => p.WeightKg).HasPrecision(5, 2);

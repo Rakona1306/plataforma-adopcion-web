@@ -8,8 +8,11 @@ namespace API.Application.Services.Organization.Users
         UserResponse,
         CreateUserDto,
         UpdateUserDto,
-        UserFilterDto>
+        UserFilterDto,
+        UserResponse>
     {
         Task ChangePassword(ChangePasswordDto changePasswordDto);
+
+        Task ChangeAccountInfo(Guid id, ChangeAccountInfoDto dto, Guid? userId);
     }
 }

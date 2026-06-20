@@ -1,6 +1,9 @@
 ﻿using API.Application.Features.Shelter.Breeds.Dtos;
+using API.Application.Features.Shelter.PetPhotos.Dtos;
 using API.Application.Features.Shelter.Pets.Dtos;
 using API.Application.Features.Shelter.Traits.Dtos;
+using API.Application.Features.Shelter.Vaccines.Dtos;
+using API.Application.Features.System.Enums.Dto;
 using API.Domain.Model.Shelter;
 using Riok.Mapperly.Abstractions;
 
@@ -15,14 +18,10 @@ namespace API.Application.Features.Shelter.Pets.Mappers
         [MapperIgnoreTarget(nameof(Pet.Photos))]
         [MapperIgnoreTarget(nameof(Pet.MedicalRecords))]
         [MapperIgnoreTarget(nameof(Pet.PetSponsors))]
+        [MapperIgnoreTarget(nameof(Pet.PetVaccines))]
         public partial Pet ToEntity(CreatePetDto dto);
 
-        [MapperIgnoreTarget(nameof(Pet.PetBreeds))]
-        [MapperIgnoreTarget(nameof(Pet.PetTraits))]
-        [MapperIgnoreTarget(nameof(Pet.Photos))]
-        [MapperIgnoreTarget(nameof(Pet.MedicalRecords))]
-        [MapperIgnoreTarget(nameof(Pet.PetSponsors))]
-        [MapperIgnoreTarget(nameof(Pet.Species))]
+
         public partial void Update(UpdatePetDto dto, [MappingTarget] Pet entity);
 
         // Mapeo de respuesta profesional
@@ -33,9 +32,21 @@ namespace API.Application.Features.Shelter.Pets.Mappers
             // Aplanado de relaciones y conversión de Enums a String
 
             response.SpeciesName = entity.Species?.Name ?? "Sin especie";
-            response.Gender = new ;
-            response.Size = entity.Size.ToString();
-            response.Status = entity.Status.ToString();
+            response.Gender = new EnumResponse
+            {
+                Key = (int)entity.Gender,
+                Value = entity.Gender.ToString()
+            };
+            response.Size = new EnumResponse
+            {
+                Key = (int)entity.Size,
+                Value = entity.Size.ToString()
+            };
+            response.Status = new EnumResponse
+            {
+                Key = (int)entity.Status,
+                Value = entity.Status.ToString()
+            };
 
             // Colecciones
             response.Breeds = entity.PetBreeds?.Select(pb => new OptionBreedResponse
@@ -48,9 +59,20 @@ namespace API.Application.Features.Shelter.Pets.Mappers
                 Id = pt.Trait.Id,
                 Name = pt.Trait.Name
             }).ToList() ?? [];
-            response.PhotoUrls = entity.Photos?.Select(p => p.Url).ToList() ?? [];
+            response.PhotoUrls = entity.Photos?.OrderByDescending(p => p.IsMain).Select(p => new OptionPetPhotoResponse
+            {
+                Id = p.Id,
+                Url = p.Url,
+            }).ToList() ?? [];
 
             return response;
+        }
+
+        public List<PetResponse> ToResponseList(List<Pet> entities)
+        {
+            if (entities == null) return [];
+
+            return [.. entities.Select(ToResponse)];
         }
 
         // Ignoramos en la parte automática todo lo que mapeamos manualmente arriba
@@ -62,7 +84,5 @@ namespace API.Application.Features.Shelter.Pets.Mappers
         [MapperIgnoreTarget(nameof(PetResponse.Traits))]
         [MapperIgnoreTarget(nameof(PetResponse.PhotoUrls))]
         private partial PetResponse ToResponseInternal(Pet entity);
-
-        public partial List<PetResponse> ToResponseList(List<Pet> entities);
     }
 }

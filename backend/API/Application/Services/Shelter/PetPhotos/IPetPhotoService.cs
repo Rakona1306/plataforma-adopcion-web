@@ -3,7 +3,7 @@ using API.Application.Features.Shelter.PetPhotos.Dtos;
 
 namespace API.Application.Services.Shelter.PetPhotos
 {
-    public interface IPetPhotoService : IBaseService<PetPhotoResponse, CreatePetPhotoDto, UpdatePetPhotoDto, PetPhotoFilterDto>
+    public interface IPetPhotoService : IBaseService<PetPhotoResponse, CreatePetPhotoDto, UpdatePetPhotoDto, PetPhotoFilterDto, PetPhotoResponse>
     {
         public Task SyncPhotosAsync(Guid petId, SyncPetPhotosDto dto, Guid? userId = null);
     }

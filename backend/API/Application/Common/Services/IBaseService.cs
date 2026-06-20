@@ -7,7 +7,9 @@ namespace API.Application.Common.Services
     TResponse,
     TCreate,
     TUpdate,
-    TFilter>
+    TFilter,
+    TChangeResponse
+    >
     {
         Task<Paginate<TResponse>> GetAllAsync(
             TFilter filter
@@ -15,12 +17,12 @@ namespace API.Application.Common.Services
 
         Task<TResponse?> GetByIdAsync(Guid id);
 
-        Task<TResponse> CreateAsync(
+        Task<TChangeResponse> CreateAsync(
             TCreate dto,
             Guid? userId = null
         );
 
-        Task<TResponse> UpdateAsync(
+        Task<TChangeResponse> UpdateAsync(
             Guid id,
             TUpdate dto,
             Guid? userId = null

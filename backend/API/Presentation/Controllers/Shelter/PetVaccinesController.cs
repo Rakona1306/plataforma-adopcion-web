@@ -7,8 +7,8 @@ namespace API.Presentation.Controllers.Shelter
 {
     [ApiController]
     [Route("api/pet-vaccines")]
-    public class PetVaccineController
-    : ControllerBase
+    [AuthorizeJwt]
+    public class PetVaccineController : ControllerBase
     {
         private readonly IPetVaccineService
             _service;
@@ -36,8 +36,7 @@ namespace API.Presentation.Controllers.Shelter
         }
 
         [HttpGet("{petId:guid}/{vaccineId:guid}")]
-        public async Task<IActionResult>
-            GetById(
+        public async Task<IActionResult> GetById(
                 Guid petId,
                 Guid vaccineId
             )
@@ -52,9 +51,7 @@ namespace API.Presentation.Controllers.Shelter
         }
 
         [HttpPost]
-        [AuthorizedUser]
-        public async Task<IActionResult>
-            Create(
+        public async Task<IActionResult> Create(
                 [FromBody]
             CreatePetVaccineDto dto
             )
@@ -85,14 +82,10 @@ namespace API.Presentation.Controllers.Shelter
             return Ok(response);
         }
 
-        [HttpPut("{petId:guid}/{vaccineId:guid}")]
-        [AuthorizedUser]
-        public async Task<IActionResult>
-            Update(
-                Guid petId,
-                Guid vaccineId,
-                [FromBody]
-            UpdatePetVaccineDto dto
+        [HttpPut("{id:guid}")]
+        public async Task<IActionResult> Update(
+                Guid id,
+                [FromBody] UpdatePetVaccineDto dto
             )
         {
             var user =
@@ -114,8 +107,7 @@ namespace API.Presentation.Controllers.Shelter
 
             var response =
                 await _service.UpdateAsync(
-                    petId,
-                    vaccineId,
+                    id,
                     dto,
                     userId
                 );
@@ -124,9 +116,7 @@ namespace API.Presentation.Controllers.Shelter
         }
 
         [HttpDelete("{petId:guid}/{vaccineId:guid}")]
-        [AuthorizedUser]
-        public async Task<IActionResult>
-            Delete(
+        public async Task<IActionResult> Delete(
                 Guid petId,
                 Guid vaccineId
             )
@@ -148,7 +138,7 @@ namespace API.Presentation.Controllers.Shelter
             var userId =
                 (Guid)((dynamic)user).Id;
 
-            await _service.DeleteAsync(
+            await _service.DeleteByPetIdAndVaccineIdAsync(
                 petId,
                 vaccineId,
                 userId
@@ -161,10 +151,16 @@ namespace API.Presentation.Controllers.Shelter
             });
         }
 
+        [HttpDelete("{id:guid}")]
+        public async Task<IActionResult> DeleteById(Guid id)
+        {
+            await _service.DeleteAsync(id);
+
+            return NoContent();
+        }
+
         [HttpGet("{petId:guid}/{vaccineId:guid}/interactions")]
-        [AuthorizedUser]
-        public async Task<IActionResult>
-            GetInteractions(
+        public async Task<IActionResult> GetInteractions(
                 Guid petId,
                 Guid vaccineId,
                 [FromQuery] int page = 1,
