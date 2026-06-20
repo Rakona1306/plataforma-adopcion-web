@@ -1,12 +1,10 @@
 "use client";
 
 import Button from "@/app/(web)/_components/atoms/button/button";
-import { PetCardItem } from "@/app/(web)/_components/atoms/card/pet-card-item";
 import Title from "@/app/(web)/_components/atoms/title";
 import { sendSponsorshipSchema } from "@/app/(web)/_schemas/sponsorship/send.chema";
 import { companyInfo } from "@/app/(web)/_utils/data/companyInfo.data";
 import { PaymentMethod, paymentMethods } from "@/app/(web)/_utils/data/paymentMethods";
-import { petsData } from "@/app/(web)/_utils/data/pets.data";
 import Input from "@/components/atoms/input";
 import Select, { SelectFormikOption } from "@/components/atoms/select";
 import Textarea from "@/components/atoms/text-area";
@@ -21,7 +19,7 @@ import { LuZap } from "react-icons/lu";
 import { MdPets } from "react-icons/md";
 
 interface PetDeatilPageProps {
-  petId: number;
+  petId: string;
 }
 
 export const parsePaymentMethodsToOptions = (
@@ -60,12 +58,12 @@ export default function PetDeatilPage({ petId }: PetDeatilPageProps) {
   }
 
   const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % pet.images.length);
+    setCurrentImageIndex((prev) => (prev + 1) % pet.photoUrls.length);
   };
 
   const prevImage = () => {
     setCurrentImageIndex(
-      (prev) => (prev - 1 + pet.images.length) % pet.images.length,
+      (prev) => (prev - 1 + pet.photoUrls.length) % pet.photoUrls.length,
     );
   };
 
@@ -98,7 +96,7 @@ export default function PetDeatilPage({ petId }: PetDeatilPageProps) {
                 <div className="bg-gray-200 rounded-2xl md:rounded-3xl overflow-hidden aspect-square md:aspect-auto md:h-96 lg:h-125">
                   <img
                     src={
-                      pet.images[currentImageIndex]?.url || "/placeholder.jpg"
+                      pet.photoUrls[currentImageIndex]?.url || "/placeholder.jpg"
                     }
                     alt={pet.name}
                     className="w-full h-full object-cover"
@@ -106,7 +104,7 @@ export default function PetDeatilPage({ petId }: PetDeatilPageProps) {
                 </div>
 
                 {/* Image Navigation */}
-                {pet.images.length > 1 && (
+                {pet.photoUrls.length > 1 && (
                   <>
                     <button
                       onClick={prevImage}
@@ -123,7 +121,7 @@ export default function PetDeatilPage({ petId }: PetDeatilPageProps) {
 
                     {/* Image Counter */}
                     <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full bg-black/50 text-white font-semibold text-sm">
-                      {currentImageIndex + 1} / {pet.images.length}
+                      {currentImageIndex + 1} / {pet.photoUrls.length}
                     </div>
                   </>
                 )}
@@ -142,17 +140,16 @@ export default function PetDeatilPage({ petId }: PetDeatilPageProps) {
               </div>
 
               {/* Thumbnails */}
-              {pet.images.length > 1 && (
+              {pet.photoUrls.length > 1 && (
                 <div className="flex gap-3 overflow-x-auto pb-2">
-                  {pet.images.map((img, idx) => (
+                  {pet.photoUrls.map((img, idx) => (
                     <button
                       key={img.id}
                       onClick={() => setCurrentImageIndex(idx)}
-                      className={`flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 transition-all duration-300 ${
-                        idx === currentImageIndex
-                          ? "border-primary shadow-lg"
-                          : "border-primary/20 hover:border-primary/40"
-                      }`}
+                      className={`flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 transition-all duration-300 ${idx === currentImageIndex
+                        ? "border-primary shadow-lg"
+                        : "border-primary/20 hover:border-primary/40"
+                        }`}
                     >
                       <img
                         src={img.url}
@@ -164,14 +161,14 @@ export default function PetDeatilPage({ petId }: PetDeatilPageProps) {
                 </div>
               )}
 
-              {pet.history && (
+              {pet.rescueStory && (
                 <div className="mt-5 space-y-5">
                   <h2 className="text-4xl font-bold text-primary flex gap-2 items-center">
                     <MdPets className="text-terciary" />
                     <span>Mi historia</span>
                   </h2>
 
-                  <p className="text-gray-600">{pet.history}</p>
+                  <p className="text-gray-600">{pet.rescueStory}</p>
                 </div>
               )}
             </div>
@@ -185,13 +182,13 @@ export default function PetDeatilPage({ petId }: PetDeatilPageProps) {
                 <div>
                   <div className="flex items-center gap-2 mb-2">
                     <span className="text-3xl">
-                      {getRaceIcon(pet.race.name)}
+                      {getRaceIcon(pet.speciesName)}
                     </span>
                     <Title className="text-4xl! md:text-5xl! font-bold text-slate-800">
                       {pet.name}
                     </Title>
                   </div>
-                  <p className="text-xl text-gray-400">{pet.breed}</p>
+                  <p className="text-xl text-gray-400">{pet.breeds[0].name}</p>
                 </div>
               </div>
 
@@ -208,7 +205,7 @@ export default function PetDeatilPage({ petId }: PetDeatilPageProps) {
                     Género
                   </p>
                   <p className="text-lg md:text-xl font-bold text-primary">
-                    {getGenderLabel(pet.gender)}
+                    {getGenderLabel(pet.gender.value)}
                   </p>
                 </div>
                 <div className="p-4 rounded-xl bg-green-50 border border-green-200">
@@ -223,7 +220,7 @@ export default function PetDeatilPage({ petId }: PetDeatilPageProps) {
                 <div className="p-4 rounded-xl bg-blue-50 border border-blue-200">
                   <p className="text-xs md:text-sm text-slate-800 mb-1">Raza</p>
                   <p className="font-bold text-blue-600 text-lg">
-                    {pet.race.name}
+                    {pet.speciesName}
                   </p>
                 </div>
               </div>
@@ -264,7 +261,7 @@ export default function PetDeatilPage({ petId }: PetDeatilPageProps) {
                 Características
               </h2>
               <div className="flex flex-wrap gap-3">
-                {pet.characteristics.map((char) => (
+                {pet.traits.map((char) => (
                   <div
                     key={char.id}
                     className="px-4 py-3 rounded-full bg-primary/10 border border-primary/30 flex items-center gap-2"
@@ -276,16 +273,6 @@ export default function PetDeatilPage({ petId }: PetDeatilPageProps) {
                   </div>
                 ))}
               </div>
-            </div>
-
-            {/* Race Description */}
-            <div className="space-y-3 p-6 rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/20">
-              <h2 className="text-xl font-bold text-slate-800">
-                {pet.race.name}
-              </h2>
-              <p className="text-gray-700 leading-relaxed">
-                {pet.race.description}
-              </p>
             </div>
 
             {/* Contact CTA */}
@@ -342,7 +329,7 @@ export default function PetDeatilPage({ petId }: PetDeatilPageProps) {
                 placeholder="Juan Perez Hidalgo"
               />
 
-              <Input 
+              <Input
                 name="petName"
                 label="Ahijad@"
                 placeholder="Escriba su nombre"
@@ -409,15 +396,6 @@ export default function PetDeatilPage({ petId }: PetDeatilPageProps) {
             Otras <span className="text-primary">Mascotas</span> que te Podrían
             Gustar
           </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {petsData
-              .filter((p) => p.id !== pet.id && p.race.name === pet.race.name)
-              .slice(0, 3)
-              .map((relatedPet) => (
-                <PetCardItem key={relatedPet.id} pet={relatedPet} />
-              ))}
-          </div>
         </div>
       </div>
     </div>

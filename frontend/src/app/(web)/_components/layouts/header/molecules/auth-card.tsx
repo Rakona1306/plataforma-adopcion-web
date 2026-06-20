@@ -2,8 +2,8 @@ import { FaDog } from "react-icons/fa";
 import Button from "../../../atoms/button/button";
 import { motion, Variants } from "motion/react";
 import { ProfileCard } from "../../../molecules/auth/profile-card";
-import { useProfile } from "@/core/application/features/system/auth/hooks/useProfile";
 import { Skeleton } from "@/components/atoms/skeleton";
+import { useProfile } from "@/features/system/auth/hooks/useProfile";
 
 const ctaVariants: Variants = {
   hidden: { opacity: 0, scale: 0.88 },
@@ -15,7 +15,7 @@ const ctaVariants: Variants = {
 };
 
 export default function AuthCard() {
-  const { data, isLoading, isFetching, isRefetching } = useProfile();
+  const { profile, isLoading, isFetching, isRefetching } = useProfile();
 
   return (
     <>
@@ -25,7 +25,7 @@ export default function AuthCard() {
         </>
       ) : (
         <>
-          {data ? (
+          {profile ? (
             <ProfileCard />
           ) : (
             <motion.div

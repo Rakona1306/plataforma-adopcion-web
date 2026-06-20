@@ -1,7 +1,9 @@
-export default function Dashboard() {
+import DashboardPage from "@/_pages/dashboard/dashboard-page";
+
+export default function DashboardPageNext() {
   return (
     <div>
-      <h1>Dashboard</h1>
+      <DashboardPage />
     </div>
   );
 }

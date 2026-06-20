@@ -1,13 +1,14 @@
 'use client'
-import { useAuth } from "@/core/application/features/system/auth/hooks/useAuth";
-import { useProfile } from "@/core/application/features/system/auth/hooks/useProfile";
+import { useLogout } from "@/features/system/auth/hooks/useLogout";
+import { useProfile } from "@/features/system/auth/hooks/useProfile";
 import { Badge, Menu } from "@mantine/core";
 import { BiLogOut, BiUser } from "react-icons/bi";
 import { CgChevronRight } from "react-icons/cg";
 import { MdPets } from "react-icons/md";
 
 export default function ProfileUser() {
-  const { isLoading, data } = useProfile()
+  const { isLoading, profile } = useProfile()
+  const { logout } = useLogout()
 
   if (isLoading) {
     return <div className="w-full h-full flex items-center justify-center">
@@ -24,8 +25,8 @@ export default function ProfileUser() {
               <MdPets className="text-white" size={15} />
             </div>
             <div>
-              <p className="font-medium line-clamp-1">{data?.name} {data?.lastName}</p>
-              <Badge className="bg-primary!">{data?.role?.name}</Badge>
+              <p className="font-medium line-clamp-1">{profile?.name} {profile?.lastName}</p>
+              <Badge className="bg-primary!">{profile?.role?.name}</Badge>
             </div>
           </div>
           <CgChevronRight size={15} />
@@ -38,7 +39,7 @@ export default function ProfileUser() {
         <Menu.Item leftSection={<BiUser size={15} />} >
           Mi información
         </Menu.Item>
-        <Menu.Item className="text-red-500!" leftSection={<BiLogOut size={15} className="text-red-500" />} >
+        <Menu.Item onClick={() => logout()} className="text-red-500!" leftSection={<BiLogOut size={15} className="text-red-500" />} >
           Cerrar sesión
         </Menu.Item>
       </Menu.Dropdown>

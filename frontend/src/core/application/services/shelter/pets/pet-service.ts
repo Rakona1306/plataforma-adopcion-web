@@ -1,12 +1,12 @@
 import { PetCreateDto } from "@/core/application/features/shelter/pets/dtos/pet-create-dto";
 import { Pet } from "@/core/domain/models/shelter/pet";
 import { Paginate } from "@/core/domain/models/system/paginate";
-import { IPetRepository } from "@/core/domain/repository/shelter/petRepository";
+import { IPetRepository } from "@/core/domain/repository/shelter/PetRepository";
 
 export class PetService {
   constructor(
     private petRepository: IPetRepository
-  ) {}
+  ) { }
 
   createPet(pet: PetCreateDto): Promise<void> {
     return this.petRepository.create(pet);

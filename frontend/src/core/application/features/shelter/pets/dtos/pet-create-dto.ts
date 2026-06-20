@@ -6,11 +6,11 @@ export const petCreateSchema = Yup.object({
     .max(100, "Máximo 100 caracteres"),
 
   description: Yup.string()
-    .required("La descripción es requerida")
+    .optional()
     .max(1000, "Máximo 1000 caracteres"),
 
   rescueStory: Yup.string()
-    .required("La historia de rescate es requerida")
+    .optional()
     .max(2000, "Máximo 2000 caracteres"),
 
   birthDate: Yup.date()
@@ -31,33 +31,41 @@ export const petCreateSchema = Yup.object({
     .required("El género es requerido"),
 
   size: Yup.number()
-    .oneOf([0, 1, 2], "Tamaño inválido")
+    .oneOf([0, 1, 2, 3], "Tamaño inválido")
     .required("El tamaño es requerido"),
 
   status: Yup.number()
     .oneOf([0, 1, 2, 3, 4, 5], "Estado inválido")
     .required("El estado es requerido"),
 
+  age: Yup.number()
+    .required("La edad es requerida")
+    .positive("La edad debe ser mayor a 0")
+    .integer("La edad debe ser un número entero"),
+
   speciesId: Yup.string()
     .uuid("La especie seleccionada es inválida")
     .required("La especie es requerida"),
 
-  breedIds: Yup.array()
-    .of(
-      Yup.string()
-        .uuid("Raza inválida")
-        .required()
-    )
-    .min(1, "Debe seleccionar al menos una raza")
-    .required("Las razas son requeridas"),
+  breedIds: Yup.object({
+    addIds: Yup.array()
+      .of(Yup.string().uuid("Raza inválida").required())
+      .default([]),
 
-  traitIds: Yup.array()
-    .of(
-      Yup.string()
-        .uuid("Característica inválida")
-        .required()
-    )
-    .default([]),
+    removeIds: Yup.array()
+      .of(Yup.string().uuid("Raza inválida").required())
+      .default([]),
+  }).required(),
+
+  traitIds: Yup.object({
+    addIds: Yup.array()
+      .of(Yup.string().uuid("Caracteristic inválida").required())
+      .default([]),
+
+    removeIds: Yup.array()
+      .of(Yup.string().uuid("Caracteristica inválida").required())
+      .default([]),
+  }).required()
 });
 
 export type PetCreateDto = Yup.InferType<

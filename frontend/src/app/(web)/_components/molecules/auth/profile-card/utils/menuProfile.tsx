@@ -16,10 +16,11 @@ interface MenuItem {
   auth?: boolean;
 }
 
-export function getMenuItems({  onLogout }: {
+export function getMenuItems({ onLogout, onEdit }: {
   onLogout: () => void;
+  onEdit: () => void
 }) {
-  
+
   const menuItems: MenuItem[] = [
     {
       label: "Dashboard",
@@ -37,7 +38,7 @@ export function getMenuItems({  onLogout }: {
     {
       label: "Editar perfil",
       icon: <HiOutlinePencil className="w-4 h-4" />,
-      href: "/account/profile/edit",
+      action: onEdit,
       color: "text-slate-700",
     },
     {

@@ -18,6 +18,8 @@ interface Props<T> {
   placeholder?: string;
   className?: string;
   defaultValue?: string;
+
+  required?: boolean;
 }
 
 export function SearchSelect<T>({
@@ -31,6 +33,7 @@ export function SearchSelect<T>({
   placeholder,
   className,
   defaultValue,
+  required = false,
 }: Props<T>) {
   const [field, meta, helpers] = useField(name);
 
@@ -86,6 +89,10 @@ export function SearchSelect<T>({
       placeholder={placeholder ?? "Buscar..."}
       rightSection={isLoading ? <Loader size="xs" /> : null}
       error={meta.touched ? meta.error : undefined}
+      required={required}
+      classNames={{
+        input: "mb-2"
+      }}
     />
   );
 }

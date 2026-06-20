@@ -47,11 +47,19 @@ export default function CreatePetPageNext() {
     size: 1,
     status: 1,
     speciesId: "",
-    breedIds: [],
-    traitIds: [],
+    breedIds: {
+      addIds: [],
+      removeIds: []
+    },
+    traitIds: {
+      addIds: [],
+      removeIds: []
+    },
+    age: 0,
   };
 
   const onSubmit = (values: PetCreateDto) => {
+    console.log(values)
     create(values)
   };
 
@@ -84,12 +92,21 @@ export default function CreatePetPageNext() {
                 title="Información básica"
                 subtitle="Datos principales de la mascota"
               >
-                <Input
-                  name="name"
-                  label="Nombre"
-                  placeholder="Ej: Luna, Max, Milo..."
-                  required
-                />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <Input
+                    name="name"
+                    label="Nombre"
+                    placeholder="Ej: Luna, Max, Milo..."
+                    required
+                  />
+                  <Input
+                    name="age"
+                    label="Edad"
+                    type="number"
+                    placeholder="Ej: 2, 5, 10..."
+                    required
+                  />
+                </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <SearchSelect

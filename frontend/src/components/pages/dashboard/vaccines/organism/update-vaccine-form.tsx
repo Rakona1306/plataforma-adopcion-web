@@ -33,6 +33,7 @@ export function UpdateVaccineForm({ vaccine }: { vaccine: Vaccine }) {
           label="Nombre"
           required
           error={errorValidation.name}
+          defaultValue={vaccine.name}
         />
 
         <Button type="submit" loading={isPending}>

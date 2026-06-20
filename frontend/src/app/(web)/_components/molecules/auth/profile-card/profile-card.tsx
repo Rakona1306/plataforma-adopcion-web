@@ -4,15 +4,19 @@ import { useEffect, useRef, useState } from "react";
 import { MdPets } from "react-icons/md";
 import { AnimatePresence, motion } from "motion/react";
 import { getMenuItems } from "./utils/menuProfile";
-import { useMenuRedirects } from "./hooks/useMenuRedirects";
 import { useSessionStore } from "@/core/infrastructure/store/useSessionStore";
 import Link from "next/link";
+import { useLogout } from "@/features/system/auth/hooks/useLogout";
+import { useModal } from "@/core/application/hooks/ui/useModal";
+import CurrentUserEditForm from "@/features/organization/user/components/forms/current-user-edit-form";
 
 export function ProfileCard() {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const { user } = useSessionStore();
-  const { onLogout } = useMenuRedirects();
+  const { logout } = useLogout()
+
+  const { handleOpenModal } = useModal() || {}
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -24,7 +28,14 @@ export function ProfileCard() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const menuItems = getMenuItems({ onLogout });
+  function onEdit() {
+    handleOpenModal?.({
+      header: "Agregar la informacion",
+      content: <CurrentUserEditForm />
+    })
+  }
+
+  const menuItems = getMenuItems({ onLogout: logout, onEdit });
 
   return (
     <div ref={ref} className="relative inline-block">

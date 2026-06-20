@@ -4,13 +4,13 @@ import { PetFilterDto } from "@/core/application/features/shelter/pets/dtos/pet-
 import { Pet } from "@/core/domain/models/shelter/pet";
 import { Paginate } from "@/core/domain/models/system/paginate";
 import { PetUpdateDto } from "@/core/application/features/shelter/pets/dtos/pet-update-dto";
-import { IPetRepository } from "@/core/domain/repository/shelter/petRepository";
+import { IPetRepository } from "@/core/domain/repository/shelter/PetRepository";
 
 export class PetRepository implements IPetRepository {
 
   constructor(
     private httpCLient: HttpClient
-  ) {}
+  ) { }
 
   create(pet: PetCreateDto): Promise<void> {
     return this.httpCLient.post("/pets", pet);

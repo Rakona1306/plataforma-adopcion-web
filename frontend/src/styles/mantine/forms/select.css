@@ -10,10 +10,15 @@
   min-height: auto;
   line-height: 2;
 }
+
 .select-input:hover {
   border-color: var(--color-slate-700);
 }
 
 .select-option {
   font-size: var(--text-sm);
+}
+
+.autocomplete-label {
+  margin-bottom: 0.4rem;
 }

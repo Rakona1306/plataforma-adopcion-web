@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 
-const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+const MAX_FILE_SIZE = 3 * 1024 * 1024; // 3MB
 
 export const createPetPhotosSchema = Yup.object({
   files: Yup.array()
@@ -22,7 +22,7 @@ export const createPetPhotosSchema = Yup.object({
         )
         .test(
           "fileSize",
-          "La imagen no debe superar los 5MB",
+          "La imagen no debe superar los 3MB, por favor utilice .webp y reduzca su tamaño",
           (value) => {
             if (!value) return true;
 

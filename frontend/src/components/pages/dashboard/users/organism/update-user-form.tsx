@@ -60,6 +60,7 @@ export default function UpdateUserForm({ user }: Props) {
             label="Nombres"
             error={errorValidation.name}
             required
+            defaultValue={user.name}
           />
         </Grid.Col>
         <Grid.Col span={{ base: 12, md: 6 }}>
@@ -68,6 +69,7 @@ export default function UpdateUserForm({ user }: Props) {
             label="Apellidos:"
             error={errorValidation.lastName}
             required
+            defaultValue={user.lastName}
           />
         </Grid.Col>
       </Grid>
@@ -77,6 +79,7 @@ export default function UpdateUserForm({ user }: Props) {
         label="Correo electrónico:"
         error={errorValidation.email}
         required
+        defaultValue={user.email}
       />
 
       <Grid>
@@ -104,7 +107,7 @@ export default function UpdateUserForm({ user }: Props) {
 
       <Grid>
         <Grid.Col span={{ base: 12, md: 6 }}>
-          <Input name="phone" label="Teléfono:" error={errorValidation.phone} />
+          <Input name="phone" label="Teléfono:" error={errorValidation.phone} defaultValue={user.phone} />
         </Grid.Col>
         <Grid.Col span={{ base: 12, md: 6 }}>
           <SelectInput
@@ -112,7 +115,7 @@ export default function UpdateUserForm({ user }: Props) {
             label="Distrito"
             placeholder="Seleccione un distrito"
             options={limaDistricts}
-
+            defaultValue={user.district}
           />
         </Grid.Col>
       </Grid>

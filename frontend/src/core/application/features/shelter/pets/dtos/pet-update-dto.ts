@@ -30,15 +30,20 @@ export const petUpdateSchema = Yup.object({
     .required("Debe indicar si fue adoptado"),
 
   gender: Yup.number()
-    .oneOf([0, 1], "Género inválido")
+    .oneOf([1, 2], "Género inválido")
     .required("El género es requerido"),
 
   size: Yup.number()
-    .oneOf([0, 1, 2], "Tamaño inválido")
+    .oneOf([1, 2, 3], "Tamaño inválido")
     .required("El tamaño es requerido"),
 
+  age: Yup.number()
+    .required("La edad es requerida")
+    .positive("La edad debe ser mayor a 0")
+    .integer("La edad debe ser un número entero"),
+
   status: Yup.number()
-    .oneOf([0, 1], "Estado inválido")
+    .oneOf([1, 2, 3, 4, 5, 6], "Estado inválido")
     .required("El estado es requerido"),
 
   speciesId: Yup.string()

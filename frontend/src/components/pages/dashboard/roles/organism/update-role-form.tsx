@@ -59,7 +59,7 @@ export function UpdateRoleForm({ role }: UpdateRoleFormProps) {
       className="space-y-5"
     >
       <section>
-        <Input name="name" label="Nombre del rol:" />
+        <Input name="name" label="Nombre del rol:" defaultValue={role.name} />
       </section>
 
       <section className="w-full">
@@ -72,11 +72,11 @@ export function UpdateRoleForm({ role }: UpdateRoleFormProps) {
       <PermissionConditional name="currentPermissions" type="update" initialPermissions={initialPermissionIds} />
 
       <section className="w-full">
-        <Textarea name="description" label="Descripción del rol:" />
+        <Textarea name="description" label="Descripción del rol:" defaultValue={role.description || ''} />
       </section>
 
-      <Button 
-        type="submit" 
+      <Button
+        type="submit"
         className="w-full! bg-primary! h-13!"
         loading={isPending}
       >

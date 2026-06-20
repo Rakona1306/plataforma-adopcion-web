@@ -9,7 +9,7 @@ import { Button } from "@mantine/core";
 export function UpdateSpecieForm({ specie }: { specie: Specie }) {
 
   const { update, isPending, errorMessage, errorValidation } = useUpdateSpecie();
-  
+
   const initialValues: SpecieUpdateDto = {
     name: specie.name
   }
@@ -27,7 +27,7 @@ export function UpdateSpecieForm({ specie }: { specie: Specie }) {
     >
       {errorMessage && <Alert icon message={errorMessage} type="error" />}
 
-      <Input name="name" label="Nombre" required error={errorValidation.name} />
+      <Input name="name" label="Nombre" required error={errorValidation.name} defaultValue={specie.name} />
 
       <Button type="submit" loading={isPending}>
         Actualizar

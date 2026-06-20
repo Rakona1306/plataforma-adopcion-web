@@ -1,6 +1,6 @@
 'use client'
 
-import { ChangeEvent, FocusEvent, InputHTMLAttributes, MouseEvent, ReactNode } from 'react'
+import { ChangeEvent, FocusEvent, InputHTMLAttributes, MouseEvent, ReactNode, useEffect } from 'react'
 import { useField } from 'formik'
 
 export default function Input({
@@ -20,9 +20,10 @@ export default function Input({
   error,
   hasErrorActive,
   required,
+  defaultValue,
   ...props
 }: InputFormikProps) {
-  const [field, meta] = useField(props.name)
+  const [field, meta, helper] = useField(props.name)
   const inputId = id ?? props.name
   const hasError = Boolean(meta.touched && meta.error) || error || hasErrorActive
   const helperId = helperText ? `${inputId}-helper` : undefined
@@ -48,6 +49,10 @@ export default function Input({
   const handleRightIconClick = (event: MouseEvent<HTMLButtonElement>) => {
     rightIconOnClick?.(event)
   }
+
+  useEffect(() => {
+    helper.setValue(defaultValue)
+  }, [defaultValue])
 
   return (
     <div className={joinClasses('flex w-full flex-col gap-2', containerClassName)}>

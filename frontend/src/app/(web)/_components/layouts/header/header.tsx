@@ -14,14 +14,6 @@ import { headerData } from "@/core/shared/utils/web/data/header.data";
 import AuthCard from "./molecules/auth-card";
 
 /* ── Variants ─────────────────────────────────────────── */
-const headerVariants: Variants = {
-  hidden: { y: -90, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: { duration: 0.55, ease: "easeOut" },
-  },
-};
 
 const navItemVariants: Variants = {
   hidden: { opacity: 0, y: -8 },

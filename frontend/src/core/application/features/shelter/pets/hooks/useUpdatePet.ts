@@ -41,6 +41,7 @@ export function useUpdatePet() {
         icon: "success",
         timer: 1500,
       });
+      router.push("/dashboard/mascotas");
     },
 
     onError: (error: any) => {

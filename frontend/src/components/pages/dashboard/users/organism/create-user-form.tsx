@@ -1,10 +1,8 @@
 // src/app/dashboard/usuarios/_components/create-user-form.tsx
 "use client";
 
-import MultiSelect from "@/app/dashboard/_components/organism/multi-select";
 import { Alert } from "@/components/atoms/alert";
 import Input from "@/components/atoms/input";
-import BooleanSelect from "@/components/molecules/boolean-select";
 import FormContainer from "@/components/molecules/form-container";
 import { SearchSelect } from "@/components/organisms/search-select";
 import SelectInput from "@/components/organisms/select-input";
@@ -150,8 +148,6 @@ export default function CreateUserForm() {
         onSearch={(search) => updateFilter({ search })}
         isLoading={isLoading}
       />
-
-      <BooleanSelect name="isBlocked" label="¿Usuario bloqueado?" />
 
       <Button type="submit" loading={isPending}>
         Crear Usuario

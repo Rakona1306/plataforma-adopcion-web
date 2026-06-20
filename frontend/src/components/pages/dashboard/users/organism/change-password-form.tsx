@@ -32,7 +32,7 @@ export function ChangePasswordForm({ user }: { user: User }) {
       validationSchema={changePasswordSchema}
     >
       {errorMessage && <Alert icon message={errorMessage} type="error" />}
-      <Input name="email" label="Email" type="email" disabled />
+      <Input name="email" label="Email" type="email" disabled defaultValue={user.email} />
       <Input
         name="password"
         label="Nueva contraseña"

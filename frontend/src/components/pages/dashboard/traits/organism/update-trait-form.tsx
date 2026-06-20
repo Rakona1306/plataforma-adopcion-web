@@ -10,7 +10,7 @@ import { Button } from "@mantine/core";
 export function UpdateTraitForm({ trait }: { trait: Trait }) {
 
   const { update, isPending, errorMessage, errorValidation } = useUpdateTrait();
-  
+
   const initialValues: TraitUpdateDto = {
     name: trait.name
   }
@@ -28,7 +28,7 @@ export function UpdateTraitForm({ trait }: { trait: Trait }) {
     >
       {errorMessage && <Alert icon message={errorMessage} type="error" />}
 
-      <Input name="name" label="Nombre" required error={errorValidation.name} />
+      <Input name="name" label="Nombre" required error={errorValidation.name} defaultValue={trait.name} />
 
       <Button type="submit" loading={isPending}>
         Actualizar

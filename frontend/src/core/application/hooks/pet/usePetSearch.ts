@@ -1,7 +1,7 @@
 "use client"
 
 import { petsData } from "@/app/(web)/_utils/data/pets.data"
-import { Pet } from "@/core/domain/models/Pet"
+import { Pet } from "@/core/domain/models/shelter/pet"
 import { useMemo, useState } from "react"
 
 export const usePetSearch = (): UsePetSearchReturn => {
@@ -13,12 +13,10 @@ export const usePetSearch = (): UsePetSearchReturn => {
   // Filter pets based on search and filters
   const filteredPets = useMemo(() => {
     return petsData.filter((pet) => {
-      const matchesSearch = pet.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        pet.breed.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        pet.characteristics.some(c => c.name.toLowerCase().includes(searchTerm.toLowerCase()))
+      const matchesSearch = pet.name.toLowerCase().includes(searchTerm.toLowerCase())
 
-      const matchesRace = selectedRace === 'todos' || pet.race.name === selectedRace
-      const matchesGender = selectedGender === 'todos' || pet.gender === selectedGender
+      const matchesRace = selectedRace === 'todos' || pet.traits[0].name === selectedRace
+      const matchesGender = selectedGender === 'todos' || pet.gender.value === selectedGender
 
       return matchesSearch && matchesRace && matchesGender
     })
@@ -46,7 +44,7 @@ export const usePetSearch = (): UsePetSearchReturn => {
 interface UsePetSearchReturn {
   searchTerm: string
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>
-  
+
   filteredPets: Pet[]
   races: string[]
   genders: string[]

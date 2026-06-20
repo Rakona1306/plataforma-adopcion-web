@@ -1,0 +1,22 @@
+.custom-swiper-container .swiper-button-next,
+.custom-swiper-container .swiper-button-prev {
+    color: #64748b !important;
+    /* slate-500 */
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 9999px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+    border: 1px border #e2e8f0;
+}
+
+.custom-swiper-container .swiper-button-next:after,
+.custom-swiper-container .swiper-button-prev:after {
+    font-size: 14px !important;
+    font-weight: bold;
+}
+
+.custom-swiper-container .swiper-pagination-bullet-active {
+    background: #3b82f6 !important;
+    /* blue-500 */
+}

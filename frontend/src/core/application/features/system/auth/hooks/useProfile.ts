@@ -2,6 +2,7 @@
 
 import { AuthService } from "@/core/application/services/system/auth/authService"
 import { useSessionStore } from "@/core/infrastructure/store/useSessionStore";
+import { QUERYKEYS } from "@/shared/constants/queryKeys";
 import { useQuery } from "@tanstack/react-query"
 import { useEffect } from "react";
 
@@ -15,7 +16,7 @@ export const useProfile = () => {
   } = useSessionStore();
 
   const query = useQuery({
-    queryKey: ["profile"],
+    queryKey: [QUERYKEYS.SYSTEM.AUTH],
 
     queryFn: () =>
       authService.profile(),

@@ -6,6 +6,7 @@
   padding-block: calc(var(--spacing) * 3);
   width: 100%;
   height: auto;
+  transition: all 0.3s ease-in;
 }
 
 .button-primary:hover {

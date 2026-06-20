@@ -11,7 +11,7 @@ export default async function Page({
 
   const { id } = await params
 
-  const petId = Number(id)
+  const petId = id
 
   return (
     <div className="pt-20 bg-gray-100">

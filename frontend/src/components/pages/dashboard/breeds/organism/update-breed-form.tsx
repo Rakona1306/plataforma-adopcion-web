@@ -40,6 +40,7 @@ export function UpdateBreedForm({ breed }: { breed: Breed }) {
           label="Nombre"
           required
           error={errorValidation.name}
+          defaultValue={breed.name}
         />
 
         <SearchSelect<Specie>

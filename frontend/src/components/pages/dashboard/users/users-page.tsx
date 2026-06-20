@@ -9,8 +9,8 @@ import CustomTable, {
 import FilterBar from "@/app/dashboard/_components/organism/filter-bar";
 import { useGetAllUser } from "@/core/application/features/organization/user/hooks/useGetAllUser";
 import { useModal } from "@/core/application/hooks/ui/useModal";
-import { Divider } from "@mantine/core";
-import { BiEditAlt, BiTrash } from "react-icons/bi";
+import { Badge, Divider } from "@mantine/core";
+import { BiEditAlt, BiLock, BiTrash } from "react-icons/bi";
 import { RowAction } from "@/app/dashboard/_components/molecules/table-actions";
 import { BsViewList } from "react-icons/bs";
 import { useDeleteUser } from "@/core/application/features/organization/user/hooks/useDeleteUser";
@@ -36,7 +36,7 @@ export default function UsersPage() {
     { key: "ruc", label: "RUC" },
     { key: "phone", label: "Telefono" },
     { key: "district", label: "Distrito" },
-    { key: "isBlocked", label: "Bloqueado" },
+    { key: "isBlocked", label: "Estado", render: (row) => (row.isBlocked ? <Badge color="red">Bloqueado</Badge> : <Badge color="green">Activo</Badge>) },
     { key: "roleId", label: "Rol", render: (row) => row.role?.name },
   ];
 
@@ -70,6 +70,12 @@ export default function UsersPage() {
           content: <ViewUser user={user} />,
         });
       },
+    },
+    {
+      label: "Bloquear Usuario",
+      icon: <BiLock size={16} />,
+      color: "blue",
+      onClick: (pet) => { }
     },
     {
       label: "Eliminar",

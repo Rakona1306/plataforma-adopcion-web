@@ -5,7 +5,9 @@ import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
 import '../../../styles/mantine/forms/select.css';
 import '../../../styles/mantine/forms/button.css';
-import '../../../styles/mantine/forms/input.css'
+import '../../../styles/mantine/forms/input.css';
+import '../../../styles/mantine/forms/label.css';
+import { DateInput } from '@mantine/dates';
 
 const theme = createTheme({
   fontFamily: manrope.style.fontFamily,
@@ -19,6 +21,7 @@ const theme = createTheme({
     Autocomplete: Autocomplete.extend({
       classNames: {
         input: "select-input",
+        label: 'autocomplete-label'
       }
     }),
     Button: Button.extend({
@@ -29,6 +32,12 @@ const theme = createTheme({
     TextInput: TextInput.extend({
       classNames: {
         input: "text-input",
+      }
+    }),
+    DateInput: DateInput.extend({
+      classNames: {
+        input: 'select-input',
+        label: 'label-input'
       }
     })
   }
