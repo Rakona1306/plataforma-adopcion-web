@@ -63,5 +63,13 @@ namespace API.Infrastructure.RepositoryImpl.Organization
                 .Set<RolePermission>()
                 .RemoveRange(relations);
         }
+
+        public async Task<List<RolePermission>> GetPermissionsByRoleId(Guid roleId)
+        {
+            return await _context.RolePermissions
+                .Include(rp => rp.Permission)
+                .Where(rp => rp.RoleId == roleId)
+                .ToListAsync();
+        }
     }
 }
