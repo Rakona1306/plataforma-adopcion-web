@@ -4,7 +4,11 @@ namespace API.Application.Services.System.Auths
 {
     public interface IAuthService
     {
-        Task<AuthResponse> RegisterAsync(CreateAccountDto request);
+        Task<RegisterResponse> RegisterAsync(CreateAccountDto request);
+
+        Task<AuthResponse> ConfirmEmailAsync(ConfirmEmailDto request);
+
+        Task<AuthResponse> CompleteRegistrationAsync(CreateAccountDto request);
 
         Task<AuthResponse> LoginAsync(LoginAccountDto request);
 

@@ -45,6 +45,7 @@ namespace API.Infrastructure.Db
 
         // --- Módulo: System ---
         public DbSet<AuditLog> AuditLogs { get; set; }
+        public DbSet<EmailVerification> EmailVerifications { get; set; }
 
         protected override void OnModelCreating(
         ModelBuilder modelBuilder)

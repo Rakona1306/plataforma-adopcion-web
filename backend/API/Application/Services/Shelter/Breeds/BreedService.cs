@@ -58,11 +58,7 @@ namespace API.Application.Services.Shelter.Breeds
                 filter.Search
             ))
             {
-                query = query.Where(x =>
-                    x.Name.Contains(
-                        filter.Search
-                    )
-                );
+                query = query.Where(x => EF.Functions.ILike(x.Name, $"%{filter.Search}%"));
             }
 
             if (filter.SpeciesId.HasValue)

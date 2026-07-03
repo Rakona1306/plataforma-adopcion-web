@@ -10,6 +10,8 @@ namespace API.Application.Features.Organization.Roles.Dtos
         public bool ToDashboard { get; set; }
         public DateTime CreatedAt { get; set; }
 
+        public int UsersCount { get; set; } = 0;
+
         public List<PermissionResponse> Permissions { get; set; } = [];
     }
 }

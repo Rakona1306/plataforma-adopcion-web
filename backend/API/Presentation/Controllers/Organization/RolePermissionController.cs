@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using API.Application.Attributes;
 using API.Application.Services.Organization.RolePermissions;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +15,7 @@ namespace API.Presentation.Controllers.Organization
             _service = service;
         }
 
-        [HttpGet("/role/{roleId:guid}")]
+        [HttpGet("role/{roleId:guid}")]
         public async Task<IActionResult> GetPermissionsByRoleId(Guid roleId)
         {
             var response = await _service.GetPermissionsByRoleId(roleId);

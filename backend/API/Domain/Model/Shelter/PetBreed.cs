@@ -9,8 +9,5 @@ namespace API.Domain.Model.Shelter
 
         public Guid BreedId { get; set; }
         public Breed Breed { get; set; } = null!;
-
-        // opcional
-        public int Percentage { get; set; }
     }
 }

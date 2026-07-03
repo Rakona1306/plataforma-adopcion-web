@@ -3,7 +3,7 @@ using API.Application.Features.Shelter.Species.Dtos;
 using API.Application.Services.Shelter.Species;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Presentation.Controllers.Shelter
+namespace API.Presentation.Controllers.Shelter.Specie
 {
     [ApiController]
     [Route("api/[controller]")]

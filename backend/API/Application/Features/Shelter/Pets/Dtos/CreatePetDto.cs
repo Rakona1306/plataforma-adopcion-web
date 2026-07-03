@@ -11,6 +11,7 @@ namespace API.Application.Features.Shelter.Pets.Dtos
         public decimal? WeightKg { get; set; }
         public bool IsVaccinated { get; set; }
         public bool IsSterilized { get; set; }
+        public bool IsRecommend { get; set; } = false;
         public bool IsAdopted { get; set; }
         public int Age { get; set; }
         public PetGender Gender { get; set; }

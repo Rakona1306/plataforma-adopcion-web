@@ -15,9 +15,11 @@ namespace API.Application.Features.Shelter.Pets.Dtos
         public DateOnly? BirthDate { get; set; }
         public decimal? WeightKg { get; set; }
         public int Age { get; set; }
+        public string? Slug { get; set; } = string.Empty;
 
         // Estados
         public bool IsVaccinated { get; set; }
+        public bool IsRecommend { get; set; } = false;
         public bool IsSterilized { get; set; }
         public bool IsAdopted { get; set; }
         public EnumResponse Gender { get; set; } = new();

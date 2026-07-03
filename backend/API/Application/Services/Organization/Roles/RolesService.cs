@@ -1,4 +1,5 @@
 ﻿using API.Application.Common.Services;
+using API.Application.Features.Bussiness.Permissions.Dtos;
 using API.Application.Features.Organization.Roles.Dtos;
 using API.Application.Features.Roles.Mappers;
 using API.Application.Features.System.AuditLogs.Mappers;
@@ -52,11 +53,26 @@ namespace API.Application.Services.Organization.Roles
             var items = await query.OrderByDescending(x => x.CreatedAt)
                                    .Skip((filter.Page - 1) * filter.PageSize)
                                    .Take(filter.PageSize)
+                                   .Select(x => new RoleResponse
+                                   {
+                                       Id = x.Id,
+                                       Name = x.Name,
+                                       Description = x.Description,
+                                       ToDashboard = x.ToDashboard,
+                                       CreatedAt = x.CreatedAt,
+                                       UsersCount = x.Users.Count(),
+                                       Permissions = x.RolePermissions.Select(rp => new PermissionResponse
+                                       {
+                                           Id = rp.Permission.Id,
+                                           Name = rp.Permission.Name,
+                                           Module = rp.Permission.Module
+                                       }).ToList()
+                                   })
                                    .ToListAsync();
 
             return new Paginate<RoleResponse>
             {
-                Items = _mapper.ToResponseList(items),
+                Items = items,
                 TotalCount = total,
                 Page = filter.Page,
                 PageSize = filter.PageSize
@@ -86,7 +102,7 @@ namespace API.Application.Services.Organization.Roles
 
             if (exists)
             {
-                throw new Exception(
+                throw new AlreadyExistException(
                     "Este rol ya existe"
                 );
             }

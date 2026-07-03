@@ -21,6 +21,8 @@ namespace API.Application.Services.Organization.RolePermissions
         {
             var entityList = await _repository.GetPermissionsByRoleId(roleId);
 
+
+
             return _mapper.ToResponseList(entityList);
         }
     }

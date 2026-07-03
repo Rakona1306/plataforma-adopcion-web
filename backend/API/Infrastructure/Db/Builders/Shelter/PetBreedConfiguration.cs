@@ -9,17 +9,20 @@ namespace API.Infrastructure.Db.Builders.Shelter
         public void Configure(EntityTypeBuilder<PetBreed> builder)
         {
             // Llave primaria compuesta ya que es una tabla intermedia con payload (Percentage)
-            builder.HasKey(pb => new { pb.PetId, pb.BreedId });
+            builder.HasKey(pb => pb.Id);
 
             builder.HasOne(pb => pb.Pet)
                    .WithMany(p => p.PetBreeds)
-                   .HasForeignKey(pb => pb.PetId);
+                   .HasForeignKey(pb => pb.PetId)
+                   .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(pb => pb.Breed)
-                   .WithMany(b => b.PetBreeds)
-                   .HasForeignKey(pb => pb.BreedId);
+                  .WithMany()
+                  .HasForeignKey(pb => pb.BreedId)
+                  .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Property(pb => pb.Percentage).IsRequired().HasDefaultValue(100);
+            builder.HasIndex(pb => new { pb.PetId, pb.BreedId })
+                   .IsUnique();
         }
     }
 }

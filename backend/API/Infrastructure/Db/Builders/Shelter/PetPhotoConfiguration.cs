@@ -8,13 +8,19 @@ namespace API.Infrastructure.Db.Builders.Shelter
     {
         public void Configure(EntityTypeBuilder<PetPhoto> builder)
         {
-            builder.HasKey(ph => ph.Id);
-            builder.Property(ph => ph.Url).IsRequired().HasMaxLength(500);
+            builder.HasKey(pp => pp.Id);
 
-            builder.HasOne(ph => ph.Pet)
+            builder.Property(pp => pp.Url)
+                   .IsRequired()
+                   .HasMaxLength(500);
+
+            // Relación con Pet
+            builder.HasOne(pp => pp.Pet)
                    .WithMany(p => p.Photos)
-                   .HasForeignKey(ph => ph.PetId)
-                   .OnDelete(DeleteBehavior.Cascade); // Si se borra la mascota, se borran sus fotos de la BD
+                   .HasForeignKey(pp => pp.PetId)
+                   .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasIndex(pp => pp.PetId);
         }
     }
 }

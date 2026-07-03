@@ -7,6 +7,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
+using Resend;
 using System.Threading.RateLimiting;
 
 DotEnvLoader.Load(Path.Combine(Directory.GetCurrentDirectory(), ".env"));
@@ -20,7 +21,10 @@ builder.Services.Configure<JwtOptions>(
     builder.Configuration.GetSection("Jwt")
 );
 
-Console.WriteLine(Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection"));
+builder.Services.AddResend(o =>
+{
+    o.ApiToken = Environment.GetEnvironmentVariable("RESEND_APITOKEN")!;
+});
 
 builder.Services.AddSwaggerGen();
 

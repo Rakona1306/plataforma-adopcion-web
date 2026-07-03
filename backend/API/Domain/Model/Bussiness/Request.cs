@@ -1,4 +1,5 @@
-﻿using API.Domain.Common.Model;
+﻿using System.ComponentModel.DataAnnotations;
+using API.Domain.Common.Model;
 using API.Domain.Model.Enums;
 using API.Domain.Model.Organization;
 using API.Domain.Model.Shelter;
@@ -7,70 +8,56 @@ namespace API.Domain.Model.Bussiness
 {
     public class Request : BaseModel
     {
-        // USER
-
         public Guid UserId { get; set; }
+        public User User { get; set; } = null!;
 
-        public User User { get; set; }  = null!;
+        public RequestType Type { get; set; }
+
+        public RequestStatus Status { get; set; }
+
+        public string Motivation { get; set; } = string.Empty;
+
+        // ──────────────────── INFORMACIÓN DE CONTACTO ────────────────────
+
         public string District { get; set; } = string.Empty;
+
         public string Phone { get; set; } = string.Empty;
 
-        // PET (OPCIONAL)
+        // ──────────────────── INFORMACIÓN OPCIONAL ────────────────────
+
+        public string? Notes { get; set; }
+
+        // ──────────────────── RELACIÓN CON MASCOTA (Adopción/Apadrinamiento) ────────────────────
 
         public Guid? PetId { get; set; }
 
         public Pet? Pet { get; set; }
 
-        // TYPE
+        // ──────────────────── DATOS DE ADOPCIÓN ────────────────────
 
-        public RequestType Type { get; set; }
+        public Guid? AdoptionDetailsId { get; set; }
 
-        // STATUS
+        public AdoptionDetails? AdoptionDetails { get; set; }
 
-        public RequestStatus Status { get; set; }
+        // ──────────────────── DATOS DE DONACIÓN ────────────────────
 
-        // COMMON
+        public Guid? DonationDetailsId { get; set; }
 
-        public string Motivation { get; set; }
-            = string.Empty;
+        public DonationDetails? DonationDetails { get; set; }
 
-        public string? Notes { get; set; }
+        // ──────────────────── DATOS DE APADRINAMIENTO ────────────────────
 
-        // ADOPTION
+        public Guid? SponsorshipDetailsId { get; set; }
 
-        public string? HouseType { get; set; }
+        public SponsorshipDetails? SponsorshipDetails { get; set; }
 
-        public bool? HasOtherPets { get; set; }
+        // ──────────────────── DATOS DE VOLUNTARIADO ────────────────────
 
-        public bool? HasChildren { get; set; }
+        public Guid? VolunteerDetailsId { get; set; }
 
-        public bool? AcceptHomeVisit { get; set; }
+        public VolunteerDetails? VolunteerDetails { get; set; }
 
-        // DONATION
-
-        public decimal? DonationAmount { get; set; }
-
-        public bool? MonthlyDonation { get; set; }
-
-        public string? DonationMessage { get; set; }
-
-        // SPONSORSHIP
-
-        public decimal? SponsorshipAmount { get; set; }
-
-        public DateTime? SponsorshipStartDate { get; set; }
-
-        // VOLUNTEER
-
-        public Guid? VolunteerAreaId { get; set; }
-
-        public VolunteerArea? VolunteerArea { get; set; }
-
-        public string? Experience { get; set; }
-
-        public int? AvailableHoursPerWeek { get; set; }
-
-        // REVIEW
+        // ──────────────────── AUDITORÍA / REVISIÓN ────────────────────
 
         public DateTime? ReviewedAt { get; set; }
 
@@ -79,5 +66,75 @@ namespace API.Domain.Model.Bussiness
         public User? Reviewer { get; set; }
 
         public string? ReviewComment { get; set; }
+    }
+
+    public class AdoptionDetails
+    {
+        [Key]
+        public Guid Id { get; set; } = Guid.NewGuid();
+        public Guid RequestId { get; set; }
+
+        public Request Request { get; set; } = null!;
+
+        public string HouseType { get; set; } = string.Empty;
+
+        public bool HasOtherPets { get; set; }
+
+        public bool HasChildren { get; set; }
+
+        public bool AcceptHomeVisit { get; set; }
+    }
+
+    public class DonationDetails
+    {
+        [Key]
+        public Guid Id { get; set; } = Guid.NewGuid();
+        public Guid RequestId { get; set; }
+
+        public Request Request { get; set; } = null!;
+
+        public decimal Amount { get; set; }
+
+        public bool IsRecurring { get; set; }
+
+        public string? Message { get; set; }
+
+        public DateTime? NextRecurringDate { get; set; }
+    }
+
+    public class SponsorshipDetails
+    {
+        [Key]
+        public Guid Id { get; set; } = Guid.NewGuid();
+        public Guid RequestId { get; set; }
+
+        public Request Request { get; set; } = null!;
+
+        public decimal MonthlyAmount { get; set; }
+
+        public DateTime StartDate { get; set; }
+
+        public DateTime? EndDate { get; set; }
+
+        public bool IsActive { get; set; }
+    }
+
+    public class VolunteerDetails
+    {
+        [Key]
+        public Guid Id { get; set; } = Guid.NewGuid();
+        public Guid RequestId { get; set; }
+
+        public Request Request { get; set; } = null!;
+
+        public Guid VolunteerAreaId { get; set; }
+
+        public VolunteerArea VolunteerArea { get; set; } = null!;
+
+        public string? Experience { get; set; }
+
+        public int AvailableHoursPerWeek { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }
