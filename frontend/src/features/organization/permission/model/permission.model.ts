@@ -1,4 +1,4 @@
-interface Permission {
+export interface Permission {
     id: string
     name: string
     module: string

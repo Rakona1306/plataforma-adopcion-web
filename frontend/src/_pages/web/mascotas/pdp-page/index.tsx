@@ -1,0 +1,1 @@
+export { PetDeatilPage } from './pdp-page';

@@ -1,105 +1,208 @@
 'use client'
 
+import { PetPublic } from '@/features/shelter/pet/model/pet-pub.model'
+import { montserrat } from '@/lib/fonts/monserrat'
+import { Card, Image, Text, Badge, Group, Stack, ActionIcon, Tooltip, Box, Flex, ThemeIcon } from '@mantine/core'
+import { Heart, Calendar, Weight, Syringe, Sparkles } from 'lucide-react'
 import Link from 'next/link'
-import { FaSyringe } from 'react-icons/fa'
-import Title from '../title'
-import Button from '../button/button'
-import { Pet } from '@/core/domain/models/shelter/pet'
+import { useState } from 'react'
 
-interface PetCardItemProps {
-  pet: Pet
-}
+export function PetCard({
+  id,
+  name,
+  breeds,
+  description,
+  photoUrls,
+  gender,
+  age,
+  specie,
+  weightKg,
+  slug,
+  size,
+  status,
+  isVaccinated,
+  isSterilized,
+  isAdopted,
+}: PetPublic) {
+  const [isFavorited, setIsFavorited] = useState(false)
 
-export function PetCardItem({ pet }: PetCardItemProps) {
+  const photoUrl = photoUrls?.[0]?.url || `https://images.unsplash.com/photo-1633722715463-d30628519c8f?w=400&h=400&fit=crop`
 
-  const getGenderLabel = (gender: string) => {
-    return gender === 'Macho' ? '♂️' : '♀️'
+  const getStatusColor = (status?: string) => {
+    switch (status?.toLowerCase()) {
+      case 'adoptado':
+        return 'green'
+      case 'habilitado':
+        return 'cyan'
+      default:
+        return 'gray'
+    }
   }
 
-  const getRaceIcon = (raceName: string) => {
-    return raceName === 'Perro' ? '🐕' : '🐱'
+  const getSizeColor = (size?: string) => {
+    switch (size?.toLowerCase()) {
+      case 'small':
+        return 'cyan'
+      case 'medium':
+        return 'lime'
+      case 'large':
+        return 'red'
+      default:
+        return 'gray'
+    }
   }
+
+  const breedName = breeds?.[0]?.name || 'Raza desconocida'
 
   return (
-    <Link href={`/mascotas/${pet.id}`}>
-      <div className="group cursor-pointer h-full">
-        <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
-          {/* Image Container */}
-          <div className="relative h-64 md:h-72 overflow-hidden bg-gray-200">
-            <img
-              src={pet.photoUrls[0]?.url || '/placeholder.jpg'}
-              alt={pet.name}
-              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-            />
+    <Card
+      shadow="md"
+      p="0"
+      radius="lg"
+      className="overflow-hidden hover:shadow-xl hover:-translate-y-1 h-full flex flex-col bg-white transition-all duration-300"
+      style={{
+        border: '1px solid #e9ecef',
+      }}
+    >
+      {/* Imagen y favorito */}
+      <Box className="relative group overflow-hidden bg-gray-100" style={{ height: '280px' }}>
+        <Link href={`/mascotas/${slug}`} className="block w-full h-full">
+          <Image
+            src={photoUrl}
+            alt={name}
+            height={280}
+            className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-300"
+          />
+        </Link>
 
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        {/* Badge de estado */}
+        {status && (
+          <Badge
+            size="lg"
+            radius="md"
+            className="absolute top-3 left-3"
 
+            color={getStatusColor(status.value)}
+            leftSection={
+              status.value.toLowerCase() === 'adopted' ? (
+                <Sparkles size={12} />
+              ) : null
+            }
+          >
+            {status.value}
+          </Badge>
+        )}
 
-            {/* Badges */}
-            <div className="absolute bottom-3 left-3 flex gap-2">
-              {pet.isVaccinated && (
-                <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-green-500/90 text-white text-xs font-semibold">
-                  <FaSyringe className="w-3 h-3" />
-                  Vacunado
-                </div>
-              )}
-              <div className="px-3 py-1 rounded-full bg-primary/90 text-white text-xs font-semibold">
-                {pet.age} {pet.age === 1 ? 'año' : 'años'}
-              </div>
-            </div>
-          </div>
+        {/* Botón favorito */}
+        <ActionIcon
+          variant="filled"
+          radius="50%"
+          size="lg"
+          className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity"
+          color={isFavorited ? 'red' : 'white'}
+          onClick={() => setIsFavorited(!isFavorited)}
+        >
+          <Heart
+            size={20}
+            fill={isFavorited ? 'currentColor' : 'none'}
+            stroke={isFavorited ? 'currentColor' : 'currentColor'}
+          />
+        </ActionIcon>
 
-          {/* Content */}
-          <div className="p-5 md:p-6 flex-grow flex flex-col gap-4">
-            {/* Name and Race */}
-            <div>
-              <div className="flex items-center justify-between mb-2">
-                <Title htmlTag='h3' className="text-2xl! md:text-xl! font-bold text-slate-800 group-hover:text-primary transition-colors">
-                  {pet.name}
-                </Title>
-                <span className="text-xl">{getRaceIcon(pet.speciesName)}</span>
-              </div>
-              <p className="text-sm text-slate-600">
-                {pet.breeds[0].name}
-                <span className="ml-2">{getGenderLabel(pet.gender.value)}</span>
-              </p>
-            </div>
+        {/* Overlay adoptado */}
+        {isAdopted && (
+          <Box className="absolute inset-0 bg-black/40 flex items-center justify-center">
+            <Text size="xl" fw={700} c="white">
+              ❤️ Adoptado
+            </Text>
+          </Box>
+        )}
+      </Box>
 
-            {/* Description */}
-            <p className="text-sm md:text-base text-gray-500 line-clamp-2">
-              {pet.description}
-            </p>
-
-            {/* Characteristics */}
-            <div className="flex flex-wrap gap-2">
-              {pet.traits.slice(0, 2).map((char) => (
-                <span
-                  key={char.id}
-                  className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold"
-                >
-                  {char.name}
-                </span>
-              ))}
-              {pet.traits.length > 2 && (
-                <span className="inline-block px-3 py-1 rounded-full bg-gray-100 text-primary text-xs font-semibold">
-                  +{pet.traits.length - 2} más
-                </span>
-              )}
-            </div>
-
-            {/* CTA Button */}
-            <div className='flex gap-5'>
-              <Button href={`/mascotas/${pet.id}`} className='flex-1 w-full font-bold' containerClassName='w-full'>
-                Ver Detalles
-              </Button>
-              <Button href={`/mascotas/${pet.id}#padrinar`} className='flex-1 w-full border-terciary text-terciary before:bg-terciary! hover:text-white! font-bold' containerClassName='w-full'>
-                Apadrinar
-              </Button>
-            </div>
-          </div>
+      {/* Contenido */}
+      <Stack gap="xs" p="md" className="flex-1 flex flex-col">
+        {/* Nombre y especie */}
+        <div>
+          <Text size="xl" fw={700} c="#1a1a1a" className={`line-clamp-1 font-extrabold! ${montserrat.className}`}>
+            {name}
+          </Text>
+          <Text size="sm" c="dimmed" className="line-clamp-1">
+            {specie ? specie.name : 'Especie desconocida'} • {breedName}
+          </Text>
         </div>
-      </div>
-    </Link>
+
+        {/* Descripción */}
+        <Text size="sm" c="#4a4a4a" className="line-clamp-2 grow">
+          {description}
+        </Text>
+
+        {/* Badges de información */}
+        <Group gap="xs">
+          {gender && (
+            <Badge size="sm" variant="light" radius="sm">
+              {gender.value === 'MACHO' ? '♂️ Macho' : gender.value === 'HEMBRA' ? '♀️ Hembra' : gender.value}
+            </Badge>
+          )}
+          {size && (
+            <Badge size="sm" variant="light" radius="sm" color={getSizeColor(size.value)}>
+              {size.value}
+            </Badge>
+          )}
+        </Group>
+
+        {/* Stats */}
+        <Group gap="md" mt="xs">
+          {age !== undefined && (
+            <Flex align="center" gap={4} className="text-xs">
+              <Calendar size={14} className="text-blue-500" />
+              <Text size="xs">{age} años</Text>
+            </Flex>
+          )}
+          {weightKg && (
+            <Flex align="center" gap={4} className="text-xs">
+              <Weight size={14} className="text-red-500" />
+              <Text size="xs">{weightKg} kg</Text>
+            </Flex>
+          )}
+        </Group>
+
+        {/* Vacunas y esterilización */}
+        {(isVaccinated || isSterilized) && (
+          <Group gap="xs" mt="xs">
+            {isVaccinated && (
+              <Tooltip label="Completamente vacunado">
+                <ThemeIcon size="sm" radius="md" variant="light" color="green">
+                  <Syringe size={14} />
+                </ThemeIcon>
+              </Tooltip>
+            )}
+            {isSterilized && (
+              <Tooltip label="Esterilizado">
+                <ThemeIcon size="sm" radius="md" variant="light" color="blue">
+                  <Sparkles size={14} />
+                </ThemeIcon>
+              </Tooltip>
+            )}
+          </Group>
+        )}
+      </Stack>
+
+      {/* Botón de acción */}
+      <Group grow p="md" gap="xs" className="border-t border-gray-100 flex! flex-row!">
+        <Link
+          href={`/mascotas/${slug}`}
+          className="px-4 py-2 bg-linear-to-r from-primary to-red-700 text-white text-center rounded-md font-semibold hover:shadow-lg transition-shadow text-sm"
+        >
+          Ver Detalles
+        </Link>
+
+        <Link href={`/mascotas/${slug}#apadrinar`}
+          className='px-4 py-2 bg-linear-to-r from-terciary to-yellow-500 text-center text-white rounded-md font-semibold hover:shadow-lg transition-shadow text-sm'
+        >
+          Apadrinar
+        </Link>
+
+      </Group>
+    </Card>
   )
 }

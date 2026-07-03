@@ -1,4 +1,4 @@
-import NosotrosPage from "@/components/pages/web/aboiut-page";
+import NosotrosPage from "@/_pages/web/aboiut-page";
 import { Suspense } from "react";
 
 

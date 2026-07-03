@@ -1,7 +1,7 @@
 
 import Title from "../../atoms/title";
 import Button from "../../atoms/button/button";
-import { PetCardItem } from "../../atoms/card/pet-card-item";
+import { PetCard } from "../../atoms/card/pet-card-item";
 import { usePetSearch } from "@/core/application/hooks/pet/usePetSearch";
 import Container from "@/components/atoms/container";
 
@@ -24,7 +24,7 @@ export default function PetsSection() {
           {filteredPets.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {filteredPets.map((pet) => (
-                <PetCardItem key={pet.id} pet={pet} />
+                <PetCard key={pet.id} {...pet} />
               ))}
             </div>
           ) : (

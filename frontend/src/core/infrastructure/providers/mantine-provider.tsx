@@ -24,11 +24,6 @@ const theme = createTheme({
         label: 'autocomplete-label'
       }
     }),
-    Button: Button.extend({
-      classNames: {
-        root: "button-primary",
-      }
-    }),
     TextInput: TextInput.extend({
       classNames: {
         input: "text-input",

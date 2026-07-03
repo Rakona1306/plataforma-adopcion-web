@@ -3,4 +3,5 @@ export interface Paginate<T> {
   totalCount: number;
   page: number
   pageSize: number
+  totalPages: number
 }

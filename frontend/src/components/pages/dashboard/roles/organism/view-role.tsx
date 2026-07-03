@@ -1,4 +1,5 @@
-import { Role } from "@/core/domain/models/organization/role";
+
+import { Role } from "@/features/organization/role/model/role.model";
 import { Badge, Grid } from "@mantine/core";
 
 interface ViewRoleProps {

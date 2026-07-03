@@ -12,12 +12,12 @@ import { RowAction } from "@/app/dashboard/_components/molecules/table-actions";
 import { BiEditAlt, BiTrash } from "react-icons/bi";
 import { FilterItemConfig } from "@/app/dashboard/_interfaces/ui/filters";
 import FilterBar from "@/app/dashboard/_components/organism/filter-bar";
-import { useGetAllRoles } from "@/core/application/features/organization/roles/hooks/useGetAllRoles";
-import { Role } from "@/core/domain/models/organization/role";
-import { useDeleteRole } from "@/core/application/features/organization/roles/hooks/useDeleteRole";
 import { BsViewList } from "react-icons/bs";
 import { useModal } from "@/core/application/hooks/ui/useModal";
 import { UpdateRoleForm, ViewRole } from "./organism";
+import { Role } from "@/features/organization/role/model/role.model";
+import { useGetAllRoles } from "@/features/organization/role/hooks/useGetAllRoles";
+import { useDeleteRole } from "@/features/organization/role/hooks/useDeleteRole";
 
 export default function RolesPage() {
   const { actionsRoles } = useActionsRole();
@@ -28,6 +28,7 @@ export default function RolesPage() {
   const columns: TableColumn<Role>[] = [
     { key: "name", label: "Nombre" },
     { key: "description", label: "Descripcion" },
+    { key: 'usersCount', label: 'Usuarios Asignados' },
     { key: "createdAt", label: "Creado en", render: (row) => new Date(row.createdAt).toLocaleDateString() },
   ];
 
@@ -50,7 +51,7 @@ export default function RolesPage() {
         handleOpenModal?.({
           header: `Ver rol - #${user.id}`,
           content: <ViewRole role={user} />,
-        }) 
+        })
       },
     },
     {

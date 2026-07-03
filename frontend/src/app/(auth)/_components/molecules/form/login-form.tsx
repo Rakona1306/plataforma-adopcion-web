@@ -9,17 +9,19 @@ import FormContainer, {
 } from "@/components/molecules/form-container";
 import Input from "@/components/atoms/input";
 import { LoginDto } from "@/core/application/features/system/auth/dtos/login.dto";
-import { useAuth } from "@/core/application/features/system/auth/hooks/useAuth";
+// import { useAuth } from "@/core/application/features/system/auth/hooks/useAuth";
+
 import { getFieldError } from "@/core/shared/helpers/getFieldError";
 import {
   containerVariants,
   itemVariants,
 } from "@/core/shared/helpers/variants";
 import { Alert } from "@/components/atoms/alert";
+import { useLogin } from "@/features/system/auth/hooks/useLogin";
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const { login, isLoading, error } = useAuth();
+  const { login, isLoading, error } = useLogin();
 
   const handleSubmit: FormContainerFormikSubmit<LoginDto> = async (values) => {
     login(values);

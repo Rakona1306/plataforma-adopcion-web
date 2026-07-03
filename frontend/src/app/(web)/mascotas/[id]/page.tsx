@@ -1,6 +1,6 @@
 "use server"
 
-import PetDeatilPage from "@/components/pages/web/mascotas/pdp-page"
+import { PetDeatilPage } from "@/_pages/web/mascotas/pdp-page"
 
 
 export default async function Page({
@@ -11,11 +11,9 @@ export default async function Page({
 
   const { id } = await params
 
-  const petId = id
-
   return (
     <div className="pt-20 bg-gray-100">
-      <PetDeatilPage petId={petId} />
+      <PetDeatilPage slug={id} />
     </div>
   )
 }

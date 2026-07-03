@@ -5,7 +5,7 @@ import { PetVaccineFilterDto } from "../dto/pet-vaccine-filter.dto";
 import { useQuery } from "@tanstack/react-query";
 import { petVaccineService } from "../services/pet-vaccine.service";
 import { useRouter } from "next/navigation";
-import { QUERYKEYS } from "@/shared/constants/queryKeys";
+import { QUERY_KEYS } from "@/shared/constants/queryKeys";
 
 interface Props {
     page?: number
@@ -23,7 +23,7 @@ export function useGetAllPetVaccine({ page, pageSize, petId }: Props) {
     });
 
     const query = useQuery({
-        queryKey: [QUERYKEYS.SHELTER.PET_VACCINE, filter.page, filter.petId, filter.pageSize],
+        queryKey: [QUERY_KEYS.SHELTER.PET_VACCINE, filter.page, filter.petId, filter.pageSize],
 
         queryFn: () => petVaccineService.getAll(filter),
 

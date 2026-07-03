@@ -1,4 +1,4 @@
-import VolunteerPage from "@/components/pages/web/volunteer-page";
+import VolunteerPage from "@/_pages/web/volunteer-page";
 
 
 export default function Page() {

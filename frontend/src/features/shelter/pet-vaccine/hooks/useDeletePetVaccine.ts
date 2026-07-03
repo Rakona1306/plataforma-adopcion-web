@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { petVaccineService } from "../services/pet-vaccine.service";
 import Swal from "sweetalert2";
-import { QUERYKEYS } from "@/shared/constants/queryKeys";
+import { QUERY_KEYS } from "@/shared/constants/queryKeys";
 
 export default function useDeletePetVaccine() {
 
@@ -14,7 +14,7 @@ export default function useDeletePetVaccine() {
 
         onSuccess: () => {
             queryClient.invalidateQueries({
-                queryKey: [QUERYKEYS.SHELTER.PET_VACCINE],
+                queryKey: [QUERY_KEYS.SHELTER.PET_VACCINE],
             });
 
             Swal.fire({
