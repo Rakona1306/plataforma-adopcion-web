@@ -1,4 +1,4 @@
-import DonationsPage from "@/components/pages/web/donation-page";
+import DonationsPage from "@/_pages/web/donation-page";
 
 
 export default function Page() {

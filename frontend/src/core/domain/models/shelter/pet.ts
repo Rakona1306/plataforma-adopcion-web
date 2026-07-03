@@ -14,6 +14,7 @@ export interface Pet {
   birthDate: Date;
   weightKg: number;
   isSterilized: boolean;
+  isRecommend: boolean;
   gender: PetGenders;
   size: PetSizes;
   status: PetStatus;

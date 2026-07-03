@@ -43,6 +43,7 @@ export default function CreatePetPageNext() {
     weightKg: 0,
     isVaccinated: false,
     isSterilized: false,
+    isRecommend: false,
     gender: 1,
     size: 1,
     status: 1,
@@ -198,6 +199,12 @@ export default function CreatePetPageNext() {
                     subtitle="¿Ha sido esterilizado/castrado?"
                     value={values.isSterilized}
                     onChange={(v) => setFieldValue("isSterilized", v)}
+                  />
+                  <ToggleField
+                    label="Recomendable para adopción"
+                    subtitle="¿Es recomendable para adopción?"
+                    value={values.isRecommend}
+                    onChange={(v) => setFieldValue("isRecommend", v)}
                   />
                 </div>
               </FormSection>

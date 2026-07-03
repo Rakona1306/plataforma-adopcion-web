@@ -3,13 +3,15 @@
 import { useQuery } from "@tanstack/react-query";
 import { useSessionStore } from "@/core/infrastructure/store/useSessionStore";
 import { authService } from "../services/auth.service";
-import { QUERYKEYS } from "@/shared/constants/queryKeys";
+import { QUERY_KEYS } from "@/shared/constants/queryKeys";
+import { useRouter } from "next/navigation";
 
 export const useProfile = () => {
     const { setUser } = useSessionStore();
+    const router = useRouter()
 
     const { data: profile, isLoading, error, isRefetching, refetch, isFetching } = useQuery({
-        queryKey: [QUERYKEYS.SYSTEM.AUTH],
+        queryKey: [QUERY_KEYS.SYSTEM.AUTH],
         queryFn: async () => {
             const data = await authService.profile();
             // 2. Sincronizamos con Zustand inmediatamente al recibir los datos con éxito
@@ -18,8 +20,20 @@ export const useProfile = () => {
         },
         retry: false,
         refetchOnWindowFocus: false,
-        // Opcional: Si quieres que no pida el perfil constantemente si ya existe en el caché
-        staleTime: 1000 * 60 * 5, // 5 minutos
+        /*
+        throwOnError: (error: any) => {
+            
+            if (
+                error?.response?.status === 401 ||
+                error?.status === 401
+            ) {
+                router.push("/login");
+                return false;
+            }
+            
+            return true;
+        },
+        */
     });
 
 

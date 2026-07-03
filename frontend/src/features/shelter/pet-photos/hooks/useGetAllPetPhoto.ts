@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { PetPhotoFilter } from "../dto/pet-photo-filter.dto";
 import { petPhotosService } from "../services/pet-photos.service";
+import { QUERY_KEYS } from "@/shared/constants/queryKeys";
 
 
 export function useGetAllPetPhoto(initialPetId?: string) {
@@ -18,7 +19,7 @@ export function useGetAllPetPhoto(initialPetId?: string) {
   });
 
   const query = useQuery({
-    queryKey: ["pet-photos", filter],
+    queryKey: [QUERY_KEYS.SHELTER.PET_PHOTO, filter],
 
     queryFn: () =>
       petPhotosService.getAll(filter),

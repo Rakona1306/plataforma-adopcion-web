@@ -1,12 +1,13 @@
 "use client"
 
-import { useAuth } from "@/core/application/features/system/auth/hooks/useAuth"
+import { useLogout } from "@/features/system/auth/hooks/useLogout"
+// import { useAuth } from "@/core/application/features/system/auth/hooks/useAuth"
 import { useRouter } from "next/navigation"
 
 export const useMenuRedirects = () => {
 
   const router = useRouter()
-  const { logout } = useAuth()
+  const { logout } = useLogout()
 
   const onMyInfo = () => {
     router.push("/account/profile")

@@ -13,7 +13,6 @@ public partial class RequestMapper
 
     [MapProperty(nameof(Request.User.Name), nameof(RequestResponse.UserName))]
     [MapProperty(nameof(Request.Pet.Name), nameof(RequestResponse.PetName))]
-    [MapProperty(nameof(Request.VolunteerArea.Name), nameof(RequestResponse.VolunteerAreaName))]
     [MapProperty(nameof(Request.Reviewer.Name), nameof(RequestResponse.ReviewerName))]
     public partial RequestResponse ToResponse(Request entity);
 

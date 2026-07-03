@@ -7,7 +7,7 @@ import { useState } from "react";
 import { petVaccineService } from "../services/pet-vaccine.service";
 import { PetVaccineUpdateDto } from "../dto/pet-vaccine-update.dto";
 import Swal from "sweetalert2";
-import { QUERYKEYS } from "@/shared/constants/queryKeys";
+import { QUERY_KEYS } from "@/shared/constants/queryKeys";
 
 export default function useUpdatePetVaccineService() {
     const queryClient = useQueryClient();
@@ -30,7 +30,7 @@ export default function useUpdatePetVaccineService() {
 
         onSuccess: () => {
             queryClient.invalidateQueries({
-                queryKey: [QUERYKEYS.SHELTER.PET_VACCINE],
+                queryKey: [QUERY_KEYS.SHELTER.PET_VACCINE],
             });
 
             handleCloseModal?.();

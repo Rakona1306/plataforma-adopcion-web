@@ -8,18 +8,23 @@ namespace API.Infrastructure.Db.Builders.Shelter
     {
         public void Configure(EntityTypeBuilder<PetVaccine> builder)
         {
-            // Al heredar de BaseModel, tiene su propia Id PK única. Una mascota puede recibir la misma vacuna en distintas fechas.
             builder.HasKey(pv => pv.Id);
 
+            // Relación con Pet - EXPLÍCITA
             builder.HasOne(pv => pv.Pet)
-                   .WithMany() // Si no definiste colección en Pet, se deja vacío
-                   .HasForeignKey(pv => pv.PetId);
+                   .WithMany(p => p.PetVaccines)
+                   .HasForeignKey(pv => pv.PetId)
+                   .OnDelete(DeleteBehavior.Cascade);
 
+            // Relación con Vaccine
             builder.HasOne(pv => pv.Vaccine)
                    .WithMany()
-                   .HasForeignKey(pv => pv.VaccineId);
+                   .HasForeignKey(pv => pv.VaccineId)
+                   .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Property(pv => pv.AppliedDate).IsRequired();
+            // Índices para mejorar rendimiento
+            builder.HasIndex(pv => pv.PetId);
+            builder.HasIndex(pv => pv.VaccineId);
         }
     }
 }

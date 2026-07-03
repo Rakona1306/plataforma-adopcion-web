@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "qV0d+0fTPR4=",
+  "dgSpecHash": "NHwLolktxeg=",
   "success": true,
   "projectFilePath": "/home/jccasas/proyectos-personales/plataforma-adopcion-web/backend/API/API.csproj",
   "expectedPackageFiles": [
@@ -45,7 +45,7 @@
     "/home/jccasas/.nuget/packages/npgsql.entityframeworkcore.postgresql/10.0.1/npgsql.entityframeworkcore.postgresql.10.0.1.nupkg.sha512",
     "/home/jccasas/.nuget/packages/postgrest-csharp/3.5.1/postgrest-csharp.3.5.1.nupkg.sha512",
     "/home/jccasas/.nuget/packages/realtime-csharp/6.0.4/realtime-csharp.6.0.4.nupkg.sha512",
-    "/home/jccasas/.nuget/packages/resend/0.5.0/resend.0.5.0.nupkg.sha512",
+    "/home/jccasas/.nuget/packages/resend/0.5.1/resend.0.5.1.nupkg.sha512",
     "/home/jccasas/.nuget/packages/riok.mapperly/4.3.1/riok.mapperly.4.3.1.nupkg.sha512",
     "/home/jccasas/.nuget/packages/supabase-core/0.0.3/supabase-core.0.0.3.nupkg.sha512",
     "/home/jccasas/.nuget/packages/supabase-csharp/0.16.2/supabase-csharp.0.16.2.nupkg.sha512",
@@ -65,5 +65,18 @@
     "/home/jccasas/.nuget/packages/system.reactive/5.0.0/system.reactive.5.0.0.nupkg.sha512",
     "/home/jccasas/.nuget/packages/websocket.client/4.6.1/websocket.client.4.6.1.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "message": "Package 'Microsoft.OpenApi' 2.4.1 has a known high severity vulnerability, https://github.com/advisories/GHSA-v5pm-xwqc-g5wc",
+      "projectPath": "/home/jccasas/proyectos-personales/plataforma-adopcion-web/backend/API/API.csproj",
+      "warningLevel": 1,
+      "filePath": "/home/jccasas/proyectos-personales/plataforma-adopcion-web/backend/API/API.csproj",
+      "libraryId": "Microsoft.OpenApi",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    }
+  ]
 }

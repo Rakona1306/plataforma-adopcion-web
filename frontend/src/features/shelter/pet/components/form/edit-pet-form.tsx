@@ -23,6 +23,7 @@ import { ToggleField } from "@/components/atoms/toggle-field";
 import { TraitsPicker } from "@/components/atoms/trait-picker";
 import Textarea from "@/components/atoms/text-area";
 import { Button } from "@mantine/core";
+import { formatDateForInput } from "@/shared/utils/date/formatDate";
 
 export function EditPetFormPage({ id }: { id: string }) {
 
@@ -61,11 +62,12 @@ function EditPetForm({ pet, id }: { pet?: Pet, id: string }) {
     size: pet?.size.key || 1,
     status: pet?.status.key || 1,
     speciesId: pet?.speciesId || "",
-    breeds: {
+    isRecommend: pet?.isRecommend || false,
+    breedIds: {
       addIds: [],
       removeIds: [],
     },
-    traits: {
+    traitIds: {
       addIds: [],
       removeIds: [],
     },
@@ -113,6 +115,7 @@ function EditPetForm({ pet, id }: { pet?: Pet, id: string }) {
                     label="Nombre"
                     placeholder="Ej: Luna, Max, Milo..."
                     required
+                    defaultValue={pet?.name}
                   />
                   <Input
                     name="age"
@@ -120,6 +123,7 @@ function EditPetForm({ pet, id }: { pet?: Pet, id: string }) {
                     type="number"
                     placeholder="Ej: 2, 5, 10..."
                     required
+                    defaultValue={pet?.age}
                   />
                 </div>
 
@@ -194,6 +198,7 @@ function EditPetForm({ pet, id }: { pet?: Pet, id: string }) {
                     label="Fecha de nacimiento"
                     type="date"
                     required
+                    defaultValue={formatDateForInput(pet?.birthDate)}
                   />
                   <Input
                     name="weightKg"
@@ -201,6 +206,7 @@ function EditPetForm({ pet, id }: { pet?: Pet, id: string }) {
                     type="number"
                     placeholder="Ej: 4.5"
                     required
+                    defaultValue={pet?.weightKg}
                   />
                 </div>
 
@@ -216,6 +222,12 @@ function EditPetForm({ pet, id }: { pet?: Pet, id: string }) {
                     subtitle="¿Ha sido esterilizado/castrado?"
                     value={values.isSterilized}
                     onChange={(v) => setFieldValue("isSterilized", v)}
+                  />
+                  <ToggleField
+                    label="Recomendable para adopción"
+                    subtitle="¿Es recomendable para adopción?"
+                    value={values.isRecommend}
+                    onChange={(v) => setFieldValue("isRecommend", v)}
                   />
                 </div>
               </FormSection>

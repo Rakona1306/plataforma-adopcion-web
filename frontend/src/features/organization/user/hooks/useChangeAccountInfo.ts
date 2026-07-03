@@ -7,7 +7,7 @@ import { useLogout } from "@/features/system/auth/hooks/useLogout"; // Tu hook d
 import Swal from "sweetalert2";
 import { userService } from "../services/user.service";
 import { useRouter } from "next/navigation";
-import { QUERYKEYS } from "@/shared/constants/queryKeys";
+import { QUERY_KEYS } from "@/shared/constants/queryKeys";
 import { useModal } from "@/core/application/hooks/ui/useModal";
 
 // Definimos la interfaz para el parámetro único de la mutación
@@ -36,7 +36,7 @@ export default function useChangeAccountInfo() {
                 showConfirmButton: true,
             });
 
-            queryClient.invalidateQueries({ queryKey: [QUERYKEYS.SYSTEM.AUTH] });
+            queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.SYSTEM.AUTH] });
 
             handleCloseModal?.()
         },

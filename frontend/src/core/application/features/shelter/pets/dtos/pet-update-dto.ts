@@ -23,6 +23,9 @@ export const petUpdateSchema = Yup.object({
   isVaccinated: Yup.boolean()
     .required("Debe indicar si está vacunado"),
 
+  isRecommend: Yup.boolean()
+    .required("Debe indicar si es recomendable para adopción"),
+
   isSterilized: Yup.boolean()
     .required("Debe indicar si está esterilizado"),
 
@@ -50,7 +53,7 @@ export const petUpdateSchema = Yup.object({
     .uuid("La especie seleccionada es inválida")
     .required("La especie es requerida"),
 
-  breeds: Yup.object({
+  breedIds: Yup.object({
     addIds: Yup.array()
       .of(Yup.string().uuid("Raza inválida").required())
       .default([]),
@@ -60,7 +63,7 @@ export const petUpdateSchema = Yup.object({
       .default([]),
   }).required(),
 
-  traits: Yup.object({
+  traitIds: Yup.object({
     addIds: Yup.array()
       .of(Yup.string().uuid("Característica inválida").required())
       .default([]),

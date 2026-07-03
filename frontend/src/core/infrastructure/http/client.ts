@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import 'client-only';
 
 import { API_CONFIG } from "@/core/shared/constants";
 import { LOCAL_STORAGE } from "@/core/shared/constants/local-storage";
@@ -67,6 +68,7 @@ class HttpClient {
     try {
       const response = await fetch(url, {
         ...options,
+        cache: "no-store",
 
         signal: controller.signal,
 

@@ -1,4 +1,4 @@
-import PetListPage from "@/components/pages/web/mascotas/plp-page";
+import PetListPage from "@/_pages/web/mascotas/plp-page";
 
 
 export default function Page() {

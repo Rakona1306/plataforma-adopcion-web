@@ -2,12 +2,19 @@
  * API Endpoints
  */
 export const API_ENDPOINTS = {
+  SHELTER: {
+    SPECIE: {
+      PUBLIC_GET_ALL: '/v1/species'
+    }
+  },
   // Auth
   AUTH: {
     LOGIN: '/auth/login',
     LOGOUT: '/auth/logout',
     REGISTER: '/auth/register',
     PROFILE: '/auth/profile',
+    CONFIRM_EMAIL: '/auth/verify-email',
+    CREATE_USER: '/auth/complete-registration'
   },
   // Usuarios
   USERS: {

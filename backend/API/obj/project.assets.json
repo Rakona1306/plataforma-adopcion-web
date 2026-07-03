@@ -854,7 +854,7 @@
           }
         }
       },
-      "Resend/0.5.0": {
+      "Resend/0.5.1": {
         "type": "package",
         "compile": {
           "lib/net8.0/Resend.dll": {
@@ -3149,10 +3149,10 @@
         "realtime-csharp.nuspec"
       ]
     },
-    "Resend/0.5.0": {
-      "sha512": "PL2tr3wbKHkkKj+I4tK3aDWrP2Unqntbzr0U7A8MzeiZk796Upp1xAg94YPyvkODp/KWezPXS57simSwyGp6QA==",
+    "Resend/0.5.1": {
+      "sha512": "omjgTjmosGHJ+bF9Mnk6Gu4TqCwIE/XyeYvQCfkPlDmoUE5yuNwxUP5Cyt9Og2KTqTzKqfQypFzlgCgORCEOSw==",
       "type": "package",
-      "path": "resend/0.5.0",
+      "path": "resend/0.5.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3160,7 +3160,7 @@
         "icon.png",
         "lib/net8.0/Resend.dll",
         "lib/net8.0/Resend.xml",
-        "resend.0.5.0.nupkg.sha512",
+        "resend.0.5.1.nupkg.sha512",
         "resend.nuspec"
       ]
     },
@@ -3589,7 +3589,7 @@
       "Microsoft.EntityFrameworkCore >= 10.0.7",
       "Microsoft.EntityFrameworkCore.Design >= 10.0.7",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 10.0.1",
-      "Resend >= 0.5.0",
+      "Resend >= 0.5.1",
       "Riok.Mapperly >= 4.3.1",
       "Swashbuckle.AspNetCore >= 10.1.7",
       "supabase-csharp >= 0.16.2"
@@ -3687,7 +3687,7 @@
           },
           "Resend": {
             "target": "Package",
-            "version": "[0.5.0, )"
+            "version": "[0.5.1, )"
           },
           "Riok.Mapperly": {
             "target": "Package",
@@ -4138,5 +4138,17 @@
         }
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.OpenApi' 2.4.1 has a known high severity vulnerability, https://github.com/advisories/GHSA-v5pm-xwqc-g5wc",
+      "libraryId": "Microsoft.OpenApi",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    }
+  ]
 }

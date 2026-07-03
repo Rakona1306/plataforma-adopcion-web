@@ -6,7 +6,7 @@ import { PetVaccineCreateDto } from "../dto/pet-vaccine-create.dto";
 import { petVaccineService } from "../services/pet-vaccine.service";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
-import { QUERYKEYS } from "@/shared/constants/queryKeys";
+import { QUERY_KEYS } from "@/shared/constants/queryKeys";
 
 export default function useCreatePetVaccine() {
     const queryClient = useQueryClient();
@@ -23,7 +23,7 @@ export default function useCreatePetVaccine() {
 
         onSuccess: () => {
             queryClient.invalidateQueries({
-                queryKey: [QUERYKEYS.SHELTER.PET_VACCINE],
+                queryKey: [QUERY_KEYS.SHELTER.PET_VACCINE],
             });
 
             Swal.fire({

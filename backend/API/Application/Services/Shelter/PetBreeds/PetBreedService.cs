@@ -218,7 +218,7 @@ namespace API.Application.Services.Shelter.PetBreedes
 
             var oldValues = new
             {
-                entity.Percentage
+
             };
 
             _mapper.Update(dto, entity);

@@ -1,7 +1,9 @@
-﻿using API.Application.Features.System.Auths.Dtos;
+﻿using API.Application.Common.Services;
+using API.Application.Features.System.Auths.Dtos;
 using API.Application.Features.System.Auths.Mappers;
 using API.Domain.Model;
 using API.Domain.Model.Organization;
+using API.Domain.Model.System;
 using API.Domain.Repository.Organization;
 using API.Domain.Repository.System;
 using API.Infrastructure.Exceptions;
@@ -19,6 +21,8 @@ namespace API.Application.Services.System.Auths
         private readonly IAuthRepository _repository;
         private readonly IUserRepository _userRepository;
         private readonly IRoleRepository _roleRepository;
+        private readonly IEmailService _emailService;
+        private readonly IEmailVerificationRepository _emailVerificationRepository;
         private readonly JwtOptions _jwtOptions;
         private readonly AuthMapper _mapper;
 
@@ -26,17 +30,21 @@ namespace API.Application.Services.System.Auths
             IAuthRepository repository,
             IUserRepository userRepository,
             IOptions<JwtOptions> jwtOptions,
-            IRoleRepository roleRepository
+            IRoleRepository roleRepository,
+            IEmailService emailService,
+            IEmailVerificationRepository emailVerificationRepository
         )
         {
             _mapper = new AuthMapper();
             _repository = repository;
             _userRepository = userRepository;
             _roleRepository = roleRepository;
+            _emailService = emailService;
+            _emailVerificationRepository = emailVerificationRepository;
             _jwtOptions = jwtOptions.Value;
         }
 
-        public async Task<AuthResponse> RegisterAsync(CreateAccountDto request)
+        public async Task<RegisterResponse> RegisterAsync(CreateAccountDto request)
         {
             request.Email = request.Email
                 .Trim()
@@ -50,30 +58,74 @@ namespace API.Application.Services.System.Auths
 
             if (exists)
             {
-                throw new Exception(
+                throw new BadRequestException(
                     "El email ya tiene cuenta"
                 );
             }
 
-            Role role = await _roleRepository.SearchRoleByName("USUARIOS");
-            User user = _mapper.ToEntity(request);
-            user.RoleId = role.Id;
-            var hash = _repository.HashPassword(request.Password);
-            user.Password = hash;
+            await _emailVerificationRepository.DeleteByEmailAsync(request.Email);
 
-            Console.WriteLine(hash);
+            // Generar código de 6 dígitos
+            string verificationCode = GenerateVerificationCode();
 
-            User userCreated = await _userRepository
-                .CreateAsync(user, null);
+            // Crear registro de verificación
+            var emailVerification = new EmailVerification
+            {
+                Email = request.Email,
+                VerificationCode = verificationCode,
+                ExpiresAt = DateTime.UtcNow.AddMinutes(15),
+                IsVerified = false,
+                Attempts = 0
+            };
 
-            var userMapped = _mapper.ToResponse(userCreated);
-            var expiresAtUtc = DateTime.UtcNow.AddMinutes(_jwtOptions.ExpirationMinutes);
-            var token = GenerateToken(user, expiresAtUtc);
+            // Guardar en base de datos
+            await _emailVerificationRepository.CreateAsync(emailVerification);
+
+            // Enviar email con código
+            await _emailService.SendVerificationCodeAsync(request.Email, verificationCode);
+            Console.WriteLine($"Código generado para {request.Email}: {verificationCode}");
+
+            return new RegisterResponse
+            {
+                Message = "Código de verificación enviado a tu email. Por favor verifica tu correo.",
+                Email = request.Email
+            };
+        }
+
+        public async Task<AuthResponse> ConfirmEmailAsync(ConfirmEmailDto request)
+        {
+            request.Email = request.Email.Trim().ToLower();
+
+            // Obtener la verificación de email
+            var emailVerification = await _emailVerificationRepository.GetByEmailAsync(request.Email);
+
+            if (emailVerification == null)
+            {
+                throw new BadRequestException("Email no encontrado o código expirado.");
+            }
+
+            // Validar el código
+            if (emailVerification.VerificationCode != request.Code)
+            {
+                emailVerification.Attempts++;
+
+                if (emailVerification.Attempts >= 5)
+                {
+                    await _emailVerificationRepository.DeleteAsync(emailVerification.Id);
+                    throw new BadRequestException("Demasiados intentos. Por favor intenta registrarte nuevamente.");
+                }
+
+                await _emailVerificationRepository.UpdateAsync(emailVerification);
+                throw new BadRequestException("Código de verificación inválido.");
+            }
+
+            // Marcar como verificado
+            emailVerification.IsVerified = true;
+            await _emailVerificationRepository.UpdateAsync(emailVerification);
 
             return new AuthResponse
             {
-                Token = token,
-                User = userMapped
+                Token = "",
             };
         }
 
@@ -141,6 +193,12 @@ namespace API.Application.Services.System.Auths
         public Task LogoutAsync()
         {
             return Task.CompletedTask;
+        }
+
+        private string GenerateVerificationCode()
+        {
+            Random random = new Random();
+            return random.Next(100000, 999999).ToString();
         }
 
         private string GenerateToken(
@@ -220,6 +278,59 @@ namespace API.Application.Services.System.Auths
 
             return new JwtSecurityTokenHandler()
                 .WriteToken(token);
+        }
+
+        public async Task<AuthResponse> CompleteRegistrationAsync(CreateAccountDto request)
+        {
+            request.Email = request.Email.Trim().ToLower();
+
+            // Validar que el email esté verificado
+            var emailVerification = await _emailVerificationRepository.GetByEmailVerifiedAsync(request.Email, request.Code);
+            Console.WriteLine($"Email verification for {request.Email}: {emailVerification?.IsVerified}");
+
+            if (emailVerification == null || !emailVerification.IsVerified)
+            {
+                throw new BadRequestException("El email debe estar verificado antes de completar el registro.");
+            }
+
+            // Buscar el rol "USUARIOS"
+            var role = await _roleRepository.SearchRoleByName("USUARIOS");
+            if (role == null)
+            {
+                throw new BadRequestException("El rol 'USUARIOS' no ha sido encontrado en el sistema.");
+            }
+
+            // Crear el usuario
+            string hashedPassword = _repository.HashPassword(request.Password);
+
+            var user = new User
+            {
+                Id = Guid.NewGuid(),
+                Email = request.Email,
+                Name = request.Name,
+                LastName = request.LastName,
+                Password = hashedPassword,
+                RoleId = role.Id,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            await _userRepository.CreateAsync(user, null);
+
+            // Eliminar registro de verificación
+            await _emailVerificationRepository.DeleteAsync(emailVerification.Id);
+
+            // Generar token
+            var expiresAtUtc = DateTime.UtcNow.AddMinutes(_jwtOptions.ExpirationMinutes);
+            var token = GenerateToken(user, expiresAtUtc);
+            var userResponse = _mapper.ToResponse(user);
+
+            userResponse.ToDashboard = role.ToDashboard;
+
+            return new AuthResponse
+            {
+                Token = token,
+                User = userResponse
+            };
         }
     }
 }

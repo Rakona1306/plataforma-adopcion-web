@@ -31,16 +31,69 @@ namespace API.Presentation.Controllers.System
                     request
                 );
 
-                SetAuthCookie(result.Token);
-
-                return Ok(result.User);
+                return Ok(result);
             }
-            catch (NotAuthorizedException ex)
+            catch (BadRequestException ex)
             {
-                return Unauthorized(new
+                return BadRequest(new
                 {
                     message = ex.Message
                 });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return StatusCode(500, new
+                {
+                    message = "Error interno del servidor."
+                });
+            }
+        }
+
+        [HttpPost("verify-email")]
+        public async Task<IActionResult> VerifyEmail(
+            [FromBody] ConfirmEmailDto request
+        )
+        {
+            try
+            {
+                var result = await _service.ConfirmEmailAsync(request);
+
+                return Ok(new
+                {
+                    message = "Email verificado exitosamente.",
+                    email = request.Email
+                });
+            }
+            catch (BadRequestException ex)
+            {
+                return BadRequest(new
+                {
+                    message = ex.Message
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return StatusCode(500, new
+                {
+                    message = "Error interno del servidor."
+                });
+            }
+        }
+
+        [HttpPost("complete-registration")]
+        public async Task<IActionResult> CompleteRegistration(
+            [FromBody] CreateAccountDto request
+        )
+        {
+            try
+            {
+                var result = await _service.CompleteRegistrationAsync(request);
+
+                SetAuthCookie(result.Token);
+
+                return Ok(result);
             }
             catch (BadRequestException ex)
             {
@@ -128,6 +181,9 @@ namespace API.Presentation.Controllers.System
             string token
         )
         {
+            if (string.IsNullOrEmpty(token))
+                return;
+
             Response.Cookies.Append(
                 "access_token",
                 token,
@@ -148,3 +204,4 @@ namespace API.Presentation.Controllers.System
         }
     }
 }
+

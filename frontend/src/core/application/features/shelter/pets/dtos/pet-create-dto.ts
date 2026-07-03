@@ -23,6 +23,9 @@ export const petCreateSchema = Yup.object({
   isVaccinated: Yup.boolean()
     .required("Debe indicar si está vacunado"),
 
+  isRecommend: Yup.boolean()
+    .required("Debe indicar si es recomendable para adopción"),
+
   isSterilized: Yup.boolean()
     .required("Debe indicar si está esterilizado"),
 

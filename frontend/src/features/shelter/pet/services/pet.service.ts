@@ -33,7 +33,11 @@ class PetService implements IPetService {
     params.append('page', filter.page.toString())
     params.append('pageSize', filter.pageSize.toString())
 
-    return this.httpClient.get(`pets?${params.toString()}`);
+    if (filter.size) {
+      params.append('size', filter.size.toString())
+    }
+
+    return this.httpClient.get(`/pets?${params.toString()}`);
   }
 
   updatePet(id: string, pet: PetUpdateDto): Promise<void> {

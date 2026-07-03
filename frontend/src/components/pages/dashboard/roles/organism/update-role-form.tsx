@@ -6,10 +6,10 @@ import {
   RoleUpdateDto,
   RoleUpdateSchema,
 } from "@/core/application/features/organization/roles/dtos/role-update-dto";
-import { Role } from "@/core/domain/models/organization/role";
 import { PermissionConditional } from "../molecules/permission-conditional";
 import { Button } from "@mantine/core";
 import { useUpdateRole } from "@/core/application/features/organization/roles/hooks/useUpdateRole";
+import { Role } from "@/features/organization/role/model/role.model";
 
 interface UpdateRoleFormProps {
   role: Role;

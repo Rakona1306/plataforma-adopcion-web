@@ -50,13 +50,21 @@ namespace API.Infrastructure.Middlewares
                     ex.Message
                 );
             }
+            catch (AlreadyExistException ex)
+            {
+                await HandleExceptionAsync(
+                    context,
+                    HttpStatusCode.BadRequest,
+                    ex.Message
+                );
+            }
             catch (Exception e)
             {
                 Console.WriteLine(e);
                 await HandleExceptionAsync(
                     context,
                     HttpStatusCode.InternalServerError,
-                    "Error interno del servidor."
+                    e.Message ?? "Error interno del servidor."
                 );
             }
         }

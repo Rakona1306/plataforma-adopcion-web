@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useTokenStore } from "@/core/application/hooks/session/useToken";
 import { useSessionStore } from "@/core/infrastructure/store/useSessionStore";
 import { authService } from "../services/auth.service";
+import { QUERY_KEYS } from "@/shared/constants/queryKeys";
 
 export const useLogout = () => {
     const router = useRouter();
@@ -17,9 +18,12 @@ export const useLogout = () => {
         mutationFn: () => authService.logout(),
 
         onSettled: () => {
+            router.replace("/login");
             clearSession();
             queryClient.clear();
-            router.replace("/login");
+            queryClient.invalidateQueries({
+                queryKey: [QUERY_KEYS.SYSTEM.AUTH]
+            })
             setToken(null)
         }
     });

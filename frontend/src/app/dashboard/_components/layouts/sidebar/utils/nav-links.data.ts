@@ -52,10 +52,6 @@ export const navLinks: NavLink[] = [
         href: '/dashboard/razas'
       },
       {
-        name: 'Historial Medico',
-        href: '/dashboard/historial-medico'
-      },
-      {
         name: "Especies",
         href: '/dashboard/especies'
       },

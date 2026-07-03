@@ -15,7 +15,11 @@ namespace API.Domain.Model.Shelter
 
         public decimal? WeightKg { get; set; }
 
+        public string? Slug { get; set; }
+
         public bool IsVaccinated { get; set; }
+
+        public bool? IsRecommend { get; set; } = false;
 
         public bool IsSterilized { get; set; }
 

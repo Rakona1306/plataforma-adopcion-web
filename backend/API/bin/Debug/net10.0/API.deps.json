@@ -19,7 +19,7 @@
           "Microsoft.EntityFrameworkCore": "10.0.7",
           "Microsoft.EntityFrameworkCore.Design": "10.0.7",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
-          "Resend": "0.5.0",
+          "Resend": "0.5.1",
           "Riok.Mapperly": "4.3.1",
           "Swashbuckle.AspNetCore": "10.1.7",
           "supabase-csharp": "0.16.2"
@@ -643,11 +643,11 @@
           }
         }
       },
-      "Resend/0.5.0": {
+      "Resend/0.5.1": {
         "runtime": {
           "lib/net8.0/Resend.dll": {
-            "assemblyVersion": "0.5.0.0",
-            "fileVersion": "0.5.0.0"
+            "assemblyVersion": "0.5.1.0",
+            "fileVersion": "0.5.1.0"
           }
         }
       },
@@ -1107,12 +1107,12 @@
       "path": "realtime-csharp/6.0.4",
       "hashPath": "realtime-csharp.6.0.4.nupkg.sha512"
     },
-    "Resend/0.5.0": {
+    "Resend/0.5.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-PL2tr3wbKHkkKj+I4tK3aDWrP2Unqntbzr0U7A8MzeiZk796Upp1xAg94YPyvkODp/KWezPXS57simSwyGp6QA==",
-      "path": "resend/0.5.0",
-      "hashPath": "resend.0.5.0.nupkg.sha512"
+      "sha512": "sha512-omjgTjmosGHJ+bF9Mnk6Gu4TqCwIE/XyeYvQCfkPlDmoUE5yuNwxUP5Cyt9Og2KTqTzKqfQypFzlgCgORCEOSw==",
+      "path": "resend/0.5.1",
+      "hashPath": "resend.0.5.1.nupkg.sha512"
     },
     "Riok.Mapperly/4.3.1": {
       "type": "package",

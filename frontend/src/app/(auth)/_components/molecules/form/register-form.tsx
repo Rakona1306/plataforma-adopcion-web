@@ -5,14 +5,15 @@ import { useState } from 'react'
 import FormContainer, { FormContainerFormikSubmit } from '@/components/molecules/form-container'
 import Input from '@/components/atoms/input'
 import { RegisterDto } from '@/core/application/features/system/auth/dtos/register.dto'
-import { useAuth } from '@/core/application/features/system/auth/hooks/useAuth'
+// import { useAuth } from '@/core/application/features/system/auth/hooks/useAuth'
 import { getFieldError } from '@/core/shared/helpers/getFieldError'
 import { containerVariants, itemVariants } from '@/core/shared/helpers/variants'
+import { useRegister } from '@/features/system/auth/hooks/useRegister'
 
 export default function RegisterForm() {
 
   const [showPassword, setShowPassword] = useState(false)
-  const { register, isLoading, error } = useAuth()
+  const { register, isLoading, error } = useRegister()
 
   const handleSubmit: FormContainerFormikSubmit<RegisterDto> = async (values) => {
     register(values)
@@ -35,7 +36,7 @@ export default function RegisterForm() {
           name: '',
           email: '',
           password: '',
-          lastName: ''          
+          lastName: ''
         }}
         validationSchema={RegisterDto}
         onSubmit={handleSubmit}
@@ -92,7 +93,7 @@ export default function RegisterForm() {
           />
         </motion.div>
 
-        
+
 
         <motion.button
           variants={itemVariants}

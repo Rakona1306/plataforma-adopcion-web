@@ -24,11 +24,15 @@ namespace API.Infrastructure.Db.Builders.Shelter
             builder.Property(p => p.Size).HasConversion<string>().HasMaxLength(20);
             builder.Property(p => p.Status).HasConversion<string>().HasMaxLength(30);
 
+            builder.Property(p => p.Slug).IsRequired();
+
             // Relación 1:N con Specie (Restringimos cascada para evitar conflictos con Breed)
             builder.HasOne(p => p.Species)
                    .WithMany()
                    .HasForeignKey(p => p.SpeciesId)
                    .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasIndex(p => p.Slug).IsUnique();
         }
     }
 }
