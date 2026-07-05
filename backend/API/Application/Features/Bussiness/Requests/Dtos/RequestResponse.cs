@@ -11,8 +11,8 @@ public class RequestResponse
     public string Phone { get; set; } = string.Empty;
     public Guid? PetId { get; set; }
     public string? PetName { get; set; }
-    public RequestType Type { get; set; }
-    public RequestStatus Status { get; set; }
+    public string Type { get; set; } = string.Empty;
+    public string Status { get; set; } = string.Empty;
     public string Motivation { get; set; } = string.Empty;
     public string? Notes { get; set; }
 

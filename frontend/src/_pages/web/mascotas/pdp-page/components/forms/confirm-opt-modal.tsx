@@ -1,14 +1,29 @@
 import ButtonUI from "@/components/atoms/button/button-ui";
 import FormContainer from "@/components/molecules/form-container";
+import { useTokenStore } from "@/core/application/hooks/session/useToken";
+import { useModal } from "@/core/application/hooks/ui/useModal";
 import { AuthConfirmEmailDto, authConfirmEmailSchema } from "@/features/system/auth/dto/auth-confirm-email.dto";
 import useConfirmOptUser from "@/features/system/auth/hooks/modal/use-confirm-opt-user";
 import { montserrat } from "@/lib/fonts/monserrat";
 import { useConfirmOptStore } from "@/store/use-confirm-opt-store";
 import { Alert, PinInput } from "@mantine/core";
 
-export default function ConfirmOptModal() {
-    const { userRegistered } = useConfirmOptStore()
-    const { confirmOpt, isLoading, error } = useConfirmOptUser()
+export default function ConfirmOptModal({ Component, header }: { Component?: React.ReactNode, header: string }) {
+    const { userRegistered, setConfirmOpt } = useConfirmOptStore()
+    const { setToken } = useTokenStore()
+    const { handleOpenModal } = useModal() || {}
+
+    const { confirmOpt, isLoading, error } = useConfirmOptUser({
+        onSuccess: async (data) => {
+            await setToken(data.token)
+            setConfirmOpt(false)
+
+            handleOpenModal && handleOpenModal({
+                header: header,
+                content: Component
+            })
+        }
+    })
 
     const initialValues: AuthConfirmEmailDto = {
         email: userRegistered?.email || '',

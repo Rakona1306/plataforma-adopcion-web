@@ -6,4 +6,5 @@ export interface BreedFilterDto {
   search?: string;
   storeFilters?: FilterItem[];
   activeFeatures?: string[];
+  speciesId?: string;
 }

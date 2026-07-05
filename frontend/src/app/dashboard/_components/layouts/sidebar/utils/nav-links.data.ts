@@ -67,14 +67,15 @@ export const navLinks: NavLink[] = [
     items: [
       {
         name: 'Solicitudes',
-        href: '/dashboard/pets'
+        href: '/dashboard/adopciones/solicitudes'
       },
       {
         name: 'Mascotas Adoptadas',
-        href: '/dashboard/adoption-requests'
+        href: '/dashboard/adopciones/mascotas-adoptadas'
       }
     ]
   },
+  /*
   {
     module: 'Padrinos',
     icon: FaUserTie,
@@ -125,4 +126,5 @@ export const navLinks: NavLink[] = [
       }
     ]
   }
+  */
 ]

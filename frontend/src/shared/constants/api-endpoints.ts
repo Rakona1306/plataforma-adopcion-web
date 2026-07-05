@@ -24,17 +24,9 @@ export const API_ENDPOINTS = {
     UPDATE: (id: string) => `/api/users/${id}`,
     DELETE: (id: string) => `/api/users/${id}`,
   },
-  // Reservaciones
-  RESERVATIONS: {
-    LIST: '/api/reservations',
-    GET: (id: string) => `/api/reservations/${id}`,
-    CREATE: '/api/reservations',
-    UPDATE: (id: string) => `/api/reservations/${id}`,
-    DELETE: (id: string) => `/api/reservations/${id}`,
-  },
-  // Habitaciones
-  ROOMS: {
-    LIST: '/api/rooms',
-    GET: (id: string) => `/api/rooms/${id}`,
-  },
+  ADOPTION: {
+    CREATE: '/v1/adoptions',
+    PAGINATE: '/v1/adoptions',
+    REVIEW: (id: string) => `/v1/adoptions/${id}/review`
+  }
 } as const;

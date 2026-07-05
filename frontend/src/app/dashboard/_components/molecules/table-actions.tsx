@@ -26,6 +26,7 @@ export default function TableActions<T>({ actions, rowData }: TableActionsProps<
       </Menu.Target>
 
       <Menu.Dropdown>
+        <Menu.Label>Acciones</Menu.Label>
         {actions.map((action, index) => (
           <Menu.Item
             key={index}

@@ -1,26 +1,19 @@
 "use client";
 
-import { Modal, Tabs, Button, TextInput, PasswordInput, Stack, Group, PinInput } from "@mantine/core";
-import { useLogin } from "@/features/system/auth/hooks/useLogin";
-import { useRegister } from "@/features/system/auth/hooks/useRegister";
+import { Tabs } from "@mantine/core";
 import { useState } from "react";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-
-import FormContainer from "@/components/molecules/form-container";
-import { LoginDto } from "@/core/application/features/system/auth/dtos/login.dto";
-import { Alert } from "@/components/atoms/alert";
-import { itemVariants } from "@/core/shared/helpers/variants";
-import { motion } from "motion/react";
-import Input from "@/components/atoms/input";
-import { getFieldError } from "@/core/shared/helpers/getFieldError";
 import { montserrat } from "@/lib/fonts/monserrat";
 import LoginFormModal from "./forms/login-form-modal";
 import RegisterFormModal from "./forms/register-form-modal";
 import { useConfirmOptStore } from "@/store/use-confirm-opt-store";
 import ConfirmOptModal from "./forms/confirm-opt-modal";
 
-export function AuthModal() {
+interface Props {
+    Component: React.ReactNode;
+    header: string
+}
+
+export function AuthModal({ Component, header }: Props) {
     const [activeTab, setActiveTab] = useState<string | null>("login");
     const { confirmOpt } = useConfirmOptStore()
 
@@ -28,7 +21,7 @@ export function AuthModal() {
         <>
             {
                 confirmOpt ? (
-                    <ConfirmOptModal />
+                    <ConfirmOptModal Component={Component} header={header} />
                 ) : (
                     <Tabs value={activeTab} onChange={setActiveTab}>
                         <Tabs.List>
@@ -43,7 +36,7 @@ export function AuthModal() {
                         </Tabs.List>
 
                         <Tabs.Panel value="login" pt="md">
-                            <LoginFormModal />
+                            <LoginFormModal Component={Component} header={header} />
                         </Tabs.Panel>
 
                         <Tabs.Panel value="register" pt="md">

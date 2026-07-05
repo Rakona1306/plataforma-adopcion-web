@@ -7,4 +7,5 @@ export interface PetFilterDto {
   status: number
   gender: number
   size: number
+  isAdopted?: boolean
 }

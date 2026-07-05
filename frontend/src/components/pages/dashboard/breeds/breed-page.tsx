@@ -50,7 +50,7 @@ export default function BreedPage() {
       label: "Buscar por especie",
       placeholder: "Buscar especie",
       options: dataSpecie?.items || [],
-      value: filter.speciesId,
+      value: filter.speciesId || '',
       displayField: 'name',
       valueField: 'id',
       onChange: (val) => updateFilter({ speciesId: String(val) }),
@@ -89,37 +89,37 @@ export default function BreedPage() {
   ];
 
   return (
-      <>
-        <HeaderDashboard>
-          <h1 className="text-lg md:text-2xl font-bold text-slate-800">
-            Sistema de Razas
-          </h1>
-          <p className="text-sm md:text-base text-gray-500">
-            Gestion de razas para el sistema
-          </p>
-        </HeaderDashboard>
-        <BodyDashboard className="space-y-5">
-          <ActionButtons title={actionsI.title} buttons={actionsI.buttons} />
-          <Divider className="mt-5 border-gray-300!" />
-  
-          <FilterBar filters={myFilters} onClearAll={handleClear} />
-  
-          <Divider className="mt-5 border-gray-300!" />
-  
-          <div>
-            <CustomTable<Breed>
-              columns={columns}
-              data={data?.items || []}
-              actions={actions}
-              keyExtractor={(specie) => specie.id}
-              isLoading={isLoading || isPending}
-              isError={isError}
-              onPageChange={(page) => updateFilter({ page })}
-              totalItems={data?.totalCount || 0}
-              page={filter.page}
-            />
-          </div>
-        </BodyDashboard>
-      </>
-    );
+    <>
+      <HeaderDashboard>
+        <h1 className="text-lg md:text-2xl font-bold text-slate-800">
+          Sistema de Razas
+        </h1>
+        <p className="text-sm md:text-base text-gray-500">
+          Gestion de razas para el sistema
+        </p>
+      </HeaderDashboard>
+      <BodyDashboard className="space-y-5">
+        <ActionButtons title={actionsI.title} buttons={actionsI.buttons} />
+        <Divider className="mt-5 border-gray-300!" />
+
+        <FilterBar filters={myFilters} onClearAll={handleClear} />
+
+        <Divider className="mt-5 border-gray-300!" />
+
+        <div>
+          <CustomTable<Breed>
+            columns={columns}
+            data={data?.items || []}
+            actions={actions}
+            keyExtractor={(specie) => specie.id}
+            isLoading={isLoading || isPending}
+            isError={isError}
+            onPageChange={(page) => updateFilter({ page })}
+            totalItems={data?.totalCount || 0}
+            page={filter.page}
+          />
+        </div>
+      </BodyDashboard>
+    </>
+  );
 }

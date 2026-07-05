@@ -196,11 +196,11 @@ export function PetCard({
           Ver Detalles
         </Link>
 
-        <Link href={`/mascotas/${slug}#apadrinar`}
+        {/*<Link href={`/mascotas/${slug}#apadrinar`}
           className='px-4 py-2 bg-linear-to-r from-terciary to-yellow-500 text-center text-white rounded-md font-semibold hover:shadow-lg transition-shadow text-sm'
         >
           Apadrinar
-        </Link>
+        </Link> */}
 
       </Group>
     </Card>

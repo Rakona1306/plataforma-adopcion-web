@@ -68,23 +68,6 @@ namespace API.Domain.Model.Bussiness
         public string? ReviewComment { get; set; }
     }
 
-    public class AdoptionDetails
-    {
-        [Key]
-        public Guid Id { get; set; } = Guid.NewGuid();
-        public Guid RequestId { get; set; }
-
-        public Request Request { get; set; } = null!;
-
-        public string HouseType { get; set; } = string.Empty;
-
-        public bool HasOtherPets { get; set; }
-
-        public bool HasChildren { get; set; }
-
-        public bool AcceptHomeVisit { get; set; }
-    }
-
     public class DonationDetails
     {
         [Key]
