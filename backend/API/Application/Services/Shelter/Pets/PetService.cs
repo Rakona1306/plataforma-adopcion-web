@@ -35,6 +35,11 @@ namespace API.Application.Services.Shelter.Pets
             if (!string.IsNullOrWhiteSpace(filter.Search))
                 query = query.Where(x => x.Name.Contains(filter.Search));
 
+            if (filter.IsAdopted.HasValue)
+                query = query.Where(x => x.IsAdopted == filter.IsAdopted.Value);
+            else
+                query = query.Where(x => !x.IsAdopted);
+
             var totalCount = await query.CountAsync();
             var items = await query.Skip((filter.Page - 1) * filter.PageSize)
                                    .Take(filter.PageSize)
@@ -148,18 +153,6 @@ namespace API.Application.Services.Shelter.Pets
                 .FirstOrDefaultAsync(x => x.Id == id) ?? throw new Exception("Pet not found");
         }
 
-        private void SyncCollection<TEntity>(ICollection<TEntity> collection, UpdatePetRelationDto dto, Func<Guid, TEntity> factory)
-            where TEntity : class
-        {
-            foreach (var id in dto.RemoveIds)
-            {
-                var item = collection.FirstOrDefault(x => EF.Property<Guid>(x, "BreedId") == id || EF.Property<Guid>(x, "TraitId") == id);
-                if (item != null) collection.Remove(item);
-            }
-            foreach (var id in dto.AddIds.Where(id => !collection.Any(x => (EF.Property<Guid>(x, "BreedId") == id || EF.Property<Guid>(x, "TraitId") == id))))
-                collection.Add(factory(id));
-        }
-
         private static void SyncBreeds(ICollection<PetBreed> collection, UpdatePetRelationDto dto)
         {
             var toRemove = collection
@@ -191,6 +184,34 @@ namespace API.Application.Services.Shelter.Pets
 
             foreach (var id in dto.AddIds.Where(id => !existing.Contains(id)))
                 collection.Add(new PetTrait { TraitId = id });
+        }
+
+
+        public async Task<Paginate<PetResponse>> GetAllAdoptedAsync(PetFilterDto filter)
+        {
+            IQueryable<Pet> query = _petRepository.Query()
+                .Include(x => x.Species)
+                .Include(x => x.PetBreeds).ThenInclude(x => x.Breed)
+                .Include(x => x.PetTraits).ThenInclude(x => x.Trait)
+                .Include(x => x.PetVaccines).ThenInclude(x => x.Vaccine)
+                .Include(x => x.Photos)
+                .Where(x => x.IsAdopted);
+
+            if (!string.IsNullOrWhiteSpace(filter.Search))
+                query = query.Where(x => x.Name.Contains(filter.Search));
+
+            var totalCount = await query.CountAsync();
+            var items = await query.Skip((filter.Page - 1) * filter.PageSize)
+                                   .Take(filter.PageSize)
+                                   .ToListAsync();
+
+            return new Paginate<PetResponse>
+            {
+                Items = _mapper.ToResponseList(items),
+                TotalCount = totalCount,
+                Page = filter.Page,
+                PageSize = filter.PageSize
+            };
         }
     }
 }

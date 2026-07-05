@@ -6,7 +6,7 @@ namespace API.Presentation.Controllers.System
 {
     [ApiController]
     [Route("api/enums")]
-    public class EnumController: ControllerBase
+    public class EnumController : ControllerBase
     {
         [HttpGet("pet-genders")]
         public IActionResult PetGenders()
@@ -21,6 +21,14 @@ namespace API.Presentation.Controllers.System
         {
             return Ok(
                 EnumHelper.ToList<PetSize>()
+            );
+        }
+
+        [HttpGet("request-status")]
+        public IActionResult RequestStatus()
+        {
+            return Ok(
+                EnumHelper.ToList<RequestStatus>()
             );
         }
 

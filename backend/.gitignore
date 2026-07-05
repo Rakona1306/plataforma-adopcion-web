@@ -1,7 +1,5 @@
 # Visual Studio
 .vs/
-API/bin/
-API/obj/
 
 bin
 obj
@@ -14,6 +12,8 @@ obj/
 
 # VS Code
 .vscode/
+
+publish
 
 # Logs
 *.log

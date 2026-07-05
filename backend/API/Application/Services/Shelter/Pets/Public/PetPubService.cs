@@ -41,6 +41,8 @@ namespace API.Application.Services.Shelter.Pets.Public
             // Aplicar ordenamiento
             query = ApplySort(query, filter.Sort);
 
+            query = query.Where(x => !x.IsAdopted);
+
             // 3. 🔥 CORRECCIÓN: Contar DESPUÉS de aplicar filtros, no antes
             var totalCount = await query.CountAsync();
 
@@ -119,7 +121,7 @@ namespace API.Application.Services.Shelter.Pets.Public
             {
                 var specieResults = query.Where(x => x.SpeciesId == specieId.Value)
                     .OrderByDescending(x => x.IsRecommend);
-                
+
                 var specieItems = await ApplyIncludes(specieResults)
                     .Take(filter.PageSize)
                     .AsNoTracking()
@@ -133,7 +135,7 @@ namespace API.Application.Services.Shelter.Pets.Public
             {
                 var breedResults = query.Where(x => x.PetBreeds.Any(pb => breedIds.Contains(pb.BreedId)))
                     .OrderByDescending(x => x.IsRecommend);
-                
+
                 var breedItems = await ApplyIncludes(breedResults)
                     .Take(filter.PageSize)
                     .AsNoTracking()
@@ -147,7 +149,7 @@ namespace API.Application.Services.Shelter.Pets.Public
             {
                 var traitResults = query.Where(x => x.PetTraits.Any(pt => traitIds.Contains(pt.TraitId)))
                     .OrderByDescending(x => x.IsRecommend);
-                
+
                 var traitItems = await ApplyIncludes(traitResults)
                     .Take(filter.PageSize)
                     .AsNoTracking()

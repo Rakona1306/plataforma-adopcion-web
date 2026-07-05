@@ -18,8 +18,8 @@ namespace API.Application.Services.System.Email
             {
                 var emailRequest = new EmailMessage
                 {
-                    From = "onboarding@resend.dev",
-                    To = "juancajas1905@gmail.com",
+                    From = "noreply@adoptasalvavidas.com",
+                    To = email,
                     Subject = "Código de verificación - Plataforma de Adopción",
                     HtmlBody = GetEmailTemplate(code)
                 };

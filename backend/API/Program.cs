@@ -10,7 +10,17 @@ using Microsoft.EntityFrameworkCore;
 using Resend;
 using System.Threading.RateLimiting;
 
-DotEnvLoader.Load(Path.Combine(Directory.GetCurrentDirectory(), ".env"));
+var envPath = Path.Combine(Directory.GetCurrentDirectory(), "production.env");
+
+Console.WriteLine($"CurrentDirectory: {Directory.GetCurrentDirectory()}");
+Console.WriteLine($"EnvPath: {envPath}");
+Console.WriteLine($"Env Exists: {File.Exists(envPath)}");
+
+DotEnvLoader.Load(envPath);
+
+Console.WriteLine(
+    Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection")
+);
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,7 +62,7 @@ builder.Services.AddCors(options =>
         policy =>
         {
             policy
-                .WithOrigins(["http://localhost:3000", "https://plataforma-adopcion-web.vercel.app"])
+                .WithOrigins(["http://localhost:3000", "https://plataforma-adopcion-web.vercel.app", "https://adoptasalvavidas.com"])
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials();
