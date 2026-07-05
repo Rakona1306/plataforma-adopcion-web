@@ -17,11 +17,46 @@ import {
   itemVariants,
 } from "@/core/shared/helpers/variants";
 import { Alert } from "@/components/atoms/alert";
-import { useLogin } from "@/features/system/auth/hooks/useLogin";
+import { useLogin } from "@/features/system/auth/hooks/use-login";
+import Swal from "sweetalert2";
+import { QUERY_KEYS } from "@/shared/constants/queryKeys";
+import { useTokenStore } from "@/core/application/hooks/session/useToken";
+import { useSessionStore } from "@/core/infrastructure/store/useSessionStore";
+import { useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const { login, isLoading, error } = useLogin();
+  const { setToken } = useTokenStore();
+  const { setUser } = useSessionStore();
+  const router = useRouter()
+  const queryClient = useQueryClient()
+
+  const { login, isLoading, error } = useLogin({
+    onSuccess: (data) => {
+      console.log('SUCCESS LOGIN')
+
+      setToken(data.token);
+      setUser(data.user);
+
+      Swal.fire({
+        icon: "success",
+        title: `Bienvenido ${data.user.name} ${data.user.lastName}`,
+        timer: 3000,
+        width: 600
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.SYSTEM.AUTH]
+      })
+
+      if (data.user.toDashboard) {
+        router.push("/dashboard");
+      } else {
+        router.push("/");
+      }
+    }
+  });
 
   const handleSubmit: FormContainerFormikSubmit<LoginDto> = async (values) => {
     login(values);

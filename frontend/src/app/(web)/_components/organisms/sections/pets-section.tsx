@@ -2,11 +2,13 @@
 import Title from "../../atoms/title";
 import Button from "../../atoms/button/button";
 import { PetCard } from "../../atoms/card/pet-card-item";
-import { usePetSearch } from "@/core/application/hooks/pet/usePetSearch";
 import Container from "@/components/atoms/container";
+import { useGetPaginateSearch } from "@/features/shelter/pet/hooks/use-get-paginate-search";
 
 export default function PetsSection() {
-  const { filteredPets } = usePetSearch();
+  const {
+    data
+  } = useGetPaginateSearch()
 
   return (
     <section className="w-full py-10 pt-20 bg-gray-50">
@@ -21,9 +23,9 @@ export default function PetsSection() {
         </p>
 
         <div className="mt-10">
-          {filteredPets.length > 0 ? (
+          {data && data?.items.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-              {filteredPets.map((pet) => (
+              {data?.items.map((pet) => (
                 <PetCard key={pet.id} {...pet} />
               ))}
             </div>

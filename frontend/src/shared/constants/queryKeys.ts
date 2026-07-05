@@ -19,5 +19,9 @@ export const QUERY_KEYS = {
     SYSTEM: {
         AUTH: 'profile'
     },
-    BUSINESS: {}
+    BUSINESS: {
+        ADOPTION: {
+            REQUEST: 'adoption-request',
+        }
+    }
 }

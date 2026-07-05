@@ -7,14 +7,25 @@ import { useQuery } from "@tanstack/react-query";
 import { petContainer } from "@/core/infrastructure/container/shelter/pet-container";
 import { PetFilterDto } from "../dtos/pet-filter-dto";
 
-export function useGetAllPet() {
+interface Props {
+  initialFilter?: Partial<PetFilterDto>;
+}
+
+const DEFAULT_FILTER: Partial<PetFilterDto> = {
+  page: 1,
+  pageSize: 10,
+  search: "",
+  gender: 0,
+  size: 0,
+  specieId: "",
+  status: 0,
+  isAdopted: false,
+};
+
+export function useGetAllPet(props: Props = { initialFilter: DEFAULT_FILTER }) {
   const router = useRouter();
 
-  const [filter, setFilter] = useState<PetFilterDto>({
-    page: 1,
-    pageSize: 10,
-    search: "",
-  });
+  const [filter, setFilter] = useState<Partial<PetFilterDto>>({ ...DEFAULT_FILTER, ...props.initialFilter });
 
   const debouncedFilter = useMemo(() => {
     const { search, ...rest } = filter;

@@ -30,10 +30,7 @@ export function PetDeatilPage({ slug }: PetDeatilPageProps) {
   const { data: pet, isLoading, isError } = useGetPetBySlug({ slug });
   const { data: petRecommend, isLoading: isLoadingRecommend, isError: isErrorRecommend } = useGetPetRecommend({ petId: pet?.id || "", specie: pet?.specie, breeds: pet?.breeds, traits: pet?.traits });
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [adoptionModalOpened, setAdoptionModalOpened] = useState(false);
-  const [sponsorshipModalOpened, setSponsorshipModalOpened] = useState(false);
-  const [authModalOpened, setAuthModalOpened] = useState(false);
-  const { handleOpenModal } = useModal() || {}
+  const { handleOpenModal, } = useModal() || {}
 
   const user = useSessionStore((state) => state.user);
 
@@ -42,19 +39,30 @@ export function PetDeatilPage({ slug }: PetDeatilPageProps) {
       // setAuthModalOpened(true);
       handleOpenModal && handleOpenModal({
         header: 'Inicia sesión para continuar',
-        content: <AuthModal />
+        content: <AuthModal header="Adopta a esta mascota" Component={<AdoptionModal pet={pet} />} />
       });
       return;
     }
-    setAdoptionModalOpened(true);
+
+    handleOpenModal && handleOpenModal({
+      header: 'Adopta a esta mascota',
+      content: <AdoptionModal pet={pet} />
+    });
   };
 
   const handleSponsorshipClick = () => {
     if (!user) {
-      setAuthModalOpened(true);
+      handleOpenModal && handleOpenModal({
+        header: 'Inicia sesión para continuar',
+        content: <AuthModal header="Apadrina a esta mascota" Component={<SponsorshipModal pet={pet} />} />
+      });
       return;
     }
-    setSponsorshipModalOpened(true);
+
+    handleOpenModal && handleOpenModal({
+      header: 'Apadrina a esta mascota',
+      content: <SponsorshipModal pet={pet} />
+    });
   };
 
   if (isLoading) {
@@ -193,13 +201,13 @@ export function PetDeatilPage({ slug }: PetDeatilPageProps) {
                 >
                   Adoptar a {pet.name}
                 </button>
-                <button
+                {/* <button
                   onClick={handleSponsorshipClick}
                   id="apadrinar"
                   className={`w-full px-8 py-4 cursor-pointer rounded-full font-bold! text-lg transition-all duration-300 hover:shadow-lg hover:opacity-90 bg-terciary text-slate-700 ${manrope.className}`}
                 >
                   Apadrina a {pet.name}
-                </button>
+                </button> */}
               </div>
 
               {pet.rescueStory && (
@@ -389,18 +397,6 @@ export function PetDeatilPage({ slug }: PetDeatilPageProps) {
           isError={isErrorRecommend}
         />
       </div>
-
-      {/* Modals */}
-      <AdoptionModal
-        opened={adoptionModalOpened}
-        onClose={() => setAdoptionModalOpened(false)}
-        petName={pet?.name || ""}
-      />
-      <SponsorshipModal
-        opened={sponsorshipModalOpened}
-        onClose={() => setSponsorshipModalOpened(false)}
-        petName={pet?.name || ""}
-      />
     </div>
   );
 }

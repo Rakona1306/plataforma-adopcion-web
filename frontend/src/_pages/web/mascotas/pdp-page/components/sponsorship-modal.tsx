@@ -1,51 +1,19 @@
 "use client";
 
+import { PetPublic } from "@/features/shelter/pet/model/pet-pub.model";
 import { Modal, Stack, Group, Button } from "@mantine/core";
 import { IoClose } from "react-icons/io5";
 
 interface SponsorshipModalProps {
-    opened: boolean;
-    onClose: () => void;
-    petName: string;
+    pet?: PetPublic
 }
 
-export function SponsorshipModal({ opened, onClose, petName }: SponsorshipModalProps) {
-    return (
-        <Modal
-            opened={opened}
-            onClose={onClose}
-            title={`Apadrinar a ${petName}`}
-            centered
-            size="md"
-            styles={{
-                header: {
-                    backgroundColor: "var(--terciary)",
-                    color: "#171717",
-                },
-            }}
-        >
-            <Stack gap="lg">
-                {/* Form will be added here */}
-                <div className="text-center text-gray-500">
-                    <p>Formulario de apadrinamiento - Por implementar</p>
-                </div>
+export function SponsorshipModal({ pet }: SponsorshipModalProps) {
+    if (!pet) {
+        return null;
+    }
 
-                <Group justify="flex-end" mt="md">
-                    <Button
-                        variant="default"
-                        onClick={onClose}
-                        leftSection={<IoClose size={18} />}
-                    >
-                        Cancelar
-                    </Button>
-                    <Button
-                        style={{ backgroundColor: "var(--terciary)", color: "#171717" }}
-                        onClick={onClose}
-                    >
-                        Apadrinar
-                    </Button>
-                </Group>
-            </Stack>
-        </Modal>
+    return (
+        <></>
     );
 }

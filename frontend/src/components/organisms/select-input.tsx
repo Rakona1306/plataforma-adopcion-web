@@ -23,12 +23,9 @@ export default function SelectInput({
   const [field, meta] = useField<string>(name)
   const { setFieldValue } = useFormikContext()
 
-  console.log("options", options);
-  console.log("field.value", field.value);
-
   useEffect(() => {
     if (defaultValue) {
-      setFieldValue(name ,defaultValue)
+      setFieldValue(name, defaultValue)
     }
   }, [defaultValue]);
 

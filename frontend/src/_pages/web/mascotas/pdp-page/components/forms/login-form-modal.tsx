@@ -4,13 +4,39 @@ import Input from "@/components/atoms/input";
 import FormContainer from "@/components/molecules/form-container";
 import { LoginDto } from "@/core/application/features/system/auth/dtos/login.dto";
 import { getFieldError } from "@/core/shared/helpers/getFieldError";
-import useLoginModal from "@/features/system/auth/hooks/modal/use-login-modal";
 import { motion } from "motion/react";
 import { itemVariants } from "@/core/shared/helpers/variants";
 import { useState } from "react";
+import { useLogin } from "@/features/system/auth/hooks/use-login";
+import { useTokenStore } from "@/core/application/hooks/session/useToken";
+import { QUERY_KEYS } from "@/shared/constants/queryKeys";
+import { useModal } from "@/core/application/hooks/ui/useModal";
+import { useQueryClient } from "@tanstack/react-query";
 
-export default function LoginFormModal() {
-    const { error, isLoading, login } = useLoginModal()
+interface Props {
+    Component: React.ReactNode;
+    header: string
+}
+
+export default function LoginFormModal({ Component, header }: Props) {
+    const { setToken } = useTokenStore();
+    const queryClient = useQueryClient()
+    const { handleOpenModal } = useModal() || {}
+
+    const { error, isLoading, login } = useLogin({
+        onSuccess: (data) => {
+            setToken(data.token);
+
+            queryClient.invalidateQueries({
+                queryKey: [QUERY_KEYS.SYSTEM.AUTH]
+            })
+
+            handleOpenModal && handleOpenModal({
+                header: header,
+                content: Component
+            })
+        }
+    })
     const [showPassword, setShowPassword] = useState(false);
 
     const handleSubmit = (values: LoginDto) => {
