@@ -352,14 +352,14 @@ export function PetDeatilPage({ slug }: PetDeatilPageProps) {
             {/* Vaccines Info */}
             {pet.vaccines && pet.vaccines.length > 0 && (
               <div className="space-y-3 p-6 rounded-xl" style={{ backgroundColor: "#F5F5F5" }}>
-                <h2 className="text-2xl font-bold" style={{ color: "var(--primary)" }}>
+                <h2 className={`text-2xl font-bold ${montserrat.className} text-primary`}>
                   Vacunas
                 </h2>
                 <div className="space-y-2">
                   {pet.vaccines.map((vaccine) => (
                     <div key={vaccine.id} className="flex items-center justify-between">
-                      <span style={{ color: "var(--foreground)" }}>{vaccine.name}</span>
-                      <FaSyringe style={{ color: "var(--terciary)" }} />
+                      <span className="text-slate-800">{vaccine.name}</span>
+                      <FaSyringe className="text-primary" />
                     </div>
                   ))}
                 </div>
@@ -368,7 +368,7 @@ export function PetDeatilPage({ slug }: PetDeatilPageProps) {
 
             {/* Contact CTA */}
             <div className="p-6 rounded-xl border-2 text-center space-y-4" style={{ borderColor: "var(--terciary)", backgroundColor: "var(--quaternary)" }}>
-              <FaUsers className="w-8 h-8 mx-auto" style={{ color: "var(--primary)" }} />
+              <FaUsers className="w-8 h-8 mx-auto text-primary" />
               <h3 className={`font-bold text-xl ${montserrat.className} text-primary`}>
                 ¿Preguntas o dudas?
               </h3>

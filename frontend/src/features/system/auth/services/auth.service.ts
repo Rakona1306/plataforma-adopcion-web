@@ -1,4 +1,3 @@
-"use client"
 
 import { LoginDto } from "@/core/application/features/system/auth/dtos/login.dto";
 import { RegisterDto } from "@/core/application/features/system/auth/dtos/register.dto";
@@ -9,11 +8,12 @@ import { httpClient } from "@/lib/httpClient";
 import { AuthRegisterResponse } from "@/core/application/features/system/auth/dtos/auth-register-response";
 import { AuthConfirmEmailDto } from "../dto/auth-confirm-email.dto";
 import { AuthCompleteVerificationDto } from "../dto/auth-complete-verification.dto";
+import { RequestConfig } from "@/core/shared/types";
 
 interface IAuthService {
     login(auth: LoginDto): Promise<AuthResponse>
     register(register: RegisterDto): Promise<AuthRegisterResponse>
-    profile(): Promise<UserLogged>
+    profile(config?: RequestConfig): Promise<UserLogged>
     logout(): Promise<void>
     confirmEmail(dto: AuthConfirmEmailDto): Promise<void>
     completeRegistration(dto: AuthCompleteVerificationDto): Promise<{ token: string }>
@@ -32,8 +32,10 @@ class AuthService implements IAuthService {
         return await this.httpClient.post<AuthRegisterResponse>(API_ENDPOINTS.AUTH.REGISTER, register);
     }
 
-    async profile(): Promise<UserLogged> {
-        return await this.httpClient.get<UserLogged>(API_ENDPOINTS.AUTH.PROFILE);
+    async profile(config?: RequestConfig): Promise<UserLogged> {
+        return await this.httpClient.get<UserLogged>(API_ENDPOINTS.AUTH.PROFILE, {
+
+        }, config);
     }
 
     async logout(): Promise<void> {

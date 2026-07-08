@@ -31,23 +31,32 @@ export function CreatePetPhotoForm({ petId }: { petId: string }) {
       validationSchema={createPetPhotosSchema}
       className="space-y-5"
     >
-      {isLoading ? (
-        <Skeleton width='100%' height='10rem' />
-      ) : (
-        <FileUpload
-          name="files"
-          removeFieldName="photoIdsToRemove"
-          mainFieldName="isMainList"
-          defaultPhotos={petPhotos?.items || []} // PetPhoto[] de la API
-          label="Imágenes"
-          required
-          maxFiles={10}
-        />
-      )}
+      {({ errors }) => (
+        <>
+          {isLoading ? (
+            <Skeleton width='100%' height='10rem' />
+          ) : (
+            <>
+              <FileUpload
+                name="files"
+                removeFieldName="photoIdsToRemove"
+                mainFieldName="isMainList"
+                defaultPhotos={petPhotos?.items || []} // PetPhoto[] de la API
+                label="Imágenes"
+                required
+                maxFiles={10}
+              />
+              {errors.files && (
+                <p className="text-red-500 text-sm">{errors.files}</p>
+              )}
+            </>
+          )}
 
-      <Button type="submit" loading={isPending} disabled={isPending}>
-        Asignar imágenes
-      </Button>
+          <Button type="submit" loading={isPending} disabled={isPending}>
+            Asignar imágenes
+          </Button>
+        </>
+      )}
     </FormContainer>
   );
 }

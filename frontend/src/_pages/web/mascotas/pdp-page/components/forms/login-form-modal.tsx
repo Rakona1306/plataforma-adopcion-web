@@ -100,16 +100,6 @@ export default function LoginFormModal({ Component, header }: Props) {
                 variants={itemVariants}
                 className="flex items-center justify-between"
             >
-                <label className="flex items-center gap-2 cursor-pointer group">
-                    <motion.input
-                        type="checkbox"
-                        className="w-4 h-4 accent-primary rounded cursor-pointer"
-                        whileHover={{ scale: 1.1 }}
-                    />
-                    <span className="text-sm text-slate-600 group-hover:text-primary transition">
-                        Recuérdame
-                    </span>
-                </label>
                 <motion.a
                     href="#"
                     className="text-sm text-primary hover:text-secondary font-semibold transition"

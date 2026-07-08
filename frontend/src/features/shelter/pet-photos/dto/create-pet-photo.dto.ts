@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 
-const MAX_FILE_SIZE = 3 * 1024 * 1024; // 3MB
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 
 export const createPetPhotosSchema = Yup.object({
   files: Yup.array()
