@@ -4,7 +4,7 @@ import {
   HiOutlinePencil,
   HiOutlineUser,
 } from "react-icons/hi";
-import { MdMonitor } from "react-icons/md";
+import { MdMonitor, MdRequestQuote } from "react-icons/md";
 
 interface MenuItem {
   label: string;
@@ -39,6 +39,12 @@ export function getMenuItems({ onLogout, onEdit }: {
       label: "Editar perfil",
       icon: <HiOutlinePencil className="w-4 h-4" />,
       action: onEdit,
+      color: "text-slate-700",
+    },
+    {
+      label: "Mis solicitudes",
+      icon: <MdRequestQuote className="w-4 h-4" />,
+      href: "/account/solicitudes",
       color: "text-slate-700",
     },
     {

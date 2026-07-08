@@ -75,7 +75,6 @@ export const navLinks: NavLink[] = [
       }
     ]
   },
-  /*
   {
     module: 'Padrinos',
     icon: FaUserTie,
@@ -126,5 +125,4 @@ export const navLinks: NavLink[] = [
       }
     ]
   }
-  */
 ]

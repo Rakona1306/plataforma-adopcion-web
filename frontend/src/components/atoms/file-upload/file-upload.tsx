@@ -18,12 +18,13 @@ export function FileUpload({
   label,
   required,
   maxFiles = 10,
-  maxSizeMb = 5,
+  maxSizeMb = 10,
   accept = "image/png, image/jpeg, image/webp",
 }: FileUploadProps) {
   const [, fileMeta, fileHelpers] = useField<File[]>(name);
   const [, removeMeta, removeHelpers] = useField<string[]>(removeFieldName ?? name);
   const [, mainMeta, mainHelpers] = useField<string[]>(mainFieldName ?? name);
+  const [uploadError, setUploadError] = useState<string | null>(null);
 
   const [items, setItems] = useState<PreviewItem[]>(() =>
     defaultPhotos.map(
@@ -66,8 +67,6 @@ export function FileUpload({
       const mainIds = items.filter((i) => i.isMain).map((i) => i.id);
       mainHelpers.setValue(mainIds);
     }
-    // fileHelpers, removeHelpers, mainHelpers son estables — no causan re-renders
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items]);
 
   const addFiles = useCallback(
@@ -84,10 +83,19 @@ export function FileUpload({
 
       for (const file of candidates) {
         const tooBig = file.size > maxSizeMb * 1024 * 1024;
+
+        if (tooBig) {
+          setUploadError(
+            `El archivo "${file.name}" supera el tamaño máximo permitido de ${maxSizeMb} MB.`
+          );
+          continue;
+        }
+
         const duplicate = existingNewFiles.some(
           (f) => f.name === file.name && f.size === file.size
         );
-        if (tooBig || duplicate) continue;
+
+        if (duplicate) continue;
 
         validItems.push({
           kind: "new",
@@ -171,12 +179,13 @@ export function FileUpload({
         aria-hidden="true"
       />
 
-      {hasError && (
+      {(hasError || uploadError) && (
         <p className="flex items-center gap-1.5 text-xs font-medium text-red-600">
           <i className="ti ti-alert-circle text-sm" aria-hidden="true" />
-          {fileMeta.error as string}
-          {removeMeta.error as string}
-          {mainMeta.error as string}
+          {uploadError ||
+            fileMeta.error ||
+            removeMeta.error ||
+            mainMeta.error}
         </p>
       )}
 

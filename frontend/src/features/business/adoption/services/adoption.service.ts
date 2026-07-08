@@ -24,7 +24,7 @@ class AdoptionService implements IAdoptionService {
     }
 
     async paginateRequests(filter: FilterRequestAdoptionDto): Promise<Paginate<RequestAdoptionResponse>> {
-        return this.httpClient.get<Paginate<RequestAdoptionResponse>>(API_ENDPOINTS.ADOPTION.PAGINATE, { params: filter });
+        return this.httpClient.get<Paginate<RequestAdoptionResponse>>(API_ENDPOINTS.ADOPTION.PAGINATE, filter);
     }
 
     async reviewAdoptionRequest(requestId: string, dto: ReviewAdoptionDto): Promise<void> {
