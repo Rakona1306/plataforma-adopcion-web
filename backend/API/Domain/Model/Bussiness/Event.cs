@@ -1,39 +1,22 @@
-﻿using API.Domain.Common.Model;
-using API.Domain.Model.Enums;
+using API.Domain.Common.Model;
 
 namespace API.Domain.Model.Bussiness
 {
-    public class Event : BaseModel
+    public class Event : BaseModelInt
     {
-        public string Title { get; set; }
-            = string.Empty;
-
-        public string? Description { get; set; }
-
-        public string Location { get; set; }
-            = string.Empty;
-
+        public string Title { get; set; } = null!;
+        public string? SubTitle { get; set; } = null!;
+        public string? Description { get; set; } = null!;
+        public string? ToDo { get; set; } = null!;
         public DateTime StartDate { get; set; }
-
         public DateTime EndDate { get; set; }
-
-        public int MaxParticipants { get; set; }
-
-        public bool IsActive { get; set; }
-            = true;
-
-        public string? BannerUrl { get; set; }
-
-        public EventType Type { get; set; }
-
-        public EventStatus Status { get; set; }
-
-        public ICollection<EventVolunteer>
-            Volunteers
-        { get; set; } = [];
-
-        public ICollection<EventPhoto>
-            Photos
-        { get; set; } = [];
+        public string? ImageUrl { get; set; } = null!;
+        public string? BannerUrl { get; set; } = null!;
+        public string? VideoUrl { get; set; } = null!;
+        public string? VideoSilenceUrl { get; set; } = null!;
+        public bool IsActive { get; set; } = true;
+        public bool IsFeatured { get; set; } = false;
+        public string? GoogleAddressLink { get; set; } = null!;
+        public string? Location { get; set; } = null!;
     }
 }

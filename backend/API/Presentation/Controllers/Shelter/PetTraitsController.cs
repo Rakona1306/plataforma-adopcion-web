@@ -175,7 +175,7 @@ namespace API.Presentation.Controllers.Shelter
                 await _service.GetInteractionsAsync(
                     page,
                     pageSize,
-                    petId
+                    petId.ToString()
                 );
 
             return Ok(response);

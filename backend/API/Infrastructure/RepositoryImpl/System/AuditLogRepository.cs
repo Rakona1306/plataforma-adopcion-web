@@ -15,7 +15,7 @@ namespace API.Infrastructure.RepositoryImpl.System
         {
             _context = context;
         }
-        public async Task CreateAsync<T>(AuditEnum auditEnum, Guid recordId, string tableName, Guid? userId, T? oldValues)
+        public async Task CreateAsync<T>(AuditEnum auditEnum, string recordId, string tableName, Guid? userId, T? oldValues)
         {
             var query = _context.AuditLogs;
             AuditLog entity = new()
@@ -40,7 +40,7 @@ namespace API.Infrastructure.RepositoryImpl.System
             return await query.ToListAsync();
         }
 
-        public async Task<Paginate<AuditLog>> GetInteractionsAsync(int page, int pageSize, Guid recordId, string tableName)
+        public async Task<Paginate<AuditLog>> GetInteractionsAsync(int page, int pageSize, string recordId, string tableName)
         {
             IQueryable<AuditLog> query = _context.AuditLogs.AsNoTracking();
             query = query.Where(x => x.RecordId == recordId);

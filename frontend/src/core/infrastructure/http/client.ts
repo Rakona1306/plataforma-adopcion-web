@@ -4,12 +4,22 @@ import { API_CONFIG } from "@/core/shared/constants";
 import { LOCAL_STORAGE } from "@/core/shared/constants/local-storage";
 import { RequestConfig } from "@/core/shared/types";
 
+import { buildUrl, getDefaultHeaders } from "@/core/shared/utils/http";
 
-import {
-  buildUrl,
-  getDefaultHeaders,
-  handleHttpError,
-} from "@/core/shared/utils/http";
+// Error custom que conserva el JSON completo de la respuesta de error
+export class HttpError<T = any> extends Error {
+  public status: number;
+  public data: T | null;
+  public response: Response;
+
+  constructor(status: number, message: string, data: T | null, response: Response) {
+    super(message);
+    this.name = "HttpError";
+    this.status = status;
+    this.data = data;
+    this.response = response;
+  }
+}
 
 class HttpClient {
   private baseUrl: string;
@@ -80,7 +90,24 @@ class HttpClient {
       clearTimeout(timeoutId);
 
       if (!response.ok) {
-        await handleHttpError(response);
+        // Intentamos parsear el body del error como JSON.
+        // Usamos clone() por si algo más adelante necesita leer el body original.
+        let errorData: any = null;
+
+        try {
+          errorData = await response.clone().json();
+        } catch {
+          // El body no era JSON válido (o estaba vacío) -> lo dejamos null
+          errorData = null;
+        }
+
+        const message =
+          errorData?.message ??
+          errorData?.error ??
+          response.statusText ??
+          `HTTP Error ${response.status}`;
+
+        throw new HttpError(response.status, message, errorData, response);
       }
 
       if (response.status === 204) {
@@ -91,6 +118,8 @@ class HttpClient {
     } catch (error) {
       clearTimeout(timeoutId);
 
+      // Si es un error HTTP ya "conocido" (tiene status), no reintentamos por defecto
+      // salvo que quieras reintentar también en errores 5xx. Ajustable según necesidad.
       if (options.retry && retryAttempt < this.retryCount) {
         await new Promise((resolve) =>
           setTimeout(resolve, Math.pow(2, retryAttempt) * 1000),
@@ -133,7 +162,7 @@ class HttpClient {
     return this.request<T>(url, {
       method: "POST",
 
-      body: JSON.stringify(body),
+      body: isFormData ? body : JSON.stringify(body),
 
       timeout: config?.timeout,
 
@@ -158,7 +187,7 @@ class HttpClient {
     return this.request<T>(url, {
       method: "PUT",
 
-      body: JSON.stringify(body),
+      body: isFormData ? body : JSON.stringify(body),
 
       timeout: config?.timeout,
 

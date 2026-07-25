@@ -1,6 +1,7 @@
 ﻿using API.Application.Common.Services;
 using API.Application.Features.Shelter.Vaccines.Dtos;
 using API.Application.Features.Shelter.Vaccines.Mappers;
+using API.Application.Features.System.AuditLogs.Dtos;
 using API.Application.Features.System.AuditLogs.Mappers;
 using API.Application.Helpers;
 using API.Domain.Common.Model;
@@ -216,6 +217,11 @@ namespace API.Application.Services.Shelter.Vaccines
             );
 
             await _repository.SaveChangesAsync();
+        }
+
+        public Task<Paginate<AuditLogResponse>> GetInteractionsAsync(int page, int pageSize, Guid recordId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

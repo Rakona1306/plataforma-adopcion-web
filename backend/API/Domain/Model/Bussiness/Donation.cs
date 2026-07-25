@@ -1,31 +1,13 @@
 ﻿using API.Domain.Common.Model;
-using API.Domain.Model.Enums;
-using API.Domain.Model.Organization;
 
 namespace API.Domain.Model.Bussiness
 {
-    public class Donation : BaseModel
+    public class Donation : BaseModelInt
     {
-        public Guid UserId { get; set; }
-
-        public User User { get; set; } = null!;
-
-        public decimal Amount { get; set; }
-
-        public DonationType Type { get; set; }
-
-        public DonationStatus Status { get; set; }
-
-        public string Currency { get; set; } = "PEN";
-
-        public string? TransactionId { get; set; }
-
-        public string? PaymentProvider { get; set; }
-
-        public string? Message { get; set; }
-
+        public int RequestDonationId { get; set; }
         public DateTime DonationDate { get; set; }
 
-        public bool IsMonthly { get; set; }
+        public ICollection<DonationFollowUp> FollowUps { get; set; } = new List<DonationFollowUp>();
+        public RequestDonation RequestDonation { get; set; } = null!;
     }
 }

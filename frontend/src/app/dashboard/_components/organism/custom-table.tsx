@@ -27,16 +27,16 @@ interface CustomTableProps<T> {
   onPageChange?: (page: number) => void;
 }
 
-export default function CustomTable<T>({ 
-  columns, 
-  data, 
-  actions, 
-  keyExtractor, 
-  isLoading, 
-  isError, 
-  page, 
-  totalItems, 
-  onPageChange 
+export default function CustomTable<T>({
+  columns,
+  data,
+  actions,
+  keyExtractor,
+  isLoading,
+  isError,
+  page,
+  totalItems,
+  onPageChange
 }: CustomTableProps<T>) {
   return (
     <div className="w-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
@@ -82,7 +82,7 @@ export default function CustomTable<T>({
                 >
                   {columns.map((col) => (
                     <TableBodyCell key={col.key} label={col.label}>
-                      {col.render ? col.render(row) : (row as any)[col.key] !== "" && (row as any)[col.key] !== null ? (row as any)[col.key] : "N/A" }
+                      {col.render ? col.render(row) : (row as any)[col.key] !== "" && (row as any)[col.key] !== null ? (row as any)[col.key] : "N/A"}
                     </TableBodyCell>
                   ))}
 
@@ -103,9 +103,9 @@ export default function CustomTable<T>({
         </table>
       </div>
 
-      {totalItems && page && onPageChange && (
-        <TablePagination total={totalItems} value={page} onChange={onPageChange} />
-      )}
+
+      <TablePagination total={totalItems} value={page} onChange={onPageChange} />
+
     </div>
   );
 }

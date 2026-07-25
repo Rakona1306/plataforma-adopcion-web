@@ -137,7 +137,7 @@ namespace API.Presentation.Controllers.Organization
                 await _service.GetInteractionsAsync(
                     page,
                     pageSize,
-                    id
+                    id.ToString()
                 );
 
             return Ok(response);

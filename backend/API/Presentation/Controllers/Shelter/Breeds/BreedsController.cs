@@ -183,7 +183,7 @@ namespace API.Presentation.Controllers.Shelter.Breeds
                     .GetInteractionsAsync(
                         page,
                         pageSize,
-                        id
+                        id.ToString()
                     );
 
             return Ok(response);

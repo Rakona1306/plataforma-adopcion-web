@@ -2,6 +2,7 @@
 using API.Application.Features.Bussiness.Permissions.Dtos;
 using API.Application.Features.Organization.Roles.Dtos;
 using API.Application.Features.Roles.Mappers;
+using API.Application.Features.System.AuditLogs.Dtos;
 using API.Application.Features.System.AuditLogs.Mappers;
 using API.Application.Helpers;
 using API.Domain.Common.Model;
@@ -278,7 +279,7 @@ namespace API.Application.Services.Organization.Roles
 
             await _auditLogRepository.CreateAsync(
                 AuditEnum.UPDATE,
-                entity.Id,
+                entity.Id.ToString(),
                 nameof(Role),
                 userId,
                 oldValues
@@ -315,6 +316,11 @@ namespace API.Application.Services.Organization.Roles
 
             await _repository.DeleteAsync(entity, userId);
             await _repository.SaveChangesAsync();
+        }
+
+        public Task<Paginate<AuditLogResponse>> GetInteractionsAsync(int page, int pageSize, Guid recordId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

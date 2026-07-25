@@ -23,7 +23,7 @@ export default function PetsSection() {
         </p>
 
         <div className="mt-10">
-          {data && data?.items.length > 0 ? (
+          {data && data?.items.length !== 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {data?.items.map((pet) => (
                 <PetCard key={pet.id} {...pet} />
@@ -38,9 +38,6 @@ export default function PetsSection() {
               <p className="text-lg text-foreground/70 max-w-md mx-auto">
                 Intenta con otros criterios de búsqueda o filtros
               </p>
-              <Button href="/mascotas">
-                Ver todas las mascotas
-              </Button>
             </div>
           )}
         </div>

@@ -109,7 +109,7 @@ export function PetDeatilPage({ slug }: PetDeatilPageProps) {
   };
 
   return (
-    <div className="min-h-screen py-8 md:py-16" style={{ backgroundColor: "#FFFFFF" }}>
+    <div className="min-h-screen py-8 md:py-16">
       <div className="container mx-auto px-4 md:px-6">
         {/* Back Button */}
         <Link
@@ -211,8 +211,8 @@ export function PetDeatilPage({ slug }: PetDeatilPageProps) {
               </div>
 
               {pet.rescueStory && (
-                <div className="mt-8 p-6 rounded-xl bg-gray-100">
-                  <h2 className={`text-3xl font-bold flex gap-2 items-center mb-4 ${montserrat.className}`} style={{ color: "var(--primary)" }}>
+                <div className="mt-8 p-6 rounded-xl bg-white border-2 border-gray-300 shadow-sm shadow-black/30">
+                  <h2 className={`text-3xl font-extrabold flex gap-2 items-center mb-4 ${montserrat.className}`} style={{ color: "var(--primary)" }}>
                     <MdPets className="w-8 h-8" style={{ color: "var(--terciary)" }} />
                     <span>Mi historia</span>
                   </h2>
@@ -317,8 +317,8 @@ export function PetDeatilPage({ slug }: PetDeatilPageProps) {
 
             {/* Description */}
             {pet.description && (
-              <div className="space-y-3 p-6 rounded-xl" style={{ backgroundColor: "#F5F5F5" }}>
-                <h2 className={`text-2xl font-bold ${montserrat.className} text-primary`}>
+              <div className="space-y-3 p-6 rounded-xl bg-white shadow-sm shadow-black/30 border-2 border-gray-300">
+                <h2 className={`text-2xl font-extrabold ${montserrat.className} text-primary`}>
                   Sobre {pet.name}
                 </h2>
                 <p className="text-base leading-relaxed text-slate-800" >
@@ -329,8 +329,8 @@ export function PetDeatilPage({ slug }: PetDeatilPageProps) {
 
             {/* Characteristics */}
             {pet.traits && pet.traits.length > 0 && (
-              <div className="space-y-4 p-6 rounded-xl" style={{ backgroundColor: "#F5F5F5" }}>
-                <h2 className={`text-2xl font-bold ${montserrat.className} text-primary`}>
+              <div className="space-y-4 p-6 rounded-xl bg-white shadow-sm shadow-black/30 border-2 border-gray-300">
+                <h2 className={`text-2xl font-extrabold ${montserrat.className} text-primary`}>
                   Características
                 </h2>
                 <div className="flex flex-wrap gap-3">

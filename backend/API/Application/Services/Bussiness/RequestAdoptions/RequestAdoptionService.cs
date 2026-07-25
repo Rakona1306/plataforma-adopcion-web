@@ -1,0 +1,356 @@
+using API.Application.Features.Bussiness.RequestAdoptions.Dtos;
+using API.Application.Features.Bussiness.RequestAdoptions.Dtos.Private;
+using API.Domain.Common.Model;
+using API.Domain.Model.Bussiness;
+using API.Domain.Model.Enums;
+using API.Domain.Repository.Bussiness;
+using API.Domain.Repository.Shelter;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
+
+namespace API.Application.Services.Bussiness.RequestAdoptions
+{
+    public interface IRequestAdoptionService
+    {
+        Task Create(CreateRequestAdoption dto, Guid userId);
+        Task Update(UpdateRequestAdoption dto, Guid userId);
+        Task<Paginate<RequestAdoptionResponse>> Paginate(RequestAdoptionFilter filter);
+        Task Delete(int id, Guid userId);
+        Task Review(ReviewRequestAdoption dto, Guid reviewerId);
+        Task AddComment(int id, string comment, Guid userId);
+        Task<RequestAdoptionResponse?> GetById(int id);
+    }
+    public class RequestAdoptionService : IRequestAdoptionService
+    {
+        private readonly IRequestAdoptionRepository _requestAdoptionRepository;
+        private readonly IPetRepository _petRepository;
+        private readonly ISponsorRepository _sponsorRepository;
+        private readonly IMapper _mapper;
+
+        public RequestAdoptionService(
+            IPetRepository petRepository,
+            IRequestAdoptionRepository requestAdoptionRepository,
+            ISponsorRepository sponsorRepository,
+            IMapper mapper)
+        {
+            _requestAdoptionRepository = requestAdoptionRepository;
+            _sponsorRepository = sponsorRepository;
+            _mapper = mapper;
+            _petRepository = petRepository;
+        }
+
+        public async Task Create(CreateRequestAdoption dto, Guid userId)
+        {
+            // Verificar que la mascota existe y está disponible
+            var existingRequest = await _requestAdoptionRepository
+                .Query()
+                .AnyAsync(r => r.UserId == userId && r.PetId == dto.PetId && r.Status == RequestStatus.PENDIENTE);
+
+            if (existingRequest)
+            {
+                throw new InvalidOperationException(
+                    "Ya tienes una solicitud pendiente para esta mascota.");
+            }
+
+            var requestAdoption = _mapper.Map<RequestAdoption>(dto);
+            requestAdoption.UserId = userId;
+            requestAdoption.Status = RequestStatus.PENDIENTE;
+            requestAdoption.CreatedAt = DateTime.UtcNow;
+            requestAdoption.CreatedBy = userId;
+            requestAdoption.LastUpdatedAt = DateTime.UtcNow;
+
+            await _requestAdoptionRepository.CreateAsync(requestAdoption, userId);
+            await _requestAdoptionRepository.SaveChangesAsync();
+        }
+
+        public async Task Update(UpdateRequestAdoption dto, Guid userId)
+        {
+            var requestAdoption = await _requestAdoptionRepository
+                .Query()
+                .FirstOrDefaultAsync(r => r.Id == dto.Id);
+
+            if (requestAdoption is null)
+            {
+                throw new KeyNotFoundException(
+                    $"No se encontró la solicitud de adopción con Id {dto.Id}");
+            }
+
+            // Solo el propietario puede actualizar
+            if (requestAdoption.UserId != userId)
+            {
+                throw new UnauthorizedAccessException(
+                    "No tienes permisos para modificar esta solicitud.");
+            }
+
+            // No se puede actualizar si ya fue revisada
+            if (requestAdoption.Status != RequestStatus.PENDIENTE)
+            {
+                throw new InvalidOperationException(
+                    "No se puede modificar una solicitud que ya ha sido revisada.");
+            }
+
+            _mapper.Map(dto, requestAdoption);
+            requestAdoption.LastUpdatedAt = DateTime.UtcNow;
+            requestAdoption.UpdatedBy = userId;
+
+            await _requestAdoptionRepository.SaveChangesAsync();
+        }
+
+        public async Task<Paginate<RequestAdoptionResponse>> Paginate(RequestAdoptionFilter filter)
+        {
+            IQueryable<RequestAdoption> query = _requestAdoptionRepository.Query();
+
+            // Aplicar filtros
+            if (filter.Status.HasValue)
+                query = query.Where(x => x.Status == filter.Status.Value);
+
+            if (filter.UserId.HasValue)
+                query = query.Where(x => x.UserId == filter.UserId.Value);
+
+            if (filter.PetId.HasValue)
+                query = query.Where(x => x.PetId == filter.PetId.Value);
+
+            if (filter.ReviewedById.HasValue)
+                query = query.Where(x => x.ReviewedBy == filter.ReviewedById.Value);
+
+            if (filter.CreatedFrom.HasValue)
+                query = query.Where(x => x.CreatedAt >= filter.CreatedFrom.Value);
+
+            if (filter.CreatedTo.HasValue)
+                query = query.Where(x => x.CreatedAt <= filter.CreatedTo.Value);
+
+            if (filter.ReviewedFrom.HasValue)
+                query = query.Where(x => x.ReviewedAt >= filter.ReviewedFrom.Value);
+
+            if (filter.ReviewedTo.HasValue)
+                query = query.Where(x => x.ReviewedAt <= filter.ReviewedTo.Value);
+
+            if (filter.HasOtherPets.HasValue)
+                query = query.Where(x => x.HasOtherPets == filter.HasOtherPets.Value);
+
+            if (filter.HasChildren.HasValue)
+                query = query.Where(x => x.HasChildren == filter.HasChildren.Value);
+
+            if (filter.AcceptHomeVisit.HasValue)
+                query = query.Where(x => x.AcceptHomeVisit == filter.AcceptHomeVisit.Value);
+
+            if (!string.IsNullOrWhiteSpace(filter.District))
+                query = query.Where(x => x.District.Contains(filter.District));
+
+            if (!string.IsNullOrWhiteSpace(filter.HouseType))
+                query = query.Where(x => x.HouseType.Contains(filter.HouseType));
+
+            if (!string.IsNullOrWhiteSpace(filter.Search))
+            {
+                var searchTerm = filter.Search.ToLower();
+                query = query.Where(x =>
+                    x.Motivation.ToLower().Contains(searchTerm) ||
+                    x.District.ToLower().Contains(searchTerm) ||
+                    x.Phone.Contains(searchTerm));
+            }
+
+            // Contar total
+            int totalItems = await query.CountAsync();
+
+            // Ordenar
+            query = filter.OrderBy?.ToLower() switch
+            {
+                "status" => filter.IsDescending ? query.OrderByDescending(x => x.Status) : query.OrderBy(x => x.Status),
+                "district" => filter.IsDescending ? query.OrderByDescending(x => x.District) : query.OrderBy(x => x.District),
+                "reviewedat" => filter.IsDescending ? query.OrderByDescending(x => x.ReviewedAt) : query.OrderBy(x => x.ReviewedAt),
+                _ => filter.IsDescending ? query.OrderByDescending(x => x.CreatedAt) : query.OrderBy(x => x.CreatedAt)
+            };
+
+            // Paginar y proyectar
+            var items = await query
+                .Skip((filter.Page - 1) * filter.PageSize)
+                .Take(filter.PageSize)
+                .ProjectTo<RequestAdoptionResponse>(_mapper.ConfigurationProvider)
+                .ToListAsync();
+
+            return new Paginate<RequestAdoptionResponse>
+            {
+                Items = items,
+                TotalCount = totalItems,
+                Page = filter.Page,
+                PageSize = filter.PageSize
+            };
+        }
+
+        public async Task Delete(int id, Guid userId)
+        {
+            var requestAdoption = await _requestAdoptionRepository
+                .Query()
+                .FirstOrDefaultAsync(r => r.Id == id);
+
+            if (requestAdoption is null)
+            {
+                throw new KeyNotFoundException(
+                    $"No se encontró la solicitud de adopción con Id {id}");
+            }
+
+            // Solo el propietario o un admin puede eliminar
+            if (requestAdoption.UserId != userId)
+            {
+                throw new UnauthorizedAccessException(
+                    "No tienes permisos para eliminar esta solicitud.");
+            }
+
+            // Si estaba aprobada, eliminar el Sponsor asociado
+            if (requestAdoption.Status == RequestStatus.APROBADO)
+            {
+                await DeleteAssociatedSponsor(requestAdoption);
+            }
+
+            await _requestAdoptionRepository.DeleteAsync(requestAdoption, userId);
+            await _requestAdoptionRepository.SaveChangesAsync();
+        }
+
+        public async Task Review(ReviewRequestAdoption dto, Guid reviewerId)
+        {
+            var requestAdoption = await _requestAdoptionRepository
+                .Query()
+                .FirstOrDefaultAsync(r => r.Id == dto.Id);
+
+            if (requestAdoption is null)
+            {
+                throw new KeyNotFoundException(
+                    $"No se encontró la solicitud de adopción con Id {dto.Id}");
+            }
+
+            // No se puede revisar si ya fue revisada (excepto si se cambia de APROBADO a otro estado)
+            if (requestAdoption.Status != RequestStatus.PENDIENTE &&
+                requestAdoption.Status != RequestStatus.APROBADO)
+            {
+                throw new InvalidOperationException(
+                    "Esta solicitud ya fue revisada y no puede ser modificada.");
+            }
+
+            var previousStatus = requestAdoption.Status;
+            var newStatus = dto.Status;
+
+            // === LÓGICA DE SPONSOR ===
+
+            // Caso 1: Cambia a APROBADO → Crear Sponsor
+            if (previousStatus != RequestStatus.APROBADO && newStatus == RequestStatus.APROBADO)
+            {
+                await CreateSponsorFromRequest(requestAdoption, reviewerId);
+            }
+            // Caso 2: Cambia de APROBADO a otro estado → Eliminar Sponsor
+            else if (previousStatus == RequestStatus.APROBADO && newStatus != RequestStatus.APROBADO)
+            {
+                await DeleteAssociatedSponsor(requestAdoption, reviewerId);
+            }
+
+            // === FLUJO NORMAL DE REVIEW ===
+            requestAdoption.Status = newStatus;
+            requestAdoption.ReviewedAt = DateTime.UtcNow;
+            requestAdoption.ReviewedBy = reviewerId;
+            requestAdoption.ReviewComment = dto.ReviewComment;
+            requestAdoption.LastUpdatedAt = DateTime.UtcNow;
+            requestAdoption.UpdatedBy = reviewerId;
+
+            await _sponsorRepository.SaveChangesAsync();
+            await _petRepository.SaveChangesAsync();
+            await _requestAdoptionRepository.SaveChangesAsync();
+        }
+
+        public async Task AddComment(int id, string comment, Guid userId)
+        {
+            var requestAdoption = await _requestAdoptionRepository
+                .Query()
+                .FirstOrDefaultAsync(r => r.Id == id);
+
+            if (requestAdoption is null)
+            {
+                throw new KeyNotFoundException(
+                    $"No se encontró la solicitud de adopción con Id {id}");
+            }
+
+            // Solo el revisor o el propietario pueden agregar comentarios
+            if (requestAdoption.UserId != userId && requestAdoption.ReviewedBy != userId)
+            {
+                throw new UnauthorizedAccessException(
+                    "No tienes permisos para agregar comentarios a esta solicitud.");
+            }
+
+            requestAdoption.ReviewComment = comment;
+            requestAdoption.LastUpdatedAt = DateTime.UtcNow;
+            requestAdoption.UpdatedBy = userId;
+
+            await _requestAdoptionRepository.SaveChangesAsync();
+        }
+
+        public async Task<RequestAdoptionResponse?> GetById(int id)
+        {
+            var requestAdoption = await _requestAdoptionRepository
+                .Query()
+                .FirstOrDefaultAsync(r => r.Id == id);
+
+            return requestAdoption is null
+                ? null
+                : _mapper.Map<RequestAdoptionResponse>(requestAdoption);
+        }
+
+        // === MÉTODOS PRIVADOS PARA MANEJO DE SPONSOR ===
+
+        private async Task CreateSponsorFromRequest(RequestAdoption requestAdoption, Guid createdBy)
+        {
+            // Verificar que no exista ya un Sponsor para esta solicitud
+            var existingSponsor = await _sponsorRepository
+                .Query()
+                .AnyAsync(s => s.RequestSponsorId == requestAdoption.Id);
+
+            if (existingSponsor)
+            {
+                throw new InvalidOperationException("Ya existe un patrocinio activo para este usuario y mascota.");
+            }
+
+            var pet = await _petRepository.Query().FirstOrDefaultAsync(p => p.Id == requestAdoption.PetId);
+
+            if (pet is null)
+            {
+                throw new KeyNotFoundException($"No se encontró la mascota con Id {requestAdoption.PetId}");
+            }
+
+            if (!pet.IsAdopted)
+            {
+                pet.IsAdopted = true;
+                await _petRepository.UpdateAsync(pet, createdBy);
+            }
+
+            var sponsor = new Sponsor
+            {
+                CreatedAt = DateTime.UtcNow,
+                CreatedBy = createdBy,
+                LastUpdatedAt = DateTime.UtcNow
+            };
+
+            await _sponsorRepository.CreateAsync(sponsor, createdBy);
+        }
+
+        private async Task DeleteAssociatedSponsor(RequestAdoption requestAdoption, Guid? createdBy = null)
+        {
+            var sponsor = await _sponsorRepository.Query().FirstOrDefaultAsync(s => s.RequestSponsorId == requestAdoption.Id);
+            var pet = await _petRepository.Query().FirstOrDefaultAsync(p => p.Id == requestAdoption.PetId);
+
+            if (pet is null)
+            {
+                throw new KeyNotFoundException($"No se encontró la mascota con Id {requestAdoption.PetId}");
+            }
+
+            if (sponsor is not null)
+            {
+                sponsor.LastUpdatedAt = DateTime.UtcNow;
+                await _sponsorRepository.DeleteAsync(sponsor, createdBy);
+            }
+
+            if (pet.IsAdopted)
+            {
+                pet.IsAdopted = false;
+                await _petRepository.UpdateAsync(pet, createdBy);
+            }
+        }
+    }
+}

@@ -36,7 +36,7 @@ namespace API.Application.Common.Services
         Task<Paginate<AuditLogResponse>> GetInteractionsAsync(
             int page,
             int pageSize,
-            Guid recordId
+            string recordId
         );
 
     }

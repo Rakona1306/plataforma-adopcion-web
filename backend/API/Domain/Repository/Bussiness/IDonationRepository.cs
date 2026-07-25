@@ -3,6 +3,6 @@ using API.Domain.Model.Bussiness;
 
 namespace API.Domain.Repository.Bussiness;
 
-public interface IDonationRepository: IBaseRepository<Donation>
+public interface IDonationRepository
 {
 }

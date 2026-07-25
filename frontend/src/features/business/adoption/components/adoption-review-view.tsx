@@ -34,7 +34,8 @@ import {
     MdVerifiedUser
 } from 'react-icons/md'
 import { useMediaQuery } from '@mantine/hooks'
-import { RequestAdoptionResponse } from '../dto/request-adoption-response'
+import { RequestAdoptionResponse } from '../../request-adoptions/dto/dashboard/request-adoption'
+import { montserrat } from '@/lib/fonts/monserrat'
 
 interface Props {
     request: RequestAdoptionResponse
@@ -69,7 +70,6 @@ export default function AdoptionReviewView({
     const isMobile = useMediaQuery('(max-width: 768px)')
 
     const statusConfig = STATUS_CONFIG[request.status as keyof typeof STATUS_CONFIG]
-    const typeConfig = TYPE_CONFIG[request.type as keyof typeof TYPE_CONFIG]
     const StatusIcon = statusConfig?.icon || MdSchedule
 
     const handleApprove = async () => {
@@ -105,49 +105,14 @@ export default function AdoptionReviewView({
     }
 
     return (
-        <Container size="lg" py={{ base: 'md', md: 'lg' }}>
-            {/* Header */}
-            <Group justify="space-between" mb="xl">
-                {onBack && (
-                    <ActionIcon variant="light" onClick={onBack}>
-                        <MdArrowBack size={20} />
-                    </ActionIcon>
-                )}
-                <Group>
-                    <Badge
-                        size="lg"
-                        variant="light"
-                        color={statusConfig?.color}
-                        leftSection={<StatusIcon size={16} />}
-                    >
-                        {statusConfig?.label}
-                    </Badge>
-                    <Badge size="lg" color={typeConfig?.color}>
-                        {typeConfig?.label}
-                    </Badge>
-                </Group>
-            </Group>
-
+        <div className='w-full'>
             {/* Información del Solicitante */}
             <Paper p="md" radius="md" mb="lg" withBorder>
                 <Stack gap="md">
                     <Group justify="space-between">
-                        <Text fw={600} size="lg">
+                        <Text fw={600} size="lg" className={`${montserrat.className}`}>
                             Información del Solicitante
                         </Text>
-                        <CopyButton value={request.userId} timeout={2000}>
-                            {({ copied, copy }) => (
-                                <Tooltip label={copied ? 'Copiado' : 'Copiar ID'} withArrow position="right">
-                                    <ActionIcon
-                                        color={copied ? 'teal' : 'gray'}
-                                        variant="subtle"
-                                        onClick={copy}
-                                    >
-                                        {copied ? <MdCheckCircle size={16} /> : <MdContentCopy size={16} />}
-                                    </ActionIcon>
-                                </Tooltip>
-                            )}
-                        </CopyButton>
                     </Group>
 
                     <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }} spacing="md">
@@ -160,7 +125,7 @@ export default function AdoptionReviewView({
                                     <Text size="xs" fw={500} c="dimmed">
                                         Nombre
                                     </Text>
-                                    <Text fw={600}>{request.userName}</Text>
+                                    <Text fw={600}>{request.user.name}</Text>
                                 </div>
                             </Group>
                         </Card>
@@ -216,84 +181,84 @@ export default function AdoptionReviewView({
             </Paper>
 
             {/* Datos de Adopción */}
-            {request.type === 'adoption' && (
-                <Paper p="md" radius="md" mb="lg" withBorder>
-                    <Stack gap="md">
-                        <Group>
-                            <ThemeIcon variant="light" size="lg" radius="md" color="teal">
-                                <MdHome size={20} />
-                            </ThemeIcon>
-                            <Text fw={600} size="md">
-                                Detalles de Adopción
+
+            <Paper p="md" radius="md" mb="lg" withBorder>
+                <Stack gap="md">
+                    <Group>
+                        <ThemeIcon variant="light" size="lg" radius="md" color="teal">
+                            <MdHome size={20} />
+                        </ThemeIcon>
+                        <Text fw={600} size="md">
+                            Detalles de Adopción
+                        </Text>
+                    </Group>
+
+                    <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
+                        <Card withBorder p="md" radius="md" bg="gray.0">
+                            <Text size="xs" fw={500} c="dimmed" mb="xs">
+                                Tipo de Vivienda
                             </Text>
-                        </Group>
+                            <Text fw={600}>{request.houseType || 'No especificado'}</Text>
+                        </Card>
 
-                        <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
-                            <Card withBorder p="md" radius="md" bg="gray.0">
-                                <Text size="xs" fw={500} c="dimmed" mb="xs">
-                                    Tipo de Vivienda
-                                </Text>
-                                <Text fw={600}>{request.houseType || 'No especificado'}</Text>
-                            </Card>
+                        <Card withBorder p="md" radius="md" bg="gray.0">
+                            <Text size="xs" fw={500} c="dimmed" mb="xs">
+                                Otras Mascotas
+                            </Text>
+                            <Badge
+                                color={request.hasOtherPets ? 'orange' : 'green'}
+                                variant="light"
+                            >
+                                {request.hasOtherPets ? 'Sí' : 'No'}
+                            </Badge>
+                        </Card>
 
-                            <Card withBorder p="md" radius="md" bg="gray.0">
-                                <Text size="xs" fw={500} c="dimmed" mb="xs">
-                                    Otras Mascotas
-                                </Text>
-                                <Badge
-                                    color={request.hasOtherPets ? 'orange' : 'green'}
-                                    variant="light"
-                                >
-                                    {request.hasOtherPets ? 'Sí' : 'No'}
-                                </Badge>
-                            </Card>
+                        <Card withBorder p="md" radius="md" bg="gray.0">
+                            <Text size="xs" fw={500} c="dimmed" mb="xs">
+                                Tiene Hijos
+                            </Text>
+                            <Badge
+                                color={request.hasChildren ? 'orange' : 'green'}
+                                variant="light"
+                            >
+                                {request.hasChildren ? 'Sí' : 'No'}
+                            </Badge>
+                        </Card>
 
-                            <Card withBorder p="md" radius="md" bg="gray.0">
-                                <Text size="xs" fw={500} c="dimmed" mb="xs">
-                                    Tiene Hijos
-                                </Text>
-                                <Badge
-                                    color={request.hasChildren ? 'orange' : 'green'}
-                                    variant="light"
-                                >
-                                    {request.hasChildren ? 'Sí' : 'No'}
-                                </Badge>
-                            </Card>
+                        <Card withBorder p="md" radius="md" bg="gray.0">
+                            <Text size="xs" fw={500} c="dimmed" mb="xs">
+                                Acepta Visita Domiciliaria
+                            </Text>
+                            <Badge
+                                color={request.acceptHomeVisit ? 'green' : 'red'}
+                                variant="light"
+                            >
+                                {request.acceptHomeVisit ? 'Sí' : 'No'}
+                            </Badge>
+                        </Card>
+                    </SimpleGrid>
 
-                            <Card withBorder p="md" radius="md" bg="gray.0">
-                                <Text size="xs" fw={500} c="dimmed" mb="xs">
-                                    Acepta Visita Domiciliaria
-                                </Text>
-                                <Badge
-                                    color={request.acceptHomeVisit ? 'green' : 'red'}
-                                    variant="light"
-                                >
-                                    {request.acceptHomeVisit ? 'Sí' : 'No'}
-                                </Badge>
-                            </Card>
-                        </SimpleGrid>
+                    {request.pet && (
+                        <Paper p="md" radius="md" bg="blue.0">
+                            <Group>
+                                <ThemeIcon variant="light" size="lg" color="blue">
+                                    <MdPets size={20} />
+                                </ThemeIcon>
+                                <div>
+                                    <Text size="xs" fw={500} c="dimmed">
+                                        Mascota Interesada
+                                    </Text>
+                                    <Text fw={600}>{request.pet.name}</Text>
+                                </div>
+                            </Group>
+                        </Paper>
+                    )}
+                </Stack>
+            </Paper>
 
-                        {request.petName && (
-                            <Paper p="md" radius="md" bg="blue.0">
-                                <Group>
-                                    <ThemeIcon variant="light" size="lg" color="blue">
-                                        <MdPets size={20} />
-                                    </ThemeIcon>
-                                    <div>
-                                        <Text size="xs" fw={500} c="dimmed">
-                                            Mascota Interesada
-                                        </Text>
-                                        <Text fw={600}>{request.petName}</Text>
-                                    </div>
-                                </Group>
-                            </Paper>
-                        )}
-                    </Stack>
-                </Paper>
-            )}
 
             {/* Notas Adicionales */}
-            {request.notes && (
+            {/* request. && (
                 <Paper p="md" radius="md" mb="lg" withBorder>
                     <Stack gap="md">
                         <Group>
@@ -311,7 +276,7 @@ export default function AdoptionReviewView({
                         </Paper>
                     </Stack>
                 </Paper>
-            )}
+            ) */}
 
             <Divider my="lg" />
 
@@ -357,7 +322,7 @@ export default function AdoptionReviewView({
                             </Card>
                         )}
 
-                        {request.reviewerName && (
+                        {request.review && (
                             <Card withBorder p="md" radius="md">
                                 <Group mb="xs">
                                     <ThemeIcon variant="light" size="lg" color="purple">
@@ -368,7 +333,7 @@ export default function AdoptionReviewView({
                                             Revisado por
                                         </Text>
                                         <Text fw={600} size="sm">
-                                            {request.reviewerName}
+                                            {request.review.name}
                                         </Text>
                                     </div>
                                 </Group>
@@ -465,6 +430,6 @@ export default function AdoptionReviewView({
                     </Group>
                 </Stack>
             </Modal>
-        </Container>
+        </div>
     )
 }

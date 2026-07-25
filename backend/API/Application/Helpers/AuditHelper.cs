@@ -15,6 +15,25 @@ namespace API.Application.Helpers
             entity.UpdatedBy = userId;
         }
 
+        public static void CreateIntAudit(
+            BaseModelInt entity,
+            Guid? userId
+        )
+        {
+            entity.LastUpdatedAt = DateTime.UtcNow;
+            entity.UpdatedBy = userId;
+        }
+
+        public static void UpdateIntAudit(
+            BaseModelInt entity,
+            Guid? userId
+        )
+        {
+            entity.LastUpdatedAt = DateTime.UtcNow;
+            entity.UpdatedBy = userId;
+        }
+
+
         public static void UpdateAudit(
             BaseModel entity,
             Guid? userId

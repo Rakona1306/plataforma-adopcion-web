@@ -81,15 +81,19 @@ export const navLinks: NavLink[] = [
     items: [
       {
         name: 'Padrinos',
-        href: '/dashboard/sponsors'
+        href: '/dashboard/padrinos'
+      },
+      {
+        name: 'Planes',
+        href: '/dashboard/padrinos/planes'
       },
       {
         name: 'Solicitudes',
-        href: '/dashboard/sponsorship-requests'
+        href: '/dashboard/padrinos/solicitudes'
       },
       {
         name: 'Reportes',
-        href: '/dashboard/sponsorship-areas'
+        href: '/dashboard/padrinos/reportes'
       },
     ]
   },

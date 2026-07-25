@@ -11,12 +11,15 @@ namespace API.Presentation.Controllers.System
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _service;
+        private readonly IWebHostEnvironment _environment;
 
         public AuthController(
-            IAuthService service
+            IAuthService service,
+            IWebHostEnvironment environment
         )
         {
             _service = service;
+            _environment = environment;
         }
 
         [HttpPost("register")]
@@ -189,9 +192,11 @@ namespace API.Presentation.Controllers.System
                 token,
                 new CookieOptions
                 {
-                    HttpOnly = true,
+                    HttpOnly = false,
 
                     Secure = true,
+
+                    Domain = _environment.IsDevelopment() ? "localhost" : ".adoptasalvavidas.com",
 
                     SameSite =
                         SameSiteMode.None,
