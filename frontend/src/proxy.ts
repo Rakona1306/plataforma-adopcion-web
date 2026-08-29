@@ -1,8 +1,4 @@
-import { authService } from "@/features/system/auth/services/auth.service";
-import { cookies } from "next/headers";
-import { NextRequest, NextResponse } from "next/server";
-
-export default async function proxy(request: NextRequest) {
+export default async function proxy() {
     /*
     const cookie = (await cookies()).get('access_token')?.value;
 

@@ -45,9 +45,6 @@ export default function PetVaccineAssignPage({ id }: Props) {
         router.back()
     }
 
-
-    console.log(errorValidation)
-
     return (
         <>
             <HeaderDashboard>

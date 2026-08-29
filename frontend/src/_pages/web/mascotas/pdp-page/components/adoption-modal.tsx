@@ -15,7 +15,6 @@ import Swal from "sweetalert2";
 import { AlertCircle } from "lucide-react";
 import useCreateRequestAdoption from "@/features/business/request-adoptions/hooks/dashboard/use-create-request-adoption";
 import { CreateReqAdoption, createRequestAdoptionSchema } from "@/features/business/request-adoptions/dto/web/create-request-adoption.dto";
-import { RequestAdoptionError } from "@/features/business/request-adoptions/dto/errors/request-adoption.error";
 
 interface AdoptionModalProps {
     pet?: PetPublic
@@ -26,7 +25,7 @@ export function AdoptionModal({ pet }: AdoptionModalProps) {
     const { profile, isLoading } = useProfile()
     const { handleCloseModal } = useModal() || {}
     const { createAdoption, isPending } = useCreateRequestAdoption({
-        onSuccess: (data) => {
+        onSuccess: () => {
             handleCloseModal?.();
             Swal.fire({
                 title: 'Solicitud enviada',

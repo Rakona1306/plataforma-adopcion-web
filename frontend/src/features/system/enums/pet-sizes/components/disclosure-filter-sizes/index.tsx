@@ -1,59 +1,69 @@
 import { useDisclosure } from "@mantine/hooks";
 import { useGetPetSizes } from "../../hooks/useGetPetSizes";
-import { useEffect, useMemo, useState } from "react";
 import { Box, Checkbox, Collapse, Group, Skeleton, Text } from "@mantine/core";
 import { montserrat } from "@/lib/fonts/monserrat";
 import { cn } from "@/lib/utils";
 import { PiCaretDownLight } from "react-icons/pi";
 import { useFilterPlpStore } from "@/store/use-filter-plp-store";
-import { v4 as uuid } from 'uuid'
+import { v4 as uuid } from "uuid";
 
-const FEATURE = 'SIZE'
+const FEATURE = "SIZE";
 
 export default function DisclosureFilterSize() {
-    const { data, isLoading } = useGetPetSizes()
+    const { data, isLoading } = useGetPetSizes();
     const [expanded, { toggle }] = useDisclosure(false);
-    const { removeFilter, setFilter, searchFilter, returnArrayString } = useFilterPlpStore()
-    const filters = useFilterPlpStore((state) => state.filters);
-    const [localValues, setLocalValues] = useState<string[]>([]);
+    const removeFilter = useFilterPlpStore((state) => state.removeFilter);
+    const setFilter = useFilterPlpStore((state) => state.setFilter);
+    const searchFilter = useFilterPlpStore((state) => state.searchFilter);
+    const returnArrayString = useFilterPlpStore((state) => state.returnArrayString);
 
-    useEffect(() => {
-        setLocalValues(returnArrayString(FEATURE));
-    }, [filters, returnArrayString]);
+    const localValues = returnArrayString(FEATURE);
 
     if (isLoading || !data) {
         return <Skeleton w="100%" h={44} radius="md" />;
     }
 
     const handleGroupChange = (nextValues: string[]) => {
-        // 1. Actualizamos el estado visual al instante para que no se tranque el check
-        setLocalValues(nextValues);
+  const currentStoreValues = returnArrayString(FEATURE);
 
-        // 2. Evaluamos si el usuario agregó o quitó un elemento comparando con el store
-        const currentStoreValues = returnArrayString(FEATURE);
+  if (nextValues.length > currentStoreValues.length) {
+    const addedKey = nextValues.find(
+      (val) => !currentStoreValues.includes(val),
+    );
 
-        if (nextValues.length > currentStoreValues.length) {
-            const addedKey = nextValues.find((val) => !currentStoreValues.includes(val));
-            const item = data.find((d) => d.key.toString() === addedKey);
+    const item = data.find(
+      (d) => d.key.toString() === addedKey,
+    );
 
-            if (item) {
-                setFilter({
-                    uid: uuid(),
-                    feature: FEATURE,
-                    id: item.key.toString(),
-                    name: item.value,
-                });
-            }
-        } else {
-            const removedKey = currentStoreValues.find((val) => !nextValues.includes(val));
-            const item = data.find((d) => d.key.toString() === removedKey);
+    if (item) {
+      setFilter({
+        uid: uuid(),
+        feature: FEATURE,
+        id: item.key.toString(),
+        name: item.value,
+      });
+    }
+  } else {
+    const removedKey = currentStoreValues.find(
+      (val) => !nextValues.includes(val),
+    );
 
-            if (item) {
-                const filterSearched = searchFilter(item.value, item.key.toString());
-                if (filterSearched) removeFilter(filterSearched);
-            }
-        }
-    };
+    const item = data.find(
+      (d) => d.key.toString() === removedKey,
+    );
+
+    if (item) {
+      const filterSearched = searchFilter(
+        item.value,
+        item.key.toString(),
+      );
+
+      if (filterSearched) {
+        removeFilter(filterSearched);
+      }
+    }
+  }
+};
 
     return (
         <Box>
@@ -67,7 +77,7 @@ export default function DisclosureFilterSize() {
                     montserrat.className,
                     expanded
                         ? "rounded-t-md border-b-transparent"
-                        : "rounded-md hover:border-gray-300 hover:bg-gray-50"
+                        : "rounded-md hover:border-gray-300 hover:bg-gray-50",
                 )}
             >
                 <Text size="sm" fw={500}>
@@ -78,7 +88,7 @@ export default function DisclosureFilterSize() {
                         size={16}
                         className={cn(
                             "text-slate-800 transition-transform duration-200",
-                            expanded && "rotate-180"
+                            expanded && "rotate-180",
                         )}
                     />
                 </span>
@@ -92,7 +102,10 @@ export default function DisclosureFilterSize() {
                         // onChange={setValue}
                         onChange={handleGroupChange}
                     >
-                        <Group align="flex-start" className="flex! flex-col! gap-0! divide-y divide-gray-100">
+                        <Group
+                            align="flex-start"
+                            className="flex! flex-col! gap-0! divide-y divide-gray-100"
+                        >
                             {data.map((item) => (
                                 <Checkbox
                                     key={item.key}

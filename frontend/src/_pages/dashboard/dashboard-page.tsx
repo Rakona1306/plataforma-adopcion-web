@@ -1,6 +1,5 @@
 "use client"
 
-import BodyDashboard from "@/app/dashboard/_components/molecules/body-dashboard"
 import { useState } from "react";
 
 const MOCK_PETS = [
@@ -22,7 +21,7 @@ const MOCK_ADOPTIONS = [
 
 export default function DashboardPage() {
 
-    const [activeTab, setActiveTab] = useState<'pets' | 'users' | 'adoptions'>('pets');
+    const [activeTab] = useState<'pets' | 'users' | 'adoptions'>('pets');
 
     // Cálculos rápidos de analíticas
     const availablePets = MOCK_PETS.filter(p => p.status === 'Disponible').length;

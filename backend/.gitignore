@@ -7,6 +7,10 @@ obj
 bin/
 obj/
 
+# .NET
+**/bin/
+**/obj/
+
 # Rider
 .idea/
 

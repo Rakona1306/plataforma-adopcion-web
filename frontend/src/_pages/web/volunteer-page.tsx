@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 "use client";
 
 import { useState } from "react";
@@ -40,8 +40,8 @@ const iconMap: Record<string, React.ComponentType<{ className: string }>> = {
 export default function VolunteerPage() {
   const [expandedFaq, setExpandedFaq] = useState<number | null>(0);
 
-  const handleSubmit = (values: any) => {
-    console.log(values);
+  const handleSubmit = () => {
+    
   };
 
   return (
