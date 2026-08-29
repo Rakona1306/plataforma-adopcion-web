@@ -3,6 +3,9 @@
  */
 export const API_ENDPOINTS = {
   SHELTER: {
+    PET: {
+      MOST_REQUESTED: '/pets/most-requested'
+    },
     SPECIE: {
       PUBLIC_GET_ALL: '/v1/species'
     }
@@ -23,16 +26,28 @@ export const API_ENDPOINTS = {
     CREATE: '/api/users',
     UPDATE: (id: string) => `/api/users/${id}`,
     DELETE: (id: string) => `/api/users/${id}`,
+    VALIDATE_DNI: (dni: string) => `/users/validate-dni/${dni}`
   },
   ADOPTION: {
-    CREATE: '/v1/adoptions',
-    PAGINATE: '/v1/adoptions',
-    REVIEW: (id: string) => `/v1/adoptions/${id}/review`
+    UPDATE: '/adoptions/status',
+    PAGINATE: '/adoptions',
+    BY_ID: (id: number) => `/adoptions/${id}`
   },
   REQUEST_ADOPTION: {
+    DELETE: (id: number) => `/request-adoptions/${id}`,
+    UPDATE: (id: number) => `/request-adoptions/${id}`,
     CREATE: '/request-adoptions',
-    PUBLIC_CREATE: '/v1/request-adoptions',
     PAGINATE: '/request-adoptions',
+    REVIEW: (id: number) => `/request-adoptions/${id}/review`,
+
+    PUBLIC_CREATE: '/v1/request-adoptions'
+  },
+  ADOPTION_FOLLOW_UP: {
+    PAGINATE: '/adoption-follow-ups',
+    CREATE: '/adoption-follow-ups',
+    UPDATE: (id: number) => `/adoption-follow-ups/${id}`,
+    DELETE: (id: number) => `/adoption-follow-ups/${id}`,
+    GET_BY_ID: (id: number) => `/adoption-follow-ups/${id}`
   }
 
 } as const;

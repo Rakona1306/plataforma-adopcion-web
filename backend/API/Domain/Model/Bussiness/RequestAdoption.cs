@@ -17,6 +17,8 @@ namespace API.Domain.Model.Bussiness
         public DateTime? ReviewedAt { get; set; }
         public Guid? ReviewedBy { get; set; }
         public string? ReviewComment { get; set; }
+        public string Dni { get; set; } = string.Empty;
+        public PlatformProvider PlatformProvider { get; set; } = PlatformProvider.Web;
 
         public RequestStatus Status { get; set; }
         public string Motivation { get; set; } = string.Empty;
@@ -28,5 +30,11 @@ namespace API.Domain.Model.Bussiness
         public User User { get; set; } = null!;
         public User? Reviewer { get; set; }
         public Pet Pet { get; set; } = null!;
+    }
+
+    public enum PlatformProvider
+    {
+        Web = 1,
+        Sistema = 2,
     }
 }

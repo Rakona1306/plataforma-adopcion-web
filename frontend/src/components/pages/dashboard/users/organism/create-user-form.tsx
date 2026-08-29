@@ -18,6 +18,7 @@ import { Button, Grid } from "@mantine/core";
 import { useState } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { DniOrRuc } from "../molecules/dni-or-ruc";
+import ButtonUI from "@/components/atoms/button/button-ui";
 
 export default function CreateUserForm() {
   const { create, isPending, errorMessage, errorValidation } = useCreateUser();
@@ -82,7 +83,7 @@ export default function CreateUserForm() {
         <Grid.Col span={{ base: 12, md: 6 }}>
           <Input
             name="password"
-            label="Contraseña"
+            label="Contraseña:"
             type={showPassword ? "text" : "password"}
             error={errorValidation.password}
             placeholder="••••••••"
@@ -101,24 +102,19 @@ export default function CreateUserForm() {
 
       <Grid>
         <Grid.Col span={6}>
-          <SelectInput
-            label="Documento de Identidad"
-            name="document"
-            options={[
-              {
-                label: 'DNI',
-                value: "DNI"
-              },
-              {
-                label: 'RUC',
-                value: 'RUC'
-              }
-            ]}
-            defaultValue="DNI"
+          <SearchSelect<Role>
+            name="roleId"
+            displayField="name"
+            valueField="id"
+            label="Buscar Rol"
+            className="w-full" // Responsive: completo en móvil, mitad en desktop
+            options={data?.items || []}
+            onSearch={(search) => updateFilter({ search })}
+            isLoading={isLoading}
           />
         </Grid.Col>
         <Grid.Col span={6}>
-          <DniOrRuc errorValidation={errorValidation} />
+          <Input name="dni" label="DNI:" error={errorValidation.dni} />
         </Grid.Col>
       </Grid>
 
@@ -129,29 +125,16 @@ export default function CreateUserForm() {
         <Grid.Col span={{ base: 12, md: 6 }}>
           <SelectInput
             name="district"
-            label="Distrito"
+            label="Distrito:"
             placeholder="Seleccione un distrito"
             options={limaDistricts}
           />
         </Grid.Col>
       </Grid>
 
-      {/* Aquí integrarías tu hook de opciones de roles */}
-      {/*<RoleSelect name="roleId" error={errorValidation.roleId} /> */}
-      <SearchSelect<Role>
-        name="roleId"
-        displayField="name"
-        valueField="id"
-        label="Buscar Rol"
-        className="w-full" // Responsive: completo en móvil, mitad en desktop
-        options={data?.items || []}
-        onSearch={(search) => updateFilter({ search })}
-        isLoading={isLoading}
-      />
-
-      <Button type="submit" loading={isPending}>
+      <ButtonUI type="submit" loading={isPending} fullWidth>
         Crear Usuario
-      </Button>
+      </ButtonUI>
     </FormContainer>
   );
 }

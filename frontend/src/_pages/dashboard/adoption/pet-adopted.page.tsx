@@ -6,35 +6,28 @@ import { RowAction } from "@/app/dashboard/_components/molecules/table-actions";
 import CustomTable, { TableColumn } from "@/app/dashboard/_components/organism/custom-table";
 import FilterBar from "@/app/dashboard/_components/organism/filter-bar";
 import { FilterItemConfig } from "@/app/dashboard/_interfaces/ui/filters";
-import { useDeletePet } from "@/core/application/features/shelter/pets/hooks/useDeletePet";
-import { useGetAllPet } from "@/core/application/features/shelter/pets/hooks/useGetAllPet";
-import { Pet } from "@/core/domain/models/shelter/pet";
 import { formatDateTime } from "@/core/shared/helpers/formatDateTime";
-import { formatDate } from "@/shared/utils/date/formatDate";
-import { Badge, Divider } from "@mantine/core";
+import { PetMostRequestedResponse } from "@/features/shelter/pet/dto/dashboard/pet-most-requested-response";
+import useGetPetMostRequested from "@/features/shelter/pet/hooks/use-get-pet-most-requested";
+import { Badge, Divider, Text } from "@mantine/core";
 import { useRouter } from "next/navigation";
 import { BsViewList } from "react-icons/bs";
 
-export default function PetAdoptedPage() {
+export default function PetMostRequestedPage() {
 
-    const { filter, updateFilter, handleClear, data, isLoading, isError } = useGetAllPet({
-        initialFilter: {
-            isAdopted: true
-        }
-    });
+    const { filter, updateFilter, handleClear, data, isLoading, isError } = useGetPetMostRequested();
     const router = useRouter();
-    const { isPending } = useDeletePet();
 
-    const columns: TableColumn<Pet>[] = [
-        { key: "image", label: "Imagen", render: (pet) => pet.photoUrls.length > 0 ? <img src={pet.photoUrls[0].url} alt={pet.name} className="w-16 h-16 object-cover rounded" /> : <div className="w-16 h-16 bg-gray-200 flex items-center justify-center rounded"><span className="text-gray-500 text-sm">Sin imagen</span></div> },
+    console.log('data', data);
+
+    const columns: TableColumn<PetMostRequestedResponse>[] = [
+        { key: "image", label: "Imagen", render: (pet) => pet.photos.length > 0 ? <img src={pet.photos[0].url} alt={pet.name} className="w-16 h-16 object-cover rounded" /> : <div className="w-16 h-16 bg-gray-200 flex items-center justify-center rounded"><span className="text-gray-500 text-sm">Sin imagen</span></div> },
         { key: "name", label: "Nombre" },
-        { key: "gender", label: "Género", render: (pet) => pet.gender.value === 'Hembra' ? <Badge color="pink">Hembra</Badge> : <Badge color="blue">Macho</Badge> },
-        { key: "status", label: "Estado", render: (pet) => pet.isAdopted ? <Badge color="blue">Adoptado</Badge> : <Badge color="green">Disponible</Badge> },
+        { key: "gender", label: "Género", render: (pet) => pet.gender === 'Hembra' ? <Badge color="pink">Hembra</Badge> : <Badge color="blue">Macho</Badge> },
         { key: "age", label: "Edad", render: (pet) => `${pet.age} años` },
-        { key: "weightKg", label: "Peso (kg)", render: (pet) => `${pet.weightKg} kg` },
-        { key: "birthDate", label: "Fecha de nacimiento", render: (pet) => formatDate(pet.birthDate) },
-        { key: "specie", label: "Especie", render: (pet) => pet.speciesName },
-        { key: "createdAt", label: "Creado", render: (pet) => formatDateTime(pet.createdAt), },
+        { key: "requestCount", label: "Cantidad de Solicitudes", render: (pet) => <Text>{pet.requestCount}</Text> },
+        { key: "specie", label: "Especie", render: (pet) => pet.species.name },
+        { key: "birthDate", label: "Fecha de Nacimiento", render: (pet) => formatDateTime(pet.birthDate ?? '', true), },
     ];
 
     const myFilters: FilterItemConfig[] = [
@@ -47,7 +40,7 @@ export default function PetAdoptedPage() {
         },
     ];
 
-    const actions: RowAction<Pet>[] = [
+    const actions: RowAction<PetMostRequestedResponse>[] = [
         {
             label: 'Ver',
             icon: <BsViewList size={16} />,
@@ -76,12 +69,12 @@ export default function PetAdoptedPage() {
                 <Divider className="mt-5 border-gray-300!" />
 
                 <div>
-                    <CustomTable<Pet>
+                    <CustomTable<PetMostRequestedResponse>
                         columns={columns}
                         data={data?.items || []}
                         actions={actions}
                         keyExtractor={(user) => user.id}
-                        isLoading={isLoading || isPending}
+                        isLoading={isLoading}
                         isError={isError}
                         onPageChange={(page) => updateFilter({ page })}
                         totalItems={data?.totalCount || 0}

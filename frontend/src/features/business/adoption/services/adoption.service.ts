@@ -5,12 +5,13 @@ import { API_ENDPOINTS } from "@/shared/constants/api-endpoints";
 import { FilterRequestAdoptionDto } from "../dto/filter-request-adoption.dto";
 import { Paginate } from "@/core/domain/models/system/paginate";
 import { RequestAdoptionResponse } from "../dto/request-adoption-response";
-import { ReviewAdoptionDto } from "../dto/review-adoption.dto";
+import { UpdateAdoptionDto } from "../dto/dashboard/update-adoption";
+import { AdoptionResponse } from "../dto/dashboard/adoption-response";
 
 export interface IAdoptionService {
-    requestAdoption: (createReq: CreateReqAdoptionDetail) => Promise<void>;
-    paginateRequests: (filter: FilterRequestAdoptionDto) => Promise<Paginate<RequestAdoptionResponse>>;
-    reviewAdoptionRequest: (requestId: string, dto: ReviewAdoptionDto) => Promise<void>;
+    update: (dto: UpdateAdoptionDto) => Promise<void>
+    paginate: (filter: FilterRequestAdoptionDto) => Promise<Paginate<AdoptionResponse>>
+    getById: (id: number) => Promise<AdoptionResponse>
 }
 
 class AdoptionService implements IAdoptionService {
@@ -19,17 +20,18 @@ class AdoptionService implements IAdoptionService {
         private readonly httpClient: HttpClient
     ) { }
 
-    async requestAdoption(createReq: CreateReqAdoptionDetail): Promise<void> {
-        return this.httpClient.post<void>(API_ENDPOINTS.ADOPTION.CREATE, createReq);
+    async update(dto: UpdateAdoptionDto): Promise<void> {
+        return this.httpClient.put<void>(API_ENDPOINTS.ADOPTION.UPDATE, dto);
     }
 
-    async paginateRequests(filter: FilterRequestAdoptionDto): Promise<Paginate<RequestAdoptionResponse>> {
-        return this.httpClient.get<Paginate<RequestAdoptionResponse>>(API_ENDPOINTS.ADOPTION.PAGINATE, filter);
+    async paginate(filter: FilterRequestAdoptionDto): Promise<Paginate<AdoptionResponse>> {
+        return this.httpClient.get<Paginate<AdoptionResponse>>(API_ENDPOINTS.ADOPTION.PAGINATE, filter);
     }
 
-    async reviewAdoptionRequest(requestId: string, dto: ReviewAdoptionDto): Promise<void> {
-        return this.httpClient.post<void>(API_ENDPOINTS.ADOPTION.REVIEW(requestId), dto);
+    async getById(id: number): Promise<AdoptionResponse> {
+        return this.httpClient.get(API_ENDPOINTS.ADOPTION.BY_ID(id));
     }
+
 }
 
 export const adoptionService = new AdoptionService(httpClient);

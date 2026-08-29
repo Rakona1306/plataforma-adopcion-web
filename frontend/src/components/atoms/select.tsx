@@ -13,6 +13,7 @@ export default function Select({
   options,
   onChange,
   onBlur,
+  defaultValue,
   ...props
 }: SelectFormikProps) {
   const [field, meta] = useField(props.name)
@@ -42,7 +43,7 @@ export default function Select({
         {...props}
         id={selectId}
         name={field.name}
-        value={field.value ?? ''}
+        value={field.value || defaultValue || ''}
         onChange={handleChange}
         onBlur={handleBlur}
         aria-invalid={hasError}

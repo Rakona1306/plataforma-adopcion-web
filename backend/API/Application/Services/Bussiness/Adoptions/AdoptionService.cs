@@ -14,6 +14,7 @@ namespace API.Application.Services.Bussiness.Adoptions
     {
         Task<Paginate<AdoptionResponse>> PaginateAsync(AdoptionFilter filter);
         Task UpdateStatusAsync(UpdateAdoptionStatus dto, Guid userId);
+        Task<AdoptionResponse> GetByIdAsync(int id);
     }
     public class AdoptionService : IAdoptionService
     {
@@ -61,6 +62,23 @@ namespace API.Application.Services.Bussiness.Adoptions
             await _petRepository.SaveChangesAsync();
             await _adoptionRepository.SaveChangesAsync();
         }
+
+        public async Task<AdoptionResponse> GetByIdAsync(int id)
+        {
+            var adoption = await _adoptionRepository
+                .Query()
+                .Where(a => a.Id == id)
+                .ProjectTo<AdoptionResponse>(_mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync();
+
+            if (adoption is null)
+            {
+                throw new KeyNotFoundException($"No se encontró la adopción con Id {id}");
+            }
+
+            return adoption;
+        }
+
         public async Task<Paginate<AdoptionResponse>> PaginateAsync(AdoptionFilter filter)
         {
             IQueryable<Adoption> query = _adoptionRepository.Query();

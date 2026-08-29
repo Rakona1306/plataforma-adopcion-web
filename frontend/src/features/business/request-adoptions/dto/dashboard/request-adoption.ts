@@ -11,17 +11,18 @@ export interface RequestAdoptionResponse {
     acceptHomeVisit: boolean
     district: string
     phone: string
-    addres: string
+    address: string
     reference: string
     motivation: string
     status: string
     createdAt: string
     reviewComment: string
     reviewedAt: string
+    dni: string
 
     user: User
     pet: Pet
-    review: User
+    reviewer: User
 }
 
 export enum RequestAdoptionStatus {

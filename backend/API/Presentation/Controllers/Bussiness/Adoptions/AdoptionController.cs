@@ -1,10 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using API.Application.Features.Bussiness.Adoptions.Dtos;
 using API.Application.Features.Bussiness.Adoptions.Dtos.Private;
+using API.Application.Helpers;
 using API.Application.Services.Bussiness.Adoptions;
+using API.Domain.Model.Bussiness;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Presentation.Controllers.Bussiness.Adoptions
@@ -34,6 +32,20 @@ namespace API.Presentation.Controllers.Bussiness.Adoptions
             }
         }
 
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            try
+            {
+                var result = await _service.GetByIdAsync(id);
+                return Ok(result);
+            }
+            catch
+            {
+                return StatusCode(500, new { message = "Ocurrió un error al procesar la solicitud." });
+            }
+        }
+
         [HttpPut("status")]
         public async Task<IActionResult> UpdateStatus([FromBody] UpdateAdoptionStatus dto)
         {
@@ -54,6 +66,14 @@ namespace API.Presentation.Controllers.Bussiness.Adoptions
 
             await _service.UpdateStatusAsync(dto, userId);
             return NoContent();
+        }
+
+        [HttpGet("enums/adoption-status")]
+        public IActionResult AdoptionStatus()
+        {
+            return Ok(
+                EnumHelper.ToList<AdoptionStatus>()
+            );
         }
     }
 }

@@ -18,8 +18,10 @@ interface Props<T> {
   placeholder?: string;
   className?: string;
   defaultValue?: string;
+  onOptionSelected?: (option: T) => void;
 
   required?: boolean;
+  description?: string;
 }
 
 export function SearchSelect<T>({
@@ -34,6 +36,8 @@ export function SearchSelect<T>({
   className,
   defaultValue,
   required = false,
+  description,
+  onOptionSelected
 }: Props<T>) {
   const [field, meta, helpers] = useField(name);
 
@@ -76,11 +80,13 @@ export function SearchSelect<T>({
     helpers.setValue(selected[valueField]);
 
     setSearchValue(labelSelected);
+    onOptionSelected?.(selected);
   };
 
   return (
     <Autocomplete
       label={label}
+      description={description}
       className={className}
       value={searchValue}
       onChange={handleChange}
@@ -91,7 +97,7 @@ export function SearchSelect<T>({
       error={meta.touched ? meta.error : undefined}
       required={required}
       classNames={{
-        input: "mb-2"
+        label: 'text-sm! font-semibold! text-slate-700! text-start! mb-2!'
       }}
     />
   );

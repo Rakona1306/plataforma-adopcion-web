@@ -4,12 +4,13 @@ import { QUERY_KEYS } from "@/shared/constants/queryKeys";
 import { requestAdoptionService } from "../../services/request-adoption.service";
 import { useCallback, useState } from "react";
 
-export default function usePaginateRequestAdoption() {
+interface Props extends Partial<RequestAdoptionFilter> {
 
-    const [filter, setFilter] = useState<RequestAdoptionFilter>({
-        page: 1,
-        pageSize: 10
-    });
+}
+
+export default function usePaginateRequestAdoption(props: Props = { page: 1, pageSize: 10 }) {
+
+    const [filter, setFilter] = useState<RequestAdoptionFilter>(props as RequestAdoptionFilter);
 
     const query = useQuery({
         queryKey: [QUERY_KEYS.BUSINESS.REQUEST_ADOPTION.PAGINATE],

@@ -5,6 +5,8 @@ import { PetCreateDto } from "@/core/application/features/shelter/pets/dtos/pet-
 import { Paginate } from "@/core/domain/models/system/paginate";
 import { PetFilterDto } from "@/core/application/features/shelter/pets/dtos/pet-filter-dto";
 import { PetUpdateDto } from "@/core/application/features/shelter/pets/dtos/pet-update-dto";
+import { API_ENDPOINTS } from "@/shared/constants/api-endpoints";
+import { PetMostRequestedResponse } from "../dto/dashboard/pet-most-requested-response";
 
 interface IPetService {
   getById(id: string): Promise<Pet>;
@@ -46,6 +48,10 @@ class PetService implements IPetService {
 
   deletePet(id: string): Promise<void> {
     return this.httpClient.delete(id);
+  }
+
+  mostRequested(filter: PetFilterDto): Promise<Paginate<PetMostRequestedResponse>> {
+    return this.httpClient.get(API_ENDPOINTS.SHELTER.PET.MOST_REQUESTED, filter);
   }
 }
 

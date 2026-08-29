@@ -32,6 +32,7 @@ namespace API.Application.Features.Bussiness.RequestAdoptions.Dtos.Public
         [Phone]
         [MaxLength(15)]
         public string Phone { get; set; } = string.Empty;
+        public string Dni { get; set; } = string.Empty;
 
         [Required]
         [MaxLength(2000)]

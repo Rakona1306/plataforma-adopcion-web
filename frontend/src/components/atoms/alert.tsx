@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react"
 
 type AlertType = "success" | "error" | "warning" | "info"
- 
+
 type AlertProps = {
   type: AlertType
   message: string
@@ -56,7 +56,7 @@ export function Alert({
 }: AlertProps) {
   const [visible, setVisible] = useState(true)
   const [leaving, setLeaving] = useState(false)
- 
+
   const dismiss = useCallback(() => {
     setLeaving(true)
     setTimeout(() => {
@@ -64,23 +64,23 @@ export function Alert({
       onDismiss?.()
     }, 300)
   }, [onDismiss])
- 
+
   useEffect(() => {
     if (!autoDismiss) return
     const t = setTimeout(dismiss, autoDismiss)
     return () => clearTimeout(t)
   }, [autoDismiss, dismiss])
- 
+
   if (!visible) return null
- 
+
   const c = CONFIG[type]
- 
+
   return (
     <div
       role="alert"
       aria-live="polite"
       className={[
-        "flex items-start gap-3 rounded-xl border px-4 py-3.5 text-sm transition-all duration-300",
+        "flex items-center gap-3 rounded-xl border px-4 py-3.5 text-sm transition-all duration-300 h-auto",
         c.bg,
         c.border,
         leaving ? "opacity-0 -translate-y-1 scale-[0.98]" : "opacity-100 translate-y-0 scale-100",
@@ -101,28 +101,30 @@ export function Alert({
           {c.icon}
         </span>
       )}
- 
+
       <div className="min-w-0 flex-1">
         {title && (
           <p className={`font-semibold leading-snug ${c.text}`}>{title}</p>
         )}
         <p className={title ? `mt-0.5 ${c.muted}` : c.text}>{message}</p>
       </div>
- 
-      {dismissible && (
-        <button
-          onClick={dismiss}
-          aria-label="Cerrar alerta"
-          className={[
-            "ml-auto shrink-0 rounded-md p-1 opacity-60 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-1",
-            c.muted,
-          ].join(" ")}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      )}
+
+      <div className="h-full min-h-0 flex">
+        {dismissible && (
+          <button
+            onClick={dismiss}
+            aria-label="Cerrar alerta"
+            className={[
+              "ml-auto shrink-0 rounded-md p-1 opacity-60 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-1",
+              c.muted,
+            ].join(" ")}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        )}
+      </div>
     </div>
   )
 }

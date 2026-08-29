@@ -5,6 +5,7 @@ import { Breed } from "./breed";
 import { Trait } from "./trait";
 import { PetPhotoResponse } from "@/features/shelter/pet-photos/dto/pet-photo-response";
 import { VaccineRelation } from "@/features/shelter/vaccine/model/vaccine-relation.model";
+import { Specie } from "./specie";
 
 export interface Pet {
   id: string;
@@ -24,6 +25,8 @@ export interface Pet {
   createdAt: Date;
   age: number;
   isAdopted: boolean;
+
+  specie?: Specie
 
   breeds: Breed[]
   traits: Trait[]

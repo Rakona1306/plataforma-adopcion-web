@@ -1,7 +1,6 @@
 "use client";
 
 import { useModal } from "@/core/application/hooks/ui/useModal";
-import { RequestAdoptionResponse } from "../../../dto/request-adoption-response";
 import {
     Badge,
     Button,
@@ -13,8 +12,8 @@ import {
     Text,
 } from "@mantine/core";
 import { MdLocationOn, MdPets, MdPhone, MdVisibility } from "react-icons/md";
-import { formatDate } from "@/shared/utils/date/formatDate";
 import { formatDateTime } from "@/core/shared/helpers/formatDateTime";
+import { RequestAdoptionResponse } from "@/features/business/request-adoptions/dto/dashboard/request-adoption";
 
 export default function AccountAdoptionRequestCard({
     request,
@@ -25,7 +24,7 @@ export default function AccountAdoptionRequestCard({
 
     const handleOpenRequestDetail = () => {
         handleOpenModal?.({
-            header: `Solicitud #${request.id.slice(0, 8)}`,
+            header: `Solicitud #${request.id}`,
             content: <RequestDetail request={request} />,
         });
     };
@@ -54,7 +53,7 @@ export default function AccountAdoptionRequestCard({
                     <Stack gap={4} h={'max-content'} mih={'0px'}>
                         <Group gap={6}>
                             <MdPets size={18} />
-                            <Text fw={600}>{request.petName ?? "Mascota"}</Text>
+                            <Text fw={600}>{request.pet.name ?? "Mascota"}</Text>
                         </Group>
 
                         <Group gap={6}>
@@ -77,10 +76,10 @@ export default function AccountAdoptionRequestCard({
                     </Text>
 
                     {
-                        request.reviewedBy && (
+                        request.reviewer.id && (
                             <>
                                 <Divider />
-                                <Text fw={600}>Revisado por: {request.reviewerName}</Text>
+                                <Text fw={600}>Revisado por: {request.reviewer.name}</Text>
                                 <Text size="sm" c="dimmed">Fecha de revisión: {formatDateTime(request.reviewedAt ?? '')}</Text>
                                 <div className="bg-gray-200 py-5 px-4 rounded-2xl">
                                     <Text size="sm" c="dimmed" classNames={{
@@ -116,15 +115,14 @@ function RequestDetail({
     request: RequestAdoptionResponse;
 }) {
     const rows = [
-        { label: "Solicitante", value: request.userName },
-        { label: "Mascota", value: request.petName ?? "-" },
+        { label: "Solicitante", value: request.user.name },
+        { label: "Mascota", value: request.pet.name ?? "-" },
         { label: "Estado", value: request.status },
-        { label: "Tipo", value: request.type },
         { label: "Distrito", value: request.district },
         { label: "Teléfono", value: request.phone },
         { label: "Fecha de solicitud", value: request.createdAt },
         { label: "Motivación", value: request.motivation },
-        { label: "Notas", value: request.notes ?? "-" },
+        { label: "Notas", value: request.motivation ?? "-" },
         { label: "Tipo de vivienda", value: request.houseType ?? "-" },
         {
             label: "Tiene otras mascotas",
@@ -153,7 +151,7 @@ function RequestDetail({
                         ? "Sí"
                         : "No",
         },
-        { label: "Revisado por", value: request.reviewerName ?? "-" },
+        { label: "Revisado por", value: request.reviewer.name ?? "-" },
         { label: "Fecha de revisión", value: request.reviewedAt ?? "-" },
         { label: "Comentario", value: request.reviewComment ?? "-" },
     ];

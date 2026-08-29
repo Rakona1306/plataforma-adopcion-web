@@ -10,12 +10,10 @@ namespace API.Application.Features.Bussiness.Adoptions.Dtos.Private
 
         // === Solicitud de adopción ===
         public int RequestAdoptionId { get; set; }
-        public Adop_RequestAdoptionResponse RequestAdoption { get; set; } = null!;
 
         // === Información de la adopción ===
-        public string? Address { get; set; }
         public DateTime AdoptionDate { get; set; }
-        public AdoptionStatus Status { get; set; }
+        public string Status { get; set; } = string.Empty;
         public string? Observations { get; set; }
 
         // === Auditoría ===
@@ -23,5 +21,7 @@ namespace API.Application.Features.Bussiness.Adoptions.Dtos.Private
         public Guid? CreatedBy { get; set; }
         public DateTime LastUpdatedAt { get; set; }
         public Guid? UpdatedBy { get; set; }
+
+        public Adop_RequestAdoptionResponse RequestAdoption { get; set; } = null!;
     }
 }

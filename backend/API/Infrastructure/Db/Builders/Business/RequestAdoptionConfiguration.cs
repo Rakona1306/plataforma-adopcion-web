@@ -35,8 +35,21 @@ namespace API.Infrastructure.Db.Builders.Business
                 .HasMaxLength(20)
                 .IsRequired();
 
+            builder.Property(e => e.Address)
+                .HasMaxLength(200)
+                .IsRequired();
+
+            builder.Property(e => e.Dni)
+                .HasMaxLength(8)
+                .IsRequired();
+
             builder.Property(e => e.ReviewComment)
                 .HasMaxLength(1000);
+
+            builder.Property(e => e.PlatformProvider)
+                .HasConversion<string>()
+                .HasDefaultValue(PlatformProvider.Web)
+                .IsRequired();
 
             builder.Property(e => e.Status)
                 .HasConversion<string>()

@@ -2,7 +2,10 @@ using API.Application.Configuration;
 using API.Infrastructure.Configuration;
 using API.Infrastructure.Db;
 using API.Infrastructure.Extensions.Features;
+using API.Infrastructure.Extensions.Features.Shelter;
 using API.Infrastructure.Extensions.Jwt;
+using API.Infrastructure.Extensions.Ratelimit;
+using API.Infrastructure.Extensions.Security;
 using API.Infrastructure.Middlewares;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -60,42 +63,11 @@ builder.Services.AddControllers();
 builder.Services.AddFluentValidationAutoValidation();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-
-// CORS
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowFrontend",
-        policy =>
-        {
-            policy
-                .WithOrigins(["http://localhost:3000", "https://plataforma-adopcion-web.vercel.app", "https://www.adoptasalvavidas.com"])
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowCredentials();
-        });
-});
-
 builder.Services.AddAuthorization();
 
-// Security
-builder.Services.AddOutputCache();
-builder.Services.AddRateLimiter(options =>
-{
-    options.AddFixedWindowLimiter(
-        "InteractionsPolicy",
-        config =>
-        {
-            config.PermitLimit = 3;
-
-            config.Window =
-                TimeSpan.FromMinutes(1);
-
-            config.QueueProcessingOrder =
-                QueueProcessingOrder.OldestFirst;
-
-            config.QueueLimit = 0;
-        });
-});
+builder.Services.AddAppOutputCache();
+builder.Services.AddAppRateLimiting();
+builder.Services.AddAppCors(builder.Configuration);
 
 var app = builder.Build();
 
@@ -110,18 +82,17 @@ if (app.Environment.IsDevelopment())
 
 // app.UseHttpsRedirection();
 
-app.UseCors("AllowFrontend");
-
 app.UseMiddleware<ExceptionMiddleware>();
+
+app.UseSecurityHeaders();
+app.UseCors(CorsExtensions.PublicApiCorsPolicy);
+
+app.UseAppRateLimiting();
+app.UseAppOutputCache();
 
 app.UseAuthentication();
 
 app.UseAuthorization();
-
-app.UseOutputCache();
-
-app.UseRateLimiter();
-
 app.MapControllers();
 
 app.Run();

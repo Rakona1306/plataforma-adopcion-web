@@ -17,9 +17,7 @@ namespace API.Application.Features.Bussiness.RequestAdoptions.Dtos.Private
         public string HouseType { get; set; } = string.Empty;
 
         public bool HasOtherPets { get; set; }
-
         public bool HasChildren { get; set; }
-
         public bool AcceptHomeVisit { get; set; }
 
         [Required]
@@ -29,6 +27,7 @@ namespace API.Application.Features.Bussiness.RequestAdoptions.Dtos.Private
         [Required]
         public string Address { get; set; } = string.Empty;
         public string? Reference { get; set; } = string.Empty;
+        public string Dni { get; set; } = string.Empty;
 
         [Required]
         [Phone]

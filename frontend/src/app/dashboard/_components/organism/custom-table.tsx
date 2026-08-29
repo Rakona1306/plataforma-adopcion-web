@@ -50,7 +50,7 @@ export default function CustomTable<T>({
                 <TableHeaderCell key={col.key} label={col.label} />
               ))}
               {actions && actions.length > 0 && (
-                <th className={`px-6 py-4 bg-primary text-right w-16 text-white font-semibold ${montserrat.className}`} >
+                <th className={`px-6 py-4 bg-primary text-left lg:text-center w-16 text-white font-semibold ${montserrat.className}`} >
                   Acciones
                 </th>
               )}
@@ -90,7 +90,7 @@ export default function CustomTable<T>({
                   {actions && actions.length > 0 && (
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-right block lg:table-cell border-none pt-4 lg:pt-4">
                       {/* En móvil posicionamos el menú flotante arriba a la derecha */}
-                      <div className="absolute top-2 right-2 lg:relative lg:top-0 lg:right-0">
+                      <div className="absolute top-2 right-2 lg:relative lg:flex lg:justify-center lg:top-0 lg:right-0">
                         <TableActions actions={actions} rowData={row} />
                       </div>
                     </td>

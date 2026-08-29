@@ -45,7 +45,7 @@ export default function ModalProvider({
 
   return (
     <ModalContext.Provider value={{ opened, handleOpenModal, handleCloseModal }}>
-      <Modal.Root opened={opened} onClose={handleCloseModal} centered size="lg">
+      <Modal.Root opened={opened} onClose={handleCloseModal} centered size="xl">
         <Modal.Overlay />
         <Modal.Content>
           <Modal.Header className="p-0!">

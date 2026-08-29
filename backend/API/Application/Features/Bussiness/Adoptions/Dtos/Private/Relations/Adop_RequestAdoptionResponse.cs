@@ -11,7 +11,7 @@ namespace API.Application.Features.Bussiness.Adoptions.Dtos.Relations
         public int Id { get; set; }
         public Adop_UserResponse User { get; set; } = null!;
         public Adop_PetResponse Pet { get; set; } = null!;
-        public RequestStatus Status { get; set; }
+        public string Status { get; set; } = string.Empty;
         public string HouseType { get; set; } = string.Empty;
         public bool HasOtherPets { get; set; }
         public bool HasChildren { get; set; }
@@ -22,5 +22,7 @@ namespace API.Application.Features.Bussiness.Adoptions.Dtos.Relations
         public string Phone { get; set; } = string.Empty;
         public string Address { get; set; } = string.Empty;
         public string? Reference { get; set; }
+
+        public Adop_UserResponse Reviewer { get; set; } = null!;
     }
 }

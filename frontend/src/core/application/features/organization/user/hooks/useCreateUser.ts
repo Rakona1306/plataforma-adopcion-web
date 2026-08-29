@@ -34,7 +34,7 @@ export function useCreateUser() {
         Swal.fire({ title: "Sesión expirada", icon: "warning" }).then(() => router.push("/login"));
         return;
       }
-      
+
       const data = error.response?.data || error.data;
       if (data?.errors) {
         const normalized: Record<string, string> = {};

@@ -12,6 +12,8 @@ interface SelectInputProps {
   placeholder?: string
   defaultValue?: string
   required?: boolean
+  error?: string
+  disabled?: boolean
 }
 
 export default function SelectInput({
@@ -20,7 +22,9 @@ export default function SelectInput({
   options,
   placeholder,
   defaultValue,
-  required
+  error,
+  required,
+  disabled
 }: SelectInputProps) {
   const [field, meta, helpers] = useField<string>(name)
   const { setFieldValue } = useFormikContext()
@@ -50,12 +54,13 @@ export default function SelectInput({
 
   return (
     <FormSelect
+      disabled={disabled}
       required={required}
       label={label}
       value={field.value || defaultValue || null}
       options={options}
       placeholder={placeholder}
-      error={meta.touched ? meta.error : undefined}
+      error={error ?? (meta.touched ? meta.error : undefined)}
       onChange={handleChange}
       onTouch={handleTouch}
     />

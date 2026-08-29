@@ -18,9 +18,7 @@ namespace API.Application.Features.Bussiness.RequestAdoptions.Validators
 
             RuleFor(x => x.Status)
                 .IsInEnum()
-                    .WithMessage("El estado no es válido.")
-                .Must(BeAReviewableStatus)
-                    .WithMessage("El estado debe ser APROBADO o RECHAZADO para revisar una solicitud.");
+                    .WithMessage("El estado no es válido.");
 
             // Si está rechazado, el comentario es obligatorio
             When(x => x.Status == RequestStatus.RECHAZADO, () =>

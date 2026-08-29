@@ -1,5 +1,5 @@
 import { useMutation, UseMutationOptions } from "@tanstack/react-query";
-import { ReviewAdoptionDto } from "../dto/review-adoption.dto";
+import { ReviewAdoptionDto } from "../../request-adoptions/dto/dashboard/review-req-adoption";
 import { adoptionService } from "../services/adoption.service";
 
 export default function useReviewAdoption(props: UseMutationOptions<void, unknown, ReviewAdoptionDto & { requestId: string }>) {

@@ -1,7 +1,8 @@
-export const normalizeText = (text: string): string => {
+export function normalizeText(text: string): string {
   return text
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '') // saca tildes/diacríticos
+    .toUpperCase()
     .trim()
-    .replace(/\s+/g, " ");
-};
+    .replace(/\s+/g, ' ') // colapsa espacios múltiples
+}

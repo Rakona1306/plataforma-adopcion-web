@@ -19,9 +19,7 @@ interface Props {
 
 export default function useConfirmOptUser({ onSuccess }: Props = {}) {
 
-    const { userRegistered, setConfirmOpt } = useConfirmOptStore()
-    const { handleCloseModal } = useModal() || {}
-    const { setToken } = useTokenStore()
+    const { userRegistered } = useConfirmOptStore()
 
     const { completeRegistration } = useCompleteRegistration({
         onSuccess: async (data, variables, onMutateResult, context) => {

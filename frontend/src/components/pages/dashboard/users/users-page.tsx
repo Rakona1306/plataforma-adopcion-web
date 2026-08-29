@@ -31,9 +31,9 @@ export default function UsersPage() {
 
   const columns: TableColumn<User>[] = [
     { key: "name", label: "Nombre" },
+    { key: "lastName", label: "Apellido" },
     { key: "email", label: "Correo" },
     { key: "dni", label: "DNI" },
-    { key: "ruc", label: "RUC" },
     { key: "phone", label: "Telefono" },
     { key: "district", label: "Distrito" },
     { key: "isBlocked", label: "Estado", render: (row) => (row.isBlocked ? <Badge color="red">Bloqueado</Badge> : <Badge color="green">Activo</Badge>) },
@@ -70,12 +70,6 @@ export default function UsersPage() {
           content: <ViewUser user={user} />,
         });
       },
-    },
-    {
-      label: "Bloquear Usuario",
-      icon: <BiLock size={16} />,
-      color: "blue",
-      onClick: (pet) => { }
     },
     {
       label: "Eliminar",

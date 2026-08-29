@@ -21,6 +21,7 @@ export default function Input({
   hasErrorActive,
   required,
   defaultValue,
+  description,
   ...props
 }: InputFormikProps) {
   const [field, meta, helper] = useField(props.name)
@@ -59,6 +60,7 @@ export default function Input({
       <label htmlFor={inputId} className="text-sm font-semibold text-slate-700 text-start">
         {label} {required && <span className="text-red-500">*</span>}
       </label>
+      {description && <p className='text-sm text-gray-500'>{description}</p>}
 
       <div className="relative">
         {hasLeftIcon ? (
@@ -131,6 +133,7 @@ interface InputFormikProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string
   hasErrorActive?: boolean
   reequired?: boolean
+  description?: string
 }
 
 function joinClasses(...classNames: Array<string | undefined>) {
