@@ -1,3 +1,4 @@
+#!/bin/sh
 cd frontend
 pnpm lint
 pnpm typecheck
