@@ -24,6 +24,7 @@ export function AdoptionModal({ pet }: AdoptionModalProps) {
 
     const { profile, isLoading } = useProfile()
     const { handleCloseModal } = useModal() || {}
+
     const { createAdoption, isPending, errorMessage, errorValidation, isError } = useCreatePubRequestAdoption({
         onSuccess: () => {
             handleCloseModal?.();

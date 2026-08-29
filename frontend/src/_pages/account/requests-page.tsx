@@ -18,8 +18,6 @@ export default function AccountRequestPage() {
         userId: profile?.id,
     })
 
-    console.log(adoptionRequests)
-
     return (
         <div className="w-full pb-10 bg-gray-100">
             <Container className="py-10">

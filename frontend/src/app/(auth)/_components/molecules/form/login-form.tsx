@@ -34,7 +34,6 @@ export default function LoginForm() {
 
   const { login, isLoading, error } = useLogin({
     onSuccess: (data) => {
-      console.log('SUCCESS LOGIN')
 
       setToken(data.token);
       setUser(data.user);

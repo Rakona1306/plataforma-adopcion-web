@@ -9,7 +9,7 @@ import { LuZap } from "react-icons/lu";
 import { MdPets } from "react-icons/md";
 import { PdpSkeleton } from "./loading/pdp-skeleton";
 import { AdoptionModal } from "./components/adoption-modal";
-import { SponsorshipModal } from "./components/sponsorship-modal";
+// import { SponsorshipModal } from "./components/sponsorship-modal";
 import { AuthModal } from "./components/auth-modal";
 import { useSessionStore } from "@/core/infrastructure/store/useSessionStore";
 import { companyInfo } from "@/app/(web)/_utils/data/companyInfo.data";
@@ -18,7 +18,6 @@ import { montserrat } from "@/lib/fonts/monserrat";
 import useGetPetRecommend from "@/features/shelter/pet/hooks/use-get-pet-recommend";
 import { RelatedPets } from "@/components/organisms/related-pets";
 import { InfoIcon } from "lucide-react";
-import { manrope } from "@/lib/fonts/manrope";
 import { BsWhatsapp } from "react-icons/bs";
 import { useModal } from "@/core/application/hooks/ui/useModal";
 import CurrentUserEditForm from "@/features/organization/user/components/forms/current-user-edit-form";
@@ -64,7 +63,7 @@ export function PetDeatilPage({ slug }: PetDeatilPageProps) {
       content: <AdoptionModal pet={pet} />
     });
   };
-
+  /*
   const handleSponsorshipClick = () => {
     if (!user) {
       handleOpenModal && handleOpenModal({
@@ -79,7 +78,7 @@ export function PetDeatilPage({ slug }: PetDeatilPageProps) {
       content: <SponsorshipModal pet={pet} />
     });
   };
-
+  */
   if (isLoading) {
     return <PdpSkeleton />;
   }

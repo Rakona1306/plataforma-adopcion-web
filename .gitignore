@@ -15,6 +15,9 @@ out/
 *.pdb
 *.mdb
 
+**/bin/
+**/obj/
+
 # ==========================================
 # VISUAL STUDIO (Community, Professional, etc.)
 # ==========================================
@@ -35,6 +38,8 @@ out/
 # Archivos de diagnóstico y profiling de VS
 *.diagsession
 *.performance
+
+frontend/test-results/
 
 # ==========================================
 # JETBRAINS (Rider, IntelliJ, WebStorm, etc.)
@@ -117,6 +122,7 @@ packages/
 frontend/node_modules/
 frontend/.next/
 frontend/out/
+frontend/test-results
 frontend/dist/
 frontend/.env.local
 frontend/.env

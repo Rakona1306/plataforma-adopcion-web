@@ -2,7 +2,7 @@
 import Title from "@/app/(web)/_components/atoms/title";
 import Container from "@/components/atoms/container";
 import { FormSection } from "@/components/atoms/form-section";
-import usePaginateAdoptionRequest from "@/features/business/adoption/hooks/use-paginate-adoption-request";
+// import usePaginateAdoptionRequest from "@/features/business/adoption/hooks/use-paginate-adoption-request";
 import { useProfile } from "@/features/system/auth/hooks/useProfile";
 import { Grid } from "@mantine/core";
 import { BiUser } from "react-icons/bi";
@@ -10,6 +10,7 @@ import { BiUser } from "react-icons/bi";
 export default function ProfilePage() {
 
     const { profile } = useProfile()
+    /*
     const { data: adoptionRequests } = usePaginateAdoptionRequest({
         filter: {
             userId: profile?.id,
@@ -21,9 +22,7 @@ export default function ProfilePage() {
             enabled: !!profile?.id
         }
     })
-
-    console.log("adoptionRequests", adoptionRequests)
-
+    */
     return (
         <Container className="pt-10 pb-20 space-y-5">
             <Title htmlTag="h1" className="xl:text-5xl text-center">

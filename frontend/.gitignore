@@ -10,8 +10,18 @@
 !.yarn/releases
 !.yarn/versions
 
+# .NET
+**/bin/
+**/obj/
+
+test-results
+
 # testing
 /coverage
+# Playwright
+test-results/
+playwright-report/
+blob-report/
 
 # next.js
 /.next/

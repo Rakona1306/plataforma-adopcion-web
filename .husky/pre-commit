@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+echo "HUSKY PRE-COMMIT EJECUTANDO"
+
+cd frontend
+
+pnpm exec lint-staged && pnpm test:all

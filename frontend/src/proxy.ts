@@ -1,8 +1,5 @@
-import { authService } from "@/features/system/auth/services/auth.service";
-import { cookies } from "next/headers";
-import { NextRequest, NextResponse } from "next/server";
-
-export default async function proxy(request: NextRequest) {
+export default async function proxy() {
+    /*
     const cookie = (await cookies()).get('access_token')?.value;
 
     try {
@@ -22,6 +19,7 @@ export default async function proxy(request: NextRequest) {
         console.log("PROXY ERROR", error);
         return NextResponse.redirect(new URL("/login", request.url))
     }
+    */
 }
 
 export const config = {
