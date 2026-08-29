@@ -12,14 +12,9 @@ import { useProfile } from "@/features/system/auth/hooks/useProfile";
 import { Grid, Skeleton } from "@mantine/core";
 import Swal from "sweetalert2";
 import { AlertCircle } from "lucide-react";
-<<<<<<< HEAD
 import useCreatePubRequestAdoption from "@/features/business/request-adoptions/hooks/web/use-create-pub-request-adoption";
 import { CreatePubReqAdoption, createPubRequestAdoptionSchema } from "@/features/business/request-adoptions/dto/web/create-request-adoption.dto";
 import { Alert } from "@/components/atoms/alert";
-=======
-import useCreateRequestAdoption from "@/features/business/request-adoptions/hooks/dashboard/use-create-request-adoption";
-import { CreateReqAdoption, createRequestAdoptionSchema } from "@/features/business/request-adoptions/dto/web/create-request-adoption.dto";
->>>>>>> 0c0999d0cf276773ba31d269af2469fef9d1ccfd
 
 interface AdoptionModalProps {
     pet?: PetPublic
@@ -29,12 +24,8 @@ export function AdoptionModal({ pet }: AdoptionModalProps) {
 
     const { profile, isLoading } = useProfile()
     const { handleCloseModal } = useModal() || {}
-<<<<<<< HEAD
 
     const { createAdoption, isPending, errorMessage, errorValidation, isError } = useCreatePubRequestAdoption({
-=======
-    const { createAdoption, isPending } = useCreateRequestAdoption({
->>>>>>> 0c0999d0cf276773ba31d269af2469fef9d1ccfd
         onSuccess: () => {
             handleCloseModal?.();
             Swal.fire({
