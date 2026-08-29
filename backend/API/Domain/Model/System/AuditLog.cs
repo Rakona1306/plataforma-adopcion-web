@@ -12,7 +12,7 @@ namespace API.Domain.Model.System
         [Required]
         public string TableName { get; set; } = string.Empty;
         [Required]
-        public Guid RecordId { get; set; }
+        public string RecordId { get; set; } = string.Empty;
         public string? OldValues { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }

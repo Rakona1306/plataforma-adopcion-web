@@ -88,7 +88,7 @@ namespace API.Infrastructure.Common.RepositoryImpl
 
             await _auditLogRepository.CreateAsync(
                 AuditEnum.UPDATE,
-                entity.Id,
+                entity.Id.ToString(),
                 typeof(T).Name,
                 userId,
                 oldEntity
@@ -110,7 +110,7 @@ namespace API.Infrastructure.Common.RepositoryImpl
 
             await _auditLogRepository.CreateAsync(
                 AuditEnum.UPDATE,
-                entity.Id,
+                entity.Id.ToString(),
                 typeof(T).Name,
                 userId,
                 oldValues
@@ -128,7 +128,7 @@ namespace API.Infrastructure.Common.RepositoryImpl
 
             await _auditLogRepository.CreateAsync(
                 AuditEnum.DELETE,
-                entity.Id,
+                entity.Id.ToString(),
                 typeof(T).Name,
                 userId,
                 entity
@@ -190,7 +190,7 @@ namespace API.Infrastructure.Common.RepositoryImpl
         public async Task<Paginate<AuditLog>> GetInteractionsAsync(
             int page,
             int pageSize,
-            Guid recordId
+            string recordId
         )
         {
             return await _auditLogRepository

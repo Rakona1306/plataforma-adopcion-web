@@ -22,6 +22,9 @@ export const QUERY_KEYS = {
     BUSINESS: {
         ADOPTION: {
             REQUEST: 'adoption-request',
+        },
+        REQUEST_ADOPTION: {
+            PAGINATE: 'request-adoption-paginate'
         }
     }
 }

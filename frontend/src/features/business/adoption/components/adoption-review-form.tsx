@@ -1,18 +1,16 @@
 import FormContainer from "@/components/molecules/form-container";
-import { RequestAdoptionResponse } from "../dto/request-adoption-response";
 import useGetRequestStatus from "@/features/system/enums/request-status/hooks/use-get-request-status";
 import { ReviewAdoptionDto } from "../dto/review-adoption.dto";
 import Textarea from "@/components/atoms/text-area";
-import { ChipField } from "@/components/atoms/chip-field";
 import useReviewAdoption from "../hooks/use-reviw-adoption";
 import { useModal } from "@/core/application/hooks/ui/useModal";
 import ButtonUI from "@/components/atoms/button/button-ui";
-import { SelectField } from "@/components/atoms/select-field";
 import Select from "@/components/atoms/select";
 import Swal from "sweetalert2";
 import { useQueryClient } from "@tanstack/react-query";
 import { QUERY_KEYS } from "@/shared/constants/queryKeys";
 import { renderIntStatus } from "../utils/renderIntStatus";
+import { RequestAdoptionResponse } from "../../request-adoptions/dto/dashboard/request-adoption";
 
 interface Props {
     request: RequestAdoptionResponse;
@@ -44,7 +42,7 @@ export default function AdoptionReviewForm({ request }: Props) {
     }
 
     const handleSubmit = (values: ReviewAdoptionDto) => {
-        reviewAdoption({ requestId: request.id, ...values })
+        // reviewAdoption(values)
     }
 
     return (

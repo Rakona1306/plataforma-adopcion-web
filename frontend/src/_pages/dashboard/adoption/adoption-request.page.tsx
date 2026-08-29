@@ -7,21 +7,21 @@ import CustomTable, { TableColumn } from "@/app/dashboard/_components/organism/c
 import { useModal } from "@/core/application/hooks/ui/useModal";
 import AdoptionReviewForm from "@/features/business/adoption/components/adoption-review-form";
 import AdoptionReviewView from "@/features/business/adoption/components/adoption-review-view";
-import { RequestAdoptionResponse } from "@/features/business/adoption/dto/request-adoption-response";
 import useAdoptionActions from "@/features/business/adoption/hooks/use-actions-adoption";
-import usePaginateAdoptionRequest from "@/features/business/adoption/hooks/use-paginate-adoption-request"
 import { renderStatus } from "@/features/business/adoption/utils/renderStatus";
+import { RequestAdoptionResponse } from "@/features/business/request-adoptions/dto/dashboard/request-adoption";
+import usePaginateRequestAdoption from "@/features/business/request-adoptions/hooks/dashboard/use-paginate-request-adoption";
 import { Divider } from "@mantine/core";
 import { BiBullseye, BiEdit } from "react-icons/bi";
 
 export default function AdoptionRequestsPage() {
     const { handleOpenModal } = useModal() || {}
-    const { data, isLoading, isError, updateFilter, filter } = usePaginateAdoptionRequest()
+    const { data, isLoading, isError, updateFilter, filter } = usePaginateRequestAdoption()
     const { actionsI } = useAdoptionActions()
 
     const columns: TableColumn<RequestAdoptionResponse>[] = [
-        { key: "userName", label: "Usuario" },
-        { key: 'petName', label: 'Mascota' },
+        { key: "userName", label: "Usuario", render: (request) => request.user.name },
+        { key: 'petName', label: 'Mascota', render: (request) => request.pet.name },
         { key: 'status', label: 'Estado', render: (request) => renderStatus(request.status) },
         { key: 'createdAt', label: 'Fecha de solicitud', render: (request) => new Date(request.createdAt).toLocaleDateString() },
         { key: 'district', label: 'Distrito' },

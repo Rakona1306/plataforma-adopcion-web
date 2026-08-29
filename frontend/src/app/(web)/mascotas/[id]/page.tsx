@@ -12,7 +12,7 @@ export default async function Page({
   const { id } = await params
 
   return (
-    <div className="pt-20 bg-gray-100">
+    <div className="bg-gray-100">
       <PetDeatilPage slug={id} />
     </div>
   )

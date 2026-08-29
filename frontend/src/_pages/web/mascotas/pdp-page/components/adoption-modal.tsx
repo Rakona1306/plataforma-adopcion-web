@@ -8,13 +8,14 @@ import FormContainer from "@/components/molecules/form-container";
 import SelectInput from "@/components/organisms/select-input";
 import { useModal } from "@/core/application/hooks/ui/useModal";
 import { limaDistricts } from "@/core/shared/constants/distritcts";
-import { CreateReqAdoptionDetail, createReqAdoptionDetailSchema } from "@/features/business/adoption/dto/create-adoption.dto";
-import useCreateAdoption from "@/features/business/adoption/hooks/use-create-adoption";
 import { PetPublic } from "@/features/shelter/pet/model/pet-pub.model";
 import { useProfile } from "@/features/system/auth/hooks/useProfile";
 import { Grid, Skeleton } from "@mantine/core";
 import Swal from "sweetalert2";
 import { AlertCircle } from "lucide-react";
+import useCreateRequestAdoption from "@/features/business/request-adoptions/hooks/dashboard/use-create-request-adoption";
+import { CreateReqAdoption, createRequestAdoptionSchema } from "@/features/business/request-adoptions/dto/web/create-request-adoption.dto";
+import { RequestAdoptionError } from "@/features/business/request-adoptions/dto/errors/request-adoption.error";
 
 interface AdoptionModalProps {
     pet?: PetPublic
@@ -24,8 +25,8 @@ export function AdoptionModal({ pet }: AdoptionModalProps) {
 
     const { profile, isLoading } = useProfile()
     const { handleCloseModal } = useModal() || {}
-    const { createAdoption, isPending, isError } = useCreateAdoption({
-        onSuccess: () => {
+    const { createAdoption, isPending } = useCreateRequestAdoption({
+        onSuccess: (data) => {
             handleCloseModal?.();
             Swal.fire({
                 title: 'Solicitud enviada',
@@ -34,8 +35,18 @@ export function AdoptionModal({ pet }: AdoptionModalProps) {
                 confirmButtonText: 'Aceptar'
             })
         },
-        onError: (error) => {
+        onError: (error: any) => {
+            if (error.data.type && error.data.type === 'INVALID_OPERATION') {
+                handleCloseModal?.();
+                Swal.fire({
+                    title: 'Error al enviar la solicitud',
+                    text: error.data.message || 'Ocurrió un error al enviar la solicitud de adopción. Por favor, inténtalo de nuevo más tarde.',
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                });
+            }
             console.error('Error al enviar la solicitud de adopción:', error);
+
             // Aquí puedes agregar la lógica para mostrar un mensaje de error al usuario.
         }
     });
@@ -107,8 +118,8 @@ export function AdoptionModal({ pet }: AdoptionModalProps) {
                         No se pudo cargar el formulario
                     </h3>
                     <p className="text-sm text-gray-500 dark:text-gray-400">
-                        {!pet 
-                            ? "Lo sentimos, no pudimos encontrar los datos de la mascota seleccionada. Inténtalo de nuevo." 
+                        {!pet
+                            ? "Lo sentimos, no pudimos encontrar los datos de la mascota seleccionada. Inténtalo de nuevo."
                             : "Para enviar una solicitud de adopción, necesitas estar registrado e iniciar sesión en tu cuenta."}
                     </p>
                 </div>
@@ -119,7 +130,7 @@ export function AdoptionModal({ pet }: AdoptionModalProps) {
         );
     }
 
-    const initialValues: CreateReqAdoptionDetail = {
+    const initialValues: CreateReqAdoption = {
         motivation: '',
         district: profile.district || '',
         phone: profile.phone || '',
@@ -129,18 +140,18 @@ export function AdoptionModal({ pet }: AdoptionModalProps) {
         hasOtherPets: false,
         hasChildren: false,
         acceptHomeVisit: false,
-        userId: profile.id,
+        address: ''
     }
 
-    const handleSubmit = (values: CreateReqAdoptionDetail) => {
+    const handleSubmit = (values: CreateReqAdoption) => {
         createAdoption(values);
     }
 
     return (
-        <FormContainer<CreateReqAdoptionDetail>
+        <FormContainer<CreateReqAdoption>
             initialValues={initialValues}
             onSubmit={handleSubmit}
-            validationSchema={createReqAdoptionDetailSchema}
+            validationSchema={createRequestAdoptionSchema}
             className="space-y-6"
         >
             {({ setFieldValue, values }) => (
@@ -161,6 +172,7 @@ export function AdoptionModal({ pet }: AdoptionModalProps) {
                                 placeholder="Seleccione un distrito"
                                 options={limaDistricts}
                                 defaultValue={profile.district || ''}
+                                required
                             />
                         </Grid.Col>
                     </Grid>
@@ -191,6 +203,14 @@ export function AdoptionModal({ pet }: AdoptionModalProps) {
                                 onChange={(v) => setFieldValue("acceptHomeVisit", v)}
                             />
                         </Grid.Col>
+                    </Grid>
+                    <Grid>
+                        <Input
+                            name="address"
+                            label="Dirección"
+                            placeholder="Ingrese su dirección completa"
+                            required
+                        />
                     </Grid>
                     <Grid>
                         <Grid.Col span={{ base: 12, sm: 6 }}>

@@ -19,8 +19,8 @@ namespace API.Application.Features.Shelter.Pets.Dtos
         public PetStatus Status { get; set; }
         public Guid SpeciesId { get; set; }
 
-        public UpdatePetRelationDto BreedIds { get; set; }
-        public UpdatePetRelationDto TraitIds { get; set; }
+        public UpdatePetRelationDto BreedIds { get; set; } = null!;
+        public UpdatePetRelationDto TraitIds { get; set; } = null!;
     }
 
 }

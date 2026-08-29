@@ -7,8 +7,8 @@ namespace API.Domain.Repository.System
 {
     public interface IAuditLogRepository
     {
-        public Task CreateAsync<T>(AuditEnum auditEnum, Guid recordId, string tableName, Guid? userId, T? oldValues);
+        public Task CreateAsync<T>(AuditEnum auditEnum, string recordId, string tableName, Guid? userId, T? oldValues);
         public Task<List<AuditLog>> GetAllAsync();
-        public Task<Paginate<AuditLog>> GetInteractionsAsync(int page, int pageSize, Guid recordId, string tableName);
+        public Task<Paginate<AuditLog>> GetInteractionsAsync(int page, int pageSize, string recordId, string tableName);
     }
 }

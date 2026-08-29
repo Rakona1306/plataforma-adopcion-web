@@ -1,6 +1,7 @@
 using API.Application.Configuration;
 using API.Infrastructure.Configuration;
 using API.Infrastructure.Db;
+using API.Infrastructure.Extensions.Features;
 using API.Infrastructure.Extensions.Jwt;
 using API.Infrastructure.Middlewares;
 using FluentValidation;
@@ -29,6 +30,11 @@ builder.Configuration.AddEnvironmentVariables();
 builder.Configuration.AddEnvironmentVariables();
 builder.Services.Configure<JwtOptions>(
     builder.Configuration.GetSection("Jwt")
+);
+
+builder.Services.AddAutoMapperFromApplication(
+    builder.Configuration,
+    typeof(Program)
 );
 
 builder.Services.AddResend(o =>
@@ -62,7 +68,7 @@ builder.Services.AddCors(options =>
         policy =>
         {
             policy
-                .WithOrigins(["http://localhost:3000", "https://plataforma-adopcion-web.vercel.app", "https://adoptasalvavidas.com"])
+                .WithOrigins(["http://localhost:3000", "https://plataforma-adopcion-web.vercel.app", "https://www.adoptasalvavidas.com"])
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials();

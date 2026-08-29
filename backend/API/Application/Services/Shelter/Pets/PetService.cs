@@ -1,6 +1,10 @@
-﻿using API.Application.Common.Services;
+﻿using System.Globalization;
+using System.Text;
+using System.Text.RegularExpressions;
+using API.Application.Common.Services;
 using API.Application.Features.Shelter.Pets.Dtos;
 using API.Application.Features.Shelter.Pets.Mappers;
+using API.Application.Features.System.AuditLogs.Dtos;
 using API.Application.Features.System.AuditLogs.Mappers;
 using API.Domain.Common.Model;
 using API.Domain.Model.Shelter;
@@ -55,7 +59,7 @@ namespace API.Application.Services.Shelter.Pets
         }
 
         // --- GET BY ID ---
-        public async Task<PetResponse> GetByIdAsync(Guid id)
+        public async Task<PetResponse?> GetByIdAsync(Guid id)
         {
             var pet = await GetPetWithRelationsAsync(id);
             return _mapper.ToResponse(pet);
@@ -90,10 +94,38 @@ namespace API.Application.Services.Shelter.Pets
                 .Select(id => new PetTrait { TraitId = id })
                 .ToList();
 
+            entity.Slug = $"{GenerateSlug(entity.Name)}-{entity.Id}";
+
             await _petRepository.CreateAsync(entity, userId);
             await _petRepository.SaveChangesAsync();
 
             return await GetByIdAsync(entity.Id);
+        }
+
+        private static string GenerateSlug(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+                return string.Empty;
+
+            text = text.ToLowerInvariant().Normalize(NormalizationForm.FormD);
+
+            var sb = new StringBuilder();
+
+            foreach (var c in text)
+            {
+                var category = CharUnicodeInfo.GetUnicodeCategory(c);
+
+                if (category != UnicodeCategory.NonSpacingMark)
+                    sb.Append(c);
+            }
+
+            text = sb.ToString().Normalize(NormalizationForm.FormC);
+
+            text = Regex.Replace(text, @"[^a-z0-9\s-]", "");
+            text = Regex.Replace(text, @"\s+", "-");
+            text = Regex.Replace(text, @"-+", "-");
+
+            return text.Trim('-');
         }
 
         // --- UPDATE (Delta Sync) ---\
@@ -127,6 +159,8 @@ namespace API.Application.Services.Shelter.Pets
 
             SyncBreeds(entity.PetBreeds, dto.BreedIds);
             SyncTraits(entity.PetTraits, dto.TraitIds);
+
+            entity.Slug = $"{GenerateSlug(entity.Name)}-{entity.Id}";
 
             await _petRepository.UpdateAsync(entity, userId);
             await _petRepository.SaveChangesAsync();
@@ -212,6 +246,11 @@ namespace API.Application.Services.Shelter.Pets
                 Page = filter.Page,
                 PageSize = filter.PageSize
             };
+        }
+
+        public Task<Paginate<AuditLogResponse>> GetInteractionsAsync(int page, int pageSize, Guid recordId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

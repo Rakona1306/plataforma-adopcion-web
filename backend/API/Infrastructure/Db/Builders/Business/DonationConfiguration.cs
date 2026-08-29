@@ -9,39 +9,44 @@ namespace API.Infrastructure.Db.Builders.Business
     {
         public void Configure(EntityTypeBuilder<Donation> builder)
         {
-            // 1. Configuración de tabla y llaves (Herencia de BaseModel)
+            // Nombre de la tabla
             builder.ToTable("Donations");
-            builder.HasKey(d => d.Id);
 
-            // 2. Configuración de columnas
-            builder.Property(d => d.Amount)
-                .IsRequired()
-                .HasPrecision(18, 2); // Buena práctica para dinero
+            // Clave primaria
+            builder.HasKey(x => x.Id);
 
-            builder.Property(d => d.Currency)
-                .IsRequired()
-                .HasMaxLength(3)
-                .HasDefaultValue("PEN");
+            // === Configuración de propiedades ===
 
-            builder.Property(d => d.PaymentProvider)
-                .HasMaxLength(100);
+            builder.Property(x => x.DonationDate)
+                   .IsRequired();
 
-            builder.Property(d => d.TransactionId)
-                .HasMaxLength(255);
+            // === Campos de auditoría (heredados de BaseModelInt) ===
 
-            // 3. Configuración de Relaciones (Foreign Key)
-            builder.HasOne(d => d.User)
-                .WithMany() // O .WithMany(u => u.Donations)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.Restrict); // Evita borrado accidental de usuarios con donaciones
+            builder.Property(x => x.CreatedAt)
+                   .IsRequired();
 
-            // 4. Mapeo de Enums (Opcional: guardar como string o int)
-            // Por defecto EF Core guarda el int, si prefieres el nombre (string):
-            builder.Property(d => d.Type)
-                .HasConversion<string>();
+            builder.Property(x => x.LastUpdatedAt)
+                   .IsRequired();
 
-            builder.Property(d => d.Status)
-                .HasConversion<string>();
+            // === Índices ===
+
+            builder.HasIndex(x => x.RequestDonationId);
+            builder.HasIndex(x => x.DonationDate);
+            builder.HasIndex(x => new { x.RequestDonationId, x.DonationDate });
+
+            // === Relaciones ===
+
+            // Relación con RequestDonation (uno a muchos)
+            builder.HasOne(x => x.RequestDonation)
+                   .WithMany()
+                   .HasForeignKey(x => x.RequestDonationId)
+                   .OnDelete(DeleteBehavior.Restrict);
+
+            // Relación con FollowUps (uno a muchos)
+            builder.HasMany(x => x.FollowUps)
+                   .WithOne(x => x.Donation)
+                   .HasForeignKey(x => x.DonationId)
+                   .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

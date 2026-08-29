@@ -66,7 +66,7 @@ namespace API.Domain.Common.Repository
         GetInteractionsAsync(
             int page,
             int pageSize,
-            Guid recordId
+            string recordId
         );
     }
 }

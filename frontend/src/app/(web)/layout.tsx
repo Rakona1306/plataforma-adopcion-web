@@ -13,6 +13,7 @@ export default function WebLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className={`${robotoFlex.className}`}>
       <Header />
+      <div className='w-full h-32 bg-gray-100' />
       {children}
       <Footer />
     </div>

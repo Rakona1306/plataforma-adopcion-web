@@ -159,7 +159,7 @@ namespace API.Presentation.Controllers.Shelter
                 await _service.GetInteractionsAsync(
                     page,
                     pageSize,
-                    id
+                    id.ToString()
                 );
 
             return Ok(response);

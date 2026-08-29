@@ -34,7 +34,7 @@ namespace API.Application.Common.Services
         > GetInteractionsAsync(
             int page,
             int pageSize,
-            Guid recordId
+            string recordId
         )
         {
             var interactions =

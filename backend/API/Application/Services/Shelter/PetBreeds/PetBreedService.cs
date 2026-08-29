@@ -286,7 +286,7 @@ namespace API.Application.Services.Shelter.PetBreedes
                     .GetInteractionsAsync(
                         page,
                         pageSize,
-                        recordId
+                        recordId.ToString()
                     );
 
             return new Paginate<AuditLogResponse>

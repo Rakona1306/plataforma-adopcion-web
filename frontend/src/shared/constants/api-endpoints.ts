@@ -28,5 +28,11 @@ export const API_ENDPOINTS = {
     CREATE: '/v1/adoptions',
     PAGINATE: '/v1/adoptions',
     REVIEW: (id: string) => `/v1/adoptions/${id}/review`
+  },
+  REQUEST_ADOPTION: {
+    CREATE: '/request-adoptions',
+    PUBLIC_CREATE: '/v1/request-adoptions',
+    PAGINATE: '/request-adoptions',
   }
+
 } as const;

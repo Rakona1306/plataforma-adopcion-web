@@ -1,6 +1,7 @@
 ﻿using API.Application.Common.Services;
 using API.Application.Features.Shelter.PetPhotos.Dtos;
 using API.Application.Features.Shelter.PetPhotos.Mappers;
+using API.Application.Features.System.AuditLogs.Dtos;
 using API.Application.Features.System.AuditLogs.Mappers;
 using API.Application.Helpers;
 using API.Application.Services.Adapter.CloudflareR2Storage;
@@ -285,6 +286,11 @@ namespace API.Application.Services.Shelter.PetPhotos
             }
 
             await _repository.SaveChangesAsync();
+        }
+
+        public Task<Paginate<AuditLogResponse>> GetInteractionsAsync(int page, int pageSize, Guid recordId)
+        {
+            throw new NotImplementedException();
         }
     }
 }
