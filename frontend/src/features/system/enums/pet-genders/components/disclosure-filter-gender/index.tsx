@@ -3,7 +3,6 @@ import { useGetAllPetGenders } from "../../hooks/useGetAllPetGenders";
 import { Box, Checkbox, Collapse, Group, Skeleton, Text } from "@mantine/core";
 import { PiCaretDownLight } from "react-icons/pi";
 import { cn } from "@/lib/utils";
-import { useEffect, useMemo, useState } from "react";
 import { montserrat } from "@/lib/fonts/monserrat";
 import { useFilterPlpStore } from "@/store/use-filter-plp-store";
 import { v4 as uuid } from "uuid";

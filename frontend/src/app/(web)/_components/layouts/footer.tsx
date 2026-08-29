@@ -10,11 +10,6 @@ import Container from "@/components/atoms/container";
 import { headerData } from "@/core/shared/utils/web/data/header.data";
 import { notSpace } from "@/core/shared/helpers/notSpace";
 
-const CONTACT = {
-  phone: "+51 955 288 116",
-  address: "Av. Salva Vidas 123, Lima, Perú",
-};
-
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 28 },
   visible: (i: number) => ({

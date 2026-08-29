@@ -19,12 +19,10 @@ interface PetCardProps {
 }
 
 export function PetCard({
-  id,
   name,
   type,
   breed,
   age,
-  image,
   description,
   gender,
   vaccinated
