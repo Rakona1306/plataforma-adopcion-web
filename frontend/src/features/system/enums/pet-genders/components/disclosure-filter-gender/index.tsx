@@ -14,27 +14,23 @@ export default function DisclosureFilterGender() {
     const { data, isLoading } = useGetAllPetGenders();
     const [expanded, { toggle }] = useDisclosure(true);
     const { removeFilter, setFilter, searchFilter, returnArrayString } = useFilterPlpStore()
-    const filters = useFilterPlpStore((state) => state.filters);
-    const [localValues, setLocalValues] = useState<string[]>([]);
-
-    useEffect(() => {
-        setLocalValues(returnArrayString(FEATURE));
-    }, [filters, returnArrayString]);
+    const localValues = returnArrayString(FEATURE);
 
     if (isLoading || !data) {
         return <Skeleton w="100%" h={44} radius="md" />;
     }
 
     const handleGroupChange = (nextValues: string[]) => {
-        // 1. Actualizamos el estado visual al instante para que no se tranque el check
-        setLocalValues(nextValues);
-
-        // 2. Evaluamos si el usuario agregó o quitó un elemento comparando con el store
         const currentStoreValues = returnArrayString(FEATURE);
 
         if (nextValues.length > currentStoreValues.length) {
-            const addedKey = nextValues.find((val) => !currentStoreValues.includes(val));
-            const item = data.find((d) => d.key.toString() === addedKey);
+            const addedKey = nextValues.find(
+                (val) => !currentStoreValues.includes(val),
+            );
+
+            const item = data.find(
+                (d) => d.key.toString() === addedKey,
+            );
 
             if (item) {
                 setFilter({
@@ -45,12 +41,23 @@ export default function DisclosureFilterGender() {
                 });
             }
         } else {
-            const removedKey = currentStoreValues.find((val) => !nextValues.includes(val));
-            const item = data.find((d) => d.key.toString() === removedKey);
+            const removedKey = currentStoreValues.find(
+                (val) => !nextValues.includes(val),
+            );
+
+            const item = data.find(
+                (d) => d.key.toString() === removedKey,
+            );
 
             if (item) {
-                const filterSearched = searchFilter(item.value, item.key.toString());
-                if (filterSearched) removeFilter(filterSearched);
+                const filterSearched = searchFilter(
+                    item.value,
+                    item.key.toString(),
+                );
+
+                if (filterSearched) {
+                    removeFilter(filterSearched);
+                }
             }
         }
     };
