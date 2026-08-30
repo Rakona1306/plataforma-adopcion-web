@@ -1,4 +1,4 @@
-#!/bin/sh
+export PATH="$HOME/.nvm/versions/node/v24.16.0/bin:$PATH"
 echo "======== VALIDACION ANTES DEL PUSH ========"
 
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
@@ -10,8 +10,8 @@ if echo "$CHANGED" | grep -q '^frontend/'; then
 fi
 
 if echo "$CHANGED" | grep -q '^backend/'; then
-  echo "-> Validando backend..."
-  
+  echo "-> Validando backend (C#)..."
+  echo "   (validaciones de backend C# pendientes de configurar)"
 fi
 
 exit 0
