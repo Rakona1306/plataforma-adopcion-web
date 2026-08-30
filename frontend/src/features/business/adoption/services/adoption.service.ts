@@ -12,6 +12,7 @@ export interface IAdoptionService {
     update: (dto: UpdateAdoptionDto) => Promise<void>
     paginate: (filter: FilterRequestAdoptionDto) => Promise<Paginate<AdoptionResponse>>
     getById: (id: number) => Promise<AdoptionResponse>
+    reviewAdoptionRequest: (requestedId: string, dto: UpdateAdoptionDto) => Promise<any>
 }
 
 class AdoptionService implements IAdoptionService {
@@ -19,6 +20,10 @@ class AdoptionService implements IAdoptionService {
     constructor(
         private readonly httpClient: HttpClient
     ) { }
+
+    async reviewAdoptionRequest(requestedId: string, dto: UpdateAdoptionDto): Promise<any> {
+
+    };
 
     async update(dto: UpdateAdoptionDto): Promise<void> {
         return this.httpClient.put<void>(API_ENDPOINTS.ADOPTION.UPDATE, dto);
