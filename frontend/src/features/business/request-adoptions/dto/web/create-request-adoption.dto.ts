@@ -11,23 +11,29 @@ export enum RequestStatus {
     RECHAZADO = 2
 }
 
-export const createRequestAdoptionSchema = yup.object({
+const phoneRegExp = /^(\+?\d{1,3}[- ]?)?\d{7,15}$/;
+
+export const createPubRequestAdoptionSchema = yup.object({
     motivation: yup
         .string()
         .trim()
         .required('La motivación es requerida')
-        .min(10, 'Por favor, detalla un poco más tu motivación (mínimo 10 caracteres)'),
+        .min(10, 'Por favor, detalla un poco más tu motivación (mínimo 10 caracteres)')
+        .max(255, 'La motivación no puede exceder los 255 caracteres'),
 
     district: yup
         .string()
         .trim()
         .required('El distrito es requerido'),
 
-    phone: yup
-        .string()
-        .trim()
-        .required('El teléfono es requerido')
-        .matches(/^[0-9+-\s]{7,15}$/, 'Número de teléfono inválido'), // Validación estándar para teléfonos
+    dni: yup.string()
+        .matches(/^\d{8}$/, "El DNI debe tener 8 dígitos")
+        .required("El DNI es obligatorio"),
+
+    phone: yup.string()
+        .matches(phoneRegExp, "Ingresa un número de teléfono válido")
+        .max(15, "El teléfono no puede exceder los 15 caracteres")
+        .required("El número de teléfono es obligatorio"), // Validación estándar para teléfonos
 
     petId: yup
         .string()
@@ -66,4 +72,4 @@ export const createRequestAdoptionSchema = yup.object({
         .min(10, 'Por favor, proporciona una dirección más detallada (mínimo 10 caracteres)')
 });
 
-export type CreateReqAdoption = yup.InferType<typeof createRequestAdoptionSchema>;
+export type CreatePubReqAdoption = yup.InferType<typeof createPubRequestAdoptionSchema>;

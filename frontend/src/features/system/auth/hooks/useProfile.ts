@@ -4,11 +4,9 @@ import { useQuery } from "@tanstack/react-query";
 import { useSessionStore } from "@/core/infrastructure/store/useSessionStore";
 import { authService } from "../services/auth.service";
 import { QUERY_KEYS } from "@/shared/constants/queryKeys";
-import { useRouter } from "next/navigation";
 
 export const useProfile = () => {
     const { setUser } = useSessionStore();
-    const router = useRouter()
 
     const { data: profile, isLoading, error, isRefetching, refetch, isFetching } = useQuery({
         queryKey: [QUERY_KEYS.SYSTEM.AUTH],

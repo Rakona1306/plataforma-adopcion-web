@@ -11,6 +11,7 @@ interface FormSelectProps {
   onTouch: () => void
   placeholder?: string
   required?: boolean
+  disabled?: boolean
 }
 
 export const FormSelect = ({
@@ -21,7 +22,8 @@ export const FormSelect = ({
   onChange,
   onTouch,
   placeholder,
-  required
+  required,
+  disabled
 }: FormSelectProps) => {
   return (
     <div className="flex flex-col gap-2 w-full" onClick={onTouch}>
@@ -36,6 +38,10 @@ export const FormSelect = ({
         onChange={onChange}
         onBlur={onTouch}
         className="w-full"
+        disabled={disabled}
+        classNames={{
+          input: 'disabled:bg-gray-200! disabled:text-slate-600! disabled:cursor-not-allowed! border-2! rounded-xl! border-slate-400! disabled:opacity-100!'
+        }}
       />
 
       {error && (

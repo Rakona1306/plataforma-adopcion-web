@@ -4,6 +4,7 @@ import Title from "@/app/(web)/_components/atoms/title"
 import Container from "@/components/atoms/container"
 import AccountAdoptioRequestCard from "@/features/business/adoption/components/account/adoption-request-card"
 import usePaginateAdoptionRequest from "@/features/business/adoption/hooks/use-paginate-adoption-request"
+import usePaginateRequestAdoption from "@/features/business/request-adoptions/hooks/dashboard/use-paginate-request-adoption"
 import { useProfile } from "@/features/system/auth/hooks/useProfile"
 import { montserrat } from "@/lib/fonts/monserrat"
 import { Grid, Skeleton } from "@mantine/core"
@@ -11,12 +12,10 @@ import { Grid, Skeleton } from "@mantine/core"
 export default function AccountRequestPage() {
 
     const { profile } = useProfile()
-    const { data: adoptionRequests, isLoading } = usePaginateAdoptionRequest({
-        filter: {
-            page: 1,
-            pageSize: 4,
-            userId: profile?.id,
-        }
+    const { data: adoptionRequests, isLoading } = usePaginateRequestAdoption({
+        page: 1,
+        pageSize: 4,
+        userId: profile?.id,
     })
 
     return (

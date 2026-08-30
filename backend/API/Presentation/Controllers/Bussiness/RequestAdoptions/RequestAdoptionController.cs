@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using API.Application.Attributes;
 using API.Application.Features.Bussiness.RequestAdoptions.Dtos;
 using API.Application.Features.Bussiness.RequestAdoptions.Dtos.Private;
+using API.Application.Helpers;
 using API.Application.Services.Bussiness.RequestAdoptions;
+using API.Domain.Model.Enums;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Presentation.Controllers.Bussiness.RequestAdoptions
@@ -131,8 +133,8 @@ namespace API.Presentation.Controllers.Bussiness.RequestAdoptions
             }
 
             var reviewerId = (Guid)((dynamic)user).Id;
-            await _service.Review(dto, reviewerId);
-            return NoContent();
+            var result = await _service.Review(dto, reviewerId);
+            return Ok(result);
         }
 
         [HttpPut("{id}/comment")]
@@ -155,6 +157,14 @@ namespace API.Presentation.Controllers.Bussiness.RequestAdoptions
             var userId = (Guid)((dynamic)user).Id;
             await _service.AddComment(id, request.Comment, userId);
             return NoContent();
+        }
+
+        [HttpGet("enums/request-adoption-status")]
+        public IActionResult RequestAdoptionStatus()
+        {
+            return Ok(
+                EnumHelper.ToList<RequestStatus>()
+            );
         }
 
         public class AddCommentRequest

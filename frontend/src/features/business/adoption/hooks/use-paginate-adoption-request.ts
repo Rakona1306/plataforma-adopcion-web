@@ -5,6 +5,7 @@ import { useCallback, useState } from "react";
 import { FilterRequestAdoptionDto } from "../dto/filter-request-adoption.dto";
 import { RequestAdoptionResponse } from "../dto/request-adoption-response";
 import { Paginate } from "@/core/domain/models/system/paginate";
+import { AdoptionResponse } from "../dto/dashboard/adoption-response";
 
 const DEFAULT_FILTER: FilterRequestAdoptionDto = {
     page: 1,
@@ -14,12 +15,12 @@ const DEFAULT_FILTER: FilterRequestAdoptionDto = {
 type Props = {
     filter?: FilterRequestAdoptionDto;
     queryOptions?: Omit<
-        UseQueryOptions<Paginate<RequestAdoptionResponse>, unknown, Paginate<RequestAdoptionResponse>>,
+        UseQueryOptions<Paginate<AdoptionResponse>, unknown, Paginate<AdoptionResponse>>,
         "queryKey" | "queryFn"
     >;
 };
 
-export default function usePaginateAdoptionRequest({
+export default function usePaginateAdoption({
     filter: initialFilter = DEFAULT_FILTER,
     queryOptions,
 }: Props = {}) {
@@ -27,7 +28,7 @@ export default function usePaginateAdoptionRequest({
 
     const query = useQuery({
         queryKey: [QUERY_KEYS.BUSINESS.ADOPTION.REQUEST, filter],
-        queryFn: () => adoptionService.paginateRequests(filter),
+        queryFn: () => adoptionService.paginate(filter),
         ...queryOptions,
     });
 

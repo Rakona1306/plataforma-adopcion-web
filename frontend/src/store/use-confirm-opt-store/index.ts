@@ -5,9 +5,9 @@ import { UserRegistered } from "./interface/user-registered.interface"
 
 interface Props {
     confirmOpt: boolean
-    userRegistered: UserRegistered
+    userRegistered: UserRegistered | null
     setConfirmOpt: (confirmOpt: boolean) => void
-    setUserRegistered: (userRegistered: UserRegistered) => void
+    setUserRegistered: (userRegistered: UserRegistered | null) => void
 }
 
 export const useConfirmOptStore = create<Props>((set) => ({
@@ -19,5 +19,5 @@ export const useConfirmOptStore = create<Props>((set) => ({
         lastName: ""
     },
     setConfirmOpt: (confirmOpt: boolean) => set({ confirmOpt }),
-    setUserRegistered: (userRegistered: UserRegistered) => set({ userRegistered })
+    setUserRegistered: (userRegistered: UserRegistered | null) => set({ userRegistered })
 }))

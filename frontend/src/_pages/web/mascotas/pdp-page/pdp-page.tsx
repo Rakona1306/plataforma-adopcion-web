@@ -20,6 +20,7 @@ import { RelatedPets } from "@/components/organisms/related-pets";
 import { InfoIcon } from "lucide-react";
 import { BsWhatsapp } from "react-icons/bs";
 import { useModal } from "@/core/application/hooks/ui/useModal";
+import CurrentUserEditForm from "@/features/organization/user/components/forms/current-user-edit-form";
 
 interface PetDeatilPageProps {
   slug: string;
@@ -41,6 +42,20 @@ export function PetDeatilPage({ slug }: PetDeatilPageProps) {
         content: <AuthModal header="Adopta a esta mascota" Component={<AdoptionModal pet={pet} />} />
       });
       return;
+    }
+
+    if (!user.district || !user.dni || !user.phone) {
+      handleOpenModal && handleOpenModal({
+        header: 'Completa tu perfil',
+        content: <CurrentUserEditForm onSubmit={() => {
+          handleOpenModal && handleOpenModal({
+            header: 'Adopta a esta mascota',
+            content: <AdoptionModal pet={pet} />
+          });
+        }} />
+      })
+
+      return
     }
 
     handleOpenModal && handleOpenModal({

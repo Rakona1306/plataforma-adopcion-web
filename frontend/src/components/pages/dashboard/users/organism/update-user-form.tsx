@@ -18,6 +18,7 @@ import { User } from "@/core/domain/models/organization/user";
 import { limaDistricts } from "@/core/shared/constants/distritcts";
 import { Button, Grid } from "@mantine/core";
 import { DniOrRuc } from "../molecules/dni-or-ruc";
+import ButtonUI from "@/components/atoms/button/button-ui";
 
 interface Props {
   user: User; // El usuario que viene de la tabla/lista
@@ -84,24 +85,25 @@ export default function UpdateUserForm({ user }: Props) {
 
       <Grid>
         <Grid.Col span={6}>
-          <SelectInput
-            label="Documento de Identidad"
-            name="document"
-            options={[
-              {
-                label: 'DNI',
-                value: "DNI"
-              },
-              {
-                label: 'RUC',
-                value: 'RUC'
-              }
-            ]}
-            defaultValue={initialValues.dni ? 'DNI' : 'RUC'}
+          <SearchSelect<Role>
+            name="roleId"
+            label="Buscar Rol"
+            className="w-full"
+            displayField="name"
+            valueField="id"
+            options={data?.items || []}
+            onSearch={(search) => updateFilter({ search })}
+            isLoading={isLoading || isPending}
+            defaultValue={user.role?.name || ""}
           />
         </Grid.Col>
         <Grid.Col span={6}>
-          <DniOrRuc errorValidation={errorValidation} />
+          <Input
+            name="dni"
+            label="DNI"
+            error={errorValidation.dni}
+            defaultValue={user.dni}
+          />
         </Grid.Col>
       </Grid>
 
@@ -120,23 +122,11 @@ export default function UpdateUserForm({ user }: Props) {
         </Grid.Col>
       </Grid>
 
-      <SearchSelect<Role>
-        name="roleId"
-        label="Buscar Rol"
-        className="w-full"
-        displayField="name"
-        valueField="id"
-        options={data?.items || []}
-        onSearch={(search) => updateFilter({ search })}
-        isLoading={isLoading || isPending}
-        defaultValue={user.role?.name || ""}
-      />
-
       <BooleanSelect name="isBlocked" label="¿Usuario bloqueado?" />
 
-      <Button type="submit" loading={isPending}>
+      <ButtonUI type="submit" loading={isPending} fullWidth>
         Actualizar Usuario
-      </Button>
+      </ButtonUI>
     </FormContainer>
   );
 }

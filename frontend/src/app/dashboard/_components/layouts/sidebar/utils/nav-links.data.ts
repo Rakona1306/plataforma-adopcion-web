@@ -66,12 +66,20 @@ export const navLinks: NavLink[] = [
     icon: FaDog,
     items: [
       {
+        name: 'Adopciones',
+        href: '/dashboard/adopciones'
+      },
+      {
         name: 'Solicitudes',
         href: '/dashboard/adopciones/solicitudes'
       },
       {
-        name: 'Mascotas Adoptadas',
-        href: '/dashboard/adopciones/mascotas-adoptadas'
+        name: 'Mascotas Solicitadas',
+        href: '/dashboard/adopciones/mascotas-solicitadas'
+      },
+      {
+        name: 'Reportes',
+        href: '/dashboard/adopciones/reportes'
       }
     ]
   },

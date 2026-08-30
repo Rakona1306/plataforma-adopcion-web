@@ -5,6 +5,7 @@ using API.Domain.Repository.System;
 using API.Infrastructure.Db;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace API.Infrastructure.RepositoryImpl.System
 {
@@ -18,6 +19,12 @@ namespace API.Infrastructure.RepositoryImpl.System
         public async Task CreateAsync<T>(AuditEnum auditEnum, string recordId, string tableName, Guid? userId, T? oldValues)
         {
             var query = _context.AuditLogs;
+
+            var serializerOptions = new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.IgnoreCycles
+            };
+
             AuditLog entity = new()
             {
                 RecordId = recordId,
@@ -27,11 +34,10 @@ namespace API.Infrastructure.RepositoryImpl.System
                 UserId = userId,
                 OldValues = oldValues is null
                     ? null
-                    : JsonSerializer.Serialize(oldValues)
+                    : JsonSerializer.Serialize(oldValues, serializerOptions)
             };
 
             await query.AddAsync(entity);
-            // await _context.SaveChangesAsync();
         }
 
         public async Task<List<AuditLog>> GetAllAsync()

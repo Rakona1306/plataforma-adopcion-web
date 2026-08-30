@@ -33,6 +33,7 @@ export default function TableActions<T>({ actions, rowData }: TableActionsProps<
             leftSection={action.icon}
             color={action.color}
             onClick={() => action.onClick(rowData)}
+
           >
             {action.label}
           </Menu.Item>

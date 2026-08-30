@@ -19,6 +19,12 @@ namespace API.Application.Features.Bussiness.RequestAdoptions.Validators
                 .NotEmpty()
                     .WithMessage("El usuario es obligatorio.");
 
+            RuleFor(x => x.Dni)
+                .NotEmpty()
+                    .WithMessage("El DNI es obligatorio.")
+                .Matches(@"^\d{8}$")
+                    .WithMessage("El DNI peruano debe contener exactamente 8 dígitos numéricos.");
+
             RuleFor(x => x.HouseType)
                 .NotEmpty()
                     .WithMessage("El tipo de vivienda es obligatorio.")

@@ -46,6 +46,7 @@ namespace API.Application.Services.Bussiness.RequestAdoptions
             requestAdoption.CreatedAt = DateTime.UtcNow;
             requestAdoption.CreatedBy = userId;
             requestAdoption.LastUpdatedAt = DateTime.UtcNow;
+            requestAdoption.PlatformProvider = PlatformProvider.Web;
 
             await _requestAdoptionRepository.CreateAsync(requestAdoption, userId);
             await _requestAdoptionRepository.SaveChangesAsync();

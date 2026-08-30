@@ -30,6 +30,13 @@ namespace API.Presentation.Controllers.Shelter
             );
         }
 
+        [HttpGet("most-requested")]
+        public async Task<IActionResult> GetMostRequested([FromQuery] PetFilterDto filter)
+        {
+            var result = await _service.GetMostRequestedAsync(filter);
+            return Ok(result);
+        }
+
         [HttpGet("{id}")]
         [OutputCache(Duration = 60)]
         public async Task<IActionResult> GetById(Guid id)

@@ -11,15 +11,9 @@ export const userPublicSchema = Yup.object({
 
     // DNI: Opcional, pero si se escribe, debe tener exactamente 8 números
     dni: Yup.string()
-        .nullable()
+        .required('El DNI es requerido')
         .transform((value) => (value === "" ? null : value))
         .matches(/^[0-9]{8}$/, 'El DNI debe tener exactamente 8 dígitos numéricos'),
-
-    // RUC: Opcional, pero si se escribe, debe tener exactamente 11 números
-    ruc: Yup.string()
-        .nullable()
-        .transform((value) => (value === "" ? null : value))
-        .matches(/^[0-9]{11}$/, 'El RUC debe tener exactamente 11 dígitos numéricos'),
 
     // Teléfono: Opcional, validación estándar para celulares (ej: 9 dígitos)
     phone: Yup.string()

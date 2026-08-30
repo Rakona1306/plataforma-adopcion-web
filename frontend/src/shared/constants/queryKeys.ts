@@ -3,7 +3,8 @@ export const QUERY_KEYS = {
         PET_VACCINE: 'pet-vaccine',
         PET: {
             PUBLIC: 'public_pets',
-            PRIVATE: 'pets'
+            PRIVATE: 'pets',
+            MOST_REQUESTED: 'most-requested-pets'
         },
         ROLE_PERMISSION: 'role-permissions',
         PET_PHOTO: 'pet-photos',
@@ -14,13 +15,17 @@ export const QUERY_KEYS = {
         }
     },
     ORGANIZATION: {
-        ROLE: 'roles'
+        ROLE: 'roles',
+        USER: {
+            VALIDATE_DNI: 'validate-dni',
+        }
     },
     SYSTEM: {
         AUTH: 'profile'
     },
     BUSINESS: {
         ADOPTION: {
+            ALL: 'adoption',
             REQUEST: 'adoption-request',
         },
         REQUEST_ADOPTION: {

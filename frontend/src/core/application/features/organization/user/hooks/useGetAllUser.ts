@@ -5,15 +5,17 @@ import { UserFilterDto } from "../dtos/user-filter-dto";
 import { useQuery } from "@tanstack/react-query";
 import { userContainer } from "@/core/infrastructure/container/organization/user-container";
 
-export function useGetAllUser() {
+const DEFAULT_FILTER = {
+  page: 1,
+  pageSize: 10,
+  search: "",
+  isBlocked: undefined,
+  roleId: undefined,
+}
+
+export function useGetAllUser(filters: UserFilterDto = DEFAULT_FILTER) {
   const router = useRouter();
-  const [filter, setFilter] = useState<UserFilterDto>({
-    page: 1,
-    pageSize: 10,
-    search: "",
-    isBlocked: undefined,
-    roleId: undefined,
-  });
+  const [filter, setFilter] = useState<UserFilterDto>(filters);
 
   const debouncedFilter = useMemo(() => {
     const { search, ...rest } = filter;

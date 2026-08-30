@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using API.Application.Services.Organization.Users;
 
 namespace API.Application.Configuration
 {
@@ -6,6 +7,14 @@ namespace API.Application.Configuration
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            services.Configure<ExternalApiSettings>(options =>
+            {
+                options.DniApiBaseUrl = Environment.GetEnvironmentVariable("DNI_API_BASE_URL") ?? string.Empty;
+                options.DniApiKey = Environment.GetEnvironmentVariable("DNI_API_KEY") ?? string.Empty;
+            });
+
+            services.AddHttpClient<IDniValidationService, DniValidationService>();
+
             var mapperTypes = Assembly.GetExecutingAssembly().GetTypes()
             .Where(t => t.IsClass && !t.IsAbstract && t.Name.EndsWith("Mapper"));
 

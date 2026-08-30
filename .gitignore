@@ -132,6 +132,9 @@ backend/API/bin/
 backend/API/obj/
 backend/API/.vs/
 backend/API/.idea/
+backend/API/[Oo]bj
+
+.env
 
 # Logs
 *.log

@@ -2,7 +2,6 @@
 
 import ButtonUI from "@/components/atoms/button/button-ui";
 import Input from "@/components/atoms/input";
-import Textarea from "@/components/atoms/text-area";
 import { ToggleField } from "@/components/atoms/toggle-field";
 import FormContainer from "@/components/molecules/form-container";
 import SelectInput from "@/components/organisms/select-input";
@@ -13,8 +12,9 @@ import { useProfile } from "@/features/system/auth/hooks/useProfile";
 import { Grid, Skeleton } from "@mantine/core";
 import Swal from "sweetalert2";
 import { AlertCircle } from "lucide-react";
-import useCreateRequestAdoption from "@/features/business/request-adoptions/hooks/dashboard/use-create-request-adoption";
-import { CreateReqAdoption, createRequestAdoptionSchema } from "@/features/business/request-adoptions/dto/web/create-request-adoption.dto";
+import useCreatePubRequestAdoption from "@/features/business/request-adoptions/hooks/web/use-create-pub-request-adoption";
+import { CreatePubReqAdoption, createPubRequestAdoptionSchema } from "@/features/business/request-adoptions/dto/web/create-request-adoption.dto";
+import { Alert } from "@/components/atoms/alert";
 
 interface AdoptionModalProps {
     pet?: PetPublic
@@ -24,7 +24,8 @@ export function AdoptionModal({ pet }: AdoptionModalProps) {
 
     const { profile, isLoading } = useProfile()
     const { handleCloseModal } = useModal() || {}
-    const { createAdoption, isPending } = useCreateRequestAdoption({
+
+    const { createAdoption, isPending, errorMessage, errorValidation, isError } = useCreatePubRequestAdoption({
         onSuccess: () => {
             handleCloseModal?.();
             Swal.fire({
@@ -129,7 +130,7 @@ export function AdoptionModal({ pet }: AdoptionModalProps) {
         );
     }
 
-    const initialValues: CreateReqAdoption = {
+    const initialValues: CreatePubReqAdoption = {
         motivation: '',
         district: profile.district || '',
         phone: profile.phone || '',
@@ -139,29 +140,40 @@ export function AdoptionModal({ pet }: AdoptionModalProps) {
         hasOtherPets: false,
         hasChildren: false,
         acceptHomeVisit: false,
-        address: ''
+        address: '',
+        dni: profile.dni || ''
     }
 
-    const handleSubmit = (values: CreateReqAdoption) => {
+    const handleSubmit = (values: CreatePubReqAdoption) => {
         createAdoption(values);
     }
 
     return (
-        <FormContainer<CreateReqAdoption>
+        <FormContainer<CreatePubReqAdoption>
             initialValues={initialValues}
             onSubmit={handleSubmit}
-            validationSchema={createRequestAdoptionSchema}
+            validationSchema={createPubRequestAdoptionSchema}
             className="space-y-6"
         >
-            {({ setFieldValue, values }) => (
+            {({ setFieldValue, values, errors, handleBlur }) => (
                 <>
+                    {
+                        isError && errorMessage && (
+                            <Alert
+                                message={errorMessage}
+                                type="error"
+                            />
+                        )
+                    }
                     <Grid>
                         <Grid.Col span={{ base: 12, sm: 6 }}>
                             <Input
                                 name="phone"
                                 defaultValue={profile.phone || ''}
                                 label="Telefono"
+                                error={errorValidation.phone}
                                 required
+                                disabled
                             />
                         </Grid.Col>
                         <Grid.Col span={{ base: 12, sm: 6 }}>
@@ -172,6 +184,8 @@ export function AdoptionModal({ pet }: AdoptionModalProps) {
                                 options={limaDistricts}
                                 defaultValue={profile.district || ''}
                                 required
+                                error={errorValidation.district}
+                                disabled
                             />
                         </Grid.Col>
                     </Grid>
@@ -182,6 +196,7 @@ export function AdoptionModal({ pet }: AdoptionModalProps) {
                                 subtitle="Selecciona si es cierto"
                                 value={values.hasOtherPets}
                                 onChange={(v) => setFieldValue("hasOtherPets", v)}
+                                error={errors.hasOtherPets || errorValidation.hasOtherPets}
                             />
                         </Grid.Col>
                         <Grid.Col span={{ base: 12, sm: 6 }}>
@@ -190,6 +205,7 @@ export function AdoptionModal({ pet }: AdoptionModalProps) {
                                 subtitle="Selecciona si es cierto"
                                 value={values.hasChildren}
                                 onChange={(v) => setFieldValue("hasChildren", v)}
+                                error={errors.hasChildren || errorValidation.hasChildren}
                             />
                         </Grid.Col>
                     </Grid>
@@ -200,16 +216,34 @@ export function AdoptionModal({ pet }: AdoptionModalProps) {
                                 subtitle="Selecciona si es cierto"
                                 value={values.acceptHomeVisit}
                                 onChange={(v) => setFieldValue("acceptHomeVisit", v)}
+                                error={errors.acceptHomeVisit || errorValidation.acceptHomeVisit}
                             />
                         </Grid.Col>
                     </Grid>
                     <Grid>
-                        <Input
-                            name="address"
-                            label="Dirección"
-                            placeholder="Ingrese su dirección completa"
-                            required
-                        />
+                        <Grid.Col span={{ base: 12, sm: 6 }}>
+                            <Input
+                                name="address"
+                                label="Dirección"
+                                placeholder="Ingrese su dirección completa"
+                                required
+                                onBlur={handleBlur}
+                                autoFocus={false}
+                                error={errorValidation.address}
+                            />
+                        </Grid.Col>
+                        <Grid.Col span={{ base: 12, sm: 6 }}>
+                            <Input
+                                name="dni"
+                                label="DNI"
+                                placeholder="Ingrese el DNI"
+                                required
+                                defaultValue={profile.dni || ''}
+                                autoFocus={false}
+                                error={errors.dni || errorValidation.dni}
+                                disabled
+                            />
+                        </Grid.Col>
                     </Grid>
                     <Grid>
                         <Grid.Col span={{ base: 12, sm: 6 }}>
@@ -217,6 +251,9 @@ export function AdoptionModal({ pet }: AdoptionModalProps) {
                                 name="houseType"
                                 label="Tipo de vivienda"
                                 placeholder="Ingrese el tipo de vivienda"
+                                required
+                                autoFocus={false}
+                                error={errorValidation.houseType}
                             />
                         </Grid.Col>
                         <Grid.Col span={{ base: 12, sm: 6 }}>
@@ -236,21 +273,12 @@ export function AdoptionModal({ pet }: AdoptionModalProps) {
                                 label="Motivación"
                                 placeholder="Ingrese su motivación para adoptar"
                                 required
+                                error={errorValidation.motivation}
                             />
                         </Grid.Col>
                     </Grid>
 
-                    <Grid>
-                        <Grid.Col span={12}>
-                            <Textarea
-                                name="notes"
-                                label="Notas adicionales"
-                                placeholder="Ingrese notas adicionales (opcional)"
-                            />
-                        </Grid.Col>
-                    </Grid>
-
-                    <ButtonUI loading={isPending} type="submit" rootClassName="w-full!">
+                    <ButtonUI loading={isPending} type="submit" fullWidth>
                         Enviar solicitud de adopción
                     </ButtonUI>
                 </>

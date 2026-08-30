@@ -34,7 +34,7 @@ namespace API.Infrastructure.Db.Builders.Business
                      builder.HasOne(x => x.RequestAdoption)
                             .WithMany()
                             .HasForeignKey(x => x.RequestAdoptionId)
-                            .OnDelete(DeleteBehavior.SetNull);
+                            .OnDelete(DeleteBehavior.Cascade);
 
                      // Relación con FollowUps
                      builder.HasMany(x => x.FollowUps)

@@ -5,18 +5,138 @@ import { useState } from 'react'
 import FormContainer, { FormContainerFormikSubmit } from '@/components/molecules/form-container'
 import Input from '@/components/atoms/input'
 import { RegisterDto } from '@/core/application/features/system/auth/dtos/register.dto'
-// import { useAuth } from '@/core/application/features/system/auth/hooks/useAuth'
 import { getFieldError } from '@/core/shared/helpers/getFieldError'
 import { containerVariants, itemVariants } from '@/core/shared/helpers/variants'
 import { useRegister } from '@/features/system/auth/hooks/useRegister'
+import { useConfirmOptStore } from '@/store/use-confirm-opt-store'
+import { AuthConfirmEmailDto, authConfirmEmailSchema } from '@/features/system/auth/dto/auth-confirm-email.dto'
+import useConfirmOptUser from '@/features/system/auth/hooks/modal/use-confirm-opt-user'
+import { montserrat } from '@/lib/fonts/monserrat'
+import { Flex, PinInput } from "@mantine/core";
+import ButtonUI from '@/components/atoms/button/button-ui'
+import { useTokenStore } from '@/core/application/hooks/session/useToken'
+import { Alert } from '@/components/atoms/alert'
+import useCompleteRegistration from '@/features/system/auth/hooks/modal/use-complete-registration'
+import Swal from 'sweetalert2'
+import { useRouter } from 'next/navigation'
+import { useProfile } from '@/features/system/auth/hooks/useProfile'
 
 export default function RegisterForm() {
 
   const [showPassword, setShowPassword] = useState(false)
-  const { register, isLoading, error } = useRegister()
+  const router = useRouter()
+  const { register, isLoading, error, isError } = useRegister()
+  const { setConfirmOpt, setUserRegistered, confirmOpt, userRegistered } = useConfirmOptStore()
+  const { confirmOpt: confirmOptSubmit, isLoading: isConfirmLoading, error: confirmOptError } = useConfirmOptUser()
+  const { completeRegistration } = useCompleteRegistration()
+  const { setToken } = useTokenStore()
+  const { refetchProfile } = useProfile()
 
   const handleSubmit: FormContainerFormikSubmit<RegisterDto> = async (values) => {
-    register(values)
+    register(values, {
+      onSuccess: (_, variables) => {
+        setConfirmOpt(true)
+        setUserRegistered(variables)
+      }
+    })
+  }
+
+  const initialValues: AuthConfirmEmailDto = {
+    email: userRegistered?.email || '',
+    code: ''
+  }
+
+  const handleConfirmOpt = (values: AuthConfirmEmailDto) => {
+    confirmOptSubmit({ code: values.code, email: values.email }, {
+      onSuccess: () => {
+        completeRegistration({
+          code: values.code,
+          email: values.email,
+          name: userRegistered?.name || '',
+          lastName: userRegistered?.lastName || '',
+          password: userRegistered?.password || ''
+        }, {
+          onSuccess: async (data) => {
+            await setToken(data.token)
+            setConfirmOpt(false)
+            setUserRegistered(null)
+
+            refetchProfile()
+
+            Swal.fire({
+              icon: 'success',
+              title: 'Registro completado',
+              text: 'Tu cuenta ha sido creada exitosamente.',
+              confirmButtonText: 'Aceptar'
+            })
+            router.back()
+          }
+        })
+      }
+    })
+  }
+
+  const backToRegister = () => {
+    setConfirmOpt(false)
+    setUserRegistered(null)
+  }
+
+  if (confirmOpt) {
+    return (
+      <FormContainer<AuthConfirmEmailDto>
+        initialValues={initialValues}
+        validationSchema={authConfirmEmailSchema}
+        onSubmit={handleConfirmOpt}
+        className="space-y-10"
+      >
+        {({ setFieldValue, values, errors }) => (
+          <>
+            <div>
+              <h2 className={`text-xl font-bold! text-primary mb-2 ${montserrat.className}`}>Confirmar Código OTP</h2>
+              <p className={`text-slate-800 font-medium ${montserrat.className} text-base`}>Se ha enviado un código OTP a tu correo electrónico: <span className="font-bold">{userRegistered?.email}</span></p>
+            </div>
+
+            {
+              confirmOptError && (
+                <Alert
+                  type='error'
+                  message={confirmOptError.message || "Ocurrió un error al confirmar el código OTP. Por favor, inténtalo de nuevo."}
+                />
+              )
+            }
+
+            <div className="flex flex-col gap-2 items-center">
+              <label htmlFor="code" className={`text-base ${montserrat.className} font-bold`}>Codigo</label>
+              <PinInput
+                name='code'
+                inputMode="numeric"
+                value={values.code}
+                id="code"
+                size="lg"
+                length={6}
+                classNames={{
+                  pinInput: 'outline-primary!',
+                  input: 'border-primary! border-4!'
+                }}
+                autoFocus
+                onChange={(value) => setFieldValue('code', value)}
+              />
+              {errors.code && <div className="text-red-500">{errors.code}</div>}
+              {errors.email && <div className="text-red-500">{errors.email}</div>}
+            </div>
+
+            <Flex gap={'xs'}>
+              <ButtonUI onClick={backToRegister} type="button" loading={isConfirmLoading} rootClassName="bg-slate-700! hover:bg-slate-800!" fullWidth>
+                Volver
+              </ButtonUI>
+              <ButtonUI type="submit" loading={isConfirmLoading} fullWidth>
+                Confirmar Código
+              </ButtonUI>
+            </Flex>
+          </>
+        )}
+      </FormContainer>
+    )
   }
 
   return (
@@ -42,8 +162,14 @@ export default function RegisterForm() {
         onSubmit={handleSubmit}
         className="space-y-4"
       >
-        <motion.div variants={itemVariants}>
-        </motion.div>
+        {
+          isError && (
+            <Alert
+              message={error?.message || "Ocurrió un error al crear la cuenta. Por favor, inténtalo de nuevo."}
+              type='error'
+            />
+          )
+        }
 
         <motion.div variants={itemVariants} className='flex gap-5'>
           <Input

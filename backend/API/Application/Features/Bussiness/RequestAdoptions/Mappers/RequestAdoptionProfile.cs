@@ -71,14 +71,21 @@ namespace API.Application.Features.Bussiness.RequestAdoptions.Mappers
                 .ForMember(dest => dest.Reviewer, opt => opt.MapFrom(src => src.Reviewer));
 
             // Entity -> Response público
-            CreateMap<RequestAdoption, RequestAdoptionPubResponse>();
+            CreateMap<RequestAdoption, RequestAdoptionPubResponse>()
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()));
 
             CreateMap<RequestAdoption, RequestAdoptionRelationResponse>();
 
             // Relaciones
 
             CreateMap<User, ReqAdop_UserResponse>();
-            CreateMap<Pet, ReqAdop_PetResponse>();
+            CreateMap<Pet, ReqAdop_PetResponse>()
+                .ForMember(dest => dest.Specie, opt => opt.MapFrom(src => src.Species))
+                .ForMember(dest => dest.Breeds, opt => opt.MapFrom(src => src.PetBreeds.Select(pb => pb.Breed)));
+            CreateMap<Specie, ReqAdop_SpecieResponse>();
+            CreateMap<PetBreed, ReqAdop_PetBreedResponse>()
+                .ForMember(dest => dest.Breed, opt => opt.MapFrom(src => src.Breed));
+            CreateMap<Breed, ReqAdop_BreedResponse>();
             /*
             CreateMap<Pet, PetResponse>();
             CreateMap<Pet, PetPublicResponse>();

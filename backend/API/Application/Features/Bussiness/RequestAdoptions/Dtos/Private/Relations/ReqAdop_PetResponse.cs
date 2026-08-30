@@ -9,5 +9,7 @@ namespace API.Application.Features.Bussiness.RequestAdoptions.Dtos.Private.Relat
     {
         public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
+        public ReqAdop_SpecieResponse? Specie { get; set; }
+        public List<ReqAdop_BreedResponse> Breeds { get; set; } = new();
     }
 }

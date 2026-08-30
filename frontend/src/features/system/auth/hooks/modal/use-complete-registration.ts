@@ -14,7 +14,7 @@ interface Props {
     }, onMutateResult: unknown, context: MutationFunctionContext) => Promise<unknown> | unknown) | undefined
 }
 
-export default function useCompleteRegistration({ onSuccess }: Props) {
+export default function useCompleteRegistration({ onSuccess }: Props = {}) {
 
     const { refetchProfile } = useProfile()
 

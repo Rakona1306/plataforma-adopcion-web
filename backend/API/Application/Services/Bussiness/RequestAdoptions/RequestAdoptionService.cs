@@ -17,7 +17,7 @@ namespace API.Application.Services.Bussiness.RequestAdoptions
         Task Update(UpdateRequestAdoption dto, Guid userId);
         Task<Paginate<RequestAdoptionResponse>> Paginate(RequestAdoptionFilter filter);
         Task Delete(int id, Guid userId);
-        Task Review(ReviewRequestAdoption dto, Guid reviewerId);
+        Task<RequestAdoptionResponse> Review(ReviewRequestAdoption dto, Guid reviewerId);
         Task AddComment(int id, string comment, Guid userId);
         Task<RequestAdoptionResponse?> GetById(int id);
     }
@@ -25,24 +25,23 @@ namespace API.Application.Services.Bussiness.RequestAdoptions
     {
         private readonly IRequestAdoptionRepository _requestAdoptionRepository;
         private readonly IPetRepository _petRepository;
-        private readonly ISponsorRepository _sponsorRepository;
+        private readonly IAdoptionRepository _adoptionRepository;
         private readonly IMapper _mapper;
 
         public RequestAdoptionService(
             IPetRepository petRepository,
             IRequestAdoptionRepository requestAdoptionRepository,
-            ISponsorRepository sponsorRepository,
+            IAdoptionRepository adoptionRepository,
             IMapper mapper)
         {
             _requestAdoptionRepository = requestAdoptionRepository;
-            _sponsorRepository = sponsorRepository;
+            _adoptionRepository = adoptionRepository;
             _mapper = mapper;
             _petRepository = petRepository;
         }
 
         public async Task Create(CreateRequestAdoption dto, Guid userId)
         {
-            // Verificar que la mascota existe y está disponible
             var existingRequest = await _requestAdoptionRepository
                 .Query()
                 .AnyAsync(r => r.UserId == userId && r.PetId == dto.PetId && r.Status == RequestStatus.PENDIENTE);
@@ -59,6 +58,7 @@ namespace API.Application.Services.Bussiness.RequestAdoptions
             requestAdoption.CreatedAt = DateTime.UtcNow;
             requestAdoption.CreatedBy = userId;
             requestAdoption.LastUpdatedAt = DateTime.UtcNow;
+            requestAdoption.PlatformProvider = PlatformProvider.Sistema;
 
             await _requestAdoptionRepository.CreateAsync(requestAdoption, userId);
             await _requestAdoptionRepository.SaveChangesAsync();
@@ -76,14 +76,6 @@ namespace API.Application.Services.Bussiness.RequestAdoptions
                     $"No se encontró la solicitud de adopción con Id {dto.Id}");
             }
 
-            // Solo el propietario puede actualizar
-            if (requestAdoption.UserId != userId)
-            {
-                throw new UnauthorizedAccessException(
-                    "No tienes permisos para modificar esta solicitud.");
-            }
-
-            // No se puede actualizar si ya fue revisada
             if (requestAdoption.Status != RequestStatus.PENDIENTE)
             {
                 throw new InvalidOperationException(
@@ -94,6 +86,8 @@ namespace API.Application.Services.Bussiness.RequestAdoptions
             requestAdoption.LastUpdatedAt = DateTime.UtcNow;
             requestAdoption.UpdatedBy = userId;
 
+            await _requestAdoptionRepository.UpdateAsync(requestAdoption, userId);
+
             await _requestAdoptionRepository.SaveChangesAsync();
         }
 
@@ -101,7 +95,6 @@ namespace API.Application.Services.Bussiness.RequestAdoptions
         {
             IQueryable<RequestAdoption> query = _requestAdoptionRepository.Query();
 
-            // Aplicar filtros
             if (filter.Status.HasValue)
                 query = query.Where(x => x.Status == filter.Status.Value);
 
@@ -147,23 +140,26 @@ namespace API.Application.Services.Bussiness.RequestAdoptions
                 query = query.Where(x =>
                     x.Motivation.ToLower().Contains(searchTerm) ||
                     x.District.ToLower().Contains(searchTerm) ||
-                    x.Phone.Contains(searchTerm));
+                    x.Phone.Contains(searchTerm) ||
+                    x.User.Email.ToLower().Contains(searchTerm) ||
+                    !string.IsNullOrWhiteSpace(x.User.Dni) && x.User.Dni.ToLower().Contains(searchTerm)
+                    );
             }
 
-            // Contar total
             int totalItems = await query.CountAsync();
 
-            // Ordenar
-            query = filter.OrderBy?.ToLower() switch
+            var orderedQuery = query.OrderBy(x => x.Status == RequestStatus.PENDIENTE ? 0 : 1);
+
+            // 2do nivel de orden: el criterio elegido por el usuario, como desempate
+            orderedQuery = filter.OrderBy?.ToLower() switch
             {
-                "status" => filter.IsDescending ? query.OrderByDescending(x => x.Status) : query.OrderBy(x => x.Status),
-                "district" => filter.IsDescending ? query.OrderByDescending(x => x.District) : query.OrderBy(x => x.District),
-                "reviewedat" => filter.IsDescending ? query.OrderByDescending(x => x.ReviewedAt) : query.OrderBy(x => x.ReviewedAt),
-                _ => filter.IsDescending ? query.OrderByDescending(x => x.CreatedAt) : query.OrderBy(x => x.CreatedAt)
+                "status" => filter.IsDescending ? orderedQuery.ThenByDescending(x => x.Status) : orderedQuery.ThenBy(x => x.Status),
+                "district" => filter.IsDescending ? orderedQuery.ThenByDescending(x => x.District) : orderedQuery.ThenBy(x => x.District),
+                "reviewedat" => filter.IsDescending ? orderedQuery.ThenByDescending(x => x.ReviewedAt) : orderedQuery.ThenBy(x => x.ReviewedAt),
+                _ => filter.IsDescending ? orderedQuery.ThenByDescending(x => x.CreatedAt) : orderedQuery.ThenBy(x => x.CreatedAt)
             };
 
-            // Paginar y proyectar
-            var items = await query
+            var items = await orderedQuery
                 .Skip((filter.Page - 1) * filter.PageSize)
                 .Take(filter.PageSize)
                 .ProjectTo<RequestAdoptionResponse>(_mapper.ConfigurationProvider)
@@ -190,24 +186,16 @@ namespace API.Application.Services.Bussiness.RequestAdoptions
                     $"No se encontró la solicitud de adopción con Id {id}");
             }
 
-            // Solo el propietario o un admin puede eliminar
-            if (requestAdoption.UserId != userId)
-            {
-                throw new UnauthorizedAccessException(
-                    "No tienes permisos para eliminar esta solicitud.");
-            }
-
-            // Si estaba aprobada, eliminar el Sponsor asociado
             if (requestAdoption.Status == RequestStatus.APROBADO)
             {
-                await DeleteAssociatedSponsor(requestAdoption);
+                await DisableAssociatedAdoption(requestAdoption);
             }
 
             await _requestAdoptionRepository.DeleteAsync(requestAdoption, userId);
             await _requestAdoptionRepository.SaveChangesAsync();
         }
 
-        public async Task Review(ReviewRequestAdoption dto, Guid reviewerId)
+        public async Task<RequestAdoptionResponse> Review(ReviewRequestAdoption dto, Guid reviewerId)
         {
             var requestAdoption = await _requestAdoptionRepository
                 .Query()
@@ -219,28 +207,34 @@ namespace API.Application.Services.Bussiness.RequestAdoptions
                     $"No se encontró la solicitud de adopción con Id {dto.Id}");
             }
 
-            // No se puede revisar si ya fue revisada (excepto si se cambia de APROBADO a otro estado)
-            if (requestAdoption.Status != RequestStatus.PENDIENTE &&
-                requestAdoption.Status != RequestStatus.APROBADO)
+            // Estados terminales: una vez ahí, no se puede modificar más
+            var isLocked = requestAdoption.Status == RequestStatus.RECHAZADO ||
+                           requestAdoption.Status == RequestStatus.CANCELADO;
+
+            if (isLocked)
             {
-                throw new InvalidOperationException(
-                    "Esta solicitud ya fue revisada y no puede ser modificada.");
+                throw new InvalidOperationException("Esta solicitud ya fue revisada y no puede ser modificada.");
             }
 
             var previousStatus = requestAdoption.Status;
             var newStatus = dto.Status;
 
-            // === LÓGICA DE SPONSOR ===
+            var oldValues = new
+            {
+                requestAdoption.Status,
+                requestAdoption.ReviewedAt,
+                requestAdoption.ReviewedBy,
+                requestAdoption.ReviewComment
+            };
 
-            // Caso 1: Cambia a APROBADO → Crear Sponsor
+            // === LÓGICA DE ADOPTION ===
             if (previousStatus != RequestStatus.APROBADO && newStatus == RequestStatus.APROBADO)
             {
-                await CreateSponsorFromRequest(requestAdoption, reviewerId);
+                await CreateAdoptionFromRequest(requestAdoption, reviewerId);
             }
-            // Caso 2: Cambia de APROBADO a otro estado → Eliminar Sponsor
             else if (previousStatus == RequestStatus.APROBADO && newStatus != RequestStatus.APROBADO)
             {
-                await DeleteAssociatedSponsor(requestAdoption, reviewerId);
+                await DisableAssociatedAdoption(requestAdoption, reviewerId);
             }
 
             // === FLUJO NORMAL DE REVIEW ===
@@ -248,12 +242,16 @@ namespace API.Application.Services.Bussiness.RequestAdoptions
             requestAdoption.ReviewedAt = DateTime.UtcNow;
             requestAdoption.ReviewedBy = reviewerId;
             requestAdoption.ReviewComment = dto.ReviewComment;
-            requestAdoption.LastUpdatedAt = DateTime.UtcNow;
-            requestAdoption.UpdatedBy = reviewerId;
 
-            await _sponsorRepository.SaveChangesAsync();
-            await _petRepository.SaveChangesAsync();
+            // FIX: la entidad viene con AsNoTracking() desde Query(), EF no la está
+            // vigilando. Sin este UpdateAsync (que hace DbSet.Update(entity) internamente),
+            // el SaveChangesAsync de abajo no detecta ningún cambio en RequestAdoption.
+            await _requestAdoptionRepository.UpdateAsync(requestAdoption, reviewerId, oldValues);
+
             await _requestAdoptionRepository.SaveChangesAsync();
+
+            // Devolvemos el estado final completo para poder verificarlo
+            return _mapper.Map<RequestAdoptionResponse>(requestAdoption);
         }
 
         public async Task AddComment(int id, string comment, Guid userId)
@@ -268,7 +266,6 @@ namespace API.Application.Services.Bussiness.RequestAdoptions
                     $"No se encontró la solicitud de adopción con Id {id}");
             }
 
-            // Solo el revisor o el propietario pueden agregar comentarios
             if (requestAdoption.UserId != userId && requestAdoption.ReviewedBy != userId)
             {
                 throw new UnauthorizedAccessException(
@@ -293,18 +290,17 @@ namespace API.Application.Services.Bussiness.RequestAdoptions
                 : _mapper.Map<RequestAdoptionResponse>(requestAdoption);
         }
 
-        // === MÉTODOS PRIVADOS PARA MANEJO DE SPONSOR ===
+        // === MÉTODOS PRIVADOS PARA MANEJO DE ADOPTION ===
 
-        private async Task CreateSponsorFromRequest(RequestAdoption requestAdoption, Guid createdBy)
+        private async Task CreateAdoptionFromRequest(RequestAdoption requestAdoption, Guid createdBy)
         {
-            // Verificar que no exista ya un Sponsor para esta solicitud
-            var existingSponsor = await _sponsorRepository
+            var existingAdoption = await _adoptionRepository
                 .Query()
-                .AnyAsync(s => s.RequestSponsorId == requestAdoption.Id);
+                .AnyAsync(a => a.RequestAdoptionId == requestAdoption.Id);
 
-            if (existingSponsor)
+            if (existingAdoption)
             {
-                throw new InvalidOperationException("Ya existe un patrocinio activo para este usuario y mascota.");
+                throw new InvalidOperationException("Ya existe una adopción registrada para esta solicitud.");
             }
 
             var pet = await _petRepository.Query().FirstOrDefaultAsync(p => p.Id == requestAdoption.PetId);
@@ -320,19 +316,25 @@ namespace API.Application.Services.Bussiness.RequestAdoptions
                 await _petRepository.UpdateAsync(pet, createdBy);
             }
 
-            var sponsor = new Sponsor
+            var adoption = new Adoption
             {
+                RequestAdoptionId = requestAdoption.Id,
+                AdoptionDate = DateTime.UtcNow,
+                Status = AdoptionStatus.HABILITADA,
                 CreatedAt = DateTime.UtcNow,
                 CreatedBy = createdBy,
                 LastUpdatedAt = DateTime.UtcNow
             };
 
-            await _sponsorRepository.CreateAsync(sponsor, createdBy);
+            await _adoptionRepository.CreateAsync(adoption, createdBy);
         }
 
-        private async Task DeleteAssociatedSponsor(RequestAdoption requestAdoption, Guid? createdBy = null)
+        private async Task DisableAssociatedAdoption(RequestAdoption requestAdoption, Guid? updatedBy = null)
         {
-            var sponsor = await _sponsorRepository.Query().FirstOrDefaultAsync(s => s.RequestSponsorId == requestAdoption.Id);
+            var adoption = await _adoptionRepository
+                .Query()
+                .FirstOrDefaultAsync(a => a.RequestAdoptionId == requestAdoption.Id);
+
             var pet = await _petRepository.Query().FirstOrDefaultAsync(p => p.Id == requestAdoption.PetId);
 
             if (pet is null)
@@ -340,16 +342,20 @@ namespace API.Application.Services.Bussiness.RequestAdoptions
                 throw new KeyNotFoundException($"No se encontró la mascota con Id {requestAdoption.PetId}");
             }
 
-            if (sponsor is not null)
+            if (adoption is not null)
             {
-                sponsor.LastUpdatedAt = DateTime.UtcNow;
-                await _sponsorRepository.DeleteAsync(sponsor, createdBy);
+                // Se deshabilita en vez de borrar para preservar el historial
+                // de AdoptionFollowUp asociados a esta adopción.
+                adoption.Status = AdoptionStatus.DESHABILITADA;
+                adoption.LastUpdatedAt = DateTime.UtcNow;
+                adoption.UpdatedBy = updatedBy;
+                await _adoptionRepository.UpdateAsync(adoption, updatedBy);
             }
 
             if (pet.IsAdopted)
             {
                 pet.IsAdopted = false;
-                await _petRepository.UpdateAsync(pet, createdBy);
+                await _petRepository.UpdateAsync(pet, updatedBy);
             }
         }
     }

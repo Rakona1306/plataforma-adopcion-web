@@ -31,7 +31,7 @@ export default function ButtonUI({
     };
 
     // Estilos obligatorios para cuando el botón se encuentre deshabilitado (ya sea por prop u loading)
-    const disabledStyles = "bg-slate-100 text-slate-400 border border-slate-200 cursor-not-allowed opacity-75 pointer-events-none shadow-none";
+    const disabledStyles = "disabled:bg-slate-100! disabled:text-slate-400! disabled:border! disabled:border-slate-200! disabled:cursor-not-allowed! disabled:opacity-75! disabled:pointer-events-none! disabled:shadow-none!";
 
     return (
         <Button

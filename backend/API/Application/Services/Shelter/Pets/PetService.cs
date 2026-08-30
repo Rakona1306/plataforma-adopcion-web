@@ -3,13 +3,16 @@ using System.Text;
 using System.Text.RegularExpressions;
 using API.Application.Common.Services;
 using API.Application.Features.Shelter.Pets.Dtos;
+using API.Application.Features.Shelter.Pets.Dtos.Private;
 using API.Application.Features.Shelter.Pets.Mappers;
 using API.Application.Features.System.AuditLogs.Dtos;
 using API.Application.Features.System.AuditLogs.Mappers;
 using API.Domain.Common.Model;
 using API.Domain.Model.Shelter;
+using API.Domain.Repository.Bussiness;
 using API.Domain.Repository.Shelter;
 using API.Infrastructure.Exceptions;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Application.Services.Shelter.Pets
@@ -18,12 +21,22 @@ namespace API.Application.Services.Shelter.Pets
     {
         private readonly IPetRepository _petRepository;
         private readonly PetMapper _mapper;
+        private readonly IRequestAdoptionRepository _requestAdoptionRepository;
+        private readonly IMapper _autoMapper;
 
-        public PetService(IPetRepository petRepository, PetMapper mapper, AuditLogMapper auditLogMapper)
+        public PetService(
+            IMapper autoMapper,
+            IPetRepository petRepository,
+            PetMapper mapper,
+            AuditLogMapper auditLogMapper,
+            IRequestAdoptionRepository requestAdoptionRepository
+        )
             : base(petRepository, auditLogMapper)
         {
+            _autoMapper = autoMapper;
             _petRepository = petRepository;
             _mapper = mapper;
+            _requestAdoptionRepository = requestAdoptionRepository;
         }
 
         // --- GET ALL ---
@@ -41,8 +54,6 @@ namespace API.Application.Services.Shelter.Pets
 
             if (filter.IsAdopted.HasValue)
                 query = query.Where(x => x.IsAdopted == filter.IsAdopted.Value);
-            else
-                query = query.Where(x => !x.IsAdopted);
 
             var totalCount = await query.CountAsync();
             var items = await query.Skip((filter.Page - 1) * filter.PageSize)
@@ -65,22 +76,6 @@ namespace API.Application.Services.Shelter.Pets
             return _mapper.ToResponse(pet);
         }
 
-        // --- CREATE ---
-        /*
-        public async Task<PetResponse> CreateAsync(CreatePetDto dto, Guid? userId = null)
-        {
-            var entity = _mapper.ToEntity(dto);
-
-            // Asignación inicial de relaciones
-            entity.PetBreeds = dto.BreedIds.Select(id => new PetBreed { BreedId = id }).ToList();
-            entity.PetTraits = dto.TraitIds.Select(id => new PetTrait { TraitId = id }).ToList();
-
-            await _petRepository.CreateAsync(entity, userId);
-            await _petRepository.SaveChangesAsync();
-
-            return await GetByIdAsync(entity.Id);
-        }
-        */
         public async Task<PetResponse> CreateAsync(CreatePetDto dto, Guid? userId = null)
         {
             var entity = _mapper.ToEntity(dto);
@@ -127,25 +122,6 @@ namespace API.Application.Services.Shelter.Pets
 
             return text.Trim('-');
         }
-
-        // --- UPDATE (Delta Sync) ---\
-        /*
-        public async Task<PetResponse> UpdateAsync(Guid id, UpdatePetDto dto, Guid? userId = null)
-        {
-            var pet = await GetPetWithRelationsAsync(id);
-
-            _mapper.Update(dto, pet);
-
-            // Delta Sync: Solo cambiamos lo que realmente se modificó
-            SyncCollection(pet.PetBreeds, dto.Breeds, id => new PetBreed { PetId = id, BreedId = id });
-            SyncCollection(pet.PetTraits, dto.Traits, id => new PetTrait { PetId = id, TraitId = id });
-
-            await _petRepository.UpdateAsync(pet, userId);
-            await _petRepository.SaveChangesAsync();
-
-            return await GetByIdAsync(id);
-        }
-        */
         public async Task<PetResponse> UpdateAsync(Guid id, UpdatePetDto dto, Guid? userId = null)
         {
             // Reemplaza GetByIdWithTrackingAsync con el query directo con relaciones
@@ -242,6 +218,70 @@ namespace API.Application.Services.Shelter.Pets
             return new Paginate<PetResponse>
             {
                 Items = _mapper.ToResponseList(items),
+                TotalCount = totalCount,
+                Page = filter.Page,
+                PageSize = filter.PageSize
+            };
+        }
+
+        public async Task<Paginate<PetMostRequestedResponse>> GetMostRequestedAsync(PetFilterDto filter)
+        {
+            // Query base sin Include, para filtrar y contar (liviana)
+            IQueryable<Pet> baseQuery = _petRepository.Query();
+
+            if (!string.IsNullOrWhiteSpace(filter.Search))
+                baseQuery = baseQuery.Where(x => x.Name.Contains(filter.Search));
+
+            if (filter.IsAdopted.HasValue)
+                baseQuery = baseQuery.Where(x => x.IsAdopted == filter.IsAdopted.Value);
+
+            var requestAdoptionsQuery = _requestAdoptionRepository.Query();
+
+            // PASO 1: solo Id + conteo, sin Include (acá el GroupBy es seguro)
+            var groupedQuery =
+                from pet in baseQuery
+                join request in requestAdoptionsQuery
+                    on pet.Id equals request.PetId
+                group pet by pet.Id into g
+                select new
+                {
+                    PetId = g.Key,
+                    RequestCount = g.Count()
+                };
+
+            var totalCount = await groupedQuery.CountAsync();
+
+            var pageOfCounts = await groupedQuery
+                .OrderByDescending(x => x.RequestCount)
+                .Skip((filter.Page - 1) * filter.PageSize)
+                .Take(filter.PageSize)
+                .ToListAsync();
+
+            var petIds = pageOfCounts.Select(x => x.PetId).ToList();
+
+            // PASO 2: traer esas mascotas puntuales CON sus Include (sin GroupBy, así no se pierden)
+            var pets = await _petRepository.Query()
+                .Include(x => x.Species)
+                .Include(x => x.Photos)
+                .Where(x => petIds.Contains(x.Id))
+                .ToListAsync();
+
+            // Reordenar según el orden por RequestCount (el Where con Contains no garantiza el orden)
+            var petsById = pets.ToDictionary(x => x.Id);
+
+            var items = pageOfCounts
+                .Where(x => petsById.ContainsKey(x.PetId)) // salvaguarda por si alguna Pet fue borrada entre queries
+                .Select(x =>
+                {
+                    var response = _autoMapper.Map<PetMostRequestedResponse>(petsById[x.PetId]);
+                    response.RequestCount = x.RequestCount;
+                    return response;
+                })
+                .ToList();
+
+            return new Paginate<PetMostRequestedResponse>
+            {
+                Items = items,
                 TotalCount = totalCount,
                 Page = filter.Page,
                 PageSize = filter.PageSize
