@@ -1,20 +1,17 @@
-'use client'
+"use client";
 
-import { Select, SelectProps } from '@mantine/core'
+import { Select, SelectProps } from "@mantine/core";
 
 export interface SelectOption {
-  label: string
-  value: string
+  label: string;
+  value: string;
 }
 
-interface SelectFieldProps extends Omit<SelectProps, 'data'> {
-  options: SelectOption[]
+interface SelectFieldProps extends Omit<SelectProps, "data"> {
+  options: SelectOption[];
 }
 
-export const SelectField = ({
-  options,
-  ...props
-}: SelectFieldProps) => {
+export const SelectField = ({ options, ...props }: SelectFieldProps) => {
   return (
     <Select
       searchable
@@ -22,8 +19,8 @@ export const SelectField = ({
       data={options}
       radius="md"
       size="lg"
-      className='border-2 border-slate-700!'
+      className="border-2 border-slate-700!"
       {...props}
     />
-  )
-}
+  );
+};

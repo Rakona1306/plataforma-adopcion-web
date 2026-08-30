@@ -86,7 +86,8 @@ export function MultiSearchSelect<T extends Option>({
   }, [defaultItems, options, valueField]);
 
   const selectedItems = useMemo(
-    () => currentIds.map((id) => allKnownOptions.get(id)).filter(Boolean) as T[],
+    () =>
+      currentIds.map((id) => allKnownOptions.get(id)).filter(Boolean) as T[],
     [currentIds, allKnownOptions],
   );
 
@@ -138,9 +139,10 @@ export function MultiSearchSelect<T extends Option>({
                 className={`
                   inline-flex items-center gap-1.5 px-3 py-1 text-sm rounded-full border
                   transition-colors cursor-default
-                  ${isNew
-                    ? "bg-green-700 text-white border-green-200"
-                    : "bg-primary text-white border-secondary"
+                  ${
+                    isNew
+                      ? "bg-green-700 text-white border-green-200"
+                      : "bg-primary text-white border-secondary"
                   }
                 `}
               >
@@ -160,13 +162,15 @@ export function MultiSearchSelect<T extends Option>({
       )}
 
       {/* Leyenda visual cuando hay cambios */}
-      {(selectedItems.some((i) => !defaultIds.includes(String(i[valueField]))) ||
+      {(selectedItems.some(
+        (i) => !defaultIds.includes(String(i[valueField])),
+      ) ||
         defaultIds.some((id) => !currentIds.includes(id))) && (
-          <p className="text-xs text-slate-400 mt-0.5">
-            <span className="text-green-700 font-medium">Verde</span> = nuevo ·{" "}
-            <span className="text-primary font-medium">Guinda</span> = existente
-          </p>
-        )}
+        <p className="text-xs text-slate-400 mt-0.5">
+          <span className="text-green-700 font-medium">Verde</span> = nuevo ·{" "}
+          <span className="text-primary font-medium">Guinda</span> = existente
+        </p>
+      )}
     </div>
   );
 }

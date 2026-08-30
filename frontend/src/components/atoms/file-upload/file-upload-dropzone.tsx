@@ -16,20 +16,20 @@ export function FileUploadDropzone({
   const borderColor = isDragging
     ? "border-blue-400"
     : hasError
-    ? "border-red-300"
-    : "border-slate-300";
+      ? "border-red-300"
+      : "border-slate-300";
 
   const bgColor = isDragging
     ? "bg-blue-50"
     : hasError
-    ? "bg-red-50"
-    : "bg-slate-50 hover:bg-blue-50 hover:border-blue-300";
+      ? "bg-red-50"
+      : "bg-slate-50 hover:bg-blue-50 hover:border-blue-300";
 
   const iconBg = isDragging
     ? "bg-blue-100 text-blue-500"
     : hasError
-    ? "bg-red-100 text-red-400"
-    : "bg-slate-200 text-slate-400";
+      ? "bg-red-100 text-red-400"
+      : "bg-slate-200 text-slate-400";
 
   return (
     <div
@@ -59,8 +59,8 @@ export function FileUploadDropzone({
               {isDragging
                 ? "Suelta las imágenes aquí"
                 : isFull
-                ? "Límite de imágenes alcanzado"
-                : "Arrastra imágenes o haz clic para seleccionar"}
+                  ? "Límite de imágenes alcanzado"
+                  : "Arrastra imágenes o haz clic para seleccionar"}
             </p>
             <p className="mt-1 text-xs text-slate-400">
               PNG, JPG, WEBP · Máx {maxSizeMb} MB por archivo ·{" "}

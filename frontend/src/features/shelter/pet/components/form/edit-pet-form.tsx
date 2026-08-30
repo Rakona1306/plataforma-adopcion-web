@@ -2,7 +2,10 @@
 
 import { Pet } from "@/core/domain/models/shelter/pet";
 import { useGetByIdPet } from "../../hooks/useGetByIdPet";
-import { PetUpdateDto, petUpdateSchema } from "@/core/application/features/shelter/pets/dtos/pet-update-dto";
+import {
+  PetUpdateDto,
+  petUpdateSchema,
+} from "@/core/application/features/shelter/pets/dtos/pet-update-dto";
 import { useGetAllSpecie } from "@/core/application/features/shelter/species/hooks/useGetAllSpecie";
 import { useGetAllBreed } from "@/core/application/features/shelter/breeds/hooks/useGetAllBreed";
 import { useGetAllTrait } from "@/core/application/features/shelter/traits/hooks/useGetAllTrait";
@@ -26,29 +29,28 @@ import { Button } from "@mantine/core";
 import { formatDateForInput } from "@/shared/utils/date/formatDate";
 
 export function EditPetFormPage({ id }: { id: string }) {
-
   const { data, isLoading } = useGetByIdPet(id);
 
   return (
     <>
-      {
-        isLoading
-          ? <div>Cargando...</div>
-          : <EditPetForm pet={data} id={id} />
-      }
+      {isLoading ? <div>Cargando...</div> : <EditPetForm pet={data} id={id} />}
     </>
-  )
+  );
 }
 
-function EditPetForm({ pet, id }: { pet?: Pet, id: string }) {
+function EditPetForm({ pet, id }: { pet?: Pet; id: string }) {
   const { data, updateFilter } = useGetAllSpecie();
-  const { data: breeds, updateFilter: updateBreedFilter, isLoading: breedsLoading } = useGetAllBreed();
+  const {
+    data: breeds,
+    updateFilter: updateBreedFilter,
+    isLoading: breedsLoading,
+  } = useGetAllBreed();
   const { data: traits, isLoading: traitsLoading } = useGetAllTrait();
   const { data: petSizes } = useGetPetSizes();
   const { data: petStatus } = useGetAllPetStatus();
   const { data: petGenders } = useGetAllPetGenders();
-  const { update } = useUpdatePet()
-  const router = useRouter()
+  const { update } = useUpdatePet();
+  const router = useRouter();
 
   const initialValues: PetUpdateDto = {
     name: pet?.name || "",
@@ -273,15 +275,13 @@ function EditPetForm({ pet, id }: { pet?: Pet, id: string }) {
                 <Button
                   color="gray"
                   classNames={{
-                    root: 'bg-gray-500!'
+                    root: "bg-gray-500!",
                   }}
                   onClick={handleBackButton}
                 >
                   Cancelar
                 </Button>
-                <Button type="submit">
-                  Editar mascota
-                </Button>
+                <Button type="submit">Editar mascota</Button>
               </div>
             </div>
           )}

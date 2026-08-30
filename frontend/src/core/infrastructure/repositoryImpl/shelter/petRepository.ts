@@ -7,10 +7,7 @@ import { PetUpdateDto } from "@/core/application/features/shelter/pets/dtos/pet-
 import { IPetRepository } from "@/core/domain/repository/shelter/PetRepository";
 
 export class PetRepository implements IPetRepository {
-
-  constructor(
-    private httpCLient: HttpClient
-  ) { }
+  constructor(private httpCLient: HttpClient) {}
 
   create(pet: PetCreateDto): Promise<void> {
     return this.httpCLient.post("/pets", pet);

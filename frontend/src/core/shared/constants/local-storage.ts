@@ -1,3 +1,3 @@
 export const LOCAL_STORAGE = {
-  NAMESESSION: 'access_token'
-}
+  NAMESESSION: "access_token",
+};

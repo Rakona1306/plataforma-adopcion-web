@@ -1,11 +1,23 @@
-'use client'
+"use client";
 
-import { PetPublic } from '@/features/shelter/pet/model/pet-pub.model'
-import { montserrat } from '@/lib/fonts/monserrat'
-import { Card, Image, Text, Badge, Group, Stack, ActionIcon, Tooltip, Box, Flex, ThemeIcon } from '@mantine/core'
-import { Heart, Calendar, Weight, Syringe, Sparkles } from 'lucide-react'
-import Link from 'next/link'
-import { useState } from 'react'
+import { PetPublic } from "@/features/shelter/pet/model/pet-pub.model";
+import { montserrat } from "@/lib/fonts/monserrat";
+import {
+  Card,
+  Image,
+  Text,
+  Badge,
+  Group,
+  Stack,
+  ActionIcon,
+  Tooltip,
+  Box,
+  Flex,
+  ThemeIcon,
+} from "@mantine/core";
+import { Heart, Calendar, Weight, Syringe, Sparkles } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
 
 export function PetCard({
   name,
@@ -23,35 +35,37 @@ export function PetCard({
   isSterilized,
   isAdopted,
 }: PetPublic) {
-  const [isFavorited, setIsFavorited] = useState(false)
+  const [isFavorited, setIsFavorited] = useState(false);
 
-  const photoUrl = photoUrls?.[0]?.url || `https://images.unsplash.com/photo-1633722715463-d30628519c8f?w=400&h=400&fit=crop`
+  const photoUrl =
+    photoUrls?.[0]?.url ||
+    `https://images.unsplash.com/photo-1633722715463-d30628519c8f?w=400&h=400&fit=crop`;
 
   const getStatusColor = (status?: string) => {
     switch (status?.toLowerCase()) {
-      case 'adoptado':
-        return 'green'
-      case 'habilitado':
-        return 'cyan'
+      case "adoptado":
+        return "green";
+      case "habilitado":
+        return "cyan";
       default:
-        return 'gray'
+        return "gray";
     }
-  }
+  };
 
   const getSizeColor = (size?: string) => {
     switch (size?.toLowerCase()) {
-      case 'small':
-        return 'cyan'
-      case 'medium':
-        return 'lime'
-      case 'large':
-        return 'red'
+      case "small":
+        return "cyan";
+      case "medium":
+        return "lime";
+      case "large":
+        return "red";
       default:
-        return 'gray'
+        return "gray";
     }
-  }
+  };
 
-  const breedName = breeds?.[0]?.name || 'Raza desconocida'
+  const breedName = breeds?.[0]?.name || "Raza desconocida";
 
   return (
     <Card
@@ -60,11 +74,14 @@ export function PetCard({
       radius="lg"
       className="overflow-hidden hover:shadow-xl hover:-translate-y-1 h-full flex flex-col bg-white transition-all duration-300"
       style={{
-        border: '1px solid #e9ecef',
+        border: "1px solid #e9ecef",
       }}
     >
       {/* Imagen y favorito */}
-      <Box className="relative group overflow-hidden bg-gray-100" style={{ height: '280px' }}>
+      <Box
+        className="relative group overflow-hidden bg-gray-100"
+        style={{ height: "280px" }}
+      >
         <Link href={`/mascotas/${slug}`} className="block w-full h-full">
           <Image
             src={photoUrl}
@@ -83,7 +100,7 @@ export function PetCard({
 
             color={getStatusColor(status.value)}
             leftSection={
-              status.value.toLowerCase() === 'adopted' ? (
+              status.value.toLowerCase() === "adopted" ? (
                 <Sparkles size={12} />
               ) : null
             }
@@ -98,13 +115,13 @@ export function PetCard({
           radius="50%"
           size="lg"
           className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity"
-          color={isFavorited ? 'red' : 'white'}
+          color={isFavorited ? "red" : "white"}
           onClick={() => setIsFavorited(!isFavorited)}
         >
           <Heart
             size={20}
-            fill={isFavorited ? 'currentColor' : 'none'}
-            stroke={isFavorited ? 'currentColor' : 'currentColor'}
+            fill={isFavorited ? "currentColor" : "none"}
+            stroke={isFavorited ? "currentColor" : "currentColor"}
           />
         </ActionIcon>
 
@@ -122,11 +139,16 @@ export function PetCard({
       <Stack gap="xs" p="md" className="flex-1 flex flex-col">
         {/* Nombre y especie */}
         <div>
-          <Text size="xl" fw={700} c="#1a1a1a" className={`line-clamp-1 font-extrabold! ${montserrat.className}`}>
+          <Text
+            size="xl"
+            fw={700}
+            c="#1a1a1a"
+            className={`line-clamp-1 font-extrabold! ${montserrat.className}`}
+          >
             {name}
           </Text>
           <Text size="sm" c="dimmed" className="line-clamp-1">
-            {specie ? specie.name : 'Especie desconocida'} • {breedName}
+            {specie ? specie.name : "Especie desconocida"} • {breedName}
           </Text>
         </div>
 
@@ -139,11 +161,20 @@ export function PetCard({
         <Group gap="xs">
           {gender && (
             <Badge size="sm" variant="light" radius="sm">
-              {gender.value === 'MACHO' ? '♂️ Macho' : gender.value === 'HEMBRA' ? '♀️ Hembra' : gender.value}
+              {gender.value === "MACHO"
+                ? "♂️ Macho"
+                : gender.value === "HEMBRA"
+                  ? "♀️ Hembra"
+                  : gender.value}
             </Badge>
           )}
           {size && (
-            <Badge size="sm" variant="light" radius="sm" color={getSizeColor(size.value)}>
+            <Badge
+              size="sm"
+              variant="light"
+              radius="sm"
+              color={getSizeColor(size.value)}
+            >
               {size.value}
             </Badge>
           )}
@@ -187,7 +218,12 @@ export function PetCard({
       </Stack>
 
       {/* Botón de acción */}
-      <Group grow p="md" gap="xs" className="border-t border-gray-100 flex! flex-row!">
+      <Group
+        grow
+        p="md"
+        gap="xs"
+        className="border-t border-gray-100 flex! flex-row!"
+      >
         <Link
           href={`/mascotas/${slug}`}
           className="px-4 py-2 bg-linear-to-r from-primary to-red-700 text-white text-center rounded-md font-semibold hover:shadow-lg transition-shadow text-sm"
@@ -200,8 +236,7 @@ export function PetCard({
         >
           Apadrinar
         </Link> */}
-
       </Group>
     </Card>
-  )
+  );
 }

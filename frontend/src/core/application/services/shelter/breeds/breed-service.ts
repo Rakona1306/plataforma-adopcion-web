@@ -6,9 +6,7 @@ import { Paginate } from "@/core/domain/models/system/paginate";
 import { IBreedRepository } from "@/core/domain/repository/shelter/breedRepository";
 
 export class BreedService {
-  constructor(
-    private breedRepository: IBreedRepository
-  ) {}
+  constructor(private breedRepository: IBreedRepository) {}
 
   async getAll(filter: BreedFilterDto): Promise<Paginate<Breed>> {
     return await this.breedRepository.getAll(filter);

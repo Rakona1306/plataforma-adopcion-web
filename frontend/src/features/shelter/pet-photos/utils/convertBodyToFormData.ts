@@ -10,7 +10,7 @@ export const convertBodyToFormData = (values: SyncPetPhotosDto): FormData => {
   });
 
   // 2. isMainList
-  // Si envías un array vacío, .NET puede ignorarlo. 
+  // Si envías un array vacío, .NET puede ignorarlo.
   // Asegúrate que el backend tenga el DTO listo.
   values.isMainList.forEach((id) => formData.append("MainPhotoId", id));
 

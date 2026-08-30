@@ -14,10 +14,9 @@ import {
 import { useCreateUser } from "@/core/application/features/organization/user/hooks/useCreateUser";
 import { Role } from "@/core/domain/models/organization/role";
 import { limaDistricts } from "@/core/shared/constants/distritcts";
-import { Button, Grid } from "@mantine/core";
+import { Grid } from "@mantine/core";
 import { useState } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
-import { DniOrRuc } from "../molecules/dni-or-ruc";
 import ButtonUI from "@/components/atoms/button/button-ui";
 
 export default function CreateUserForm() {
@@ -36,11 +35,10 @@ export default function CreateUserForm() {
     district: "",
     isBlocked: false,
     roleId: "",
-    document: ''
+    document: "",
   };
 
   const handleSubmit = (values: UserCreateDto) => {
-    console.log("values", values);
     create(values);
   };
 
@@ -138,4 +136,3 @@ export default function CreateUserForm() {
     </FormContainer>
   );
 }
-

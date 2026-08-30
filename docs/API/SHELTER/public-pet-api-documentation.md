@@ -26,18 +26,18 @@ Devuelve un listado **paginado** de mascotas **no adoptadas** (`IsAdopted == fal
 
 ### Query Parameters
 
-| Parámetro     | Tipo                     | Requerido | Descripción |
-|---------------|--------------------------|:---------:|-------------|
-| `Page`        | `int`                    | No*       | Número de página (usado en `Skip((Page-1)*PageSize)`). |
-| `PageSize`    | `int`                    | No*       | Cantidad de elementos por página. |
-| `Sort`        | `string`                 | No        | Criterio de orden. Valores soportados (ver [Valores de `Sort`](#valores-de-sort)). Si se omite o no coincide con ningún caso, se ordena por `IsRecommend` descendente. |
-| `Search`       | `string`                 | No        | Búsqueda parcial e insensible a mayúsculas sobre `Name` (usa `ILIKE '%valor%'`). |
-| `Genders`      | `int[]` (CSV o repetido) | No        | Lista de valores del enum `PetGender`. Filtra `x.Gender` dentro de la lista. |
-| `Sizes`        | `int[]` (CSV o repetido) | No        | Lista de valores del enum `PetSize`. Filtra `x.Size` dentro de la lista. |
-| `SpeciesIds`   | `Guid[]` (CSV o repetido)| No        | Filtra por `x.SpeciesId` dentro de la lista. |
-| `BreedIds`     | `Guid[]` (CSV o repetido)| No        | Filtra mascotas que tengan **al menos una** raza (`PetBreeds`) dentro de la lista. |
-| `MinAge`       | `int`                    | No        | Edad mínima (`x.Age >= MinAge`). |
-| `MaxAge`       | `int`                    | No        | Edad máxima (`x.Age <= MaxAge`). |
+| Parámetro    | Tipo                      | Requerido | Descripción                                                                                                                                                            |
+| ------------ | ------------------------- | :-------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Page`       | `int`                     |    No*    | Número de página (usado en `Skip((Page-1)*PageSize)`).                                                                                                                 |
+| `PageSize`   | `int`                     |    No*    | Cantidad de elementos por página.                                                                                                                                      |
+| `Sort`       | `string`                  |    No     | Criterio de orden. Valores soportados (ver [Valores de `Sort`](#valores-de-sort)). Si se omite o no coincide con ningún caso, se ordena por `IsRecommend` descendente. |
+| `Search`     | `string`                  |    No     | Búsqueda parcial e insensible a mayúsculas sobre `Name` (usa `ILIKE '%valor%'`).                                                                                       |
+| `Genders`    | `int[]` (CSV o repetido)  |    No     | Lista de valores del enum `PetGender`. Filtra `x.Gender` dentro de la lista.                                                                                           |
+| `Sizes`      | `int[]` (CSV o repetido)  |    No     | Lista de valores del enum `PetSize`. Filtra `x.Size` dentro de la lista.                                                                                               |
+| `SpeciesIds` | `Guid[]` (CSV o repetido) |    No     | Filtra por `x.SpeciesId` dentro de la lista.                                                                                                                           |
+| `BreedIds`   | `Guid[]` (CSV o repetido) |    No     | Filtra mascotas que tengan **al menos una** raza (`PetBreeds`) dentro de la lista.                                                                                     |
+| `MinAge`     | `int`                     |    No     | Edad mínima (`x.Age >= MinAge`).                                                                                                                                       |
+| `MaxAge`     | `int`                     |    No     | Edad máxima (`x.Age <= MaxAge`).                                                                                                                                       |
 
 `*` `Page` y `PageSize` no tienen validación explícita en el servicio mostrado, pero son obligatorios funcionalmente para paginar correctamente (si `PageSize` es `0` o no se envía, `TotalPages` se calcula como `0`).
 
@@ -45,13 +45,13 @@ Devuelve un listado **paginado** de mascotas **no adoptadas** (`IsAdopted == fal
 
 ### Valores de `Sort`
 
-| Valor            | Efecto |
-|-------------------|--------|
-| *(vacío / nulo)*  | `OrderByDescending(IsRecommend)` |
-| `recommended`     | `OrderByDescending(IsRecommend)` |
-| `name_asc`        | `OrderBy(Name)` |
-| `name_desc`        | `OrderByDescending(Name)` |
-| *(cualquier otro)* | `OrderByDescending(IsRecommend)` (fallback) |
+| Valor              | Efecto                                      |
+| ------------------ | ------------------------------------------- |
+| _(vacío / nulo)_   | `OrderByDescending(IsRecommend)`            |
+| `recommended`      | `OrderByDescending(IsRecommend)`            |
+| `name_asc`         | `OrderBy(Name)`                             |
+| `name_desc`        | `OrderByDescending(Name)`                   |
+| _(cualquier otro)_ | `OrderByDescending(IsRecommend)` (fallback) |
 
 > `Sort` no distingue mayúsculas/minúsculas ni espacios extremos (`ToLower().Trim()`).
 
@@ -67,7 +67,7 @@ Objeto `Paginate<PetPubResponse>`:
 
 ```json
 {
-  "items": [ /* array de PetPubResponse, ver estructura abajo */ ],
+  "items": [/* array de PetPubResponse, ver estructura abajo */],
   "totalCount": 42,
   "page": 1,
   "pageSize": 10,
@@ -75,13 +75,13 @@ Objeto `Paginate<PetPubResponse>`:
 }
 ```
 
-| Campo         | Tipo                    | Descripción |
-|---------------|-------------------------|-------------|
-| `items`       | `PetPubResponse[]`      | Elementos de la página actual. |
-| `totalCount`  | `int`                   | Total de registros que cumplen los filtros (sin paginar). |
-| `page`        | `int`                   | Página solicitada. |
-| `pageSize`    | `int`                   | Tamaño de página solicitado. |
-| `totalPages`  | `int`                   | `ceil(totalCount / pageSize)`. `0` si `pageSize <= 0`. |
+| Campo        | Tipo               | Descripción                                               |
+| ------------ | ------------------ | --------------------------------------------------------- |
+| `items`      | `PetPubResponse[]` | Elementos de la página actual.                            |
+| `totalCount` | `int`              | Total de registros que cumplen los filtros (sin paginar). |
+| `page`       | `int`              | Página solicitada.                                        |
+| `pageSize`   | `int`              | Tamaño de página solicitado.                              |
+| `totalPages` | `int`              | `ceil(totalCount / pageSize)`. `0` si `pageSize <= 0`.    |
 
 Ver estructura completa de `PetPubResponse` en la [sección compartida](#estructura-petpubresponse) al final del documento.
 
@@ -97,9 +97,9 @@ Devuelve el detalle de **una** mascota buscada por su `slug` único.
 
 ### Path Parameters
 
-| Parámetro | Tipo     | Requerido | Descripción |
-|-----------|----------|:---------:|-------------|
-| `slug`    | `string` | Sí        | Slug de la mascota (ej. `luna-golden-retriever`). |
+| Parámetro | Tipo     | Requerido | Descripción                                       |
+| --------- | -------- | :-------: | ------------------------------------------------- |
+| `slug`    | `string` |    Sí     | Slug de la mascota (ej. `luna-golden-retriever`). |
 
 > ⚠️ Este endpoint **no** filtra por `IsAdopted`, a diferencia del listado paginado — puede devolver mascotas ya adoptadas.
 
@@ -132,13 +132,13 @@ Devuelve una lista de mascotas recomendadas, con una **cascada de criterios** de
 
 ### Query Parameters
 
-| Parámetro   | Tipo      | Requerido | Descripción |
-|-------------|-----------|:---------:|-------------|
-| `PetId`     | `Guid`    | No        | Si se envía, excluye esa mascota de los resultados (`x.Id != PetId`). Útil para no recomendar la misma ficha que se está viendo. |
-| `SpecieId`  | `Guid`    | No        | Si se envía, filtra por especie (`x.SpeciesId == SpecieId`) y **tiene prioridad sobre `BreedIds` y `TraitIds`**. |
-| `BreedIds`  | `Guid[]`  | No        | Se evalúa **solo si `SpecieId` no fue enviado**. Filtra mascotas con al menos una raza dentro de la lista. |
-| `TraitIds`  | `Guid[]`  | No        | Se evalúa **solo si `SpecieId` y `BreedIds` no fueron enviados**. Filtra mascotas con al menos un rasgo dentro de la lista. |
-| `PageSize`  | `int`     | No        | Cantidad máxima de resultados a devolver (`Take(PageSize)`). |
+| Parámetro  | Tipo     | Requerido | Descripción                                                                                                                      |
+| ---------- | -------- | :-------: | -------------------------------------------------------------------------------------------------------------------------------- |
+| `PetId`    | `Guid`   |    No     | Si se envía, excluye esa mascota de los resultados (`x.Id != PetId`). Útil para no recomendar la misma ficha que se está viendo. |
+| `SpecieId` | `Guid`   |    No     | Si se envía, filtra por especie (`x.SpeciesId == SpecieId`) y **tiene prioridad sobre `BreedIds` y `TraitIds`**.                 |
+| `BreedIds` | `Guid[]` |    No     | Se evalúa **solo si `SpecieId` no fue enviado**. Filtra mascotas con al menos una raza dentro de la lista.                       |
+| `TraitIds` | `Guid[]` |    No     | Se evalúa **solo si `SpecieId` y `BreedIds` no fueron enviados**. Filtra mascotas con al menos un rasgo dentro de la lista.      |
+| `PageSize` | `int`    |    No     | Cantidad máxima de resultados a devolver (`Take(PageSize)`).                                                                     |
 
 > ⚠️ Importante: **no es un OR combinado**, es una jerarquía "si A no vino, probar B; si B no vino, probar C". Enviar `SpecieId` y `BreedIds` juntos hace que `BreedIds` sea **ignorado**.
 
@@ -159,10 +159,7 @@ GET {{baseUrl}}/api/v1/pets/recommendations?SpecieId=3fa85f64-5717-4562-b3fc-2c9
 Array de `PetPubResponse` (**sin** envoltorio de paginación):
 
 ```json
-[
-  { /* PetPubResponse */ },
-  { /* PetPubResponse */ }
-]
+[{/* PetPubResponse */}, {/* PetPubResponse */}]
 ```
 
 ---
@@ -171,27 +168,27 @@ Array de `PetPubResponse` (**sin** envoltorio de paginación):
 
 Estructura común retornada (directamente o dentro de `items`) por los tres endpoints.
 
-| Campo           | Tipo                        | Descripción |
-|-----------------|-----------------------------|-------------|
-| `id`            | `Guid`                      | Identificador único. |
-| `name`          | `string`                    | Nombre de la mascota. |
-| `description`   | `string \| null`            | Descripción general. |
-| `rescueStory`   | `string \| null`            | Historia de rescate. |
-| `birthDate`     | `DateOnly \| null`          | Fecha de nacimiento (`yyyy-MM-dd`). |
-| `weightKg`      | `decimal \| null`           | Peso en kilogramos. |
-| `age`           | `int`                       | Edad. |
-| `slug`          | `string`                    | Slug único. Si la entidad no tiene uno persistido, se genera al vuelo a partir de `Name` (ver [Generación de `slug`](#generación-de-slug)). |
-| `isVaccinated`  | `bool`                      | Si está vacunado. |
-| `isSterilized`  | `bool`                      | Si está esterilizado. |
-| `isAdopted`     | `bool`                      | Si ya fue adoptado. |
-| `gender`        | `EnumResponse`              | `{ key: int, value: string }` — valor del enum `PetGender`. |
-| `size`          | `EnumResponse`              | `{ key: int, value: string }` — valor del enum `PetSize`. |
-| `status`        | `EnumResponse`              | `{ key: int, value: string }` — estado de la mascota. |
-| `specie`        | `SpeciePubResponse`         | `{ id: Guid, name: string }`. |
-| `breeds`        | `OptionBreedResponse[]`     | `{ id: Guid, name: string }[]`. |
-| `traits`        | `OptionTraitResponse[]`     | `{ id: Guid, name: string }[]`. |
-| `photoUrls`     | `OptionPetPhotoResponse[]`  | `{ id: Guid, url: string }[]`. |
-| `vaccines`      | `VaccineRelationResponse[]` | `{ id: Guid, name: string }[]`. |
+| Campo          | Tipo                        | Descripción                                                                                                                                 |
+| -------------- | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`           | `Guid`                      | Identificador único.                                                                                                                        |
+| `name`         | `string`                    | Nombre de la mascota.                                                                                                                       |
+| `description`  | `string \| null`            | Descripción general.                                                                                                                        |
+| `rescueStory`  | `string \| null`            | Historia de rescate.                                                                                                                        |
+| `birthDate`    | `DateOnly \| null`          | Fecha de nacimiento (`yyyy-MM-dd`).                                                                                                         |
+| `weightKg`     | `decimal \| null`           | Peso en kilogramos.                                                                                                                         |
+| `age`          | `int`                       | Edad.                                                                                                                                       |
+| `slug`         | `string`                    | Slug único. Si la entidad no tiene uno persistido, se genera al vuelo a partir de `Name` (ver [Generación de `slug`](#generación-de-slug)). |
+| `isVaccinated` | `bool`                      | Si está vacunado.                                                                                                                           |
+| `isSterilized` | `bool`                      | Si está esterilizado.                                                                                                                       |
+| `isAdopted`    | `bool`                      | Si ya fue adoptado.                                                                                                                         |
+| `gender`       | `EnumResponse`              | `{ key: int, value: string }` — valor del enum `PetGender`.                                                                                 |
+| `size`         | `EnumResponse`              | `{ key: int, value: string }` — valor del enum `PetSize`.                                                                                   |
+| `status`       | `EnumResponse`              | `{ key: int, value: string }` — estado de la mascota.                                                                                       |
+| `specie`       | `SpeciePubResponse`         | `{ id: Guid, name: string }`.                                                                                                               |
+| `breeds`       | `OptionBreedResponse[]`     | `{ id: Guid, name: string }[]`.                                                                                                             |
+| `traits`       | `OptionTraitResponse[]`     | `{ id: Guid, name: string }[]`.                                                                                                             |
+| `photoUrls`    | `OptionPetPhotoResponse[]`  | `{ id: Guid, url: string }[]`.                                                                                                              |
+| `vaccines`     | `VaccineRelationResponse[]` | `{ id: Guid, name: string }[]`.                                                                                                             |
 
 ### Ejemplo de objeto `PetPubResponse`
 
@@ -222,7 +219,10 @@ Estructura común retornada (directamente o dentro de `items`) por los tres endp
     { "id": "t1a2c3d4-0000-0000-0000-000000000001", "name": "Juguetón" }
   ],
   "photoUrls": [
-    { "id": "p1a2c3d4-0000-0000-0000-000000000001", "url": "https://cdn.example.com/pets/luna1.jpg" }
+    {
+      "id": "p1a2c3d4-0000-0000-0000-000000000001",
+      "url": "https://cdn.example.com/pets/luna1.jpg"
+    }
   ],
   "vaccines": [
     { "id": "v1a2c3d4-0000-0000-0000-000000000001", "name": "Rabia" }

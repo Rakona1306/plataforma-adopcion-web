@@ -8,26 +8,26 @@ import { PetPhotoPubRelation } from "../../pet-photos/model/pet-photo-pub-relati
 import { SpeciePub } from "../../specie/model/specie-pub.model";
 
 export interface PetPublic {
-    id: string;
-    name: string;
-    description: string;
-    rescueStory: string;
-    birthDate: Date;
-    weightKg: number;
-    isSterilized: boolean;
-    gender: PetGenders;
-    size: PetSizes;
-    status: PetStatus;
-    isVaccinated: boolean;
-    speciesId: string;
-    age: number;
-    isAdopted: boolean;
-    slug: string;
+  id: string;
+  name: string;
+  description: string;
+  rescueStory: string;
+  birthDate: Date;
+  weightKg: number;
+  isSterilized: boolean;
+  gender: PetGenders;
+  size: PetSizes;
+  status: PetStatus;
+  isVaccinated: boolean;
+  speciesId: string;
+  age: number;
+  isAdopted: boolean;
+  slug: string;
 
-    breeds: BreedPublic[]
-    traits: TraitPublic[]
-    vaccines: VaccinePubRelation[]
-    specie: SpeciePub
+  breeds: BreedPublic[];
+  traits: TraitPublic[];
+  vaccines: VaccinePubRelation[];
+  specie: SpeciePub;
 
-    photoUrls: PetPhotoPubRelation[];
+  photoUrls: PetPhotoPubRelation[];
 }

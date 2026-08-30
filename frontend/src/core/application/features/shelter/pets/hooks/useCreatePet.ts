@@ -20,8 +20,7 @@ export function useCreatePet() {
   >({});
 
   const mutation = useMutation({
-    mutationFn: (dto: PetCreateDto) =>
-      petContainer.createPet(dto),
+    mutationFn: (dto: PetCreateDto) => petContainer.createPet(dto),
 
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -65,9 +64,7 @@ export function useCreatePet() {
         setErrorValidation(normalized);
         setErrorMessage(data.title || "Falló la validación");
       } else {
-        setErrorMessage(
-          error.message || "Error al registrar la mascota"
-        );
+        setErrorMessage(error.message || "Error al registrar la mascota");
       }
     },
   });

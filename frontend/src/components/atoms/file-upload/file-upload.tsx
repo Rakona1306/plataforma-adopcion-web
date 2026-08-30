@@ -22,26 +22,29 @@ export function FileUpload({
   accept = "image/png, image/jpeg, image/webp",
 }: FileUploadProps) {
   const [, fileMeta, fileHelpers] = useField<File[]>(name);
-  const [, removeMeta, removeHelpers] = useField<string[]>(removeFieldName ?? name);
+  const [, removeMeta, removeHelpers] = useField<string[]>(
+    removeFieldName ?? name,
+  );
   const [, mainMeta, mainHelpers] = useField<string[]>(mainFieldName ?? name);
   const [uploadError, setUploadError] = useState<string | null>(null);
 
   const [items, setItems] = useState<PreviewItem[]>(() =>
-    defaultPhotos.map(
-      (p): ExistingPreviewItem => ({
-        kind: "existing",
-        id: p.id,
-        url: p.url,
-        isMain: p.isMain,
-      })
-    )
+    defaultPhotos.map((p): ExistingPreviewItem => ({
+      kind: "existing",
+      id: p.id,
+      url: p.url,
+      isMain: p.isMain,
+    })),
   );
 
   const [isDragging, setIsDragging] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const hasError = fileMeta.touched && Boolean(fileMeta.error) || removeMeta.touched && Boolean(removeMeta.error) || mainMeta.touched && Boolean(mainMeta.error);
+  const hasError =
+    (fileMeta.touched && Boolean(fileMeta.error)) ||
+    (removeMeta.touched && Boolean(removeMeta.error)) ||
+    (mainMeta.touched && Boolean(mainMeta.error));
   const remaining = maxFiles - items.length;
   const isFull = remaining <= 0;
   const hasMainField = Boolean(mainFieldName);
@@ -86,13 +89,13 @@ export function FileUpload({
 
         if (tooBig) {
           setUploadError(
-            `El archivo "${file.name}" supera el tamaño máximo permitido de ${maxSizeMb} MB.`
+            `El archivo "${file.name}" supera el tamaño máximo permitido de ${maxSizeMb} MB.`,
           );
           continue;
         }
 
         const duplicate = existingNewFiles.some(
-          (f) => f.name === file.name && f.size === file.size
+          (f) => f.name === file.name && f.size === file.size,
         );
 
         if (duplicate) continue;
@@ -111,7 +114,7 @@ export function FileUpload({
       setIsProcessing(false);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [items, remaining, maxSizeMb]
+    [items, remaining, maxSizeMb],
   );
 
   const handleRemove = useCallback((item: PreviewItem) => {
@@ -128,7 +131,7 @@ export function FileUpload({
       prev.map((i) => ({
         ...i,
         isMain: i.id === target.id ? !i.isMain : false,
-      }))
+      })),
     );
   }, []);
 
@@ -182,10 +185,7 @@ export function FileUpload({
       {(hasError || uploadError) && (
         <p className="flex items-center gap-1.5 text-xs font-medium text-red-600">
           <i className="ti ti-alert-circle text-sm" aria-hidden="true" />
-          {uploadError ||
-            fileMeta.error ||
-            removeMeta.error ||
-            mainMeta.error}
+          {uploadError || fileMeta.error || removeMeta.error || mainMeta.error}
         </p>
       )}
 

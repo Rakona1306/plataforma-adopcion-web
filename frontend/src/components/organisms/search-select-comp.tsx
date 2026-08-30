@@ -1,6 +1,6 @@
 "use client";
 import { Autocomplete, Loader } from "@mantine/core";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 interface SearchSelectProps<T extends Record<string, any>> {
   options: T[];
@@ -19,24 +19,17 @@ interface SearchSelectProps<T extends Record<string, any>> {
 }
 
 export function SearchSelectComp<T extends Record<string, any>>(
-  props: SearchSelectProps<T>
+  props: SearchSelectProps<T>,
 ) {
-
-  const [searchValue, setSearchValue] = useState(
-    props.defaultValue ?? ""
-  );
+  const [searchValue, setSearchValue] = useState(props.defaultValue ?? "");
 
   const isControlled = props.filterValue !== undefined;
-  const currentValue = isControlled && props.filterValue === ""
-    ? ""
-    : searchValue;
+  const currentValue =
+    isControlled && props.filterValue === "" ? "" : searchValue;
 
   const data = useMemo(
-    () =>
-      props.options.map((item) =>
-        String(item[props.displayField])
-      ),
-    [props.options, props.displayField]
+    () => props.options.map((item) => String(item[props.displayField])),
+    [props.options, props.displayField],
   );
 
   const handleChange = (value: string) => {
@@ -44,7 +37,7 @@ export function SearchSelectComp<T extends Record<string, any>>(
     props.onSearch?.(value);
 
     const selected = props.options.find(
-      (item) => String(item[props.displayField]) === value
+      (item) => String(item[props.displayField]) === value,
     );
 
     if (!selected) {
@@ -54,7 +47,7 @@ export function SearchSelectComp<T extends Record<string, any>>(
 
   const handleOptionSubmit = (labelSelected: string) => {
     const selected = props.options.find(
-      (item) => String(item[props.displayField]) === labelSelected
+      (item) => String(item[props.displayField]) === labelSelected,
     );
 
     if (!selected) return;
@@ -63,7 +56,6 @@ export function SearchSelectComp<T extends Record<string, any>>(
     props.onChange?.(valueToSave);
     setSearchValue(labelSelected);
   };
-
 
   return (
     <Autocomplete

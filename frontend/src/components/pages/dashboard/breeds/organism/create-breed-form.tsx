@@ -13,7 +13,7 @@ import { Button } from "@mantine/core";
 
 export function CreateBreedForm() {
   const { create, errorMessage, errorValidation, isPending } = useCreateBreed();
-  const {  data, updateFilter, isLoading } = useGetAllSpecie();
+  const { data, updateFilter, isLoading } = useGetAllSpecie();
 
   const initialValues: BreedCreateDto = {
     name: "",

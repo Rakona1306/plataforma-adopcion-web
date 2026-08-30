@@ -42,9 +42,7 @@ export function useGetAllSpecie() {
     enabled: !filter.search || filter.search.length >= 3,
   });
 
-  const updateFilter = (
-    newFilter: Partial<SpecieFilterDto>
-  ) => {
+  const updateFilter = (newFilter: Partial<SpecieFilterDto>) => {
     setFilter((prev) => ({
       ...prev,
       ...newFilter,

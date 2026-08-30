@@ -1,7 +1,7 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
-test('la aplicación debe cargar correctamente', async ({ page }) => {
-  await page.goto('/');
+test("la aplicación debe cargar correctamente", async ({ page }) => {
+  await page.goto("/");
 
-  await expect(page).toHaveURL('/');
+  await expect(page).toHaveURL("/");
 });

@@ -11,19 +11,11 @@ export const changePasswordSchema = Yup.object({
     .matches(/[a-z]/, "Debe contener al menos una letra minúscula")
     .matches(/[A-Z]/, "Debe contener al menos una letra mayúscula")
     .matches(/[0-9]/, "Debe contener al menos un número")
-    .matches(
-      /[^A-Za-z0-9]/,
-      "Debe contener al menos un carácter especial"
-    ),
+    .matches(/[^A-Za-z0-9]/, "Debe contener al menos un carácter especial"),
 
   confirmPassword: Yup.string()
     .required("Confirmar contraseña requerida")
-    .oneOf(
-      [Yup.ref("password")],
-      "Las contraseñas no coinciden"
-    ),
+    .oneOf([Yup.ref("password")], "Las contraseñas no coinciden"),
 });
 
-export type ChangePasswordDto = Yup.InferType<
-  typeof changePasswordSchema
->;
+export type ChangePasswordDto = Yup.InferType<typeof changePasswordSchema>;

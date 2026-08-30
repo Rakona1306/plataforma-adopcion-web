@@ -4,26 +4,30 @@ import { QUERY_KEYS } from "@/shared/constants/queryKeys";
 import { requestAdoptionService } from "../../services/request-adoption.service";
 import { useCallback, useState } from "react";
 
-interface Props extends Partial<RequestAdoptionFilter> {
+type Props = Partial<RequestAdoptionFilter>;
 
-}
+export default function usePaginateRequestAdoption(
+  props: Props = { page: 1, pageSize: 10 },
+) {
+  const [filter, setFilter] = useState<RequestAdoptionFilter>(
+    props as RequestAdoptionFilter,
+  );
 
-export default function usePaginateRequestAdoption(props: Props = { page: 1, pageSize: 10 }) {
+  const query = useQuery({
+    queryKey: [QUERY_KEYS.BUSINESS.REQUEST_ADOPTION.PAGINATE],
+    queryFn: () => requestAdoptionService.paginate(filter),
+  });
 
-    const [filter, setFilter] = useState<RequestAdoptionFilter>(props as RequestAdoptionFilter);
+  const updateFilter = useCallback(
+    (partial: Partial<RequestAdoptionFilter>) => {
+      setFilter((prev) => ({ ...prev, ...partial }));
+    },
+    [],
+  );
 
-    const query = useQuery({
-        queryKey: [QUERY_KEYS.BUSINESS.REQUEST_ADOPTION.PAGINATE],
-        queryFn: () => requestAdoptionService.paginate(filter)
-    })
-
-    const updateFilter = useCallback((partial: Partial<RequestAdoptionFilter>) => {
-        setFilter((prev) => ({ ...prev, ...partial }));
-    }, []);
-
-    return {
-        ...query,
-        filter,
-        updateFilter
-    }
+  return {
+    ...query,
+    filter,
+    updateFilter,
+  };
 }

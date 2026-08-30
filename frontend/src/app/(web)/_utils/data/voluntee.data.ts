@@ -1,47 +1,51 @@
 export const volunteerData = {
   title: "Sé Parte del Cambio",
-  subtitle: "Tu tiempo y pasión pueden transformar vidas. Únete a nuestro equipo de voluntarios y haz una diferencia real en la vida de nuestras mascotas.",
-  
+  subtitle:
+    "Tu tiempo y pasión pueden transformar vidas. Únete a nuestro equipo de voluntarios y haz una diferencia real en la vida de nuestras mascotas.",
+
   whyVolunteer: {
     title: "Por Qué Ser Voluntario",
-    description: "El voluntariado no solo ayuda a las mascotas, sino que también enriquece tu vida y te conecta con una comunidad de personas que comparten tu pasión.",
+    description:
+      "El voluntariado no solo ayuda a las mascotas, sino que también enriquece tu vida y te conecta con una comunidad de personas que comparten tu pasión.",
     benefits: [
       {
         title: "Impacto Real",
-        description: "Crea un cambio tangible en la vida de los animales necesitados",
-        icon: "heart"
+        description:
+          "Crea un cambio tangible en la vida de los animales necesitados",
+        icon: "heart",
       },
       {
         title: "Comunidad",
         description: "Únete a personas apasionadas que comparten tus valores",
-        icon: "users"
+        icon: "users",
       },
       {
         title: "Crecimiento Personal",
         description: "Desarrolla nuevas habilidades y gana experiencia valiosa",
-        icon: "trending-up"
+        icon: "trending-up",
       },
       {
         title: "Flexibilidad",
         description: "Elige tu horario y el tipo de trabajo que disfrutas",
-        icon: "clock"
-      }
-    ]
+        icon: "clock",
+      },
+    ],
   },
 
   roles: [
     {
       id: 1,
       title: "Cuidador de Animales",
-      description: "Alimenta, limpia y cuida de nuestros perros y gatos. Asegúrate de que tengan un ambiente cómodo y seguro.",
+      description:
+        "Alimenta, limpia y cuida de nuestros perros y gatos. Asegúrate de que tengan un ambiente cómodo y seguro.",
       image: "/volunteers/volunteer-1.jpg",
       requirements: [
         "Amor genuino por los animales",
         "Capacidad de trabajo físico",
-        "Disponibilidad: 4+ horas semanales"
+        "Disponibilidad: 4+ horas semanales",
       ],
       schedule: "Flexibles",
-      difficulty: "Principiante"
+      difficulty: "Principiante",
     },
     /*
     {
@@ -103,74 +107,87 @@ export const volunteerData = {
     {
       step: 1,
       title: "Solicita",
-      description: "Completa nuestro formulario de aplicación en línea con tu información básica e intereses.",
-      icon: "clipboard"
+      description:
+        "Completa nuestro formulario de aplicación en línea con tu información básica e intereses.",
+      icon: "clipboard",
     },
     {
       step: 2,
       title: "Entrevista",
-      description: "Nos reunimos para conocerte, entender tus motivaciones y responder tus preguntas.",
-      icon: "handshake"
+      description:
+        "Nos reunimos para conocerte, entender tus motivaciones y responder tus preguntas.",
+      icon: "handshake",
     },
     {
       step: 3,
       title: "Orientación",
-      description: "Recibe capacitación sobre seguridad, procedimientos y el tipo de trabajo que realizarás.",
-      icon: "book-open"
+      description:
+        "Recibe capacitación sobre seguridad, procedimientos y el tipo de trabajo que realizarás.",
+      icon: "book-open",
     },
     {
       step: 4,
       title: "Voluntariado",
-      description: "¡Comienza! Trabaja a tu propio ritmo y sé parte de nuestro equipo.",
-      icon: "smile"
-    }
+      description:
+        "¡Comienza! Trabaja a tu propio ritmo y sé parte de nuestro equipo.",
+      icon: "smile",
+    },
   ],
 
   testimonials: [
     {
       name: "María López",
       role: "Voluntaria - Cuidadora",
-      quote: "Ser voluntaria aquí cambió mi vida. Ver la transformación de estos animales y saber que contribuí es lo más gratificante que he hecho.",
-      image: "👩‍🦰"
+      quote:
+        "Ser voluntaria aquí cambió mi vida. Ver la transformación de estos animales y saber que contribuí es lo más gratificante que he hecho.",
+      image: "👩‍🦰",
     },
     {
       name: "Carlos Mendez",
       role: "Voluntario - Entrenador",
-      quote: "La comunidad aquí es increíble. He conocido personas increíbles y he aprendido habilidades que nunca pensé que tendría.",
-      image: "👨‍🦱"
+      quote:
+        "La comunidad aquí es increíble. He conocido personas increíbles y he aprendido habilidades que nunca pensé que tendría.",
+      image: "👨‍🦱",
     },
     {
       name: "Ana García",
       role: "Voluntaria - Asistente de Paseos",
-      quote: "Cada día es diferente y cada paseo es especial. Sé que estoy haciendo una diferencia real en la vida de estos perros.",
-      image: "👩‍🦳"
-    }
+      quote:
+        "Cada día es diferente y cada paseo es especial. Sé que estoy haciendo una diferencia real en la vida de estos perros.",
+      image: "👩‍🦳",
+    },
   ],
 
   faq: [
     {
       question: "¿Cuál es la edad mínima para ser voluntario?",
-      answer: "Debes tener al menos 16 años. Si tienes entre 16-18, necesitarás consentimiento de tus padres."
+      answer:
+        "Debes tener al menos 16 años. Si tienes entre 16-18, necesitarás consentimiento de tus padres.",
     },
     {
       question: "¿Necesito experiencia previa?",
-      answer: "No es necesario. Proporcionamos capacitación completa para todos nuestros voluntarios. Solo necesitas ganas de ayudar."
+      answer:
+        "No es necesario. Proporcionamos capacitación completa para todos nuestros voluntarios. Solo necesitas ganas de ayudar.",
     },
     {
       question: "¿Cuántas horas debo dedicar?",
-      answer: "Depende del rol. Mínimo 3 horas semanales, pero puedes hacer más según tu disponibilidad."
+      answer:
+        "Depende del rol. Mínimo 3 horas semanales, pero puedes hacer más según tu disponibilidad.",
     },
     {
       question: "¿Hay un compromiso de tiempo mínimo?",
-      answer: "Preferimos compromisos de al menos 3 meses, pero hablamos contigo sobre tu situación específica."
+      answer:
+        "Preferimos compromisos de al menos 3 meses, pero hablamos contigo sobre tu situación específica.",
     },
     {
       question: "¿Es seguro trabajar con los animales?",
-      answer: "Sí. Proporcionamos equipo de protección y capacitación extensiva sobre seguridad. Nuestros animales son evaluados comportamentalmente."
+      answer:
+        "Sí. Proporcionamos equipo de protección y capacitación extensiva sobre seguridad. Nuestros animales son evaluados comportamentalmente.",
     },
     {
       question: "¿Qué pasa si no puedo continuar?",
-      answer: "Entendemos que las circunstancias cambian. Solo avísanos con anticipación cuando sea posible."
-    }
-  ]
-}
+      answer:
+        "Entendemos que las circunstancias cambian. Solo avísanos con anticipación cuando sea posible.",
+    },
+  ],
+};

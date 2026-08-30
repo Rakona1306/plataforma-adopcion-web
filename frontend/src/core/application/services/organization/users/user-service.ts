@@ -7,9 +7,7 @@ import { Paginate } from "@/core/domain/models/system/paginate";
 import { IUserRepository } from "@/core/domain/repository/organization/IUserRepository";
 
 export class UserService {
-  constructor(
-    private userRepository: IUserRepository,
-  ) {}
+  constructor(private userRepository: IUserRepository) {}
 
   async getUsers(filter: UserFilterDto): Promise<Paginate<User>> {
     return this.userRepository.getAll(filter);

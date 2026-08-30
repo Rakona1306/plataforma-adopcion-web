@@ -20,13 +20,8 @@ export function useUpdatePet() {
   >({});
 
   const mutation = useMutation({
-    mutationFn: ({
-      id,
-      dto,
-    }: {
-      id: string;
-      dto: PetUpdateDto;
-    }) => petContainer.updatePet(id, dto),
+    mutationFn: ({ id, dto }: { id: string; dto: PetUpdateDto }) =>
+      petContainer.updatePet(id, dto),
 
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -69,9 +64,7 @@ export function useUpdatePet() {
         setErrorValidation(normalized);
         setErrorMessage(data.title || "Error en la validación");
       } else {
-        setErrorMessage(
-          error.message || "No se pudo actualizar la mascota"
-        );
+        setErrorMessage(error.message || "No se pudo actualizar la mascota");
 
         Swal.fire({
           title: "Error",

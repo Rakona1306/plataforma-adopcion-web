@@ -1,5 +1,5 @@
 export default async function proxy() {
-    /*
+  /*
     const cookie = (await cookies()).get('access_token')?.value;
 
     try {
@@ -23,8 +23,5 @@ export default async function proxy() {
 }
 
 export const config = {
-    matcher: [
-        "/account/:path*",
-        "/dashboard/:path*"
-    ],
+  matcher: ["/account/:path*", "/dashboard/:path*"],
 };

@@ -1,5 +1,5 @@
 export interface RequestAdoptionFilter {
-    page: number;
-    pageSize: number;
-    userId?: string;
+  page: number;
+  pageSize: number;
+  userId?: string;
 }

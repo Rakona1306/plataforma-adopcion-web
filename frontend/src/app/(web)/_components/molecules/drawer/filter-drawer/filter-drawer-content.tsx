@@ -6,17 +6,17 @@ import { Flex } from "@mantine/core";
 import DisclosureFilterAge from "./disclosure-filter-age";
 
 export function FilterDrawerContent() {
-    return (
-        <Flex w={'100%'} direction={'column'} gap={'sm'}>
-            <DisclosureFilterGender />
+  return (
+    <Flex w={"100%"} direction={"column"} gap={"sm"}>
+      <DisclosureFilterGender />
 
-            <DisclosureFilterSize />
+      <DisclosureFilterSize />
 
-            <DisclosureFilterSpecie />
+      <DisclosureFilterSpecie />
 
-            <DisclosureFilterBreed />
+      <DisclosureFilterBreed />
 
-            <DisclosureFilterAge />
-        </Flex>
-    )
+      <DisclosureFilterAge />
+    </Flex>
+  );
 }

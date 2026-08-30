@@ -1,6 +1,6 @@
-'use client'
+"use client";
 
-import { motion, Variants } from 'motion/react'
+import { motion, Variants } from "motion/react";
 
 export default function PetAnimation() {
   // Paw print animation - fluttering in the background
@@ -12,10 +12,10 @@ export default function PetAnimation() {
       transition: {
         duration: 6,
         repeat: Infinity,
-        ease: 'easeInOut',
+        ease: "easeInOut",
       },
     },
-  }
+  };
 
   // Emoji animation
   const emojiVariants: Variants = {
@@ -26,17 +26,17 @@ export default function PetAnimation() {
       transition: {
         duration: 8,
         repeat: Infinity,
-        ease: 'easeInOut',
+        ease: "easeInOut",
       },
     },
-  }
+  };
 
   const pets = [
-    { emoji: '🐕', delay: 0 },
-    { emoji: '🐈', delay: 1 },
-    { emoji: '🐦', delay: 2 },
-    { emoji: '🐰', delay: 3 },
-  ]
+    { emoji: "🐕", delay: 0 },
+    { emoji: "🐈", delay: 1 },
+    { emoji: "🐦", delay: 2 },
+    { emoji: "🐰", delay: 3 },
+  ];
 
   return (
     <>
@@ -61,7 +61,7 @@ export default function PetAnimation() {
       {/* Floating paw prints */}
       <motion.div
         className="absolute text-5xl"
-        style={{ top: '20%', right: '10%' }}
+        style={{ top: "20%", right: "10%" }}
         variants={pawVariants}
         animate="float"
         initial={{ opacity: 0 }}
@@ -71,7 +71,7 @@ export default function PetAnimation() {
 
       <motion.div
         className="absolute text-4xl"
-        style={{ bottom: '15%', left: '5%' }}
+        style={{ bottom: "15%", left: "5%" }}
         variants={pawVariants}
         animate="float"
         initial={{ opacity: 0 }}
@@ -82,7 +82,7 @@ export default function PetAnimation() {
 
       <motion.div
         className="absolute text-6xl"
-        style={{ bottom: '25%', right: '15%' }}
+        style={{ bottom: "25%", right: "15%" }}
         variants={pawVariants}
         animate="float"
         initial={{ opacity: 0 }}
@@ -94,7 +94,7 @@ export default function PetAnimation() {
       {/* Bouncing hearts */}
       <motion.div
         className="absolute text-4xl"
-        style={{ top: '40%', right: '5%' }}
+        style={{ top: "40%", right: "5%" }}
         animate={{
           y: [-10, 10, -10],
           scale: [1, 1.2, 1],
@@ -103,7 +103,7 @@ export default function PetAnimation() {
         transition={{
           duration: 3,
           repeat: Infinity,
-          ease: 'easeInOut',
+          ease: "easeInOut",
         }}
       >
         ❤️
@@ -112,7 +112,7 @@ export default function PetAnimation() {
       {/* Animated circles background */}
       <motion.div
         className="absolute w-64 h-64 rounded-full opacity-10 border-2 border-primary"
-        style={{ top: '10%', right: '20%' }}
+        style={{ top: "10%", right: "20%" }}
         animate={{
           scale: [1, 1.2, 1],
           rotate: [0, 90, 180],
@@ -120,13 +120,13 @@ export default function PetAnimation() {
         transition={{
           duration: 15,
           repeat: Infinity,
-          ease: 'linear',
+          ease: "linear",
         }}
       />
 
       <motion.div
         className="absolute w-48 h-48 rounded-full opacity-10 border-2 border-secondary"
-        style={{ bottom: '20%', left: '10%' }}
+        style={{ bottom: "20%", left: "10%" }}
         animate={{
           scale: [1.2, 1, 1.2],
           rotate: [180, 90, 0],
@@ -134,9 +134,9 @@ export default function PetAnimation() {
         transition={{
           duration: 12,
           repeat: Infinity,
-          ease: 'linear',
+          ease: "linear",
         }}
       />
     </>
-  )
+  );
 }

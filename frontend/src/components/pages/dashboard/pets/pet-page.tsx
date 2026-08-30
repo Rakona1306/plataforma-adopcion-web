@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import BodyDashboard from "@/app/dashboard/_components/molecules/body-dashboard";
 import HeaderDashboard from "@/app/dashboard/_components/molecules/header-dashboard";
@@ -6,7 +6,9 @@ import { ActionButtons } from "@/app/dashboard/_components/organism/action-butto
 import FilterBar from "@/app/dashboard/_components/organism/filter-bar";
 import { Badge, Divider } from "@mantine/core";
 import useActionsPet from "./hooks/useActionsPet";
-import CustomTable, { TableColumn } from "@/app/dashboard/_components/organism/custom-table";
+import CustomTable, {
+  TableColumn,
+} from "@/app/dashboard/_components/organism/custom-table";
 import { FilterItemConfig } from "@/app/dashboard/_interfaces/ui/filters";
 import { formatDateTime } from "@/core/shared/helpers/formatDateTime";
 import { Pet } from "@/core/domain/models/shelter/pet";
@@ -25,21 +27,67 @@ import { MdVaccines } from "react-icons/md";
 
 export default function PetPage() {
   const { actionsI } = useActionsPet();
-  const { filter, updateFilter, handleClear, data, isLoading, isError } = useGetAllPet();
+  const { filter, updateFilter, handleClear, data, isLoading, isError } =
+    useGetAllPet();
   const router = useRouter();
   const { deletePetWithConfirmation, isPending } = useDeletePet();
   const { handleOpenModal } = useModal() || {};
 
   const columns: TableColumn<Pet>[] = [
-    { key: "image", label: "Imagen", render: (pet) => pet.photoUrls.length > 0 ? <img src={pet.photoUrls[0].url} alt={pet.name} className="w-16 h-16 object-cover rounded" /> : <div className="w-16 h-16 bg-gray-200 flex items-center justify-center rounded"><span className="text-gray-500 text-sm">Sin imagen</span></div> },
+    {
+      key: "image",
+      label: "Imagen",
+      render: (pet) =>
+        pet.photoUrls.length > 0 ? (
+          <img
+            src={pet.photoUrls[0].url}
+            alt={pet.name}
+            className="w-16 h-16 object-cover rounded"
+          />
+        ) : (
+          <div className="w-16 h-16 bg-gray-200 flex items-center justify-center rounded">
+            <span className="text-gray-500 text-sm">Sin imagen</span>
+          </div>
+        ),
+    },
     { key: "name", label: "Nombre" },
-    { key: "gender", label: "Género", render: (pet) => pet.gender.value === 'Hembra' ? <Badge color="pink">Hembra</Badge> : <Badge color="blue">Macho</Badge> },
-    { key: "status", label: "Estado", render: (pet) => pet.isAdopted ? <Badge color="blue">Adoptado</Badge> : <Badge color="green">Disponible</Badge> },
+    {
+      key: "gender",
+      label: "Género",
+      render: (pet) =>
+        pet.gender.value === "Hembra" ? (
+          <Badge color="pink">Hembra</Badge>
+        ) : (
+          <Badge color="blue">Macho</Badge>
+        ),
+    },
+    {
+      key: "status",
+      label: "Estado",
+      render: (pet) =>
+        pet.isAdopted ? (
+          <Badge color="blue">Adoptado</Badge>
+        ) : (
+          <Badge color="green">Disponible</Badge>
+        ),
+    },
     { key: "age", label: "Edad", render: (pet) => `${pet.age} años` },
-    { key: "weightKg", label: "Peso (kg)", render: (pet) => `${pet.weightKg} kg` },
-    { key: "birthDate", label: "Fecha de nacimiento", render: (pet) => formatDate(pet.birthDate) },
+    {
+      key: "weightKg",
+      label: "Peso (kg)",
+      render: (pet) => `${pet.weightKg} kg`,
+    },
+    {
+      key: "birthDate",
+      label: "Fecha de nacimiento",
+      render: (pet) => formatDate(pet.birthDate),
+    },
     { key: "specie", label: "Especie", render: (pet) => pet.speciesName },
-    { key: "createdAt", label: "Creado", render: (pet) => formatDateTime(pet.createdAt), },
+    {
+      key: "createdAt",
+      label: "Creado",
+      render: (pet) => formatDateTime(pet.createdAt),
+    },
   ];
 
   const myFilters: FilterItemConfig[] = [
@@ -58,38 +106,36 @@ export default function PetPage() {
       icon: <BiEditAlt size={16} />,
       onClick(row) {
         router.push(`/dashboard/mascotas/${row.id}/editar`);
-      }
+      },
     },
     {
-      label: 'Ver',
+      label: "Ver",
       icon: <BsViewList size={16} />,
       onClick(row) {
         router.push(`/dashboard/mascotas/${row.id}/ver`);
-      }
+      },
     },
     {
-      label: 'Adjuntar Registro Medico',
+      label: "Adjuntar Registro Medico",
       icon: <AiOutlineMedicineBox size={16} />,
-      onClick(row) {
-        console.log(row)
-      }
+      onClick() {},
     },
     {
-      label: 'Asignar Vacunas',
+      label: "Asignar Vacunas",
       icon: <MdVaccines />,
       onClick(row) {
         router.push(`/dashboard/mascotas/${row.id}/vacunas`);
-      }
+      },
     },
     {
-      label: 'Asignar Imagenes',
+      label: "Asignar Imagenes",
       icon: <IoImageOutline size={16} />,
       onClick(row) {
         handleOpenModal?.({
           header: `Asignar imágenes a ${row.name}`,
           content: <CreatePetPhotoForm petId={row.id} />,
         });
-      }
+      },
     },
     {
       label: "Eliminar",
@@ -98,7 +144,7 @@ export default function PetPage() {
       onClick: (pet) => {
         deletePetWithConfirmation(pet.id);
       },
-    }
+    },
   ];
 
   return (

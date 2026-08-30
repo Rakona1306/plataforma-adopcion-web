@@ -45,7 +45,6 @@ export default function Footer() {
 
       <Container className="py-10">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-4">
-
           {/* Brand column */}
           <motion.div
             className="md:col-span-1 flex flex-col gap-5"
@@ -65,7 +64,8 @@ export default function Footer() {
               />
             </Link>
             <p className="text-sm font-light leading-relaxed text-white/60">
-              Rescatamos, rehabilitamos y encontramos hogares amorosos para mascotas que lo necesitan.
+              Rescatamos, rehabilitamos y encontramos hogares amorosos para
+              mascotas que lo necesitan.
             </p>
 
             {/* Paw divider */}
@@ -196,13 +196,18 @@ export default function Footer() {
           transition={{ duration: 0.8, delay: 0.4 }}
         >
           <p className="text-xs font-light text-white/40">
-            © {new Date().getFullYear()} Albergue Salva Vidas. Todos los derechos reservados.
+            © {new Date().getFullYear()} Albergue Salva Vidas. Todos los
+            derechos reservados.
           </p>
           <div className="flex items-center gap-1.5 text-xs font-light text-white/40">
             Hecho con
             <motion.span
               animate={{ scale: [1, 1.3, 1] }}
-              transition={{ repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
+              transition={{
+                repeat: Infinity,
+                duration: 1.6,
+                ease: "easeInOut",
+              }}
               className="text-red-400"
             >
               ♥

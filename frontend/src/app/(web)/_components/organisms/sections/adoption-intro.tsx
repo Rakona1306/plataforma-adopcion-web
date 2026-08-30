@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 import { FaStar } from "react-icons/fa";
 import { RxCaretRight } from "react-icons/rx";
@@ -21,10 +20,7 @@ export default function AdoptionIntro() {
               </Tag>
 
               <div className="space-y-5">
-                <Title  
-                  htmlTag='h1'
-                  className=" font-bold text-slate-800"
-                >
+                <Title htmlTag="h1" className=" font-bold text-slate-800">
                   Encuentra tu{" "}
                   <span className="text-primary">compañero perfecto</span>
                 </Title>
@@ -41,7 +37,10 @@ export default function AdoptionIntro() {
                     <RxCaretRight className="relative z-10" />
                   </Button>
 
-                  <Button href="/nosotros" className="hover:text-white border-terciary before:bg-terciary! text-terciary">
+                  <Button
+                    href="/nosotros"
+                    className="hover:text-white border-terciary before:bg-terciary! text-terciary"
+                  >
                     <span className="relative z-10">Quienes somos</span>
                     <RxCaretRight className="relative z-10" />
                   </Button>
@@ -50,7 +49,10 @@ export default function AdoptionIntro() {
 
               <div className="border-t-[0.5px] border-slate-400/50 py-5">
                 <div>
-                  <Title htmlTag="h3" className="font-bold text-2xl! text-slate-800">
+                  <Title
+                    htmlTag="h3"
+                    className="font-bold text-2xl! text-slate-800"
+                  >
                     Siguenos en nuestras{" "}
                     <span className="text-primary ">redes sociales</span>
                   </Title>

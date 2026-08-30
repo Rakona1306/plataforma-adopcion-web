@@ -5,7 +5,6 @@ import AdoptProccess from "@/app/(web)/_components/organisms/sections/adopt-proc
 import AdoptionIntro from "@/app/(web)/_components/organisms/sections/adoption-intro";
 
 export default async function NosotrosPage() {
-
   return (
     <>
       <AboutSection />

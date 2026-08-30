@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import classNames from "classnames";
 import "./button.css";
@@ -11,7 +10,6 @@ export default function Button({
   containerClassName,
   ...props
 }: ButtonProps) {
-
   const handleClick = () => {
     if (href) {
       window.open(href, target);
@@ -21,7 +19,12 @@ export default function Button({
   };
 
   return (
-    <div className={classNames("relative w-fit button-container", containerClassName)}>
+    <div
+      className={classNames(
+        "relative w-fit button-container",
+        containerClassName,
+      )}
+    >
       <div
         className={classNames(
           "w-3 h-1 absolute bg-white space-custom -top-0.5 right-4 z-20 transition-all! duration-300!",

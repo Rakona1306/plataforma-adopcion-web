@@ -1,19 +1,18 @@
-import { manrope } from "@/lib/fonts/manrope"
-import { Button } from "@mantine/core"
-import Link from "next/link"
+import { manrope } from "@/lib/fonts/manrope";
+import { Button } from "@mantine/core";
+import Link from "next/link";
 
 export interface IActionButtons {
-  title?: string
-  buttons: Buttons[]
+  title?: string;
+  buttons: Buttons[];
 }
 
 export interface Buttons {
-  label: string
-  href?: string
-  className?: string
-  onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void
+  label: string;
+  href?: string;
+  className?: string;
+  onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
 }
-
 
 export function ActionButtons({ title = "Acciones", buttons }: IActionButtons) {
   return (
@@ -31,9 +30,8 @@ export function ActionButtons({ title = "Acciones", buttons }: IActionButtons) {
                 >
                   {button.label}
                 </Button>
-
               </Link>
-            )
+            );
           }
 
           return (
@@ -45,9 +43,9 @@ export function ActionButtons({ title = "Acciones", buttons }: IActionButtons) {
             >
               {button.label}
             </Button>
-          )
+          );
         })}
       </div>
     </div>
-  )
+  );
 }

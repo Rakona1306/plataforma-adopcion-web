@@ -4,9 +4,7 @@ export const actionsUser: IActionButtons = {
   buttons: [
     {
       label: "Crear",
-      onClick: () => {
-        console.log("Crear rol")
-      }
-    }
-  ]
-}
+      onClick: () => {},
+    },
+  ],
+};

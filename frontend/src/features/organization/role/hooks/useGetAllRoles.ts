@@ -1,9 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // src/presentation/hooks/useRoles.ts
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { RoleFilterDto } from "../dtos/role-filter-dto";
-import { roleContainer } from "@/core/infrastructure/container/organization/role-container";
 import { useRouter } from "next/navigation";
 import { roleService } from "../services/role.service";
 import { QUERY_KEYS } from "@/shared/constants/queryKeys";

@@ -20,8 +20,7 @@ export function useCreateTrait() {
   >({});
 
   const mutation = useMutation({
-    mutationFn: (dto: TraitCreateDto) =>
-      traitContainer.create(dto),
+    mutationFn: (dto: TraitCreateDto) => traitContainer.create(dto),
 
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -41,7 +40,7 @@ export function useCreateTrait() {
 
     onError: (error: any) => {
       const status = error.response?.status || error.status;
-    
+
       if (status === 401) {
         handleCloseModal?.();
         Swal.fire({
@@ -64,9 +63,7 @@ export function useCreateTrait() {
         setErrorValidation(normalized);
         setErrorMessage(data.title || "Falló la validación");
       } else {
-        setErrorMessage(
-          error.message || "Error al crear la característica"
-        );
+        setErrorMessage(error.message || "Error al crear la característica");
       }
     },
   });

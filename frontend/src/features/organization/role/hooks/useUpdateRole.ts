@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useModal } from "@/core/application/hooks/ui/useModal";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { RoleUpdateDto } from "../dtos/role-update-dto";
@@ -18,7 +17,9 @@ export function useUpdateRole() {
       roleService.update(id, dto),
 
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.ORGANIZATION.ROLE] });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.ORGANIZATION.ROLE],
+      });
       handleCloseModal?.();
       Swal.fire({
         title: "¡Role actualizado!",

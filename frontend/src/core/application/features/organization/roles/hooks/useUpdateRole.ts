@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useModal } from "@/core/application/hooks/ui/useModal";
 import { roleContainer } from "@/core/infrastructure/container/organization/role-container";
 import { useMutation, useQueryClient } from "@tanstack/react-query";

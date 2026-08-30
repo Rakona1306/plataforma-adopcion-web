@@ -21,15 +21,20 @@ import { useDeleteRole } from "@/features/organization/role/hooks/useDeleteRole"
 
 export default function RolesPage() {
   const { actionsRoles } = useActionsRole();
-  const { data, updateFilter, filter, handleClear, isLoading, isError } = useGetAllRoles();
+  const { data, updateFilter, filter, handleClear, isLoading, isError } =
+    useGetAllRoles();
   const { deleteRoleWithConfirmation, isPending } = useDeleteRole();
   const { handleOpenModal } = useModal() || {};
 
   const columns: TableColumn<Role>[] = [
     { key: "name", label: "Nombre" },
     { key: "description", label: "Descripcion" },
-    { key: 'usersCount', label: 'Usuarios Asignados' },
-    { key: "createdAt", label: "Creado en", render: (row) => new Date(row.createdAt).toLocaleDateString() },
+    { key: "usersCount", label: "Usuarios Asignados" },
+    {
+      key: "createdAt",
+      label: "Creado en",
+      render: (row) => new Date(row.createdAt).toLocaleDateString(),
+    },
   ];
 
   // 3. Definición de acciones disponibles por fila
@@ -41,7 +46,7 @@ export default function RolesPage() {
         handleOpenModal?.({
           header: "Editar rol",
           content: <UpdateRoleForm role={role} />,
-        })
+        });
       },
     },
     {
@@ -51,7 +56,7 @@ export default function RolesPage() {
         handleOpenModal?.({
           header: `Ver rol - #${user.id}`,
           content: <ViewRole role={user} />,
-        })
+        });
       },
     },
     {
@@ -88,7 +93,9 @@ export default function RolesPage() {
   return (
     <>
       <HeaderDashboard>
-        <h1 className="text-lg md:text-2xl font-bold text-slate-800">Sistema de Roles</h1>
+        <h1 className="text-lg md:text-2xl font-bold text-slate-800">
+          Sistema de Roles
+        </h1>
         <p className="text-sm md:text-base text-gray-500">
           Gestion roles y permisos para los usuarios
         </p>

@@ -1,7 +1,10 @@
 import { Alert } from "@/components/atoms/alert";
 import Input from "@/components/atoms/input";
 import FormContainer from "@/components/molecules/form-container";
-import { ChangePasswordDto, changePasswordSchema } from "@/core/application/features/organization/user/dtos/change-password-dto";
+import {
+  ChangePasswordDto,
+  changePasswordSchema,
+} from "@/core/application/features/organization/user/dtos/change-password-dto";
 import usePasswordChange from "@/core/application/features/organization/user/hooks/usePasswordChange";
 import { User } from "@/core/domain/models/organization/user";
 import { Button } from "@mantine/core";
@@ -32,7 +35,13 @@ export function ChangePasswordForm({ user }: { user: User }) {
       validationSchema={changePasswordSchema}
     >
       {errorMessage && <Alert icon message={errorMessage} type="error" />}
-      <Input name="email" label="Email" type="email" disabled defaultValue={user.email} />
+      <Input
+        name="email"
+        label="Email"
+        type="email"
+        disabled
+        defaultValue={user.email}
+      />
       <Input
         name="password"
         label="Nueva contraseña"
@@ -58,7 +67,11 @@ export function ChangePasswordForm({ user }: { user: User }) {
             onClick={() => setShowConfirmPassword(!showConfirmPassword)}
             className="text-sm font-semibold text-primary hover:text-secondary"
           >
-            {showConfirmPassword ? <BsEyeSlash size={20} /> : <BsEye size={20} />}
+            {showConfirmPassword ? (
+              <BsEyeSlash size={20} />
+            ) : (
+              <BsEye size={20} />
+            )}
           </div>
         }
         rightIconOnClick={() => setShowConfirmPassword(!showConfirmPassword)}

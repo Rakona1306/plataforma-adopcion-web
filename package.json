@@ -1,8 +1,11 @@
 {
+	"type": "module",
 	"devDependencies": {
 		"husky": "9.1.7",
 		"lint-staged": "^17.4.1",
 		"prettier": "^3.9.6",
+		"@commitlint/cli": "^19.5.0",
+		"@commitlint/config-conventional": "^19.5.0",
 		"prettier-plugin-tailwindcss": "^0.8.1"
 	},
 	"lint-staged": {

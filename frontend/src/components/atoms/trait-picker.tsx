@@ -150,9 +150,10 @@ export function TraitsPicker({
                     className={`
                       inline-flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-full
                       cursor-pointer transition-opacity hover:opacity-75
-                      ${isNew
-                        ? "bg-green-100 text-green-800 border border-green-300"
-                        : "bg-primary text-white border border-secondary"
+                      ${
+                        isNew
+                          ? "bg-green-100 text-green-800 border border-green-300"
+                          : "bg-primary text-white border border-secondary"
                       }
                     `}
                   >
@@ -171,14 +172,18 @@ export function TraitsPicker({
             {/* Leyenda si hay cambios */}
             {(selectedItems.some((t) => !defaultIds.includes(t.id)) ||
               defaultIds.some((id) => !currentIds.includes(id))) && (
-                <p className="text-xs text-slate-400 mt-0.5">
-                  <span className="text-green-600 font-medium">Verde</span> = nuevo ·{" "}
-                  <span className="font-medium" style={{ color: "var(--color-primary)" }}>
-                    Color primario
-                  </span>{" "}
-                  = existente
-                </p>
-              )}
+              <p className="text-xs text-slate-400 mt-0.5">
+                <span className="text-green-600 font-medium">Verde</span> =
+                nuevo ·{" "}
+                <span
+                  className="font-medium"
+                  style={{ color: "var(--color-primary)" }}
+                >
+                  Color primario
+                </span>{" "}
+                = existente
+              </p>
+            )}
           </div>
         </>
       )}

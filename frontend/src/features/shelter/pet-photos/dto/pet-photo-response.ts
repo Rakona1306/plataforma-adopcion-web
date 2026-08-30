@@ -1,4 +1,4 @@
 export interface PetPhotoResponse {
-    id: string;
-    url: string;
+  id: string;
+  url: string;
 }

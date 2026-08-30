@@ -20,13 +20,8 @@ export function useUpdateSpecie() {
   >({});
 
   const mutation = useMutation({
-    mutationFn: ({
-      id,
-      dto,
-    }: {
-      id: string;
-      dto: SpecieUpdateDto;
-    }) => specieContainer.updateSpecies(id, dto),
+    mutationFn: ({ id, dto }: { id: string; dto: SpecieUpdateDto }) =>
+      specieContainer.updateSpecies(id, dto),
 
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -68,9 +63,7 @@ export function useUpdateSpecie() {
         setErrorValidation(normalized);
         setErrorMessage(data.title || "Error en la validación");
       } else {
-        setErrorMessage(
-          error.message || "No se pudo actualizar la especie"
-        );
+        setErrorMessage(error.message || "No se pudo actualizar la especie");
 
         Swal.fire({
           title: "Error",

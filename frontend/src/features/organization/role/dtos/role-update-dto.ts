@@ -1,4 +1,4 @@
-import * as Yup from "yup"
+import * as Yup from "yup";
 
 export const RoleUpdateSchema = Yup.object().shape({
   name: Yup.string().required("El nombre es requerido"),
@@ -9,6 +9,6 @@ export const RoleUpdateSchema = Yup.object().shape({
   currentPermissions: Yup.array().of(Yup.string()),
   permissionsToAdd: Yup.array().of(Yup.string()),
   permissionsToRemove: Yup.array().of(Yup.string()),
-})
+});
 
-export type RoleUpdateDto = Yup.InferType<typeof RoleUpdateSchema>
+export type RoleUpdateDto = Yup.InferType<typeof RoleUpdateSchema>;

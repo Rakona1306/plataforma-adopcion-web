@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // src/presentation/hooks/organization/useDeleteRole.ts
 "use client";
 
@@ -17,7 +16,9 @@ export function useDeleteRole() {
     mutationFn: (id: string) => roleService.delete(id),
     onSuccess: () => {
       // Al igual que al crear, invalidamos la caché para refrescar la lista
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.ORGANIZATION.ROLE] });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.ORGANIZATION.ROLE],
+      });
       Swal.fire({
         title: "¡Rol eliminado!",
         text: "El rol ha sido eliminado con éxito.",

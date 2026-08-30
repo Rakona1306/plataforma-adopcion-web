@@ -1,14 +1,10 @@
-
 import Title from "../../atoms/title";
-import Button from "../../atoms/button/button";
 import { PetCard } from "../../atoms/card/pet-card-item";
 import Container from "@/components/atoms/container";
 import { useGetPaginateSearch } from "@/features/shelter/pet/hooks/use-get-paginate-search";
 
 export default function PetsSection() {
-  const {
-    data
-  } = useGetPaginateSearch()
+  const { data } = useGetPaginateSearch();
 
   return (
     <section className="w-full py-10 pt-20 bg-gray-50">

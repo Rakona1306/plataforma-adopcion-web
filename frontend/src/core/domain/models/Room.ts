@@ -17,10 +17,10 @@ export interface Room {
 }
 
 export enum RoomType {
-  SINGLE = 'SINGLE',
-  DOUBLE = 'DOUBLE',
-  SUITE = 'SUITE',
-  DORMITORY = 'DORMITORY',
+  SINGLE = "SINGLE",
+  DOUBLE = "DOUBLE",
+  SUITE = "SUITE",
+  DORMITORY = "DORMITORY",
 }
 
 export interface CreateRoomInput {

@@ -5,7 +5,11 @@ import { Burger, Drawer } from "@mantine/core";
 import { SidebarLayout, SidebarContent } from "./_components/layouts/sidebar";
 import { manrope } from "@/lib/fonts/manrope";
 
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+export default function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [opened, { open, close }] = useDisclosure(false);
 
   return (
@@ -14,7 +18,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <SidebarLayout />
 
       {/* Drawer Móvil (Solo renderiza el contenido) */}
-      <Drawer opened={opened} onClose={close} size="xs" withCloseButton={false} padding={0}>
+      <Drawer
+        opened={opened}
+        onClose={close}
+        size="xs"
+        withCloseButton={false}
+        padding={0}
+      >
         <SidebarContent onClose={close} />
       </Drawer>
 

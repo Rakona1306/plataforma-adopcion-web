@@ -15,11 +15,11 @@ export default function useActionsSpecie() {
             content: <CreateSpecieForm />,
           });
         },
-      }
+      },
     ],
   };
 
   return {
-    actionsI
+    actionsI,
   };
 }

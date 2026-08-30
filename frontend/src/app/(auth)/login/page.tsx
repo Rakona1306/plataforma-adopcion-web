@@ -1,17 +1,19 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'motion/react'
-import PetAnimation from '../_components/molecules/pet-animation'
-import LoginForm from '../_components/molecules/form/login-form'
-import RegisterForm from '../_components/molecules/form/register-form'
-import { companyInfo } from '@/app/(web)/_utils/data/companyInfo.data'
-import Link from 'next/link'
-import { containerVariants, itemVariants } from '@/core/shared/helpers/variants'
+import { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import PetAnimation from "../_components/molecules/pet-animation";
+import LoginForm from "../_components/molecules/form/login-form";
+import RegisterForm from "../_components/molecules/form/register-form";
+import { companyInfo } from "@/app/(web)/_utils/data/companyInfo.data";
+import Link from "next/link";
+import {
+  containerVariants,
+  itemVariants,
+} from "@/core/shared/helpers/variants";
 
 export default function AuthPage() {
-  const [isLogin, setIsLogin] = useState(true)
-
+  const [isLogin, setIsLogin] = useState(true);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/30 via-white to-quaternary/20 flex items-center justify-center p-4 relative overflow-hidden">
@@ -28,8 +30,11 @@ export default function AuthPage() {
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           {/* Left side - Branding */}
-          <motion.div variants={itemVariants} className="hidden md:flex flex-col gap-6">
-            <Link href='/' className="text-center md:text-left">
+          <motion.div
+            variants={itemVariants}
+            className="hidden md:flex flex-col gap-6"
+          >
+            <Link href="/" className="text-center md:text-left">
               <motion.h1
                 className="text-5xl font-bold text-primary mb-2"
                 initial={{ opacity: 0, x: -30 }}
@@ -75,7 +80,8 @@ export default function AuthPage() {
               transition={{ delay: 0.6, duration: 0.6 }}
             >
               <p className="text-sm text-foreground text-center">
-                ✨ Únete a nuestra comunidad y ayuda a encontrar hogares amorosos para nuestras mascotas
+                ✨ Únete a nuestra comunidad y ayuda a encontrar hogares
+                amorosos para nuestras mascotas
               </p>
             </motion.div>
           </motion.div>
@@ -117,7 +123,7 @@ export default function AuthPage() {
               transition={{ delay: 0.7, duration: 0.5 }}
             >
               <p className="text-slate-600 mb-3">
-                {isLogin ? '¿No tienes cuenta?' : '¿Ya tienes cuenta?'}
+                {isLogin ? "¿No tienes cuenta?" : "¿Ya tienes cuenta?"}
               </p>
               <motion.button
                 onClick={() => setIsLogin(!isLogin)}
@@ -125,12 +131,12 @@ export default function AuthPage() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                {isLogin ? 'Crear cuenta' : 'Iniciar sesión'}
+                {isLogin ? "Crear cuenta" : "Iniciar sesión"}
               </motion.button>
             </motion.div>
           </motion.div>
         </div>
       </motion.div>
     </div>
-  )
+  );
 }

@@ -15,11 +15,11 @@ export default function useActionsTrait() {
             content: <CreateTraitForm />,
           });
         },
-      }
+      },
     ],
   };
 
   return {
-    actionsI
+    actionsI,
   };
 }

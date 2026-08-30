@@ -20,8 +20,7 @@ export function useCreateSpecie() {
   >({});
 
   const mutation = useMutation({
-    mutationFn: (dto: SpecieCreateDto) =>
-      specieContainer.createSpecies(dto),
+    mutationFn: (dto: SpecieCreateDto) => specieContainer.createSpecies(dto),
 
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -64,9 +63,7 @@ export function useCreateSpecie() {
         setErrorValidation(normalized);
         setErrorMessage(data.title || "Falló la validación");
       } else {
-        setErrorMessage(
-          error.message || "Error al crear la especie"
-        );
+        setErrorMessage(error.message || "Error al crear la especie");
       }
     },
   });

@@ -13,7 +13,9 @@ export function useCreateUser() {
   const router = useRouter();
   const { handleCloseModal } = useModal() || {};
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const [errorValidation, setErrorValidation] = useState<Record<string, string>>({});
+  const [errorValidation, setErrorValidation] = useState<
+    Record<string, string>
+  >({});
 
   const mutation = useMutation({
     mutationFn: (dto: UserCreateDto) => userContainer.createUser(dto),
@@ -31,14 +33,18 @@ export function useCreateUser() {
     onError: (error: any) => {
       const status = error.response?.status || error.status;
       if (status === 401) {
-        Swal.fire({ title: "Sesión expirada", icon: "warning" }).then(() => router.push("/login"));
+        Swal.fire({ title: "Sesión expirada", icon: "warning" }).then(() =>
+          router.push("/login"),
+        );
         return;
       }
 
       const data = error.response?.data || error.data;
       if (data?.errors) {
         const normalized: Record<string, string> = {};
-        Object.keys(data.errors).forEach((key) => normalized[key.toLowerCase()] = data.errors[key][0]);
+        Object.keys(data.errors).forEach(
+          (key) => (normalized[key.toLowerCase()] = data.errors[key][0]),
+        );
         setErrorValidation(normalized);
         setErrorMessage(data.title || "Fallo la validación");
       } else {
@@ -47,5 +53,10 @@ export function useCreateUser() {
     },
   });
 
-  return { create: mutation.mutate, isPending: mutation.isPending, errorMessage, errorValidation };
+  return {
+    create: mutation.mutate,
+    isPending: mutation.isPending,
+    errorMessage,
+    errorValidation,
+  };
 }

@@ -18,7 +18,7 @@ export const createPetPhotosSchema = Yup.object({
               "image/png",
               "image/webp",
             ].includes(value.type);
-          }
+          },
         )
         .test(
           "fileSize",
@@ -27,24 +27,16 @@ export const createPetPhotosSchema = Yup.object({
             if (!value) return true;
 
             return value.size <= MAX_FILE_SIZE;
-          }
-        )
+          },
+        ),
     )
     .default([]),
 
-  isMainList: Yup.array()
-    .of(Yup.string().uuid().required())
-    .default([]),
+  isMainList: Yup.array().of(Yup.string().uuid().required()).default([]),
 
   photoIdsToRemove: Yup.array()
-    .of(
-      Yup.string()
-        .uuid("ID de foto inválido")
-        .required()
-    )
+    .of(Yup.string().uuid("ID de foto inválido").required())
     .default([]),
 });
 
-export type SyncPetPhotosDto = Yup.InferType<
-  typeof createPetPhotosSchema
->;
+export type SyncPetPhotosDto = Yup.InferType<typeof createPetPhotosSchema>;

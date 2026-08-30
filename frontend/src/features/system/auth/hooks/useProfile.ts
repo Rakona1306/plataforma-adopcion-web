@@ -6,19 +6,26 @@ import { authService } from "../services/auth.service";
 import { QUERY_KEYS } from "@/shared/constants/queryKeys";
 
 export const useProfile = () => {
-    const { setUser } = useSessionStore();
+  const { setUser } = useSessionStore();
 
-    const { data: profile, isLoading, error, isRefetching, refetch, isFetching } = useQuery({
-        queryKey: [QUERY_KEYS.SYSTEM.AUTH],
-        queryFn: async () => {
-            const data = await authService.profile();
-            // 2. Sincronizamos con Zustand inmediatamente al recibir los datos con éxito
-            setUser(data);
-            return data;
-        },
-        retry: false,
-        refetchOnWindowFocus: false,
-        /*
+  const {
+    data: profile,
+    isLoading,
+    error,
+    isRefetching,
+    refetch,
+    isFetching,
+  } = useQuery({
+    queryKey: [QUERY_KEYS.SYSTEM.AUTH],
+    queryFn: async () => {
+      const data = await authService.profile();
+      // 2. Sincronizamos con Zustand inmediatamente al recibir los datos con éxito
+      setUser(data);
+      return data;
+    },
+    retry: false,
+    refetchOnWindowFocus: false,
+    /*
         throwOnError: (error: any) => {
             
             if (
@@ -32,16 +39,15 @@ export const useProfile = () => {
             return true;
         },
         */
-    });
+  });
 
-
-    // Retornamos una interfaz limpia y consistente con tus otros hooks de Auth
-    return {
-        profile,
-        isLoading,
-        error,
-        isRefetching,
-        isFetching,
-        refetchProfile: refetch
-    };
+  // Retornamos una interfaz limpia y consistente con tus otros hooks de Auth
+  return {
+    profile,
+    isLoading,
+    error,
+    isRefetching,
+    isFetching,
+    refetchProfile: refetch,
+  };
 };

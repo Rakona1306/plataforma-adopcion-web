@@ -29,8 +29,7 @@ export function useGetAllBreed() {
   const query = useQuery({
     queryKey: ["breeds", debouncedFilter],
 
-    queryFn: () =>
-      breedContainer.getAll(debouncedFilter),
+    queryFn: () => breedContainer.getAll(debouncedFilter),
 
     placeholderData: (previousData) => previousData,
 
@@ -46,9 +45,7 @@ export function useGetAllBreed() {
     enabled: !filter.search || filter.search.length >= 3,
   });
 
-  const updateFilter = (
-    newFilter: Partial<BreedFilterDto>
-  ) => {
+  const updateFilter = (newFilter: Partial<BreedFilterDto>) => {
     setFilter((prev) => ({
       ...prev,
       ...newFilter,

@@ -15,7 +15,6 @@ export default function FilterBar({ filters, onClearAll }: FilterBarProps) {
   return (
     <div className="w-full bg-white border shadow border-gray-200 rounded-xl p-4 mb-6">
       <div className="flex flex-wrap md:items-end gap-4 w-full md:flex-row flex-col">
-
         {filters.map((filter, index) => {
           switch (filter.type) {
             case "search":

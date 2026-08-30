@@ -20,13 +20,8 @@ export function useUpdateTrait() {
   >({});
 
   const mutation = useMutation({
-    mutationFn: ({
-      id,
-      dto,
-    }: {
-      id: string;
-      dto: TraitUpdateDto;
-    }) => traitContainer.update(id, dto),
+    mutationFn: ({ id, dto }: { id: string; dto: TraitUpdateDto }) =>
+      traitContainer.update(id, dto),
 
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -70,7 +65,7 @@ export function useUpdateTrait() {
         setErrorMessage(data.title || "Error en la validación");
       } else {
         setErrorMessage(
-          error.message || "No se pudo actualizar la característica"
+          error.message || "No se pudo actualizar la característica",
         );
 
         Swal.fire({

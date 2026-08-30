@@ -1,3 +1,17 @@
-#!/bin/sh
-cd frontend
-pnpm typecheck && pnpm build
+export PATH="$HOME/.nvm/versions/node/v24.16.0/bin:$PATH"
+echo "======== VALIDACION ANTES DEL PUSH ========"
+
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+CHANGED=$(git diff --name-only origin/$BRANCH...HEAD 2>/dev/null || git diff --name-only HEAD~1)
+
+if echo "$CHANGED" | grep -q '^frontend/'; then
+  echo "-> Validando frontend..."
+  pnpm --prefix frontend typecheck && pnpm --prefix frontend build || exit 1
+fi
+
+if echo "$CHANGED" | grep -q '^backend/'; then
+  echo "-> Validando backend (C#)..."
+  echo "   (validaciones de backend C# pendientes de configurar)"
+fi
+
+exit 0

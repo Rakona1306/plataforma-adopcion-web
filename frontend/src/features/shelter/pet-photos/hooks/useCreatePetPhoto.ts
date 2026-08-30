@@ -20,13 +20,8 @@ export function useCreatePetPhotos() {
   >({});
 
   const mutation = useMutation({
-    mutationFn: ({
-      petId,
-      dto,
-    }: {
-      petId: string;
-      dto: SyncPetPhotosDto;
-    }) => petPhotosService.create(petId, dto),
+    mutationFn: ({ petId, dto }: { petId: string; dto: SyncPetPhotosDto }) =>
+      petPhotosService.create(petId, dto),
 
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -65,19 +60,13 @@ export function useCreatePetPhotos() {
         const normalized: Record<string, string> = {};
 
         Object.keys(data.errors).forEach((key) => {
-          normalized[key.toLowerCase()] =
-            data.errors[key][0];
+          normalized[key.toLowerCase()] = data.errors[key][0];
         });
 
         setErrorValidation(normalized);
-        setErrorMessage(
-          data.title || "Falló la validación"
-        );
+        setErrorMessage(data.title || "Falló la validación");
       } else {
-        setErrorMessage(
-          error.message ||
-            "Error al sincronizar las fotos"
-        );
+        setErrorMessage(error.message || "Error al sincronizar las fotos");
       }
     },
   });

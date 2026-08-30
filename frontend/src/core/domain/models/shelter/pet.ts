@@ -26,11 +26,11 @@ export interface Pet {
   age: number;
   isAdopted: boolean;
 
-  specie?: Specie
+  specie?: Specie;
 
-  breeds: Breed[]
-  traits: Trait[]
-  vaccines: VaccineRelation[]
+  breeds: Breed[];
+  traits: Trait[];
+  vaccines: VaccineRelation[];
 
   photoUrls: PetPhotoResponse[];
 }

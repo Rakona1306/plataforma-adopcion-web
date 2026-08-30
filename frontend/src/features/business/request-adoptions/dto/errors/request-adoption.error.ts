@@ -1,4 +1,4 @@
 export interface RequestAdoptionError {
-    message: string;
-    errorCode: number;
+  message: string;
+  errorCode: number;
 }

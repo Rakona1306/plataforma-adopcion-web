@@ -1,15 +1,19 @@
-import { Toaster } from "sileo"
+import { Toaster } from "sileo";
 
-export default function SileoLayout({ children }: { children: React.ReactNode }) {
+export default function SileoLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <div>
-      <Toaster 
+      <Toaster
         position="top-center"
         options={{
-          fill: "#EEEEEE"
+          fill: "#EEEEEE",
         }}
       />
       {children}
     </div>
-  )
+  );
 }

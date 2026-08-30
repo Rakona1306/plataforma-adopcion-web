@@ -5,29 +5,23 @@ export const petCreateSchema = Yup.object({
     .required("El nombre es requerido")
     .max(100, "Máximo 100 caracteres"),
 
-  description: Yup.string()
-    .optional()
-    .max(1000, "Máximo 1000 caracteres"),
+  description: Yup.string().optional().max(1000, "Máximo 1000 caracteres"),
 
-  rescueStory: Yup.string()
-    .optional()
-    .max(2000, "Máximo 2000 caracteres"),
+  rescueStory: Yup.string().optional().max(2000, "Máximo 2000 caracteres"),
 
-  birthDate: Yup.date()
-    .required("La fecha de nacimiento es requerida"),
+  birthDate: Yup.date().required("La fecha de nacimiento es requerida"),
 
   weightKg: Yup.number()
     .required("El peso es requerido")
     .positive("El peso debe ser mayor a 0"),
 
-  isVaccinated: Yup.boolean()
-    .required("Debe indicar si está vacunado"),
+  isVaccinated: Yup.boolean().required("Debe indicar si está vacunado"),
 
-  isRecommend: Yup.boolean()
-    .required("Debe indicar si es recomendable para adopción"),
+  isRecommend: Yup.boolean().required(
+    "Debe indicar si es recomendable para adopción",
+  ),
 
-  isSterilized: Yup.boolean()
-    .required("Debe indicar si está esterilizado"),
+  isSterilized: Yup.boolean().required("Debe indicar si está esterilizado"),
 
   gender: Yup.number()
     .oneOf([0, 1, 2], "Género inválido")
@@ -68,9 +62,7 @@ export const petCreateSchema = Yup.object({
     removeIds: Yup.array()
       .of(Yup.string().uuid("Caracteristica inválida").required())
       .default([]),
-  }).required()
+  }).required(),
 });
 
-export type PetCreateDto = Yup.InferType<
-  typeof petCreateSchema
->;
+export type PetCreateDto = Yup.InferType<typeof petCreateSchema>;

@@ -14,9 +14,9 @@ export function ProfileCard() {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const { user } = useSessionStore();
-  const { logout } = useLogout()
+  const { logout } = useLogout();
 
-  const { handleOpenModal } = useModal() || {}
+  const { handleOpenModal } = useModal() || {};
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -31,8 +31,8 @@ export function ProfileCard() {
   function onEdit() {
     handleOpenModal?.({
       header: "Agregar la informacion",
-      content: <CurrentUserEditForm />
-    })
+      content: <CurrentUserEditForm />,
+    });
   }
 
   const menuItems = getMenuItems({ onLogout: logout, onEdit });
@@ -111,9 +111,8 @@ export function ProfileCard() {
               {/* Menu items */}
               <div className="py-1">
                 {menuItems.map((item, i) => {
-
                   if (item.auth && user?.role?.toDashboard === false) {
-                    return null
+                    return null;
                   }
 
                   return (

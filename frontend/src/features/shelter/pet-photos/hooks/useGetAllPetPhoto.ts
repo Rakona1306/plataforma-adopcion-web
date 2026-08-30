@@ -7,7 +7,6 @@ import { PetPhotoFilter } from "../dto/pet-photo-filter.dto";
 import { petPhotosService } from "../services/pet-photos.service";
 import { QUERY_KEYS } from "@/shared/constants/queryKeys";
 
-
 export function useGetAllPetPhoto(initialPetId?: string) {
   const router = useRouter();
 
@@ -21,16 +20,12 @@ export function useGetAllPetPhoto(initialPetId?: string) {
   const query = useQuery({
     queryKey: [QUERY_KEYS.SHELTER.PET_PHOTO, filter],
 
-    queryFn: () =>
-      petPhotosService.getAll(filter),
+    queryFn: () => petPhotosService.getAll(filter),
 
     placeholderData: (previousData) => previousData,
 
     throwOnError: (error: any) => {
-      if (
-        error?.response?.status === 401 ||
-        error?.status === 401
-      ) {
+      if (error?.response?.status === 401 || error?.status === 401) {
         router.push("/login");
         return false;
       }
@@ -39,9 +34,7 @@ export function useGetAllPetPhoto(initialPetId?: string) {
     },
   });
 
-  const updateFilter = (
-    newFilter: Partial<PetPhotoFilter>
-  ) => {
+  const updateFilter = (newFilter: Partial<PetPhotoFilter>) => {
     setFilter((prev) => ({
       ...prev,
       ...newFilter,

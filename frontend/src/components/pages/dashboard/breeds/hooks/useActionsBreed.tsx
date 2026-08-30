@@ -15,11 +15,11 @@ export default function useActionsBreed() {
             content: <CreateBreedForm />,
           });
         },
-      }
+      },
     ],
   };
 
   return {
-    actionsI
+    actionsI,
   };
 }

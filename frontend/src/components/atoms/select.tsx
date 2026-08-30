@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
-import { ChangeEvent, FocusEvent, SelectHTMLAttributes } from 'react'
-import { useField } from 'formik'
+import { ChangeEvent, FocusEvent, SelectHTMLAttributes } from "react";
+import { useField } from "formik";
 
 export default function Select({
   label,
@@ -16,26 +16,32 @@ export default function Select({
   defaultValue,
   ...props
 }: SelectFormikProps) {
-  const [field, meta] = useField(props.name)
-  const selectId = id ?? props.name
-  const hasError = Boolean(meta.touched && meta.error)
-  const helperId = helperText ? `${selectId}-helper` : undefined
-  const errorId = hasError ? `${selectId}-error` : undefined
-  const describedBy = [helperId, errorId].filter(Boolean).join(' ') || undefined
+  const [field, meta] = useField(props.name);
+  const selectId = id ?? props.name;
+  const hasError = Boolean(meta.touched && meta.error);
+  const helperId = helperText ? `${selectId}-helper` : undefined;
+  const errorId = hasError ? `${selectId}-error` : undefined;
+  const describedBy =
+    [helperId, errorId].filter(Boolean).join(" ") || undefined;
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    field.onChange(event)
-    onChange?.(event)
-  }
+    field.onChange(event);
+    onChange?.(event);
+  };
 
   const handleBlur = (event: FocusEvent<HTMLSelectElement>) => {
-    field.onBlur(event)
-    onBlur?.(event)
-  }
+    field.onBlur(event);
+    onBlur?.(event);
+  };
 
   return (
-    <div className={joinClasses('flex w-full flex-col gap-2', containerClassName)}>
-      <label htmlFor={selectId} className="text-sm font-semibold text-slate-700">
+    <div
+      className={joinClasses("flex w-full flex-col gap-2", containerClassName)}
+    >
+      <label
+        htmlFor={selectId}
+        className="text-sm font-semibold text-slate-700"
+      >
         {label}
       </label>
 
@@ -43,17 +49,17 @@ export default function Select({
         {...props}
         id={selectId}
         name={field.name}
-        value={field.value || defaultValue || ''}
+        value={field.value || defaultValue || ""}
         onChange={handleChange}
         onBlur={handleBlur}
         aria-invalid={hasError}
         aria-describedby={describedBy}
         className={joinClasses(
-          'w-full rounded-xl border bg-white px-4 py-3 text-sm text-slate-900 outline-none transition',
-          'focus:border-slate-900 focus:ring-2 focus:ring-slate-200',
+          "w-full rounded-xl border bg-white px-4 py-3 text-sm text-slate-900 outline-none transition",
+          "focus:border-slate-900 focus:ring-2 focus:ring-slate-200",
           hasError
-            ? 'border-red-400 focus:border-red-500 focus:ring-red-100'
-            : 'border-slate-200',
+            ? "border-red-400 focus:border-red-500 focus:ring-red-100"
+            : "border-slate-200",
           className,
         )}
       >
@@ -64,7 +70,11 @@ export default function Select({
         ) : null}
 
         {options.map((option) => (
-          <option key={option.value} value={option.value} disabled={option.disabled}>
+          <option
+            key={option.value}
+            value={option.value}
+            disabled={option.disabled}
+          >
             {option.label}
           </option>
         ))}
@@ -82,24 +92,24 @@ export default function Select({
         </p>
       ) : null}
     </div>
-  )
+  );
 }
 
 interface SelectFormikProps extends SelectHTMLAttributes<HTMLSelectElement> {
-  name: string
-  label: string
-  helperText?: string
-  containerClassName?: string
-  placeholder?: string
-  options: SelectFormikOption[]
+  name: string;
+  label: string;
+  helperText?: string;
+  containerClassName?: string;
+  placeholder?: string;
+  options: SelectFormikOption[];
 }
 
 export interface SelectFormikOption {
-  value: string | number
-  label: string
-  disabled?: boolean
+  value: string | number;
+  label: string;
+  disabled?: boolean;
 }
 
 function joinClasses(...classNames: Array<string | undefined>) {
-  return classNames.filter(Boolean).join(' ')
+  return classNames.filter(Boolean).join(" ");
 }

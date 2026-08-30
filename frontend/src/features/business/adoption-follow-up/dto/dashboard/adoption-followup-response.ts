@@ -1,6 +1,6 @@
 export interface AdoptionFollowUpResponse {
-    id: number
-    title: string
-    description: string
-    adoptionId: number
+  id: number;
+  title: string;
+  description: string;
+  adoptionId: number;
 }

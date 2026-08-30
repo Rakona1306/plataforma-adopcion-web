@@ -6,9 +6,7 @@ import { Paginate } from "@/core/domain/models/system/paginate";
 import { ISpecieRepository } from "@/core/domain/repository/shelter/specieRepository";
 
 export class SpecieService {
-  constructor(
-    private specieRepository: ISpecieRepository,
-  ) {}
+  constructor(private specieRepository: ISpecieRepository) {}
 
   async getAllSpecies(filter: SpecieFilterDto): Promise<Paginate<Specie>> {
     return await this.specieRepository.getAll(filter);

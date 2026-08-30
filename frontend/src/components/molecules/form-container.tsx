@@ -1,6 +1,6 @@
-'use client'
+"use client";
 
-import { ReactNode } from 'react'
+import { ReactNode } from "react";
 import {
   Form,
   Formik,
@@ -8,7 +8,7 @@ import {
   FormikHelpers,
   FormikProps,
   FormikValues,
-} from 'formik'
+} from "formik";
 
 export default function FormContainer<Values extends FormikValues>({
   children,
@@ -43,39 +43,38 @@ export default function FormContainer<Values extends FormikValues>({
       {(formik) => (
         <div className={containerClassName}>
           <Form className={className}>
-            {typeof children === 'function' ? children(formik) : children}
+            {typeof children === "function" ? children(formik) : children}
           </Form>
         </div>
       )}
     </Formik>
-  )
+  );
 }
 
-interface FormContainerFormikProps<Values extends FormikValues>
-  extends Pick<
-    FormikConfig<Values>,
-    | 'initialValues'
-    | 'onSubmit'
-    | 'validationSchema'
-    | 'validate'
-    | 'validateOnBlur'
-    | 'validateOnChange'
-    | 'validateOnMount'
-    | 'enableReinitialize'
-    | 'initialErrors'
-    | 'initialTouched'
-    | 'initialStatus'
-  > {
-  children: ReactNode | FormRenderFunction<Values>
-  className?: string
-  containerClassName?: string
+interface FormContainerFormikProps<Values extends FormikValues> extends Pick<
+  FormikConfig<Values>,
+  | "initialValues"
+  | "onSubmit"
+  | "validationSchema"
+  | "validate"
+  | "validateOnBlur"
+  | "validateOnChange"
+  | "validateOnMount"
+  | "enableReinitialize"
+  | "initialErrors"
+  | "initialTouched"
+  | "initialStatus"
+> {
+  children: ReactNode | FormRenderFunction<Values>;
+  className?: string;
+  containerClassName?: string;
 }
 
 type FormRenderFunction<Values extends FormikValues> = (
   formik: FormikProps<Values>,
-) => ReactNode
+) => ReactNode;
 
 export type FormContainerFormikSubmit<Values extends FormikValues> = (
   values: Values,
   formikHelpers: FormikHelpers<Values>,
-) => void | Promise<unknown>
+) => void | Promise<unknown>;

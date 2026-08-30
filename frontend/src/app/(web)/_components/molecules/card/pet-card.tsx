@@ -1,21 +1,21 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { Badge } from '../../atoms/badge/badge'
-import { Card, CardContent } from './card'
-import { BiHeart, BiMessageSquare } from 'react-icons/bi'
-import Button from '../../atoms/button/button'
+import { useState } from "react";
+import { Badge } from "../../atoms/badge/badge";
+import { Card, CardContent } from "./card";
+import { BiHeart, BiMessageSquare } from "react-icons/bi";
+import Button from "../../atoms/button/button";
 
 interface PetCardProps {
-  id: string
-  name: string
-  type: string
-  breed: string
-  age: string
-  image: string
-  description: string
-  gender: string
-  vaccinated: boolean
+  id: string;
+  name: string;
+  type: string;
+  breed: string;
+  age: string;
+  image: string;
+  description: string;
+  gender: string;
+  vaccinated: boolean;
 }
 
 export function PetCard({
@@ -25,15 +25,15 @@ export function PetCard({
   age,
   description,
   gender,
-  vaccinated
+  vaccinated,
 }: PetCardProps) {
-  const [isFavorite, setIsFavorite] = useState(false)
+  const [isFavorite, setIsFavorite] = useState(false);
 
   return (
     <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 h-full flex flex-col border border-primary/20">
       <div className="relative h-48 bg-gradient-to-br from-primary/10 to-secondary/10 overflow-hidden group">
         <div className="absolute inset-0 flex items-center justify-center text-6xl group-hover:scale-110 transition-transform duration-300">
-          {type === 'Perro' ? '🐶' : '🐱'}
+          {type === "Perro" ? "🐶" : "🐱"}
         </div>
         <button
           onClick={() => setIsFavorite(!isFavorite)}
@@ -42,8 +42,8 @@ export function PetCard({
           <BiHeart
             className={`w-5 h-5 transition-colors ${
               isFavorite
-                ? 'fill-primary text-primary'
-                : 'text-foreground/40 hover:text-primary'
+                ? "fill-primary text-primary"
+                : "text-foreground/40 hover:text-primary"
             }`}
           />
         </button>
@@ -54,7 +54,7 @@ export function PetCard({
             </Badge>
           )}
           <Badge className="bg-primary/90 hover:bg-primary">
-            {gender === 'M' ? '♂️ Macho' : '♀️ Hembra'}
+            {gender === "M" ? "♂️ Macho" : "♀️ Hembra"}
           </Badge>
         </div>
       </div>
@@ -67,24 +67,18 @@ export function PetCard({
           </p>
         </div>
 
-        <p className="text-sm text-foreground/70 line-clamp-2">
-          {description}
-        </p>
+        <p className="text-sm text-foreground/70 line-clamp-2">{description}</p>
 
         <div className="flex gap-2 pt-4">
-          <Button
-            className="flex-1 bg-primary hover:bg-primary/90 text-white"
-          >
+          <Button className="flex-1 bg-primary hover:bg-primary/90 text-white">
             Adoptar
           </Button>
-          <Button
-            className="flex-1 border-primary/30"
-          >
+          <Button className="flex-1 border-primary/30">
             <BiMessageSquare className="w-4 h-4" />
             Padrino
           </Button>
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

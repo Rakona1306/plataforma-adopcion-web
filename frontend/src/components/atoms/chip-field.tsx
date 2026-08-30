@@ -1,4 +1,3 @@
-
 interface ChipFieldProps<T> {
   label: string;
   options: T[];
@@ -10,7 +9,16 @@ interface ChipFieldProps<T> {
   required?: boolean;
 }
 
-export function ChipField<T>({ label, options, value, onChange, error, required, labelKey, valueKey }: ChipFieldProps<T>) {
+export function ChipField<T>({
+  label,
+  options,
+  value,
+  onChange,
+  error,
+  required,
+  labelKey,
+  valueKey,
+}: ChipFieldProps<T>) {
   return (
     <div className="flex flex-col gap-2">
       <label className="text-sm font-semibold text-slate-700">
@@ -28,7 +36,7 @@ export function ChipField<T>({ label, options, value, onChange, error, required,
                 : "border-slate-300 text-slate-500 hover:border-secondary"
             }`}
           >
-            {String(opt[labelKey]) ?? ''}
+            {String(opt[labelKey]) ?? ""}
           </button>
         ))}
       </div>

@@ -5,9 +5,7 @@ import { Specie } from "@/core/domain/models/shelter/specie";
 import { SpecieFilterDto } from "@/core/application/features/shelter/species/dtos/specie-filter-dto";
 
 export class SpecieRepository implements ISpecieRepository {
-  constructor(
-    private httpClient: HttpClient
-  ) {}
+  constructor(private httpClient: HttpClient) {}
 
   async getAll(filter: SpecieFilterDto): Promise<Paginate<Specie>> {
     const params = new URLSearchParams();
@@ -15,7 +13,9 @@ export class SpecieRepository implements ISpecieRepository {
 
     params.append("page", filter.page.toString());
     params.append("pageSize", filter.pageSize.toString());
-    return await this.httpClient.get<Paginate<Specie>>(`/species?${params.toString()}`);
+    return await this.httpClient.get<Paginate<Specie>>(
+      `/species?${params.toString()}`,
+    );
   }
 
   async create(dto: Specie): Promise<void> {

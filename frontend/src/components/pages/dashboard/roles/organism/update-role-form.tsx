@@ -31,7 +31,7 @@ export function UpdateRoleForm({ role }: UpdateRoleFormProps) {
 
   const handleSubmit = (values: RoleUpdateDto) => {
     const current = values.currentPermissions || [];
-    console.log("Current:", current);
+
     const permissionsToAdd = current.filter(
       (id): id is string =>
         typeof id === "string" && !initialPermissionIds.includes(id),
@@ -46,8 +46,6 @@ export function UpdateRoleForm({ role }: UpdateRoleFormProps) {
       permissionsToAdd,
       permissionsToRemove,
     };
-
-    console.log("Payload para backend:", payload);
     update({ id: role.id, dto: payload });
   };
 
@@ -69,10 +67,18 @@ export function UpdateRoleForm({ role }: UpdateRoleFormProps) {
         />
       </section>
 
-      <PermissionConditional name="currentPermissions" type="update" initialPermissions={initialPermissionIds} />
+      <PermissionConditional
+        name="currentPermissions"
+        type="update"
+        initialPermissions={initialPermissionIds}
+      />
 
       <section className="w-full">
-        <Textarea name="description" label="Descripción del rol:" defaultValue={role.description || ''} />
+        <Textarea
+          name="description"
+          label="Descripción del rol:"
+          defaultValue={role.description || ""}
+        />
       </section>
 
       <Button

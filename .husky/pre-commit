@@ -1,6 +1,26 @@
 #!/usr/bin/env sh
-echo "HUSKY PRE-COMMIT EJECUTANDO"
+echo "======== HUSKY PRE-COMMIT ========"
 
-cd frontend
+STAGED=$(git diff --cached --name-only --diff-filter=ACM)
 
-pnpm exec lint-staged && pnpm test:all
+FRONTEND_CHANGED=$(echo "$STAGED" | grep -c '^frontend/' || true)
+BACKEND_CHANGED=$(echo "$STAGED" | grep -c '^backend/' || true)
+
+pnpm exec lint-staged || exit 1
+
+if [ "$FRONTEND_CHANGED" -gt 0 ]; then
+  echo "-> Cambios en frontend detectados, corriendo tests..."
+  pnpm --prefix frontend test:all || exit 1
+fi
+
+if [ "$BACKEND_CHANGED" -gt 0 ]; then
+  echo "-> Cambios en backend (C#) detectados..."
+  # Descomenta cuando tengas las validaciones listas:
+  # cd backend || exit 1
+  # dotnet format --verify-no-changes || exit 1
+  # dotnet test || exit 1
+  # cd ..
+  echo "   (validaciones de backend C# pendientes de configurar)"
+fi
+
+exit 0

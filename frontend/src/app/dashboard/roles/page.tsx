@@ -6,5 +6,5 @@ export default function RolesPageNext() {
     <Suspense>
       <RolesPage />
     </Suspense>
-  )
+  );
 }

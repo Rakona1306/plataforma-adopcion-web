@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // src/presentation/hooks/useRoles.ts
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";

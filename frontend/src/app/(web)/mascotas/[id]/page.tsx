@@ -1,19 +1,17 @@
-"use server"
+"use server";
 
-import { PetDeatilPage } from "@/_pages/web/mascotas/pdp-page"
-
+import { PetDeatilPage } from "@/_pages/web/mascotas/pdp-page";
 
 export default async function Page({
   params,
 }: {
-  params: Promise<{ id: string }>
+  params: Promise<{ id: string }>;
 }) {
-
-  const { id } = await params
+  const { id } = await params;
 
   return (
     <div className="bg-gray-100">
       <PetDeatilPage slug={id} />
     </div>
-  )
+  );
 }

@@ -32,8 +32,8 @@ export default function CreatePetPageNext() {
   const { data: petSizes } = useGetPetSizes();
   const { data: petStatus } = useGetAllPetStatus();
   const { data: petGenders } = useGetAllPetGenders();
-  const { create } = useCreatePet()
-  const router = useRouter()
+  const { create } = useCreatePet();
+  const router = useRouter();
 
   const initialValues: PetCreateDto = {
     name: "",
@@ -50,18 +50,17 @@ export default function CreatePetPageNext() {
     speciesId: "",
     breedIds: {
       addIds: [],
-      removeIds: []
+      removeIds: [],
     },
     traitIds: {
       addIds: [],
-      removeIds: []
+      removeIds: [],
     },
     age: 0,
   };
 
   const onSubmit = (values: PetCreateDto) => {
-    console.log(values)
-    create(values)
+    create(values);
   };
 
   const handleBackButton = () => {
@@ -249,15 +248,13 @@ export default function CreatePetPageNext() {
                 <Button
                   color="gray"
                   classNames={{
-                    root: 'bg-gray-500!'
+                    root: "bg-gray-500!",
                   }}
                   onClick={handleBackButton}
                 >
                   Cancelar
                 </Button>
-                <Button type="submit">
-                  Crear mascota
-                </Button>
+                <Button type="submit">Crear mascota</Button>
               </div>
             </div>
           )}

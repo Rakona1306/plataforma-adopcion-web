@@ -16,18 +16,20 @@ interface MenuItem {
   auth?: boolean;
 }
 
-export function getMenuItems({ onLogout, onEdit }: {
+export function getMenuItems({
+  onLogout,
+  onEdit,
+}: {
   onLogout: () => void;
-  onEdit: () => void
+  onEdit: () => void;
 }) {
-
   const menuItems: MenuItem[] = [
     {
       label: "Dashboard",
       icon: <MdMonitor className="w-4 h-4" />,
       color: "text-slate-700",
       href: "/dashboard",
-      auth: true
+      auth: true,
     },
     {
       label: "Mi información",
@@ -53,7 +55,7 @@ export function getMenuItems({ onLogout, onEdit }: {
       action: onLogout,
       color: "text-rose-500",
       divider: true,
-    }
+    },
   ];
 
   return menuItems;

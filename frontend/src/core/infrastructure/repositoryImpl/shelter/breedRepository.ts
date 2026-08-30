@@ -1,4 +1,3 @@
-import { IBreedRepository } from "@/core/domain/repository/shelter/breedRepository";
 import HttpClient from "../../http/client";
 import { Breed } from "@/core/domain/models/shelter/breed";
 import { Paginate } from "@/core/domain/models/system/paginate";

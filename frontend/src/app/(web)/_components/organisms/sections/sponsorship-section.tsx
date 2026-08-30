@@ -33,14 +33,6 @@ const scaleIn: Variants = {
   }),
 };
 
-const drawLine: Variants = {
-  hidden: { scaleX: 0 },
-  visible: {
-    scaleX: 1,
-    transition: { duration: 0.8, ease: "easeOut", delay: 0.2 },
-  },
-};
-
 /* ── Floating paw decoration ─────────────────────────── */
 function FloatingPaw({
   className,
@@ -55,7 +47,12 @@ function FloatingPaw({
     <motion.div
       className={`absolute pointer-events-none select-none ${className}`}
       animate={{ y: [0, -10, 0], rotate: [0, 8, 0] }}
-      transition={{ duration: 4 + delay, repeat: Infinity, ease: "easeInOut", delay }}
+      transition={{
+        duration: 4 + delay,
+        repeat: Infinity,
+        ease: "easeInOut",
+        delay,
+      }}
     >
       <FaPaw size={size} className="text-terciary/20" />
     </motion.div>
@@ -75,11 +72,15 @@ export default function SponsorshipSection() {
       {/* ── Background decoration ── */}
       <div className="pointer-events-none absolute inset-0">
         {/* Soft radial glow */}
-        
+
         <div className="absolute bottom-0 right-0 w-75 h-75 rounded-full bg-secondary/10 blur-3xl" />
         {/* Floating paws */}
         <FloatingPaw className="top-12 left-8 md:left-24" delay={0} size={32} />
-        <FloatingPaw className="top-32 right-10 md:right-32" delay={1.2} size={20} />
+        <FloatingPaw
+          className="top-32 right-10 md:right-32"
+          delay={1.2}
+          size={20}
+        />
         <FloatingPaw className="bottom-16 left-1/4" delay={2} size={28} />
         <FloatingPaw className="bottom-8 right-16" delay={0.8} size={18} />
       </div>
@@ -99,7 +100,10 @@ export default function SponsorshipSection() {
           </motion.div>
 
           <motion.div custom={1} variants={fadeUp}>
-            <Title htmlTag="h2" className="text-3xl md:text-4xl lg:text-5xl leading-tight">
+            <Title
+              htmlTag="h2"
+              className="text-3xl md:text-4xl lg:text-5xl leading-tight"
+            >
               Sé el Padrino o{" "}
               <span className="relative inline-block text-primary">
                 Madrina de una Mascota
@@ -112,8 +116,9 @@ export default function SponsorshipSection() {
             variants={fadeUp}
             className="text-secondary text-base md:text-lg font-light leading-relaxed"
           >
-            ¿No puedes adoptar pero quieres hacer la diferencia? El apadrinamiento
-            te permite ayudar a una mascota y mantener contacto con su crecimiento.
+            ¿No puedes adoptar pero quieres hacer la diferencia? El
+            apadrinamiento te permite ayudar a una mascota y mantener contacto
+            con su crecimiento.
           </motion.p>
         </motion.div>
 
@@ -128,12 +133,15 @@ export default function SponsorshipSection() {
                 variants={scaleIn}
                 initial="hidden"
                 animate={inView ? "visible" : "hidden"}
-                whileHover={{ y: -6, transition: { duration: 0.25, ease: "easeOut" } }}
+                whileHover={{
+                  y: -6,
+                  transition: { duration: 0.25, ease: "easeOut" },
+                }}
                 className="group relative bg-white rounded-2xl overflow-hidden border border-quaternary/60 shadow-sm hover:shadow-[0_8px_32px_rgba(115,29,52,0.12)] transition-shadow duration-300"
               >
                 {/* Card image */}
                 <div className="relative h-48 overflow-hidden bg-quaternary/40">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  {}
                   <img
                     src={item.img}
                     alt={item.title}
@@ -152,7 +160,9 @@ export default function SponsorshipSection() {
 
                   {/* Index pill */}
                   <div className="absolute bottom-3 left-3 w-7 h-7 rounded-full bg-terciary flex items-center justify-center shadow-sm">
-                    <span className="text-xs font-bold text-primary">{index + 1}</span>
+                    <span className="text-xs font-bold text-primary">
+                      {index + 1}
+                    </span>
                   </div>
                 </div>
 

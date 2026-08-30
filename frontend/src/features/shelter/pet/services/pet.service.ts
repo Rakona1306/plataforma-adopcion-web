@@ -17,26 +17,24 @@ interface IPetService {
 }
 
 class PetService implements IPetService {
-  constructor(
-    private httpClient: HttpClient
-  ) { }
+  constructor(private httpClient: HttpClient) {}
 
   getById(id: string): Promise<Pet> {
     return this.httpClient.get<Pet>(`/pets/${id}`);
   }
 
   createPet(pet: PetCreateDto): Promise<void> {
-    return this.httpClient.post('/pets', pet);
+    return this.httpClient.post("/pets", pet);
   }
 
   getAllPets(filter: PetFilterDto): Promise<Paginate<Pet>> {
-    const params = new URLSearchParams()
+    const params = new URLSearchParams();
 
-    params.append('page', filter.page.toString())
-    params.append('pageSize', filter.pageSize.toString())
+    params.append("page", filter.page.toString());
+    params.append("pageSize", filter.pageSize.toString());
 
     if (filter.size) {
-      params.append('size', filter.size.toString())
+      params.append("size", filter.size.toString());
     }
 
     return this.httpClient.get(`/pets?${params.toString()}`);
@@ -50,8 +48,13 @@ class PetService implements IPetService {
     return this.httpClient.delete(id);
   }
 
-  mostRequested(filter: PetFilterDto): Promise<Paginate<PetMostRequestedResponse>> {
-    return this.httpClient.get(API_ENDPOINTS.SHELTER.PET.MOST_REQUESTED, filter);
+  mostRequested(
+    filter: PetFilterDto,
+  ): Promise<Paginate<PetMostRequestedResponse>> {
+    return this.httpClient.get(
+      API_ENDPOINTS.SHELTER.PET.MOST_REQUESTED,
+      filter,
+    );
   }
 }
 
