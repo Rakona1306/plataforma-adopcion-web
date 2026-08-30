@@ -1,7 +1,6 @@
-
 interface HeaderData {
-  logo: string
-  navLinks: { name: string, href: string }[]
+  logo: string;
+  navLinks: { name: string; href: string }[];
 }
 
 export const headerData: HeaderData = {
@@ -10,7 +9,7 @@ export const headerData: HeaderData = {
     { name: "Inicio", href: "/" },
     { name: "Nosotros", href: "/nosotros" },
     { name: "Mascotas", href: "/mascotas" },
-    { name: 'Voluntariado', href: '/voluntariado' },
+    { name: "Voluntariado", href: "/voluntariado" },
     { name: "Donaciones", href: "/donaciones" },
-  ]
-}
+  ],
+};

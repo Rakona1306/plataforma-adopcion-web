@@ -1,5 +1,5 @@
 export interface Permission {
-    id: string
-    name: string
-    module: string
+  id: string;
+  name: string;
+  module: string;
 }

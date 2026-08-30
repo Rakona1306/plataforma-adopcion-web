@@ -20,8 +20,7 @@ export function useCreateBreed() {
   >({});
 
   const mutation = useMutation({
-    mutationFn: (dto: BreedCreateDto) =>
-      breedContainer.create(dto),
+    mutationFn: (dto: BreedCreateDto) => breedContainer.create(dto),
 
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -43,7 +42,6 @@ export function useCreateBreed() {
       const status = error.response?.status || error.status;
 
       if (status === 401) {
-
         handleCloseModal?.();
         Swal.fire({
           title: "Sesión expirada",
@@ -65,9 +63,7 @@ export function useCreateBreed() {
         setErrorValidation(normalized);
         setErrorMessage(data.title || "Falló la validación");
       } else {
-        setErrorMessage(
-          error.message || "Error al crear la raza"
-        );
+        setErrorMessage(error.message || "Error al crear la raza");
       }
     },
   });

@@ -1,9 +1,8 @@
-"use client"
+"use client";
 import BodyModal from "@/components/atoms/body-modal";
 import HeaderModal from "@/components/atoms/header-modal";
 import { Modal } from "@mantine/core";
-import { createContext, useCallback, useEffect, useState } from "react";
-
+import { createContext, useCallback, useState } from "react";
 
 interface ModalProviderProps {
   opened: boolean;
@@ -29,22 +28,28 @@ export default function ModalProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [{ content, opened, header }, setModalState] = useState<ModalState>({ content: null, header: null, opened: false });
+  const [{ content, opened, header }, setModalState] = useState<ModalState>({
+    content: null,
+    header: null,
+    opened: false,
+  });
 
   const handleOpenModal = useCallback((dto: IModalDto) => {
-    setModalState({ content: dto.content, header: dto.header || null, opened: true });
+    setModalState({
+      content: dto.content,
+      header: dto.header || null,
+      opened: true,
+    });
   }, []);
 
   const handleCloseModal = useCallback(() => {
-    setModalState(prev => ({ ...prev, opened: false }));
+    setModalState((prev) => ({ ...prev, opened: false }));
   }, []);
 
-  useEffect(() => {
-    console.log("Modal state changed:", { opened });
-  }, [opened]);
-
   return (
-    <ModalContext.Provider value={{ opened, handleOpenModal, handleCloseModal }}>
+    <ModalContext.Provider
+      value={{ opened, handleOpenModal, handleCloseModal }}
+    >
       <Modal.Root opened={opened} onClose={handleCloseModal} centered size="xl">
         <Modal.Overlay />
         <Modal.Content>

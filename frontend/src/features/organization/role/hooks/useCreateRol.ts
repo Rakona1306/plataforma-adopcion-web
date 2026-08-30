@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -24,7 +23,9 @@ export function useCreateRole() {
     onSuccess: () => {
       // Invalidamos el caché de 'roles' para que el hook de "getAll"
       // vuelva a hacer el fetch y la tabla se actualice sola.
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.ORGANIZATION.ROLE] });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.ORGANIZATION.ROLE],
+      });
       handleCloseModal?.();
       Swal.fire({
         title: "¡Role creado!",
@@ -58,8 +59,6 @@ export function useCreateRole() {
         Object.keys(data.errors).forEach((key) => {
           normalizedErrors[key.toLowerCase()] = data.errors[key][0];
         });
-
-        console.log("Errores normalizados:", normalizedErrors); // Debería salir { name: "..." }
         setErrorValidation(normalizedErrors);
         setErrorMessage(data.title || "Fallo la validación");
       } else {

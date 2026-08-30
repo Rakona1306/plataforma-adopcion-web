@@ -6,9 +6,7 @@ import { Paginate } from "@/core/domain/models/system/paginate";
 import { ITraitRepository } from "@/core/domain/repository/shelter/traitRepository";
 
 export class TraitService {
-  constructor(
-    private traitRepository: ITraitRepository
-  ) {}
+  constructor(private traitRepository: ITraitRepository) {}
 
   async getAll(filter: TraitFilterDto): Promise<Paginate<Trait>> {
     return this.traitRepository.getAll(filter);

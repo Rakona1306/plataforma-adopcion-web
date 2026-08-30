@@ -6,9 +6,7 @@ import { Paginate } from "@/core/domain/models/system/paginate";
 import { IVaccineRepository } from "@/core/domain/repository/shelter/vaccineRepository";
 
 export class VaccineService {
-  constructor(
-    private vaccineRepository: IVaccineRepository,
-  ) {}
+  constructor(private vaccineRepository: IVaccineRepository) {}
 
   async getAllVaccines(filter: VaccineFilterDto): Promise<Paginate<Vaccine>> {
     return await this.vaccineRepository.getAll(filter);

@@ -1,4 +1,4 @@
 export interface VaccinePubRelation {
-    id: string
-    name: string
+  id: string;
+  name: string;
 }

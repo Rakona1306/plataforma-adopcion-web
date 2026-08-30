@@ -10,7 +10,7 @@ import FilterBar from "@/app/dashboard/_components/organism/filter-bar";
 import { useGetAllUser } from "@/core/application/features/organization/user/hooks/useGetAllUser";
 import { useModal } from "@/core/application/hooks/ui/useModal";
 import { Badge, Divider } from "@mantine/core";
-import { BiEditAlt, BiLock, BiTrash } from "react-icons/bi";
+import { BiEditAlt, BiTrash } from "react-icons/bi";
 import { RowAction } from "@/app/dashboard/_components/molecules/table-actions";
 import { BsViewList } from "react-icons/bs";
 import { useDeleteUser } from "@/core/application/features/organization/user/hooks/useDeleteUser";
@@ -36,7 +36,16 @@ export default function UsersPage() {
     { key: "dni", label: "DNI" },
     { key: "phone", label: "Telefono" },
     { key: "district", label: "Distrito" },
-    { key: "isBlocked", label: "Estado", render: (row) => (row.isBlocked ? <Badge color="red">Bloqueado</Badge> : <Badge color="green">Activo</Badge>) },
+    {
+      key: "isBlocked",
+      label: "Estado",
+      render: (row) =>
+        row.isBlocked ? (
+          <Badge color="red">Bloqueado</Badge>
+        ) : (
+          <Badge color="green">Activo</Badge>
+        ),
+    },
     { key: "roleId", label: "Rol", render: (row) => row.role?.name },
   ];
 

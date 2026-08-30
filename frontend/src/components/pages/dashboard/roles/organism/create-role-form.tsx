@@ -54,7 +54,11 @@ export default function CreateRoleForm() {
         />
       </section>
 
-      <PermissionConditional name='currentPermissions' type="create" initialPermissions={[]} />
+      <PermissionConditional
+        name="currentPermissions"
+        type="create"
+        initialPermissions={[]}
+      />
 
       <section className="w-full">
         <Textarea
@@ -64,10 +68,7 @@ export default function CreateRoleForm() {
         />
       </section>
 
-      <Button
-        type="submit"
-        loading={isPending}
-      >
+      <Button type="submit" loading={isPending}>
         Crear
       </Button>
     </FormContainer>

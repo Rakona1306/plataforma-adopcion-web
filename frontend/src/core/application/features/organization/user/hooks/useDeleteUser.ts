@@ -20,7 +20,11 @@ export function useDeleteUser() {
         router.push("/login");
         return;
       }
-      Swal.fire({ title: "Error", text: "Error al eliminar usuario", icon: "error" });
+      Swal.fire({
+        title: "Error",
+        text: "Error al eliminar usuario",
+        icon: "error",
+      });
     },
   });
 
@@ -37,5 +41,8 @@ export function useDeleteUser() {
     if (result.isConfirmed) return mutation.mutate(id);
   }
 
-  return { deleteUserWithConfirmation: deleteConfirmed, isPending: mutation.isPending };
+  return {
+    deleteUserWithConfirmation: deleteConfirmed,
+    isPending: mutation.isPending,
+  };
 }

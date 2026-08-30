@@ -6,8 +6,7 @@ import NavLinks from "./components/molecules/nav-links";
 import { useProfile } from "@/features/system/auth/hooks/useProfile";
 
 export const SidebarContent = ({ onClose }: { onClose?: () => void }) => {
-
-  const { profile, isLoading } = useProfile()
+  const { profile, isLoading } = useProfile();
 
   return (
     <div className="flex flex-col h-full bg-white">
@@ -19,13 +18,11 @@ export const SidebarContent = ({ onClose }: { onClose?: () => void }) => {
       </div>
       <div className="flex-1 min-h-0 py-2 px-2 overflow-y-auto">
         {/* Pasamos el onClose para que los links cierren el drawer al navegar */}
-        {
-          isLoading ? (
-            <>Cargando...</>
-          ) : (
-            <NavLinks onClose={onClose} roleId={profile?.role?.id || ''} />
-          )
-        }
+        {isLoading ? (
+          <>Cargando...</>
+        ) : (
+          <NavLinks onClose={onClose} roleId={profile?.role?.id || ""} />
+        )}
       </div>
       <div className="w-full shrink-0 mt-auto">
         <div className="px-4">
@@ -36,7 +33,7 @@ export const SidebarContent = ({ onClose }: { onClose?: () => void }) => {
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 export function SidebarLayout({ onClose }: { onClose?: () => void }) {

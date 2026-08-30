@@ -7,26 +7,26 @@ import { VaccineRelation } from "../../vaccine/model/vaccine-relation.model";
 import { PetPhotoResponse } from "../../pet-photos/dto/pet-photo-response";
 
 export interface Pet {
-    id: string;
-    name: string;
-    description: string;
-    rescueStory: string;
-    birthDate: Date;
-    weightKg: number;
-    isSterilized: boolean;
-    gender: PetGenders;
-    size: PetSizes;
-    status: PetStatus;
-    speciesName: string;
-    isVaccinated: boolean;
-    speciesId: string;
-    createdAt: Date;
-    age: number;
-    isAdopted: boolean;
+  id: string;
+  name: string;
+  description: string;
+  rescueStory: string;
+  birthDate: Date;
+  weightKg: number;
+  isSterilized: boolean;
+  gender: PetGenders;
+  size: PetSizes;
+  status: PetStatus;
+  speciesName: string;
+  isVaccinated: boolean;
+  speciesId: string;
+  createdAt: Date;
+  age: number;
+  isAdopted: boolean;
 
-    breeds: Breed[]
-    traits: Trait[]
-    vaccines: VaccineRelation[]
+  breeds: Breed[];
+  traits: Trait[];
+  vaccines: VaccineRelation[];
 
-    photoUrls: PetPhotoResponse[];
+  photoUrls: PetPhotoResponse[];
 }

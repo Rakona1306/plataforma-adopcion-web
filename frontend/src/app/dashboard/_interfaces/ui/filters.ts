@@ -1,6 +1,6 @@
 // src/types/filters.ts
 export interface SearchFilterConfig {
-  type: 'search';
+  type: "search";
   label: string;
   placeholder?: string;
   value: string | undefined;
@@ -8,7 +8,7 @@ export interface SearchFilterConfig {
 }
 
 export interface SelectFilterConfig {
-  type: 'select';
+  type: "select";
   label: string;
   placeholder?: string;
   options: { label: string; value: string }[];
@@ -17,7 +17,7 @@ export interface SelectFilterConfig {
 }
 
 export interface DateFilterConfig {
-  type: 'date';
+  type: "date";
   label: string;
   placeholder?: string;
   value: string | null;
@@ -25,7 +25,7 @@ export interface DateFilterConfig {
 }
 
 export interface SelectSearchFilterConfig<T> {
-  type: 'select-search';
+  type: "select-search";
   label: string;
   placeholder?: string;
   options: T[];
@@ -36,4 +36,8 @@ export interface SelectSearchFilterConfig<T> {
 }
 
 // Unión de todos los tipos posibles de filtros
-export type FilterItemConfig = SearchFilterConfig | SelectFilterConfig | DateFilterConfig | SelectSearchFilterConfig<any>;
+export type FilterItemConfig =
+  | SearchFilterConfig
+  | SelectFilterConfig
+  | DateFilterConfig
+  | SelectSearchFilterConfig<any>;

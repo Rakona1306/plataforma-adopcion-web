@@ -25,7 +25,10 @@ const DEFAULT_FILTER: Partial<PetFilterDto> = {
 export function useGetAllPet(props: Props = { initialFilter: DEFAULT_FILTER }) {
   const router = useRouter();
 
-  const [filter, setFilter] = useState<Partial<PetFilterDto>>({ ...DEFAULT_FILTER, ...props.initialFilter });
+  const [filter, setFilter] = useState<Partial<PetFilterDto>>({
+    ...DEFAULT_FILTER,
+    ...props.initialFilter,
+  });
 
   const debouncedFilter = useMemo(() => {
     const { search, ...rest } = filter;
@@ -39,16 +42,12 @@ export function useGetAllPet(props: Props = { initialFilter: DEFAULT_FILTER }) {
   const query = useQuery({
     queryKey: ["pets", debouncedFilter],
 
-    queryFn: () =>
-      petContainer.getAllPets(debouncedFilter),
+    queryFn: () => petContainer.getAllPets(debouncedFilter),
 
     placeholderData: (previousData) => previousData,
 
     throwOnError: (error: any) => {
-      if (
-        error?.response?.status === 401 ||
-        error?.status === 401
-      ) {
+      if (error?.response?.status === 401 || error?.status === 401) {
         router.push("/login");
         return false;
       }
@@ -59,9 +58,7 @@ export function useGetAllPet(props: Props = { initialFilter: DEFAULT_FILTER }) {
     enabled: !filter.search || filter.search.length >= 3,
   });
 
-  const updateFilter = (
-    newFilter: Partial<PetFilterDto>
-  ) => {
+  const updateFilter = (newFilter: Partial<PetFilterDto>) => {
     setFilter((prev) => ({
       ...prev,
       ...newFilter,

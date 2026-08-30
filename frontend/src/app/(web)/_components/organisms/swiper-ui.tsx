@@ -1,13 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import {
-  Pagination,
-  Navigation,
-  A11y,
-  Autoplay,
-} from "swiper/modules";
+import { Pagination, Navigation, A11y, Autoplay } from "swiper/modules";
 import "swiper/css/bundle";
 import { AutoplayOptions, NavigationOptions } from "swiper/types";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
@@ -25,7 +19,6 @@ export default function SwiperUI<T>({
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
   const [swiperInstance, setSwiperInstance] = useState<any>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
 
   return (
     <div className="relative w-full group">
@@ -33,9 +26,7 @@ export default function SwiperUI<T>({
         modules={[Navigation, Pagination, A11y, Autoplay]}
         spaceBetween={spaceBetween}
         slidesPerView={slidesPerView}
-        navigation={
-          showCustomNav ? false : navigation
-        }
+        navigation={showCustomNav ? false : navigation}
         pagination={{
           clickable: true,
           el: ".swiper-custom-pagination",
@@ -46,7 +37,6 @@ export default function SwiperUI<T>({
         autoplay={autoplay}
         loop={true}
         onSwiper={setSwiperInstance}
-        onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
         className="relative"
       >
         {data.map((item, index) => (

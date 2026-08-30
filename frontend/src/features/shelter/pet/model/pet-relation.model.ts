@@ -1,4 +1,4 @@
 export interface PetRelation {
-    id: string;
-    name: string
+  id: string;
+  name: string;
 }

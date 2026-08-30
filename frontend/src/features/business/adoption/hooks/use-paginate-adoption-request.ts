@@ -3,42 +3,48 @@ import { useQuery, UseQueryOptions } from "@tanstack/react-query";
 import { adoptionService } from "../services/adoption.service";
 import { useCallback, useState } from "react";
 import { FilterRequestAdoptionDto } from "../dto/filter-request-adoption.dto";
-import { RequestAdoptionResponse } from "../dto/request-adoption-response";
 import { Paginate } from "@/core/domain/models/system/paginate";
 import { AdoptionResponse } from "../dto/dashboard/adoption-response";
 
 const DEFAULT_FILTER: FilterRequestAdoptionDto = {
-    page: 1,
-    pageSize: 10,
+  page: 1,
+  pageSize: 10,
 };
 
 type Props = {
-    filter?: FilterRequestAdoptionDto;
-    queryOptions?: Omit<
-        UseQueryOptions<Paginate<AdoptionResponse>, unknown, Paginate<AdoptionResponse>>,
-        "queryKey" | "queryFn"
-    >;
+  filter?: FilterRequestAdoptionDto;
+  queryOptions?: Omit<
+    UseQueryOptions<
+      Paginate<AdoptionResponse>,
+      unknown,
+      Paginate<AdoptionResponse>
+    >,
+    "queryKey" | "queryFn"
+  >;
 };
 
 export default function usePaginateAdoption({
-    filter: initialFilter = DEFAULT_FILTER,
-    queryOptions,
+  filter: initialFilter = DEFAULT_FILTER,
+  queryOptions,
 }: Props = {}) {
-    const [filter, setFilter] = useState(initialFilter);
+  const [filter, setFilter] = useState(initialFilter);
 
-    const query = useQuery({
-        queryKey: [QUERY_KEYS.BUSINESS.ADOPTION.REQUEST, filter],
-        queryFn: () => adoptionService.paginate(filter),
-        ...queryOptions,
-    });
+  const query = useQuery({
+    queryKey: [QUERY_KEYS.BUSINESS.ADOPTION.REQUEST, filter],
+    queryFn: () => adoptionService.paginate(filter),
+    ...queryOptions,
+  });
 
-    const updateFilter = useCallback((partial: Partial<FilterRequestAdoptionDto>) => {
-        setFilter((prev) => ({ ...prev, ...partial }));
-    }, []);
+  const updateFilter = useCallback(
+    (partial: Partial<FilterRequestAdoptionDto>) => {
+      setFilter((prev) => ({ ...prev, ...partial }));
+    },
+    [],
+  );
 
-    return {
-        ...query,
-        filter,
-        updateFilter,
-    };
+  return {
+    ...query,
+    filter,
+    updateFilter,
+  };
 }

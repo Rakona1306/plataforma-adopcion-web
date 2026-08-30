@@ -8,10 +8,7 @@ import { VaccineCreateDto } from "@/core/application/features/shelter/vaccines/d
 import { VaccineUpdateDto } from "@/core/application/features/shelter/vaccines/dtos/vaccine-update-dto";
 
 export class VaccineRepositoryImpl implements IVaccineRepository {
-
-  constructor(
-    private httpClient: HttpClient
-  ) {}
+  constructor(private httpClient: HttpClient) {}
 
   async getAll(filter: VaccineFilterDto): Promise<Paginate<Vaccine>> {
     const params = new URLSearchParams();

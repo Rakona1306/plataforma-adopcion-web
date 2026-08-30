@@ -20,13 +20,8 @@ export function useUpdateVaccine() {
   >({});
 
   const mutation = useMutation({
-    mutationFn: ({
-      id,
-      dto,
-    }: {
-      id: string;
-      dto: VaccineUpdateDto;
-    }) => vaccineContainer.updateVaccine(id, dto),
+    mutationFn: ({ id, dto }: { id: string; dto: VaccineUpdateDto }) =>
+      vaccineContainer.updateVaccine(id, dto),
 
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -68,9 +63,7 @@ export function useUpdateVaccine() {
         setErrorValidation(normalized);
         setErrorMessage(data.title || "Error en la validación");
       } else {
-        setErrorMessage(
-          error.message || "No se pudo actualizar la vacuna"
-        );
+        setErrorMessage(error.message || "No se pudo actualizar la vacuna");
 
         Swal.fire({
           title: "Error",

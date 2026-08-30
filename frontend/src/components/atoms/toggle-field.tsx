@@ -1,4 +1,3 @@
-
 interface ToggleFieldProps {
   label: string;
   subtitle: string;
@@ -7,7 +6,13 @@ interface ToggleFieldProps {
   error?: string;
 }
 
-export function ToggleField({ label, subtitle, value, onChange, error }: ToggleFieldProps) {
+export function ToggleField({
+  label,
+  subtitle,
+  value,
+  onChange,
+  error,
+}: ToggleFieldProps) {
   return (
     <div>
       <button
@@ -20,21 +25,19 @@ export function ToggleField({ label, subtitle, value, onChange, error }: ToggleF
           <p className="text-xs text-slate-500 mt-0.5">{subtitle}</p>
         </div>
         <div
-          className={`w-9 h-5 rounded-full relative transition-colors ${value ? "bg-primary" : "bg-slate-300"
-            }`}
+          className={`w-9 h-5 rounded-full relative transition-colors ${
+            value ? "bg-primary" : "bg-slate-300"
+          }`}
         >
           <div
-            className={`absolute top-0.5 w-4 h-4 bg-white rounded-full transition-transform ${value ? "translate-x-4 left-0.5" : "left-0.5"
-              }`}
+            className={`absolute top-0.5 w-4 h-4 bg-white rounded-full transition-transform ${
+              value ? "translate-x-4 left-0.5" : "left-0.5"
+            }`}
           />
         </div>
       </button>
 
-      {
-        error && (
-          <p className="text-xs text-red-500 mt-1">{error}</p>
-        )
-      }
+      {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
     </div>
   );
 }

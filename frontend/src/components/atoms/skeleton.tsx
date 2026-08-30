@@ -24,7 +24,7 @@ export const Skeleton: React.FC<SkeletonProps> = ({
         width,
         height,
         rounded,
-        className
+        className,
       )}
     />
   );

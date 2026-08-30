@@ -1,9 +1,6 @@
 "use client";
 
-import React, {
-  ReactNode,
-  useEffect,
-} from "react";
+import React, { ReactNode, useEffect } from "react";
 
 import { createPortal } from "react-dom";
 import { Overlay } from "../atoms/overlay";
@@ -34,17 +31,11 @@ export const Modal: React.FC<ModalProps> = ({
     };
 
     if (isOpen) {
-      document.addEventListener(
-        "keydown",
-        handleKey
-      );
+      document.addEventListener("keydown", handleKey);
     }
 
     return () => {
-      document.removeEventListener(
-        "keydown",
-        handleKey
-      );
+      document.removeEventListener("keydown", handleKey);
     };
   }, [isOpen, onClose]);
 
@@ -53,25 +44,16 @@ export const Modal: React.FC<ModalProps> = ({
 
   return createPortal(
     <>
-      <Overlay
-        onClick={
-          closeOnOverlay ? onClose : undefined
-        }
-      />
+      <Overlay onClick={closeOnOverlay ? onClose : undefined} />
 
       <ModalLayout>
         <div className="p-5 space-y-4">
-          <ModalHeader
-            title={title}
-            onClose={onClose}
-          />
+          <ModalHeader title={title} onClose={onClose} />
 
-          <div>
-            {children}
-          </div>
+          <div>{children}</div>
         </div>
       </ModalLayout>
     </>,
-    document.body
+    document.body,
   );
 };

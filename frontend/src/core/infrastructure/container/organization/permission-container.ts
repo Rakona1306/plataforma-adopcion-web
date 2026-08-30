@@ -3,4 +3,6 @@ import { PermissionRepository } from "../../repositoryImpl/organization/permissi
 import { PermissionService } from "@/core/application/services/organization/permissions/permission-service";
 
 const permissionRepositoryImpl = new PermissionRepository(httpClient);
-export const permissionContainer = new PermissionService(permissionRepositoryImpl);
+export const permissionContainer = new PermissionService(
+  permissionRepositoryImpl,
+);

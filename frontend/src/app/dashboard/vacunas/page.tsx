@@ -5,5 +5,5 @@ export default function VaccinePageNext() {
     <>
       <VaccinePage />
     </>
-  )
+  );
 }

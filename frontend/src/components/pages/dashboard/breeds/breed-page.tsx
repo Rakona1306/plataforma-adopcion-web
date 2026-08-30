@@ -3,7 +3,9 @@
 import BodyDashboard from "@/app/dashboard/_components/molecules/body-dashboard";
 import HeaderDashboard from "@/app/dashboard/_components/molecules/header-dashboard";
 import { ActionButtons } from "@/app/dashboard/_components/organism/action-buttons";
-import CustomTable, { TableColumn } from "@/app/dashboard/_components/organism/custom-table";
+import CustomTable, {
+  TableColumn,
+} from "@/app/dashboard/_components/organism/custom-table";
 import FilterBar from "@/app/dashboard/_components/organism/filter-bar";
 import { Breed } from "@/core/domain/models/shelter/breed";
 import { Divider } from "@mantine/core";
@@ -20,9 +22,9 @@ import { BsViewList } from "react-icons/bs";
 import { useGetAllSpecie } from "@/core/application/features/shelter/species/hooks/useGetAllSpecie";
 
 export default function BreedPage() {
-
   const { actionsI } = useActionsBreed();
-  const { data, updateFilter, filter, handleClear, isLoading, isError } = useGetAllBreed();
+  const { data, updateFilter, filter, handleClear, isLoading, isError } =
+    useGetAllBreed();
   const { deleteBreedWithConfirmation, isPending } = useDeleteBreed();
   const { handleOpenModal } = useModal() || {};
   const { data: dataSpecie } = useGetAllSpecie();
@@ -50,9 +52,9 @@ export default function BreedPage() {
       label: "Buscar por especie",
       placeholder: "Buscar especie",
       options: dataSpecie?.items || [],
-      value: filter.speciesId || '',
-      displayField: 'name',
-      valueField: 'id',
+      value: filter.speciesId || "",
+      displayField: "name",
+      valueField: "id",
       onChange: (val) => updateFilter({ speciesId: String(val) }),
     },
   ];

@@ -28,40 +28,63 @@ interface PetDeatilPageProps {
 
 export function PetDeatilPage({ slug }: PetDeatilPageProps) {
   const { data: pet, isLoading, isError } = useGetPetBySlug({ slug });
-  const { data: petRecommend, isLoading: isLoadingRecommend, isError: isErrorRecommend } = useGetPetRecommend({ petId: pet?.id || "", specie: pet?.specie, breeds: pet?.breeds, traits: pet?.traits });
+  const {
+    data: petRecommend,
+    isLoading: isLoadingRecommend,
+    isError: isErrorRecommend,
+  } = useGetPetRecommend({
+    petId: pet?.id || "",
+    specie: pet?.specie,
+    breeds: pet?.breeds,
+    traits: pet?.traits,
+  });
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const { handleOpenModal, } = useModal() || {}
+  const { handleOpenModal } = useModal() || {};
 
   const user = useSessionStore((state) => state.user);
 
   const handleAdoptClick = () => {
     if (!user) {
       // setAuthModalOpened(true);
-      handleOpenModal && handleOpenModal({
-        header: 'Inicia sesión para continuar',
-        content: <AuthModal header="Adopta a esta mascota" Component={<AdoptionModal pet={pet} />} />
-      });
+      if (handleOpenModal) {
+        handleOpenModal({
+          header: "Inicia sesión para continuar",
+          content: (
+            <AuthModal
+              header="Adopta a esta mascota"
+              Component={<AdoptionModal pet={pet} />}
+            />
+          ),
+        });
+      }
       return;
     }
 
     if (!user.district || !user.dni || !user.phone) {
-      handleOpenModal && handleOpenModal({
-        header: 'Completa tu perfil',
-        content: <CurrentUserEditForm onSubmit={() => {
-          handleOpenModal && handleOpenModal({
-            header: 'Adopta a esta mascota',
-            content: <AdoptionModal pet={pet} />
-          });
-        }} />
-      })
+      handleOpenModal &&
+        handleOpenModal({
+          header: "Completa tu perfil",
+          content: (
+            <CurrentUserEditForm
+              onSubmit={() => {
+                handleOpenModal &&
+                  handleOpenModal({
+                    header: "Adopta a esta mascota",
+                    content: <AdoptionModal pet={pet} />,
+                  });
+              }}
+            />
+          ),
+        });
 
-      return
+      return;
     }
 
-    handleOpenModal && handleOpenModal({
-      header: 'Adopta a esta mascota',
-      content: <AdoptionModal pet={pet} />
-    });
+    handleOpenModal &&
+      handleOpenModal({
+        header: "Adopta a esta mascota",
+        content: <AdoptionModal pet={pet} />,
+      });
   };
   /*
   const handleSponsorshipClick = () => {
@@ -85,9 +108,15 @@ export function PetDeatilPage({ slug }: PetDeatilPageProps) {
 
   if (!pet || isError) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center py-16" style={{ backgroundColor: "var(--quaternary)" }}>
+      <div
+        className="min-h-screen flex flex-col items-center justify-center py-16"
+        style={{ backgroundColor: "var(--quaternary)" }}
+      >
         <div className="text-6xl mb-4">🐾</div>
-        <h1 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: "var(--foreground)" }}>
+        <h1
+          className="text-3xl md:text-4xl font-bold mb-4"
+          style={{ color: "var(--foreground)" }}
+        >
           Mascota no encontrada
         </h1>
         <p className="text-lg mb-8" style={{ color: "var(--secondary)" }}>
@@ -147,7 +176,8 @@ export function PetDeatilPage({ slug }: PetDeatilPageProps) {
                 >
                   <img
                     src={
-                      pet.photoUrls[currentImageIndex]?.url || "/placeholder.jpg"
+                      pet.photoUrls[currentImageIndex]?.url ||
+                      "/placeholder.jpg"
                     }
                     alt={pet.name}
                     className="w-full h-full object-cover"
@@ -189,8 +219,14 @@ export function PetDeatilPage({ slug }: PetDeatilPageProps) {
                       onClick={() => setCurrentImageIndex(idx)}
                       className="shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 transition-all duration-300"
                       style={{
-                        borderColor: idx === currentImageIndex ? "var(--primary)" : "var(--terciary)",
-                        boxShadow: idx === currentImageIndex ? "0 4px 12px rgba(0,0,0,0.15)" : "none",
+                        borderColor:
+                          idx === currentImageIndex
+                            ? "var(--primary)"
+                            : "var(--terciary)",
+                        boxShadow:
+                          idx === currentImageIndex
+                            ? "0 4px 12px rgba(0,0,0,0.15)"
+                            : "none",
                       }}
                     >
                       <img
@@ -204,9 +240,14 @@ export function PetDeatilPage({ slug }: PetDeatilPageProps) {
               )}
 
               <div className="space-y-4 pt-6 mt-6 border-t-2 border-gray-300">
-                <p className={`text-base text-slate-600 flex items-center gap-2 font-medium ${montserrat.className}`}>
+                <p
+                  className={`text-base text-slate-600 flex items-center gap-2 font-medium ${montserrat.className}`}
+                >
                   <InfoIcon />
-                  <span>Para realizar alguna de estas 2 acciones se debe iniciar sesión.</span>
+                  <span>
+                    Para realizar alguna de estas 2 acciones se debe iniciar
+                    sesión.
+                  </span>
                 </p>
                 <button
                   onClick={handleAdoptClick}
@@ -226,13 +267,17 @@ export function PetDeatilPage({ slug }: PetDeatilPageProps) {
 
               {pet.rescueStory && (
                 <div className="mt-8 p-6 rounded-xl bg-white border-2 border-gray-300 shadow-sm shadow-black/30">
-                  <h2 className={`text-3xl font-extrabold flex gap-2 items-center mb-4 ${montserrat.className}`} style={{ color: "var(--primary)" }}>
-                    <MdPets className="w-8 h-8" style={{ color: "var(--terciary)" }} />
+                  <h2
+                    className={`text-3xl font-extrabold flex gap-2 items-center mb-4 ${montserrat.className}`}
+                    style={{ color: "var(--primary)" }}
+                  >
+                    <MdPets
+                      className="w-8 h-8"
+                      style={{ color: "var(--terciary)" }}
+                    />
                     <span>Mi historia</span>
                   </h2>
-                  <p className="text-base leading-relaxed">
-                    {pet.rescueStory}
-                  </p>
+                  <p className="text-base leading-relaxed">{pet.rescueStory}</p>
                 </div>
               )}
             </div>
@@ -245,9 +290,13 @@ export function PetDeatilPage({ slug }: PetDeatilPageProps) {
               <div className="flex items-start justify-between">
                 <div>
                   <div className="flex items-center gap-3 mb-3">
-                    <span className="text-4xl">{getRaceIcon(pet.specie.name)}</span>
+                    <span className="text-4xl">
+                      {getRaceIcon(pet.specie.name)}
+                    </span>
                     <div>
-                      <h1 className={`text-4xl md:text-5xl font-extrabold text-slate-800 ${montserrat.className}`}>
+                      <h1
+                        className={`text-4xl md:text-5xl font-extrabold text-slate-800 ${montserrat.className}`}
+                      >
                         {pet.name}
                       </h1>
                       <p className="text-lg text-secondary font-semibold">
@@ -261,7 +310,9 @@ export function PetDeatilPage({ slug }: PetDeatilPageProps) {
               {/* Quick Info Cards */}
               <div className="grid grid-cols-2 gap-4">
                 <div className="p-4 rounded-xl border-2 bg-primary border-terciary transition-all duration-300 hover:scale-105">
-                  <p className={`text-xs md:text-sm mb-2 font-semibold text-white ${montserrat.className}`}>
+                  <p
+                    className={`text-xs md:text-sm mb-2 font-semibold text-white ${montserrat.className}`}
+                  >
                     Edad
                   </p>
                   <p className="text-lg md:text-xl font-extrabold text-terciary">
@@ -269,7 +320,9 @@ export function PetDeatilPage({ slug }: PetDeatilPageProps) {
                   </p>
                 </div>
                 <div className="p-4 rounded-xl border-2 bg-primary border-terciary transition-all duration-300 hover:scale-105">
-                  <p className={`text-xs md:text-sm mb-2 font-semibold text-white ${montserrat.className}`}>
+                  <p
+                    className={`text-xs md:text-sm mb-2 font-semibold text-white ${montserrat.className}`}
+                  >
                     Género
                   </p>
                   <p className="text-lg md:text-xl font-extrabold text-terciary">
@@ -277,7 +330,9 @@ export function PetDeatilPage({ slug }: PetDeatilPageProps) {
                   </p>
                 </div>
                 <div className="p-4 rounded-xl border-2 bg-terciary border-primary transition-all duration-300 hover:scale-105">
-                  <p className={`text-xs md:text-sm mb-2 font-semibold text-slate-700 ${montserrat.className}`}>
+                  <p
+                    className={`text-xs md:text-sm mb-2 font-semibold text-slate-700 ${montserrat.className}`}
+                  >
                     Peso
                   </p>
                   <p className="text-lg md:text-xl font-extrabold text-primary">
@@ -285,7 +340,9 @@ export function PetDeatilPage({ slug }: PetDeatilPageProps) {
                   </p>
                 </div>
                 <div className="p-4 rounded-xl border-2 bg-terciary border-primary transition-all duration-300 hover:scale-105">
-                  <p className={`text-xs md:text-sm mb-2 font-semibold text-slate-700 ${montserrat.className}`}>
+                  <p
+                    className={`text-xs md:text-sm mb-2 font-semibold text-slate-700 ${montserrat.className}`}
+                  >
                     Especie
                   </p>
                   <p className="text-lg md:text-xl font-extrabold text-primary">
@@ -293,18 +350,28 @@ export function PetDeatilPage({ slug }: PetDeatilPageProps) {
                   </p>
                 </div>
                 <div className="p-4 rounded-xl border-2 bg-primary border-terciary transition-all duration-300 hover:scale-105">
-                  <p className={`text-xs md:text-sm mb-2 font-semibold text-white ${montserrat.className}`}>
+                  <p
+                    className={`text-xs md:text-sm mb-2 font-semibold text-white ${montserrat.className}`}
+                  >
                     Vacunado
                   </p>
-                  <p className="text-lg font-extrabold" style={{ color: pet.isVaccinated ? "#22c55e" : "#ef4444" }}>
+                  <p
+                    className="text-lg font-extrabold"
+                    style={{ color: pet.isVaccinated ? "#22c55e" : "#ef4444" }}
+                  >
                     {pet.isVaccinated ? "✓ Sí" : "✗ No"}
                   </p>
                 </div>
                 <div className="p-4 rounded-xl border-2 bg-primary border-terciary transition-all duration-300 hover:scale-105">
-                  <p className={`text-xs md:text-sm mb-2 font-semibold text-white ${montserrat.className}`}>
+                  <p
+                    className={`text-xs md:text-sm mb-2 font-semibold text-white ${montserrat.className}`}
+                  >
                     Esterilizado
                   </p>
-                  <p className="text-lg font-extrabold" style={{ color: pet.isSterilized ? "#22c55e" : "#ef4444" }}>
+                  <p
+                    className="text-lg font-extrabold"
+                    style={{ color: pet.isSterilized ? "#22c55e" : "#ef4444" }}
+                  >
                     {pet.isSterilized ? "✓ Sí" : "✗ No"}
                   </p>
                 </div>
@@ -332,10 +399,12 @@ export function PetDeatilPage({ slug }: PetDeatilPageProps) {
             {/* Description */}
             {pet.description && (
               <div className="space-y-3 p-6 rounded-xl bg-white shadow-sm shadow-black/30 border-2 border-gray-300">
-                <h2 className={`text-2xl font-extrabold ${montserrat.className} text-primary`}>
+                <h2
+                  className={`text-2xl font-extrabold ${montserrat.className} text-primary`}
+                >
                   Sobre {pet.name}
                 </h2>
-                <p className="text-base leading-relaxed text-slate-800" >
+                <p className="text-base leading-relaxed text-slate-800">
                   {pet.description}
                 </p>
               </div>
@@ -344,7 +413,9 @@ export function PetDeatilPage({ slug }: PetDeatilPageProps) {
             {/* Characteristics */}
             {pet.traits && pet.traits.length > 0 && (
               <div className="space-y-4 p-6 rounded-xl bg-white shadow-sm shadow-black/30 border-2 border-gray-300">
-                <h2 className={`text-2xl font-extrabold ${montserrat.className} text-primary`}>
+                <h2
+                  className={`text-2xl font-extrabold ${montserrat.className} text-primary`}
+                >
                   Características
                 </h2>
                 <div className="flex flex-wrap gap-3">
@@ -365,13 +436,21 @@ export function PetDeatilPage({ slug }: PetDeatilPageProps) {
 
             {/* Vaccines Info */}
             {pet.vaccines && pet.vaccines.length > 0 && (
-              <div className="space-y-3 p-6 rounded-xl" style={{ backgroundColor: "#F5F5F5" }}>
-                <h2 className={`text-2xl font-bold ${montserrat.className} text-primary`}>
+              <div
+                className="space-y-3 p-6 rounded-xl"
+                style={{ backgroundColor: "#F5F5F5" }}
+              >
+                <h2
+                  className={`text-2xl font-bold ${montserrat.className} text-primary`}
+                >
                   Vacunas
                 </h2>
                 <div className="space-y-2">
                   {pet.vaccines.map((vaccine) => (
-                    <div key={vaccine.id} className="flex items-center justify-between">
+                    <div
+                      key={vaccine.id}
+                      className="flex items-center justify-between"
+                    >
                       <span className="text-slate-800">{vaccine.name}</span>
                       <FaSyringe className="text-primary" />
                     </div>
@@ -381,13 +460,22 @@ export function PetDeatilPage({ slug }: PetDeatilPageProps) {
             )}
 
             {/* Contact CTA */}
-            <div className="p-6 rounded-xl border-2 text-center space-y-4" style={{ borderColor: "var(--terciary)", backgroundColor: "var(--quaternary)" }}>
+            <div
+              className="p-6 rounded-xl border-2 text-center space-y-4"
+              style={{
+                borderColor: "var(--terciary)",
+                backgroundColor: "var(--quaternary)",
+              }}
+            >
               <FaUsers className="w-8 h-8 mx-auto text-primary" />
-              <h3 className={`font-bold text-xl ${montserrat.className} text-primary`}>
+              <h3
+                className={`font-bold text-xl ${montserrat.className} text-primary`}
+              >
                 ¿Preguntas o dudas?
               </h3>
               <p className="text-base text-slate-800">
-                Contáctanos para conocer más sobre {pet.name} y el proceso de adopción
+                Contáctanos para conocer más sobre {pet.name} y el proceso de
+                adopción
               </p>
               <div className="flex justify-center">
                 <a

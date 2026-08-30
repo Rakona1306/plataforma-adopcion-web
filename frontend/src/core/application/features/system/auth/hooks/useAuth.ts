@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-"use client"
+"use client";
 
 import { AuthService } from "@/core/application/services/system/auth/authService";
 import { LoginDto } from "../dtos/login.dto";
@@ -32,7 +31,7 @@ export const useAuth = () => {
         icon: "success",
         title: `Bienvenido ${data.user.name} ${data.user.lastName}`,
         timer: 3000,
-        width: 600
+        width: 600,
       });
 
       if (data.user.toDashboard) {

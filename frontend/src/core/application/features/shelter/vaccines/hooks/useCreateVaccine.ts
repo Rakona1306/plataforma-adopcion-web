@@ -20,8 +20,7 @@ export function useCreateVaccine() {
   >({});
 
   const mutation = useMutation({
-    mutationFn: (dto: VaccineCreateDto) =>
-      vaccineContainer.createVaccine(dto),
+    mutationFn: (dto: VaccineCreateDto) => vaccineContainer.createVaccine(dto),
 
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -64,9 +63,7 @@ export function useCreateVaccine() {
         setErrorValidation(normalized);
         setErrorMessage(data.title || "Falló la validación");
       } else {
-        setErrorMessage(
-          error.message || "Error al crear la vacuna"
-        );
+        setErrorMessage(error.message || "Error al crear la vacuna");
       }
     },
   });

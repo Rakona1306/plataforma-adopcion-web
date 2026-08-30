@@ -14,17 +14,16 @@ export function useGetAllPetGenders(): UseQueryResult<PetGenders[], Error> {
   const query = useQuery({
     queryKey: petGendersKeys.all,
     queryFn: () => petGendersService.getAll(),
-    
+
     staleTime: 1000 * 60 * 60 * 24, // 24 horas
-    gcTime: 1000 * 60 * 60 * 24,    // 24 horas en caché
+    gcTime: 1000 * 60 * 60 * 24, // 24 horas en caché
   });
 
   useEffect(() => {
     if (query.isError && query.error) {
-      
       const error = query.error as any;
       const statusCode = error?.status || error?.response?.status;
-      
+
       if (statusCode === 401) {
         router.replace("/login");
       }

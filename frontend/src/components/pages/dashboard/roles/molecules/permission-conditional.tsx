@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import MultiSelect from "@/app/dashboard/_components/organism/multi-select";
 import { usePermissionOptions } from "@/core/application/features/organization/permissions/hooks/getPermissionOptions";
 import { Button, Skeleton } from "@mantine/core";
@@ -7,11 +6,11 @@ import { useFormikContext } from "formik";
 export function PermissionConditional({
   initialPermissions,
   type = "create",
-  name
+  name,
 }: {
   initialPermissions: string[];
   type: "create" | "update";
-  name: string
+  name: string;
 }) {
   const { values, setFieldValue } = useFormikContext<any>();
   const { options, isLoading } = usePermissionOptions();

@@ -21,7 +21,7 @@ export const socialLinks: SocialLink[] = [
     name: "Tiktok",
     href: "https://www.tiktok.com/@adopta.salvavidas",
     icon: FaTiktok,
-  }
+  },
 ];
 
 export interface SocialLink {

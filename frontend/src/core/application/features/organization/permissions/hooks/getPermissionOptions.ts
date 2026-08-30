@@ -5,8 +5,8 @@ import { permissionMapper } from "../mapper/permission-mapper";
 
 export const usePermissionOptions = () => {
   const { data, ...rest } = useQuery({
-    queryKey: ['permissions'],
-    queryFn: () => permissionContainer.getPermissions()
+    queryKey: ["permissions"],
+    queryFn: () => permissionContainer.getPermissions(),
   });
 
   // Mapeamos los datos en cuanto llegan

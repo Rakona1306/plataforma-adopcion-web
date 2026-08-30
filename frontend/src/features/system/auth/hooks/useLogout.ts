@@ -8,25 +8,25 @@ import { authService } from "../services/auth.service";
 import { QUERY_KEYS } from "@/shared/constants/queryKeys";
 
 export const useLogout = () => {
-    const router = useRouter();
-    const queryClient = useQueryClient();
+  const router = useRouter();
+  const queryClient = useQueryClient();
 
-    const { setToken } = useTokenStore();
-    const { clearSession } = useSessionStore();
+  const { setToken } = useTokenStore();
+  const { clearSession } = useSessionStore();
 
-    const { mutate: logout, isPending: isLoading } = useMutation({
-        mutationFn: () => authService.logout(),
+  const { mutate: logout, isPending: isLoading } = useMutation({
+    mutationFn: () => authService.logout(),
 
-        onSettled: () => {
-            router.replace("/login");
-            clearSession();
-            queryClient.clear();
-            queryClient.invalidateQueries({
-                queryKey: [QUERY_KEYS.SYSTEM.AUTH]
-            })
-            setToken(null)
-        }
-    });
+    onSettled: () => {
+      router.replace("/login");
+      clearSession();
+      queryClient.clear();
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.SYSTEM.AUTH],
+      });
+      setToken(null);
+    },
+  });
 
-    return { logout, isLoading };
+  return { logout, isLoading };
 };

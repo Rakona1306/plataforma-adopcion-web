@@ -28,16 +28,12 @@ export function useGetAllTrait() {
   const query = useQuery({
     queryKey: ["traits", debouncedFilter],
 
-    queryFn: () =>
-      traitContainer.getAll(debouncedFilter),
+    queryFn: () => traitContainer.getAll(debouncedFilter),
 
     placeholderData: (previousData) => previousData,
 
     throwOnError: (error: any) => {
-      if (
-        error?.response?.status === 401 ||
-        error?.status === 401
-      ) {
+      if (error?.response?.status === 401 || error?.status === 401) {
         router.push("/login");
         return false;
       }
@@ -48,9 +44,7 @@ export function useGetAllTrait() {
     enabled: !filter.search || filter.search.length >= 3,
   });
 
-  const updateFilter = (
-    newFilter: Partial<TraitFilterDto>
-  ) => {
+  const updateFilter = (newFilter: Partial<TraitFilterDto>) => {
     setFilter((prev) => ({
       ...prev,
       ...newFilter,

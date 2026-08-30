@@ -9,7 +9,12 @@ interface FilterSearchProps {
   onChange: (value: string) => void;
 }
 
-export default function FilterSearch({ label, placeholder, value, onChange }: FilterSearchProps) {
+export default function FilterSearch({
+  label,
+  placeholder,
+  value,
+  onChange,
+}: FilterSearchProps) {
   return (
     <div className="flex-1">
       <TextInput

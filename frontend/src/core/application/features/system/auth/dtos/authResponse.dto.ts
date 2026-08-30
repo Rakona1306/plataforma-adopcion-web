@@ -1,8 +1,8 @@
 import { Role } from "@/core/domain/models/organization/role";
 
 export interface AuthResponse {
-  user: UserLogged
-  token: string
+  user: UserLogged;
+  token: string;
 }
 
 export interface UserLogged {

@@ -6,10 +6,7 @@ import { TraitCreateDto } from "@/core/application/features/shelter/traits/dto/t
 import { TraitUpdateDto } from "@/core/application/features/shelter/traits/dto/trait-update-dto";
 
 export class TraitRepositoryImpl {
-
-  constructor(
-    private httpClient: HttpClient
-  ) {}
+  constructor(private httpClient: HttpClient) {}
 
   getAll(filter: TraitFilterDto): Promise<Paginate<Trait>> {
     const params = new URLSearchParams();

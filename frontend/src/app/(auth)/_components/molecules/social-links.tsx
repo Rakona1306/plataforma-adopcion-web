@@ -1,33 +1,33 @@
-'use client'
+"use client";
 
-import { motion } from 'motion/react'
+import { motion } from "motion/react";
 
 const socialLinks = [
   {
-    icon: '🚀',
-    label: 'Google',
-    color: 'hover:bg-blue-50',
-    border: 'hover:border-blue-300',
+    icon: "🚀",
+    label: "Google",
+    color: "hover:bg-blue-50",
+    border: "hover:border-blue-300",
   },
   {
-    icon: '👍',
-    label: 'Facebook',
-    color: 'hover:bg-blue-100',
-    border: 'hover:border-blue-400',
+    icon: "👍",
+    label: "Facebook",
+    color: "hover:bg-blue-100",
+    border: "hover:border-blue-400",
   },
   {
-    icon: '𝕏',
-    label: 'Twitter',
-    color: 'hover:bg-gray-50',
-    border: 'hover:border-gray-300',
+    icon: "𝕏",
+    label: "Twitter",
+    color: "hover:bg-gray-50",
+    border: "hover:border-gray-300",
   },
   {
-    icon: '🔗',
-    label: 'LinkedIn',
-    color: 'hover:bg-blue-50',
-    border: 'hover:border-blue-200',
+    icon: "🔗",
+    label: "LinkedIn",
+    color: "hover:bg-blue-50",
+    border: "hover:border-blue-200",
   },
-]
+];
 
 export default function SocialLinks() {
   const containerVariants = {
@@ -38,7 +38,7 @@ export default function SocialLinks() {
         staggerChildren: 0.1,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, scale: 0.8 },
@@ -47,7 +47,7 @@ export default function SocialLinks() {
       scale: 1,
       transition: { duration: 0.3 },
     },
-  }
+  };
 
   return (
     <motion.div
@@ -63,7 +63,7 @@ export default function SocialLinks() {
           whileHover={{
             scale: 1.05,
             y: -2,
-            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
           }}
           whileTap={{ scale: 0.95 }}
           className={`py-3 px-2 rounded-lg border-2 border-slate-200 transition-all duration-300 ${social.color} ${social.border}`}
@@ -73,5 +73,5 @@ export default function SocialLinks() {
         </motion.button>
       ))}
     </motion.div>
-  )
+  );
 }

@@ -1,20 +1,24 @@
 import { Alert } from "@/components/atoms/alert";
 import Input from "@/components/atoms/input";
 import FormContainer from "@/components/molecules/form-container";
-import { VaccineCreateDto, vaccineCreateSchema } from "@/core/application/features/shelter/vaccines/dtos/vaccine-create-dto";
+import {
+  VaccineCreateDto,
+  vaccineCreateSchema,
+} from "@/core/application/features/shelter/vaccines/dtos/vaccine-create-dto";
 import { useCreateVaccine } from "@/core/application/features/shelter/vaccines/hooks/useCreateVaccine";
 import { Button } from "@mantine/core";
 
 export function CreateVaccineForm() {
-  const { create, errorMessage, errorValidation, isPending } = useCreateVaccine();
-  
+  const { create, errorMessage, errorValidation, isPending } =
+    useCreateVaccine();
+
   const initialValues: VaccineCreateDto = {
     name: "",
   };
 
   const handleSubmit = (values: VaccineCreateDto) => {
     create(values);
-  }
+  };
 
   return (
     <>

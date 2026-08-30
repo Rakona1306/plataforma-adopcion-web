@@ -16,8 +16,7 @@ import { useUpdateUser } from "@/core/application/features/organization/user/hoo
 import { Role } from "@/core/domain/models/organization/role";
 import { User } from "@/core/domain/models/organization/user";
 import { limaDistricts } from "@/core/shared/constants/distritcts";
-import { Button, Grid } from "@mantine/core";
-import { DniOrRuc } from "../molecules/dni-or-ruc";
+import { Grid } from "@mantine/core";
 import ButtonUI from "@/components/atoms/button/button-ui";
 
 interface Props {
@@ -109,7 +108,12 @@ export default function UpdateUserForm({ user }: Props) {
 
       <Grid>
         <Grid.Col span={{ base: 12, md: 6 }}>
-          <Input name="phone" label="Teléfono:" error={errorValidation.phone} defaultValue={user.phone} />
+          <Input
+            name="phone"
+            label="Teléfono:"
+            error={errorValidation.phone}
+            defaultValue={user.phone}
+          />
         </Grid.Col>
         <Grid.Col span={{ base: 12, md: 6 }}>
           <SelectInput

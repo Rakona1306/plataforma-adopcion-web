@@ -4,4 +4,4 @@ export type UserFilterDto = {
   page: number;
   pageSize: number;
   roleId?: string;
-}
+};

@@ -30,11 +30,7 @@ export default function Title({
 
   const classNameTitle = selectTitleClass(htmlTag);
 
-  return (
-    <Tag className={`${cn(classNameTitle, className)}`}>
-      {children}
-    </Tag>
-  );
+  return <Tag className={`${cn(classNameTitle, className)}`}>{children}</Tag>;
 }
 
 interface TitleProps {

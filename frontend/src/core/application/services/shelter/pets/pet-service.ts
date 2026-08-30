@@ -4,9 +4,7 @@ import { Paginate } from "@/core/domain/models/system/paginate";
 import { IPetRepository } from "@/core/domain/repository/shelter/PetRepository";
 
 export class PetService {
-  constructor(
-    private petRepository: IPetRepository
-  ) { }
+  constructor(private petRepository: IPetRepository) {}
 
   createPet(pet: PetCreateDto): Promise<void> {
     return this.petRepository.create(pet);

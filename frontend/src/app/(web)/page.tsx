@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import HomePage from "@/_pages/web/home-page";
 

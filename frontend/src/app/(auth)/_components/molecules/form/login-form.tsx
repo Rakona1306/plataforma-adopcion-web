@@ -29,12 +29,11 @@ export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const { setToken } = useTokenStore();
   const { setUser } = useSessionStore();
-  const router = useRouter()
-  const queryClient = useQueryClient()
+  const router = useRouter();
+  const queryClient = useQueryClient();
 
   const { login, isLoading, error } = useLogin({
     onSuccess: (data) => {
-
       setToken(data.token);
       setUser(data.user);
 
@@ -42,19 +41,19 @@ export default function LoginForm() {
         icon: "success",
         title: `Bienvenido ${data.user.name} ${data.user.lastName}`,
         timer: 3000,
-        width: 600
+        width: 600,
       });
 
       queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.SYSTEM.AUTH]
-      })
+        queryKey: [QUERY_KEYS.SYSTEM.AUTH],
+      });
 
       if (data.user.toDashboard) {
         router.push("/dashboard");
       } else {
         router.push("/");
       }
-    }
+    },
   });
 
   const handleSubmit: FormContainerFormikSubmit<LoginDto> = async (values) => {

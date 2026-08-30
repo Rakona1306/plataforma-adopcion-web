@@ -28,7 +28,7 @@ export function TraitsPicker({
 
   const selectedItems = useMemo(
     () => traits.filter((t) => selectedIds.includes(t.id)),
-    [traits, selectedIds]
+    [traits, selectedIds],
   );
 
   const availableFiltered = useMemo(
@@ -36,16 +36,16 @@ export function TraitsPicker({
       traits.filter(
         (t) =>
           !selectedIds.includes(t.id) &&
-          t.name.toLowerCase().includes(search.toLowerCase())
+          t.name.toLowerCase().includes(search.toLowerCase()),
       ),
-    [traits, selectedIds, search]
+    [traits, selectedIds, search],
   );
 
   const toggle = (id: string) => {
     helpers.setValue(
       selectedIds.includes(id)
         ? selectedIds.filter((v) => v !== id)
-        : [...selectedIds, id]
+        : [...selectedIds, id],
     );
   };
 

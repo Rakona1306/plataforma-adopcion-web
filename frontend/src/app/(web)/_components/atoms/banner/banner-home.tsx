@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 import Title from "../title";
 import { GiSittingDog } from "react-icons/gi";
@@ -10,11 +9,30 @@ interface BannerHomeProps {
   imgClassName?: string;
 }
 
-const categoryColors: Record<string, { bg: string; text: string; border: string }> = {
-  adopcion: { bg: "bg-orange-500/20", text: "text-orange-600", border: "border-orange-400" },
-  donacion: { bg: "bg-red-500/20", text: "text-red-600", border: "border-red-400" },
-  voluntariado: { bg: "bg-blue-500/20", text: "text-blue-600", border: "border-blue-400" },
-  seguimiento: { bg: "bg-green-500/20", text: "text-green-600", border: "border-green-400" },
+const categoryColors: Record<
+  string,
+  { bg: string; text: string; border: string }
+> = {
+  adopcion: {
+    bg: "bg-orange-500/20",
+    text: "text-orange-600",
+    border: "border-orange-400",
+  },
+  donacion: {
+    bg: "bg-red-500/20",
+    text: "text-red-600",
+    border: "border-red-400",
+  },
+  voluntariado: {
+    bg: "bg-blue-500/20",
+    text: "text-blue-600",
+    border: "border-blue-400",
+  },
+  seguimiento: {
+    bg: "bg-green-500/20",
+    text: "text-green-600",
+    border: "border-green-400",
+  },
 };
 
 const categoryLabels: Record<string, string> = {
@@ -54,7 +72,10 @@ export default function BannerHome({
         </div>
 
         {/* Main Title */}
-        <Title htmlTag="h1" className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 leading-tight text-balance drop-shadow-lg text-white">
+        <Title
+          htmlTag="h1"
+          className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 leading-tight text-balance drop-shadow-lg text-white"
+        >
           {item.title}
         </Title>
 

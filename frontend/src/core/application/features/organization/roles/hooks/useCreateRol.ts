@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -58,7 +57,6 @@ export function useCreateRole() {
           normalizedErrors[key.toLowerCase()] = data.errors[key][0];
         });
 
-        console.log("Errores normalizados:", normalizedErrors); // Debería salir { name: "..." }
         setErrorValidation(normalizedErrors);
         setErrorMessage(data.title || "Fallo la validación");
       } else {

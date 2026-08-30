@@ -7,10 +7,13 @@ interface TablePaginationProps {
   onChange?: (page: number) => void;
 }
 
-export const TablePagination = ({ total, value, onChange }: TablePaginationProps) => {
-
+export const TablePagination = ({
+  total,
+  value,
+  onChange,
+}: TablePaginationProps) => {
   if (!total || total <= 1 || !value || !onChange) {
-    return null
+    return null;
   }
 
   return (
@@ -23,5 +26,5 @@ export const TablePagination = ({ total, value, onChange }: TablePaginationProps
         size="sm"
       />
     </div>
-  )
+  );
 };

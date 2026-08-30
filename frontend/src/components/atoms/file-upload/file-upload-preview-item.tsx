@@ -8,7 +8,8 @@ export function FileUploadPreviewItem({
   onToggleMain,
 }: PreviewItemProps) {
   const src = item.kind === "existing" ? item.url : item.previewUrl;
-  const name = item.kind === "existing" ? `Foto ${item.id.slice(0, 6)}` : item.file.name;
+  const name =
+    item.kind === "existing" ? `Foto ${item.id.slice(0, 6)}` : item.file.name;
   const sizeLabel =
     item.kind === "new"
       ? `${(item.file.size / 1024 / 1024).toFixed(1)} MB`

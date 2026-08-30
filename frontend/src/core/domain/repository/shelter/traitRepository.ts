@@ -7,6 +7,6 @@ import { TraitUpdateDto } from "@/core/application/features/shelter/traits/dto/t
 export interface ITraitRepository {
   getAll(filter: TraitFilterDto): Promise<Paginate<Trait>>;
   create(data: TraitCreateDto): Promise<void>;
-  update(id: string,data: TraitUpdateDto): Promise<void>;
+  update(id: string, data: TraitUpdateDto): Promise<void>;
   delete(id: string): Promise<void>;
 }

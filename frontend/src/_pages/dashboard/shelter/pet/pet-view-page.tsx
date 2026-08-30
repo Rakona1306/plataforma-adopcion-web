@@ -5,22 +5,15 @@ import { ViewPet } from "@/features/shelter/pet/components/view-pet";
 import { useGetByIdPet } from "@/features/shelter/pet/hooks/useGetByIdPet";
 
 interface Props {
-    id: string
+  id: string;
 }
 
 export default function PetViewPage({ id }: Props) {
+  const { data } = useGetByIdPet(id);
 
-    const { data } = useGetByIdPet(id)
-
-    return (
-        <BodyDashboard>
-            {
-                data ? (
-                    <ViewPet pet={data} />
-                ) : (
-                    <>Cargando...</>
-                )
-            }
-        </BodyDashboard>
-    )
+  return (
+    <BodyDashboard>
+      {data ? <ViewPet pet={data} /> : <>Cargando...</>}
+    </BodyDashboard>
+  );
 }

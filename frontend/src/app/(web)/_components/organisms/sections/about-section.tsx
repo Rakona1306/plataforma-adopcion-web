@@ -1,4 +1,3 @@
-
 /* import Container from "@/presentation/atoms/container";
 import Title from "../../atoms/title";
 import { MdPets } from "react-icons/md";
@@ -141,65 +140,76 @@ export default function AboutSection() {
 }
 */
 
-'use client'
+"use client";
 
-import { useEffect, useRef, useState } from 'react'
-import { companyInfo } from '@/app/(web)/_utils/data/companyInfo.data'
-import { Card, CardContent } from '../../molecules/card/card'
-import { BiMapPin, BiPhone } from 'react-icons/bi'
-import { CgMail } from 'react-icons/cg'
-import Title from '../../atoms/title'
-import Button from '../../atoms/button/button'
-import { BsWhatsapp } from 'react-icons/bs'
-import { MdEmail } from 'react-icons/md'
-import Container from '@/components/atoms/container'
+import { useEffect, useRef, useState } from "react";
+import { companyInfo } from "@/app/(web)/_utils/data/companyInfo.data";
+import { Card, CardContent } from "../../molecules/card/card";
+import { BiMapPin, BiPhone } from "react-icons/bi";
+import { CgMail } from "react-icons/cg";
+import Title from "../../atoms/title";
+import Button from "../../atoms/button/button";
+import { BsWhatsapp } from "react-icons/bs";
+import { MdEmail } from "react-icons/md";
+import Container from "@/components/atoms/container";
 
 export default function AboutSection() {
-  const [isVisible, setIsVisible] = useState(false)
-  const sectionRef = useRef(null)
-  const [animatedStats, setAnimatedStats] = useState<Record<string, number>>({})
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+  const [, setAnimatedStats] = useState<Record<string, number>>({});
 
   const animateStats = () => {
-    companyInfo.stats.forEach(stat => {
-      let current = 0
-      const increment = stat.number / 50
+    companyInfo.stats.forEach((stat) => {
+      let current = 0;
+      const increment = stat.number / 50;
       const timer = setInterval(() => {
-        current += increment
+        current += increment;
         if (current >= stat.number) {
-          setAnimatedStats(prev => ({ ...prev, [stat.label]: stat.number }))
-          clearInterval(timer)
+          setAnimatedStats((prev) => ({ ...prev, [stat.label]: stat.number }));
+          clearInterval(timer);
         } else {
-          setAnimatedStats(prev => ({ ...prev, [stat.label]: Math.floor(current) }))
+          setAnimatedStats((prev) => ({
+            ...prev,
+            [stat.label]: Math.floor(current),
+          }));
         }
-      }, 30)
-    })
-  }
+      }, 30);
+    });
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true)
-          animateStats()
+          setIsVisible(true);
+          animateStats();
         }
       },
-      { threshold: 0.1 }
-    )
+      { threshold: 0.1 },
+    );
 
     if (sectionRef.current) {
-      observer.observe(sectionRef.current)
+      observer.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section ref={sectionRef} id="sobre-nosotros" className="py-16 md:py-26 md:pt-40 bg-linear-to-b from-gray-100 to-primary/5">
+    <section
+      ref={sectionRef}
+      id="sobre-nosotros"
+      className="py-16 md:py-26 md:pt-40 bg-linear-to-b from-gray-100 to-primary/5"
+    >
       <Container className="space-y-16 md:space-y-24">
-        
         {/* Header */}
-        <div className={`text-center space-y-4 md:space-y-6 transition-all duration-1000 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <Title htmlTag='h2' className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground">
+        <div
+          className={`text-center space-y-4 md:space-y-6 transition-all duration-1000 transform ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+        >
+          <Title
+            htmlTag="h2"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground"
+          >
             Sobre <span className="text-primary">Albergue Salva Vidas</span>
           </Title>
           <p className="text-lg md:text-xl max-w-2xl mx-auto leading-relaxed text-gray-500">
@@ -208,24 +218,38 @@ export default function AboutSection() {
         </div>
 
         {/* Mission & Activities */}
-        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center transition-all duration-1000 delay-200 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <div
+          className={`grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center transition-all duration-1000 delay-200 transform ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+        >
           <div className="space-y-6 md:space-y-8 order-2 lg:order-1">
             <div className="space-y-4">
-              <Title htmlTag='h3' className="text-2xl md:text-3xl font-bold text-foreground">Nuestra Misión</Title>
+              <Title
+                htmlTag="h3"
+                className="text-2xl md:text-3xl font-bold text-foreground"
+              >
+                Nuestra Misión
+              </Title>
               <p className="leading-relaxed text-base md:text-lg text-gray-500">
                 {companyInfo.mission}
               </p>
             </div>
 
             <div className="space-y-4">
-              <Title htmlTag='h3' className="text-2xl md:text-3xl font-bold text-foreground">Lo Que Hacemos</Title>
+              <Title
+                htmlTag="h3"
+                className="text-2xl md:text-3xl font-bold text-foreground"
+              >
+                Lo Que Hacemos
+              </Title>
               <ul className="space-y-3">
                 {companyInfo.activities.map((activity, i) => (
                   <li key={i} className="flex items-start gap-3 group">
                     <span className="w-6 h-6 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-0.5">
                       <span className="w-2 h-2 rounded-full bg-white"></span>
                     </span>
-                    <span className="text-gray-500 group-hover:text-foreground transition-colors text-base">{activity}</span>
+                    <span className="text-gray-500 group-hover:text-foreground transition-colors text-base">
+                      {activity}
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -243,8 +267,13 @@ export default function AboutSection() {
         </div>
 
         {/* Services with Images */}
-        <div className={`space-y-8 md:space-y-12 transition-all duration-1000 delay-400 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <Title htmlTag='h3' className="text-3xl md:text-4xl font-bold text-foreground text-center">
+        <div
+          className={`space-y-8 md:space-y-12 transition-all duration-1000 delay-400 transform ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+        >
+          <Title
+            htmlTag="h3"
+            className="text-3xl md:text-4xl font-bold text-foreground text-center"
+          >
             Servicios del <span className="text-primary">Albergue</span>
           </Title>
 
@@ -275,13 +304,18 @@ export default function AboutSection() {
         </div>
 
         {/* Contact Information */}
-        <div className={`w-full transition-all duration-1000 delay-500 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <div
+          className={`w-full transition-all duration-1000 delay-500 transform ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+        >
           <Card className="bg-white border-2 border-primary/30 hover:border-primary/60 transition-all duration-300">
             <CardContent className="p-8 md:p-12">
-              <Title htmlTag='h3' className="text-2xl md:text-3xl font-bold text-foreground mb-8 text-center">
+              <Title
+                htmlTag="h3"
+                className="text-2xl md:text-3xl font-bold text-foreground mb-8 text-center"
+              >
                 Información de Contacto
               </Title>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                 {/* Location */}
                 <div className="flex gap-4">
@@ -291,8 +325,12 @@ export default function AboutSection() {
                     </div>
                   </div>
                   <div className="flex-1">
-                    <Title htmlTag='h4' className="text-base! mb-1">Ubicación</Title>
-                    <p className="text-gray-500 text-sm md:text-base">{companyInfo.contact.address}</p>
+                    <Title htmlTag="h4" className="text-base! mb-1">
+                      Ubicación
+                    </Title>
+                    <p className="text-gray-500 text-sm md:text-base">
+                      {companyInfo.contact.address}
+                    </p>
                   </div>
                 </div>
 
@@ -304,8 +342,13 @@ export default function AboutSection() {
                     </div>
                   </div>
                   <div className="flex-1">
-                    <Title htmlTag='h4' className="text-base! mb-1">Teléfono</Title>
-                    <a href={`tel:${companyInfo.contact.phone.replace(/\s/g, '')}`} className="text-gray-500  transition-colors text-sm md:text-base font-medium">
+                    <Title htmlTag="h4" className="text-base! mb-1">
+                      Teléfono
+                    </Title>
+                    <a
+                      href={`tel:${companyInfo.contact.phone.replace(/\s/g, "")}`}
+                      className="text-gray-500  transition-colors text-sm md:text-base font-medium"
+                    >
                       {companyInfo.contact.phone}
                     </a>
                   </div>
@@ -319,8 +362,13 @@ export default function AboutSection() {
                     </div>
                   </div>
                   <div className="flex-1">
-                    <Title htmlTag='h4' className="text-base! mb-1">Correo</Title>
-                    <a href={`mailto:${companyInfo.contact.email}`} className="text-gray-500 transition-colors text-sm md:text-base">
+                    <Title htmlTag="h4" className="text-base! mb-1">
+                      Correo
+                    </Title>
+                    <a
+                      href={`mailto:${companyInfo.contact.email}`}
+                      className="text-gray-500 transition-colors text-sm md:text-base"
+                    >
                       {companyInfo.contact.email}
                     </a>
                   </div>
@@ -329,11 +377,19 @@ export default function AboutSection() {
 
               {/* CTA */}
               <div className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-                <Button href={companyInfo.social.whatsapp} target="_blank" rel="noopener noreferrer" className="px-6 md:px-8 py-3 border-terciary text-terciary before:bg-terciary! rounded-full font-semibold hover:shadow-lg transition-all duration-300 transform text-center text-base md:text-lg">
+                <Button
+                  href={companyInfo.social.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 md:px-8 py-3 border-terciary text-terciary before:bg-terciary! rounded-full font-semibold hover:shadow-lg transition-all duration-300 transform text-center text-base md:text-lg"
+                >
                   <BsWhatsapp size={23} />
                   <span>Contactanos por WhatsApp</span>
                 </Button>
-                <Button href={`mailto:${companyInfo.contact.email}`} className="px-6 md:px-8 py-3 bg-white text-primary border-2 border-primary rounded-full font-semibold hover:bg-primary/5 transition-all duration-300 text-center text-base md:text-lg">
+                <Button
+                  href={`mailto:${companyInfo.contact.email}`}
+                  className="px-6 md:px-8 py-3 bg-white text-primary border-2 border-primary rounded-full font-semibold hover:bg-primary/5 transition-all duration-300 text-center text-base md:text-lg"
+                >
                   <MdEmail size={23} />
                   <span>Enviar Correo</span>
                 </Button>
@@ -343,5 +399,5 @@ export default function AboutSection() {
         </div>
       </Container>
     </section>
-  )
+  );
 }

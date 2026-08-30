@@ -1,7 +1,6 @@
-"use client"
+"use client";
 
-import LinkSocial, { LinkSocialProps } from "../../atoms/header/link-social"
-
+import LinkSocial, { LinkSocialProps } from "../../atoms/header/link-social";
 
 export default function ListSocial({ linkSocials }: ListSocialProps) {
   return (
@@ -10,9 +9,9 @@ export default function ListSocial({ linkSocials }: ListSocialProps) {
         <LinkSocial key={index} {...link} />
       ))}
     </>
-  )
+  );
 }
 
 interface ListSocialProps {
- linkSocials: LinkSocialProps[] 
+  linkSocials: LinkSocialProps[];
 }

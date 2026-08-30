@@ -20,13 +20,8 @@ export function useUpdateBreed() {
   >({});
 
   const mutation = useMutation({
-    mutationFn: ({
-      id,
-      dto,
-    }: {
-      id: string;
-      dto: BreedUpdateDto;
-    }) => breedContainer.update(id, dto),
+    mutationFn: ({ id, dto }: { id: string; dto: BreedUpdateDto }) =>
+      breedContainer.update(id, dto),
 
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -69,9 +64,7 @@ export function useUpdateBreed() {
         setErrorValidation(normalized);
         setErrorMessage(data.title || "Error en la validación");
       } else {
-        setErrorMessage(
-          error.message || "No se pudo actualizar la raza"
-        );
+        setErrorMessage(error.message || "No se pudo actualizar la raza");
 
         Swal.fire({
           title: "Error",

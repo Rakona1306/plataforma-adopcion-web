@@ -14,7 +14,10 @@ interface TableActionsProps<T> {
   rowData: T;
 }
 
-export default function TableActions<T>({ actions, rowData }: TableActionsProps<T>) {
+export default function TableActions<T>({
+  actions,
+  rowData,
+}: TableActionsProps<T>) {
   if (!actions || actions.length === 0) return null;
 
   return (
@@ -33,7 +36,6 @@ export default function TableActions<T>({ actions, rowData }: TableActionsProps<
             leftSection={action.icon}
             color={action.color}
             onClick={() => action.onClick(rowData)}
-
           >
             {action.label}
           </Menu.Item>

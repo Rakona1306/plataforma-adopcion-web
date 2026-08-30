@@ -8,7 +8,12 @@ interface FilterDateProps {
   onChange: (value: string | null) => void;
 }
 
-export default function FilterDate({ label, placeholder, value, onChange }: FilterDateProps) {
+export default function FilterDate({
+  label,
+  placeholder,
+  value,
+  onChange,
+}: FilterDateProps) {
   return (
     <div className="md:w-52 md:min-w-40 flex-1 md:flex-none">
       <DateInput

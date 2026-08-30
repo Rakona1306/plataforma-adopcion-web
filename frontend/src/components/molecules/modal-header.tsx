@@ -5,15 +5,10 @@ interface ModalHeaderProps {
   onClose: () => void;
 }
 
-export const ModalHeader: React.FC<ModalHeaderProps> = ({
-  title,
-  onClose,
-}) => {
+export const ModalHeader: React.FC<ModalHeaderProps> = ({ title, onClose }) => {
   return (
     <div className="flex items-center justify-between border-b pb-2">
-      <h2 className="text-lg font-semibold">
-        {title}
-      </h2>
+      <h2 className="text-lg font-semibold">{title}</h2>
 
       <button
         onClick={onClose}

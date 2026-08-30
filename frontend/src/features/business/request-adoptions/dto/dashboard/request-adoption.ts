@@ -1,34 +1,34 @@
-import { User } from "@/core/domain/models/organization/user"
-import { Pet } from "@/core/domain/models/shelter/pet"
+import { User } from "@/core/domain/models/organization/user";
+import { Pet } from "@/core/domain/models/shelter/pet";
 
 export interface RequestAdoptionResponse {
-    id: number
-    petId: string
-    userId: string
-    houseType: string
-    hasOtherPets: boolean
-    hasChildren: boolean
-    acceptHomeVisit: boolean
-    district: string
-    phone: string
-    address: string
-    reference: string
-    motivation: string
-    status: string
-    createdAt: string
-    reviewComment: string
-    reviewedAt: string
-    dni: string
+  id: number;
+  petId: string;
+  userId: string;
+  houseType: string;
+  hasOtherPets: boolean;
+  hasChildren: boolean;
+  acceptHomeVisit: boolean;
+  district: string;
+  phone: string;
+  address: string;
+  reference: string;
+  motivation: string;
+  status: string;
+  createdAt: string;
+  reviewComment: string;
+  reviewedAt: string;
+  dni: string;
 
-    user: User
-    pet: Pet
-    reviewer: User
+  user: User;
+  pet: Pet;
+  reviewer: User;
 }
 
 export enum RequestAdoptionStatus {
-    PENDIENTE = 1,
-    EN_REVISION = 2,
-    RECHAZADO = 4,
-    APROBADO = 3,
-    CANCELADO = 5
+  PENDIENTE = 1,
+  EN_REVISION = 2,
+  RECHAZADO = 4,
+  APROBADO = 3,
+  CANCELADO = 5,
 }

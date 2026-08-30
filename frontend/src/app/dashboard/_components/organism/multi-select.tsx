@@ -1,15 +1,26 @@
 // src/components/organisms/multi-select.tsx
-'use client'
+"use client";
 
-import { useField, useFormikContext } from 'formik'
-import { SelectOptionChip } from '../atoms/select-option-chip'
+import { useField, useFormikContext } from "formik";
+import { SelectOptionChip } from "../atoms/select-option-chip";
 
-interface Option { label: string; value: string | number; }
+interface Option {
+  label: string;
+  value: string | number;
+}
 
-export default function MultiSelect({ name, label, options }: { name: string, label: string, options: Option[] }) {
-  const [field, meta] = useField<Array<string | number>>(name)
-  const { setFieldValue } = useFormikContext()
-  const values = field.value || []
+export default function MultiSelect({
+  name,
+  label,
+  options,
+}: {
+  name: string;
+  label: string;
+  options: Option[];
+}) {
+  const [field, meta] = useField<Array<string | number>>(name);
+  const { setFieldValue } = useFormikContext();
+  const values = field.value || [];
 
   return (
     <div className="flex w-full flex-col gap-2">
@@ -19,7 +30,7 @@ export default function MultiSelect({ name, label, options }: { name: string, la
           {values.length} seleccionados
         </span>
       </div>
-      
+
       <div className="flex flex-wrap gap-2 py-1">
         {options.map((opt) => (
           <SelectOptionChip
@@ -37,8 +48,10 @@ export default function MultiSelect({ name, label, options }: { name: string, la
       </div>
 
       {meta.touched && meta.error && (
-        <p className="text-[11px] text-red-500 font-medium pl-1">{meta.error as string}</p>
+        <p className="text-[11px] text-red-500 font-medium pl-1">
+          {meta.error as string}
+        </p>
       )}
     </div>
-  )
+  );
 }

@@ -14,13 +14,12 @@ export function useGetPetSizes(): UseQueryResult<PetSizes[], Error> {
   const query = useQuery({
     queryKey: petSizesKeys.all,
     queryFn: () => petSizesService.getAll(),
-    
+
     staleTime: 1000 * 60 * 60 * 24,
     gcTime: 1000 * 60 * 60 * 24,
   });
   useEffect(() => {
     if (query.isError && query.error) {
-      
       const error = query.error as any;
       const statusCode = error?.status || error?.response?.status;
 

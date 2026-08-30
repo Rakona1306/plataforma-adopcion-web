@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useLogout } from "@/features/system/auth/hooks/useLogout";
 import { useProfile } from "@/features/system/auth/hooks/useProfile";
 import { Badge, Menu } from "@mantine/core";
@@ -7,13 +7,15 @@ import { CgChevronRight } from "react-icons/cg";
 import { MdPets } from "react-icons/md";
 
 export default function ProfileUser() {
-  const { isLoading, profile } = useProfile()
-  const { logout } = useLogout()
+  const { isLoading, profile } = useProfile();
+  const { logout } = useLogout();
 
   if (isLoading) {
-    return <div className="w-full h-full flex items-center justify-center">
-      <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-slate-200 border-r-2 border-l-2" />
-    </div>
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-slate-200 border-r-2 border-l-2" />
+      </div>
+    );
   }
 
   return (
@@ -25,7 +27,9 @@ export default function ProfileUser() {
               <MdPets className="text-white" size={15} />
             </div>
             <div>
-              <p className="font-medium line-clamp-1">{profile?.name} {profile?.lastName}</p>
+              <p className="font-medium line-clamp-1">
+                {profile?.name} {profile?.lastName}
+              </p>
               <Badge className="bg-primary!">{profile?.role?.name}</Badge>
             </div>
           </div>
@@ -36,13 +40,15 @@ export default function ProfileUser() {
       <Menu.Dropdown>
         <Menu.Label>Perfil</Menu.Label>
         <Menu.Divider />
-        <Menu.Item leftSection={<BiUser size={15} />} >
-          Mi información
-        </Menu.Item>
-        <Menu.Item onClick={() => logout()} className="text-red-500!" leftSection={<BiLogOut size={15} className="text-red-500" />} >
+        <Menu.Item leftSection={<BiUser size={15} />}>Mi información</Menu.Item>
+        <Menu.Item
+          onClick={() => logout()}
+          className="text-red-500!"
+          leftSection={<BiLogOut size={15} className="text-red-500" />}
+        >
           Cerrar sesión
         </Menu.Item>
       </Menu.Dropdown>
     </Menu>
-  )
+  );
 }

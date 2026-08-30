@@ -15,7 +15,7 @@ export interface ExistingPreviewItem {
 // Item que representa un archivo nuevo seleccionado por el usuario
 export interface NewPreviewItem {
   kind: "new";
-  id: string;        // id local temporal
+  id: string; // id local temporal
   file: File;
   previewUrl: string;
   isMain: boolean;

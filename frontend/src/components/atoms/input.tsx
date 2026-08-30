@@ -1,7 +1,14 @@
-'use client'
+"use client";
 
-import { ChangeEvent, FocusEvent, InputHTMLAttributes, MouseEvent, ReactNode, useEffect } from 'react'
-import { useField } from 'formik'
+import {
+  ChangeEvent,
+  FocusEvent,
+  InputHTMLAttributes,
+  MouseEvent,
+  ReactNode,
+  useEffect,
+} from "react";
+import { useField } from "formik";
 
 export default function Input({
   label,
@@ -24,43 +31,50 @@ export default function Input({
   description,
   ...props
 }: InputFormikProps) {
-  const [field, meta, helper] = useField(props.name)
-  const inputId = id ?? props.name
-  const hasError = Boolean(meta.touched && meta.error) || error || hasErrorActive
-  const helperId = helperText ? `${inputId}-helper` : undefined
-  const errorId = hasError ? `${inputId}-error` : undefined
-  const describedBy = [helperId, errorId].filter(Boolean).join(' ') || undefined
-  const hasLeftIcon = Boolean(leftIcon)
-  const hasRightIcon = Boolean(rightIcon)
+  const [field, meta, helper] = useField(props.name);
+  const inputId = id ?? props.name;
+  const hasError =
+    Boolean(meta.touched && meta.error) || error || hasErrorActive;
+  const helperId = helperText ? `${inputId}-helper` : undefined;
+  const errorId = hasError ? `${inputId}-error` : undefined;
+  const describedBy =
+    [helperId, errorId].filter(Boolean).join(" ") || undefined;
+  const hasLeftIcon = Boolean(leftIcon);
+  const hasRightIcon = Boolean(rightIcon);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    field.onChange(event)
-    onChange?.(event)
-  }
+    field.onChange(event);
+    onChange?.(event);
+  };
 
   const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
-    field.onBlur(event)
-    onBlur?.(event)
-  }
+    field.onBlur(event);
+    onBlur?.(event);
+  };
 
   const handleLeftIconClick = (event: MouseEvent<HTMLButtonElement>) => {
-    leftIconOnClick?.(event)
-  }
+    leftIconOnClick?.(event);
+  };
 
   const handleRightIconClick = (event: MouseEvent<HTMLButtonElement>) => {
-    rightIconOnClick?.(event)
-  }
+    rightIconOnClick?.(event);
+  };
 
   useEffect(() => {
-    helper.setValue(defaultValue)
-  }, [defaultValue])
+    helper.setValue(defaultValue);
+  }, [defaultValue]);
 
   return (
-    <div className={joinClasses('flex w-full flex-col gap-2', containerClassName)}>
-      <label htmlFor={inputId} className="text-sm font-semibold text-slate-700 text-start">
+    <div
+      className={joinClasses("flex w-full flex-col gap-2", containerClassName)}
+    >
+      <label
+        htmlFor={inputId}
+        className="text-sm font-semibold text-slate-700 text-start"
+      >
         {label} {required && <span className="text-red-500">*</span>}
       </label>
-      {description && <p className='text-sm text-gray-500'>{description}</p>}
+      {description && <p className="text-sm text-gray-500">{description}</p>}
 
       <div className="relative">
         {hasLeftIcon ? (
@@ -76,20 +90,20 @@ export default function Input({
           {...props}
           id={inputId}
           name={field.name}
-          value={field.value ?? ''}
+          value={field.value ?? ""}
           onChange={handleChange}
           onBlur={handleBlur}
           aria-describedby={describedBy}
           className={joinClasses(
-            'w-full rounded-xl border-2 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition-all duration-300 disabled:bg-gray-200 disabled:text-slate-600 disabled:cursor-not-allowed',
-            'placeholder:text-slate-400',
-            'focus:border-primary focus:ring-4 focus:ring-secondary',
-            !hasError ? 'hover:border-slate-700' : '',
-            hasLeftIcon ? 'pl-11' : undefined,
-            hasRightIcon ? 'pr-11' : undefined,
+            "w-full rounded-xl border-2 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition-all duration-300 disabled:bg-gray-200 disabled:text-slate-600 disabled:cursor-not-allowed",
+            "placeholder:text-slate-400",
+            "focus:border-primary focus:ring-4 focus:ring-secondary",
+            !hasError ? "hover:border-slate-700" : "",
+            hasLeftIcon ? "pl-11" : undefined,
+            hasRightIcon ? "pr-11" : undefined,
             hasError
-              ? 'border-red-400 focus:border-red-500 focus:ring-red-100 ring-4 ring-red-100 hover:border-red-500 hover:ring-red-100'
-              : 'border-slate-400',
+              ? "border-red-400 focus:border-red-500 focus:ring-red-100 ring-4 ring-red-100 hover:border-red-500 hover:ring-red-100"
+              : "border-slate-400",
             className,
           )}
         />
@@ -112,43 +126,43 @@ export default function Input({
 
       {hasError ? (
         <p id={errorId} className="text-xs font-medium text-red-600">
-          {meta.error || error}
+          {error || meta.error}
         </p>
       ) : null}
     </div>
-  )
+  );
 }
 
 interface InputFormikProps extends InputHTMLAttributes<HTMLInputElement> {
-  name: string
-  label: string
-  helperText?: string
-  containerClassName?: string
-  leftIcon?: ReactNode
-  rightIcon?: ReactNode
-  leftIconOnClick?: (event: MouseEvent<HTMLButtonElement>) => void
-  rightIconOnClick?: (event: MouseEvent<HTMLButtonElement>) => void
-  leftIconAriaLabel?: string
-  rightIconAriaLabel?: string
-  error?: string
-  hasErrorActive?: boolean
-  reequired?: boolean
-  description?: string
+  name: string;
+  label: string;
+  helperText?: string;
+  containerClassName?: string;
+  leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
+  leftIconOnClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+  rightIconOnClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+  leftIconAriaLabel?: string;
+  rightIconAriaLabel?: string;
+  error?: string;
+  hasErrorActive?: boolean;
+  reequired?: boolean;
+  description?: string;
 }
 
 function joinClasses(...classNames: Array<string | undefined>) {
-  return classNames.filter(Boolean).join(' ')
+  return classNames.filter(Boolean).join(" ");
 }
 
 interface IconSlotProps {
-  position: 'left' | 'right'
-  icon: ReactNode
-  onClick?: (event: MouseEvent<HTMLButtonElement>) => void
-  ariaLabel?: string
+  position: "left" | "right";
+  icon: ReactNode;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+  ariaLabel?: string;
 }
 
 function IconSlot({ position, icon, onClick, ariaLabel }: IconSlotProps) {
-  const positionClassName = position === 'left' ? 'left-3' : 'right-3'
+  const positionClassName = position === "left" ? "left-3" : "right-3";
 
   if (onClick) {
     return (
@@ -157,24 +171,24 @@ function IconSlot({ position, icon, onClick, ariaLabel }: IconSlotProps) {
         onClick={onClick}
         aria-label={ariaLabel ?? `input-${position}-icon`}
         className={joinClasses(
-          'absolute inset-y-0 z-10 flex items-center text-slate-400 transition hover:text-slate-600',
+          "absolute inset-y-0 z-10 flex items-center text-slate-400 transition hover:text-slate-600",
           positionClassName,
         )}
       >
         {icon}
       </button>
-    )
+    );
   }
 
   return (
     <span
       aria-hidden="true"
       className={joinClasses(
-        'pointer-events-none absolute inset-y-0 flex items-center text-slate-400',
+        "pointer-events-none absolute inset-y-0 flex items-center text-slate-400",
         positionClassName,
       )}
     >
       {icon}
     </span>
-  )
+  );
 }

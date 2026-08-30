@@ -9,37 +9,37 @@ import { ChangePasswordDto } from "../dtos/change-password-dto";
 import Swal from "sweetalert2";
 
 export default function usePasswordChange() {
-
   const queryClient = useQueryClient();
   const { handleCloseModal } = useModal() || {};
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const [errorValidation, setErrorValidation] = useState<Record<string, string>>({});
+  const [errorValidation, setErrorValidation] = useState<
+    Record<string, string>
+  >({});
 
   const mutation = useMutation({
-    mutationFn: (dto: ChangePasswordDto) =>
-      userContainer.changePassword(dto),
+    mutationFn: (dto: ChangePasswordDto) => userContainer.changePassword(dto),
 
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
       handleCloseModal?.();
-      Swal.fire({ 
-        title: "¡Contraseña actualizada!", 
+      Swal.fire({
+        title: "¡Contraseña actualizada!",
         text: "La contraseña ha sido actualizada con éxito.",
-        icon: "success", 
-        timer: 1500 
+        icon: "success",
+        timer: 1500,
       });
     },
 
     onError: (error: any) => {
       const status = error.response?.status || error.status;
-      
+
       // 1. Manejo de sesión expirada
       if (status === 401) {
-        Swal.fire({ 
-          title: "Sesión expirada", 
+        Swal.fire({
+          title: "Sesión expirada",
           text: "Serás redirigido al login.",
-          icon: "warning" 
+          icon: "warning",
         }).then(() => router.push("/login"));
         return;
       }
@@ -56,7 +56,11 @@ export default function usePasswordChange() {
       } else {
         // 3. Manejo de error genérico
         setErrorMessage(error.message || "No se pudo actualizar la contraseña");
-        Swal.fire({ title: "Error", text: "Ocurrió un error inesperado", icon: "error" });
+        Swal.fire({
+          title: "Error",
+          text: "Ocurrió un error inesperado",
+          icon: "error",
+        });
       }
     },
   });
@@ -65,6 +69,6 @@ export default function usePasswordChange() {
     changePassword: mutation.mutate,
     isPending: mutation.isPending,
     errorMessage,
-    errorValidation
-  }
+    errorValidation,
+  };
 }

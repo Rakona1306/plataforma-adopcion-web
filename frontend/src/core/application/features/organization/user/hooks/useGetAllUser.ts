@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import { UserFilterDto } from "../dtos/user-filter-dto";
@@ -11,7 +11,7 @@ const DEFAULT_FILTER = {
   search: "",
   isBlocked: undefined,
   roleId: undefined,
-}
+};
 
 export function useGetAllUser(filters: UserFilterDto = DEFAULT_FILTER) {
   const router = useRouter();

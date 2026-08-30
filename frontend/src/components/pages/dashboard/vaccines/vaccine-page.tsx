@@ -3,7 +3,9 @@ import BodyDashboard from "@/app/dashboard/_components/molecules/body-dashboard"
 import HeaderDashboard from "@/app/dashboard/_components/molecules/header-dashboard";
 import { RowAction } from "@/app/dashboard/_components/molecules/table-actions";
 import { ActionButtons } from "@/app/dashboard/_components/organism/action-buttons";
-import CustomTable, { TableColumn } from "@/app/dashboard/_components/organism/custom-table";
+import CustomTable, {
+  TableColumn,
+} from "@/app/dashboard/_components/organism/custom-table";
 import FilterBar from "@/app/dashboard/_components/organism/filter-bar";
 import { FilterItemConfig } from "@/app/dashboard/_interfaces/ui/filters";
 import { useDeleteVaccine } from "@/core/application/features/shelter/vaccines/hooks/useDeleteVaccine";
@@ -18,12 +20,11 @@ import { UpdateVaccineForm, ViewVaccine } from "./organism";
 import useActionsVaccine from "./hooks/useActionsVaccine";
 
 export default function VaccinePage() {
-
   const { deleteVaccineWithConfirmation, isPending } = useDeleteVaccine();
-    const { handleOpenModal } = useModal() || {};
-    const { actionsI } = useActionsVaccine();
-    const { data, updateFilter, filter, handleClear, isLoading, isError } =
-      useGetAllVaccine();
+  const { handleOpenModal } = useModal() || {};
+  const { actionsI } = useActionsVaccine();
+  const { data, updateFilter, filter, handleClear, isLoading, isError } =
+    useGetAllVaccine();
 
   const columns: TableColumn<Vaccine>[] = [
     { key: "name", label: "Nombre" },

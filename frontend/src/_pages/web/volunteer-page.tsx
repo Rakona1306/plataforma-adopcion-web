@@ -1,4 +1,3 @@
- 
 "use client";
 
 import { useState } from "react";
@@ -40,9 +39,7 @@ const iconMap: Record<string, React.ComponentType<{ className: string }>> = {
 export default function VolunteerPage() {
   const [expandedFaq, setExpandedFaq] = useState<number | null>(0);
 
-  const handleSubmit = () => {
-    
-  };
+  const handleSubmit = () => {};
 
   return (
     <main className="bg-white">
@@ -134,11 +131,11 @@ export default function VolunteerPage() {
                   label="Email"
                   placeholder="usuario@gmail.com"
                 />
-                <Input 
-                  name="number" 
-                  label="Celular" 
-                  type="tel" 
-                  placeholder="123456789" 
+                <Input
+                  name="number"
+                  label="Celular"
+                  type="tel"
+                  placeholder="123456789"
                 />
               </section>
 
@@ -160,14 +157,17 @@ export default function VolunteerPage() {
             </FormContainer>
 
             <div className="w-full md:w-1/2 space-y-5 py-3">
-
               {/* Address */}
               <div className="space-y-2 flex flex-col justify-start">
                 <h3 className="text-start text-xl md:text-2xl font-bold text-primary flex gap-2 items-center">
                   <FaMapMarkerAlt size={30} />
                   <span>Direccion</span>
                 </h3>
-                <Link href={companyInfo.linkAddress} target="_blank" className="text-gray-500 text-start w-full">
+                <Link
+                  href={companyInfo.linkAddress}
+                  target="_blank"
+                  className="text-gray-500 text-start w-full"
+                >
                   {companyInfo.address}
                 </Link>
               </div>
@@ -177,7 +177,11 @@ export default function VolunteerPage() {
                   <IoPhonePortraitOutline size={30} />
                   <span>Celular</span>
                 </h3>
-                <Link href={`tel:${notSpace(companyInfo.contact.phone)}`} target="_blank" className="text-gray-500 text-start w-full">
+                <Link
+                  href={`tel:${notSpace(companyInfo.contact.phone)}`}
+                  target="_blank"
+                  className="text-gray-500 text-start w-full"
+                >
                   {companyInfo.contact.phone}
                 </Link>
               </div>
@@ -187,7 +191,11 @@ export default function VolunteerPage() {
                   <MdOutlineEmail size={30} />
                   <span>Email</span>
                 </h3>
-                <Link href={`mailto:${companyInfo.contact.email}`} target="_blank" className="text-gray-500 text-start w-full">
+                <Link
+                  href={`mailto:${companyInfo.contact.email}`}
+                  target="_blank"
+                  className="text-gray-500 text-start w-full"
+                >
                   {companyInfo.contact.email}
                 </Link>
               </div>

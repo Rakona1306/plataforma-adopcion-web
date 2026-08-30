@@ -1,6 +1,6 @@
 export interface FilterRequestAdoptionDto {
-    page: number
-    pageSize: number
-    userId?: string
-    status?: number
+  page: number;
+  pageSize: number;
+  userId?: string;
+  status?: number;
 }

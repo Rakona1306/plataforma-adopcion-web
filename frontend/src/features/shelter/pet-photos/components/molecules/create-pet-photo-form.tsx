@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import FormContainer from "@/components/molecules/form-container";
 import { useCreatePetPhotos } from "../../hooks/useCreatePetPhoto";
 import {
@@ -20,7 +20,6 @@ export function CreatePetPhotoForm({ petId }: { petId: string }) {
   };
 
   const onSubmit = (values: SyncPetPhotosDto) => {
-    console.log(values, petId);
     create({ dto: values, petId });
   };
 
@@ -34,7 +33,7 @@ export function CreatePetPhotoForm({ petId }: { petId: string }) {
       {({ errors }) => (
         <>
           {isLoading ? (
-            <Skeleton width='100%' height='10rem' />
+            <Skeleton width="100%" height="10rem" />
           ) : (
             <>
               <FileUpload

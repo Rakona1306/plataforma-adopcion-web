@@ -1,29 +1,28 @@
-"use client"
+"use client";
 
-import { useLogout } from "@/features/system/auth/hooks/useLogout"
+import { useLogout } from "@/features/system/auth/hooks/useLogout";
 // import { useAuth } from "@/core/application/features/system/auth/hooks/useAuth"
-import { useRouter } from "next/navigation"
+import { useRouter } from "next/navigation";
 
 export const useMenuRedirects = () => {
-
-  const router = useRouter()
-  const { logout } = useLogout()
+  const router = useRouter();
+  const { logout } = useLogout();
 
   const onMyInfo = () => {
-    router.push("/account/profile")
-  }
+    router.push("/account/profile");
+  };
 
   const onEditProfile = () => {
-    router.push("/account/edit")
-  }
+    router.push("/account/edit");
+  };
 
   const onLogout = () => {
-    logout()
-  }
+    logout();
+  };
 
   return {
     onMyInfo,
     onEditProfile,
     onLogout,
-  }
-}
+  };
+};

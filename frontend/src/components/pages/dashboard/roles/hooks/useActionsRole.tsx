@@ -1,13 +1,13 @@
-import { IActionButtons } from "@/app/dashboard/_components/organism/action-buttons"
-import { useModal } from "@/core/application/hooks/ui/useModal"
-import CreateRoleForm from "../organism/create-role-form"
+import { IActionButtons } from "@/app/dashboard/_components/organism/action-buttons";
+import { useModal } from "@/core/application/hooks/ui/useModal";
+import CreateRoleForm from "../organism/create-role-form";
 
 interface IUseActionsRole {
-  actionsRoles: IActionButtons
+  actionsRoles: IActionButtons;
 }
 
 export default function useActionsRole(): IUseActionsRole {
-  const { handleOpenModal } = useModal() || {}
+  const { handleOpenModal } = useModal() || {};
   const actionsRoles: IActionButtons = {
     buttons: [
       {
@@ -15,20 +15,22 @@ export default function useActionsRole(): IUseActionsRole {
         onClick: () => {
           handleOpenModal?.({
             header: "Crear nuevo rol",
-            content: <CreateRoleForm />
-          })
-        }
-      }, {
+            content: <CreateRoleForm />,
+          });
+        },
+      },
+      {
         label: "Exportar",
         href: "/dashboard/roles/export",
-      }, {
+      },
+      {
         label: "Auditoría",
         href: "/dashboard/roles/audit",
-      }
-    ]
-  }
+      },
+    ],
+  };
 
   return {
-    actionsRoles
-  }
+    actionsRoles,
+  };
 }

@@ -15,19 +15,17 @@ export function useGetAllPetStatus(): UseQueryResult<PetStatus[], Error> {
   const query = useQuery({
     queryKey: petStatusKeys.all,
     queryFn: () => petStatusService.getAll(),
-    
+
     staleTime: 1000 * 60 * 60 * 24,
     gcTime: 1000 * 60 * 60 * 24,
   });
 
   useEffect(() => {
     if (query.isError && query.error) {
-      
       const error = query.error as any;
       const statusCode = error?.status || error?.response?.status;
-      
+
       if (statusCode === 401) {
-        
         router.replace("/login");
       }
     }

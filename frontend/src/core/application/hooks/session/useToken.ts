@@ -1,4 +1,3 @@
-
 import { LOCAL_STORAGE } from "@/core/shared/constants/local-storage";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
@@ -14,6 +13,6 @@ export const useTokenStore = create<TokenStore>()(
       token: null,
       setToken: (token: string | null) => set({ token }),
     }),
-    { name: LOCAL_STORAGE.NAMESESSION }
-  )
-)
+    { name: LOCAL_STORAGE.NAMESESSION },
+  ),
+);

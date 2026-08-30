@@ -1,35 +1,35 @@
 export const QUERY_KEYS = {
-    SHELTER: {
-        PET_VACCINE: 'pet-vaccine',
-        PET: {
-            PUBLIC: 'public_pets',
-            PRIVATE: 'pets',
-            MOST_REQUESTED: 'most-requested-pets'
-        },
-        ROLE_PERMISSION: 'role-permissions',
-        PET_PHOTO: 'pet-photos',
-        BREED: 'breed',
-        SPECIE: {
-            PUBLIC: 'public_species',
-            PRIVATE: 'species'
-        }
+  SHELTER: {
+    PET_VACCINE: "pet-vaccine",
+    PET: {
+      PUBLIC: "public_pets",
+      PRIVATE: "pets",
+      MOST_REQUESTED: "most-requested-pets",
     },
-    ORGANIZATION: {
-        ROLE: 'roles',
-        USER: {
-            VALIDATE_DNI: 'validate-dni',
-        }
+    ROLE_PERMISSION: "role-permissions",
+    PET_PHOTO: "pet-photos",
+    BREED: "breed",
+    SPECIE: {
+      PUBLIC: "public_species",
+      PRIVATE: "species",
     },
-    SYSTEM: {
-        AUTH: 'profile'
+  },
+  ORGANIZATION: {
+    ROLE: "roles",
+    USER: {
+      VALIDATE_DNI: "validate-dni",
     },
-    BUSINESS: {
-        ADOPTION: {
-            ALL: 'adoption',
-            REQUEST: 'adoption-request',
-        },
-        REQUEST_ADOPTION: {
-            PAGINATE: 'request-adoption-paginate'
-        }
-    }
-}
+  },
+  SYSTEM: {
+    AUTH: "profile",
+  },
+  BUSINESS: {
+    ADOPTION: {
+      ALL: "adoption",
+      REQUEST: "adoption-request",
+    },
+    REQUEST_ADOPTION: {
+      PAGINATE: "request-adoption-paginate",
+    },
+  },
+};

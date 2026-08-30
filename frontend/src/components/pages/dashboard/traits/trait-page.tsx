@@ -1,10 +1,12 @@
-'use client';
+"use client";
 
 import BodyDashboard from "@/app/dashboard/_components/molecules/body-dashboard";
 import HeaderDashboard from "@/app/dashboard/_components/molecules/header-dashboard";
 import { RowAction } from "@/app/dashboard/_components/molecules/table-actions";
 import { ActionButtons } from "@/app/dashboard/_components/organism/action-buttons";
-import CustomTable, { TableColumn } from "@/app/dashboard/_components/organism/custom-table";
+import CustomTable, {
+  TableColumn,
+} from "@/app/dashboard/_components/organism/custom-table";
 import FilterBar from "@/app/dashboard/_components/organism/filter-bar";
 import { FilterItemConfig } from "@/app/dashboard/_interfaces/ui/filters";
 import { useDeleteTrait } from "@/core/application/features/shelter/traits/hooks/useDeleteTrait";
@@ -19,60 +21,61 @@ import useActionsTrait from "./hooks/useActionsTrait";
 import { UpdateTraitForm, ViewTrait } from "./organism";
 
 export default function TraitPage() {
-  const { data, updateFilter, isLoading, isError, filter, handleClear } = useGetAllTrait();
+  const { data, updateFilter, isLoading, isError, filter, handleClear } =
+    useGetAllTrait();
   const { deleteTraitWithConfirmation, isPending } = useDeleteTrait();
   const { handleOpenModal } = useModal() || {};
   const { actionsI } = useActionsTrait();
 
   const columns: TableColumn<Trait>[] = [
-      { key: "name", label: "Nombre" },
-      {
-        key: "createdAt",
-        label: "Creado",
-        render: (trait) => formatDateTime(trait.createdAt),
+    { key: "name", label: "Nombre" },
+    {
+      key: "createdAt",
+      label: "Creado",
+      render: (trait) => formatDateTime(trait.createdAt),
+    },
+  ];
+
+  const myFilters: FilterItemConfig[] = [
+    {
+      type: "search",
+      label: "Buscar",
+      placeholder: "Nombre o correo...",
+      value: filter.search,
+      onChange: (val) => updateFilter({ search: String(val) }),
+    },
+  ];
+
+  const actions: RowAction<Trait>[] = [
+    {
+      label: "Editar",
+      icon: <BiEditAlt size={16} />,
+      onClick: (trait) => {
+        handleOpenModal?.({
+          header: "Editar caracteristica",
+          content: <UpdateTraitForm trait={trait} />,
+        });
       },
-    ];
-  
-    const myFilters: FilterItemConfig[] = [
-      {
-        type: "search",
-        label: "Buscar",
-        placeholder: "Nombre o correo...",
-        value: filter.search,
-        onChange: (val) => updateFilter({ search: String(val) }),
+    },
+    {
+      label: "Ver",
+      icon: <BsViewList size={16} />,
+      onClick: (trait) => {
+        handleOpenModal?.({
+          header: `Ver caracteristica - #${trait.id}`,
+          content: <ViewTrait trait={trait} />,
+        });
       },
-    ];
-  
-    const actions: RowAction<Trait>[] = [
-      {
-        label: "Editar",
-        icon: <BiEditAlt size={16} />,
-        onClick: (trait) => {
-          handleOpenModal?.({
-            header: "Editar caracteristica",
-            content: <UpdateTraitForm trait={trait} />,
-          });
-        },
+    },
+    {
+      label: "Eliminar",
+      icon: <BiTrash size={16} />,
+      color: "red",
+      onClick: (trait) => {
+        deleteTraitWithConfirmation(trait.id);
       },
-      {
-        label: "Ver",
-        icon: <BsViewList size={16} />,
-        onClick: (trait) => {
-          handleOpenModal?.({
-            header: `Ver caracteristica - #${trait.id}`,
-            content: <ViewTrait trait={trait} />,
-          });
-        },
-      },
-      {
-        label: "Eliminar",
-        icon: <BiTrash size={16} />,
-        color: "red",
-        onClick: (trait) => {
-          deleteTraitWithConfirmation(trait.id);
-        },
-      },
-    ];
+    },
+  ];
 
   return (
     <>

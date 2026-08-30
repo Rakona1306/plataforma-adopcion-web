@@ -37,23 +37,23 @@ export function SearchSelect<T>({
   defaultValue,
   required = false,
   description,
-  onOptionSelected
+  onOptionSelected,
 }: Props<T>) {
   const [field, meta, helpers] = useField(name);
 
   const selectedOption = useMemo(() => {
     return options.find(
-      (item) => String(item[valueField]) === String(field.value)
+      (item) => String(item[valueField]) === String(field.value),
     );
   }, [options, field.value, valueField]);
 
   const [searchValue, setSearchValue] = useState(
-    selectedOption ? String(selectedOption[displayField]) : defaultValue || ""
+    selectedOption ? String(selectedOption[displayField]) : defaultValue || "",
   );
 
   const data = useMemo(
     () => options.map((item) => String(item[displayField])),
-    [options, displayField]
+    [options, displayField],
   );
 
   const handleChange = (value: string) => {
@@ -62,7 +62,7 @@ export function SearchSelect<T>({
     onSearch?.(value);
 
     const selected = options.find(
-      (item) => String(item[displayField]) === value
+      (item) => String(item[displayField]) === value,
     );
 
     if (!selected) {
@@ -72,7 +72,7 @@ export function SearchSelect<T>({
 
   const handleOptionSubmit = (labelSelected: string) => {
     const selected = options.find(
-      (item) => String(item[displayField]) === labelSelected
+      (item) => String(item[displayField]) === labelSelected,
     );
 
     if (!selected) return;
@@ -97,7 +97,7 @@ export function SearchSelect<T>({
       error={meta.touched ? meta.error : undefined}
       required={required}
       classNames={{
-        label: 'text-sm! font-semibold! text-slate-700! text-start! mb-2!'
+        label: "text-sm! font-semibold! text-slate-700! text-start! mb-2!",
       }}
     />
   );

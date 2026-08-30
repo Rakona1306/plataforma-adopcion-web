@@ -1,17 +1,17 @@
-'use client'
+"use client";
 
-import { SelectField, SelectOption } from '../atoms/select-field'
+import { SelectField, SelectOption } from "../atoms/select-field";
 
 interface FormSelectProps {
-  label: string
-  value: string | null
-  options: SelectOption[]
-  error?: string
-  onChange: (value: string | null) => void
-  onTouch: () => void
-  placeholder?: string
-  required?: boolean
-  disabled?: boolean
+  label: string;
+  value: string | null;
+  options: SelectOption[];
+  error?: string;
+  onChange: (value: string | null) => void;
+  onTouch: () => void;
+  placeholder?: string;
+  required?: boolean;
+  disabled?: boolean;
 }
 
 export const FormSelect = ({
@@ -23,7 +23,7 @@ export const FormSelect = ({
   onTouch,
   placeholder,
   required,
-  disabled
+  disabled,
 }: FormSelectProps) => {
   return (
     <div className="flex flex-col gap-2 w-full" onClick={onTouch}>
@@ -40,13 +40,12 @@ export const FormSelect = ({
         className="w-full"
         disabled={disabled}
         classNames={{
-          input: 'disabled:bg-gray-200! disabled:text-slate-600! disabled:cursor-not-allowed! border-2! rounded-xl! border-slate-400! disabled:opacity-100!'
+          input:
+            "disabled:bg-gray-200! disabled:text-slate-600! disabled:cursor-not-allowed! border-2! rounded-xl! border-slate-400! disabled:opacity-100!",
         }}
       />
 
-      {error && (
-        <p className="text-xs font-medium text-red-600">{error}</p>
-      )}
+      {error && <p className="text-xs font-medium text-red-600">{error}</p>}
     </div>
-  )
-}
+  );
+};

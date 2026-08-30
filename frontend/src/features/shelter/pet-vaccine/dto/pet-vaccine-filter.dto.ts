@@ -1,5 +1,5 @@
 export interface PetVaccineFilterDto {
-    page: number
-    pageSize: number
-    petId?: string
+  page: number;
+  pageSize: number;
+  petId?: string;
 }

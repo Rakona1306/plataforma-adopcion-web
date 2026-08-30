@@ -32,10 +32,7 @@ export function useGetAllVaccine() {
     placeholderData: (previousData) => previousData,
 
     throwOnError: (error: any) => {
-      if (
-        error.response?.status === 401 ||
-        error.status === 401
-      ) {
+      if (error.response?.status === 401 || error.status === 401) {
         router.push("/login");
         return false;
       }
@@ -46,9 +43,7 @@ export function useGetAllVaccine() {
     enabled: !filter.search || filter.search.length >= 3,
   });
 
-  const updateFilter = (
-    newFilter: Partial<VaccineFilterDto>
-  ) => {
+  const updateFilter = (newFilter: Partial<VaccineFilterDto>) => {
     setFilter((prev) => ({
       ...prev,
       ...newFilter,

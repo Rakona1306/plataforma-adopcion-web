@@ -1,4 +1,3 @@
-
 import { Role } from "@/core/domain/models/organization/role";
 import { IRoleRepository } from "@/core/domain/repository/organization/IRoleRepository";
 import HttpClient from "../../http/client";
@@ -7,20 +6,19 @@ import { RoleFilterDto } from "@/core/application/features/organization/roles/dt
 import { RoleCreateDto } from "@/core/application/features/organization/roles/dtos/role-create-dto";
 
 export class RoleRepository implements IRoleRepository {
-
-  constructor(
-    private httpClient: HttpClient
-  ) {}
+  constructor(private httpClient: HttpClient) {}
 
   async getAll(filter: RoleFilterDto): Promise<Paginate<Role>> {
-  
     const params = new URLSearchParams();
     if (filter.search) params.append("search", filter.search);
-    if (filter.toDashboard !== undefined && filter.toDashboard !== "todos") params.append("toDashboard", filter.toDashboard);
+    if (filter.toDashboard !== undefined && filter.toDashboard !== "todos")
+      params.append("toDashboard", filter.toDashboard);
     params.append("page", filter.page.toString());
     params.append("pageSize", filter.pageSize.toString());
 
-    return await this.httpClient.get<Paginate<Role>>(`/roles?${params.toString()}`);
+    return await this.httpClient.get<Paginate<Role>>(
+      `/roles?${params.toString()}`,
+    );
   }
 
   async create(create: RoleCreateDto): Promise<void> {

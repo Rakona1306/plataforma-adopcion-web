@@ -1,6 +1,12 @@
-
 import { IconType } from "react-icons";
-import { FaDog, FaHome, FaMoneyCheck, FaUserPlus, FaUsers, FaUserTie } from "react-icons/fa";
+import {
+  FaDog,
+  FaHome,
+  FaMoneyCheck,
+  FaUserPlus,
+  FaUsers,
+  FaUserTie,
+} from "react-icons/fa";
 import { MdDashboard } from "react-icons/md";
 
 export interface NavLinkItem {
@@ -19,122 +25,122 @@ export const navLinks: NavLink[] = [
   {
     module: "Dashboard",
     icon: MdDashboard,
-    href: "/dashboard"
+    href: "/dashboard",
   },
   {
-    module: 'Organización',
+    module: "Organización",
     icon: FaUsers,
     items: [
       {
-        name: 'Usuarios',
-        href: '/dashboard/usuarios'
+        name: "Usuarios",
+        href: "/dashboard/usuarios",
       },
       {
-        name: 'Roles',
-        href: '/dashboard/roles'
-      }
-    ]
+        name: "Roles",
+        href: "/dashboard/roles",
+      },
+    ],
   },
   {
-    module: 'Albergue',
+    module: "Albergue",
     icon: FaHome,
     items: [
       {
-        name: 'Mascotas',
-        href: '/dashboard/mascotas'
+        name: "Mascotas",
+        href: "/dashboard/mascotas",
       },
       {
-        name: 'Caracteristicas',
-        href: '/dashboard/caracteristicas'
+        name: "Caracteristicas",
+        href: "/dashboard/caracteristicas",
       },
       {
-        name: 'Razas',
-        href: '/dashboard/razas'
+        name: "Razas",
+        href: "/dashboard/razas",
       },
       {
         name: "Especies",
-        href: '/dashboard/especies'
+        href: "/dashboard/especies",
       },
       {
         name: "Vacunas",
-        href: '/dashboard/vacunas'
-      }
-    ]
+        href: "/dashboard/vacunas",
+      },
+    ],
   },
   {
-    module: 'Adopciones',
+    module: "Adopciones",
     icon: FaDog,
     items: [
       {
-        name: 'Adopciones',
-        href: '/dashboard/adopciones'
-      },
-      {
-        name: 'Solicitudes',
-        href: '/dashboard/adopciones/solicitudes'
-      },
-      {
-        name: 'Mascotas Solicitadas',
-        href: '/dashboard/adopciones/mascotas-solicitadas'
-      },
-      {
-        name: 'Reportes',
-        href: '/dashboard/adopciones/reportes'
-      }
-    ]
-  },
-  {
-    module: 'Padrinos',
-    icon: FaUserTie,
-    items: [
-      {
-        name: 'Padrinos',
-        href: '/dashboard/padrinos'
-      },
-      {
-        name: 'Planes',
-        href: '/dashboard/padrinos/planes'
-      },
-      {
-        name: 'Solicitudes',
-        href: '/dashboard/padrinos/solicitudes'
-      },
-      {
-        name: 'Reportes',
-        href: '/dashboard/padrinos/reportes'
-      },
-    ]
-  },
-  {
-    module: 'Voluntarios',
-    icon: FaUserPlus,
-    items: [
-      {
-        name: 'Voluntarios',
-        href: '/dashboard/volunteers'
-      },
-      {
-        name: 'Solicitudes',
-        href: '/dashboard/volunteer-requests'
-      },
-    ]
-  },
-  {
-    module: 'Donaciones',
-    icon: FaMoneyCheck,
-    items: [
-      {
-        name: 'Donaciones',
-        href: '/dashboard/donations'
+        name: "Adopciones",
+        href: "/dashboard/adopciones",
       },
       {
         name: "Solicitudes",
-        href: '/dashboard/donation-requests'
+        href: "/dashboard/adopciones/solicitudes",
       },
       {
-        name: 'Reportes',
-        href: '/dashboard/donation-reports'
-      }
-    ]
-  }
-]
+        name: "Mascotas Solicitadas",
+        href: "/dashboard/adopciones/mascotas-solicitadas",
+      },
+      {
+        name: "Reportes",
+        href: "/dashboard/adopciones/reportes",
+      },
+    ],
+  },
+  {
+    module: "Padrinos",
+    icon: FaUserTie,
+    items: [
+      {
+        name: "Padrinos",
+        href: "/dashboard/padrinos",
+      },
+      {
+        name: "Planes",
+        href: "/dashboard/padrinos/planes",
+      },
+      {
+        name: "Solicitudes",
+        href: "/dashboard/padrinos/solicitudes",
+      },
+      {
+        name: "Reportes",
+        href: "/dashboard/padrinos/reportes",
+      },
+    ],
+  },
+  {
+    module: "Voluntarios",
+    icon: FaUserPlus,
+    items: [
+      {
+        name: "Voluntarios",
+        href: "/dashboard/volunteers",
+      },
+      {
+        name: "Solicitudes",
+        href: "/dashboard/volunteer-requests",
+      },
+    ],
+  },
+  {
+    module: "Donaciones",
+    icon: FaMoneyCheck,
+    items: [
+      {
+        name: "Donaciones",
+        href: "/dashboard/donations",
+      },
+      {
+        name: "Solicitudes",
+        href: "/dashboard/donation-requests",
+      },
+      {
+        name: "Reportes",
+        href: "/dashboard/donation-reports",
+      },
+    ],
+  },
+];

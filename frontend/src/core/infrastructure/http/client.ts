@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { API_CONFIG } from "@/core/shared/constants";
 import { LOCAL_STORAGE } from "@/core/shared/constants/local-storage";
 import { RequestConfig } from "@/core/shared/types";
@@ -12,7 +10,12 @@ export class HttpError<T = any> extends Error {
   public data: T | null;
   public response: Response;
 
-  constructor(status: number, message: string, data: T | null, response: Response) {
+  constructor(
+    status: number,
+    message: string,
+    data: T | null,
+    response: Response,
+  ) {
     super(message);
     this.name = "HttpError";
     this.status = status;

@@ -6,7 +6,7 @@ import { httpClient } from "@/lib/httpClient";
 import { PetPhotoFilter } from "../dto/pet-photo-filter.dto";
 import { Paginate } from "@/core/domain/models/system/paginate";
 import { convertBodyToFormData } from "../utils/convertBodyToFormData";
-import axios from "axios"
+import axios from "axios";
 import { API_CONFIG } from "@/core/shared/constants";
 
 class PetPhotosService implements PetPhotosServiceInterface {
@@ -32,19 +32,11 @@ class PetPhotosService implements PetPhotosServiceInterface {
   async create(petId: string, dto: SyncPetPhotosDto): Promise<void> {
     const formData = convertBodyToFormData(dto);
 
-    for (const [key, value] of formData.entries()) {
-      console.log(`${key}:`, value);
-    }
-
-    const response = await axios.postForm(`${API_CONFIG.BASE_URL}/pet-photos/${petId}/sync-photos`, formData);
+    const response = await axios.postForm(
+      `${API_CONFIG.BASE_URL}/pet-photos/${petId}/sync-photos`,
+      formData,
+    );
     return response.data;
-    /*
-    return this.httpClient.post(`/pet-photos/${petId}/sync-photos`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    */
   }
 }
 

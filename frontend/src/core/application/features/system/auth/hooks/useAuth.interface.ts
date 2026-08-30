@@ -1,3 +1,3 @@
 import { IAuthRepository } from "@/core/domain/repository/system/authRepository";
 
-export type UseAuth = IAuthRepository
+export type UseAuth = IAuthRepository;

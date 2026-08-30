@@ -13,24 +13,21 @@ export const petUpdateSchema = Yup.object({
     .required("La historia de rescate es requerida")
     .max(2000, "Máximo 2000 caracteres"),
 
-  birthDate: Yup.date()
-    .required("La fecha de nacimiento es requerida"),
+  birthDate: Yup.date().required("La fecha de nacimiento es requerida"),
 
   weightKg: Yup.number()
     .required("El peso es requerido")
     .positive("El peso debe ser mayor a 0"),
 
-  isVaccinated: Yup.boolean()
-    .required("Debe indicar si está vacunado"),
+  isVaccinated: Yup.boolean().required("Debe indicar si está vacunado"),
 
-  isRecommend: Yup.boolean()
-    .required("Debe indicar si es recomendable para adopción"),
+  isRecommend: Yup.boolean().required(
+    "Debe indicar si es recomendable para adopción",
+  ),
 
-  isSterilized: Yup.boolean()
-    .required("Debe indicar si está esterilizado"),
+  isSterilized: Yup.boolean().required("Debe indicar si está esterilizado"),
 
-  isAdopted: Yup.boolean()
-    .required("Debe indicar si fue adoptado"),
+  isAdopted: Yup.boolean().required("Debe indicar si fue adoptado"),
 
   gender: Yup.number()
     .oneOf([1, 2], "Género inválido")
@@ -74,6 +71,4 @@ export const petUpdateSchema = Yup.object({
   }).required(),
 });
 
-export type PetUpdateDto = Yup.InferType<
-  typeof petUpdateSchema
->;
+export type PetUpdateDto = Yup.InferType<typeof petUpdateSchema>;
