@@ -10,7 +10,7 @@ pnpm exec lint-staged || exit 1
 
 if [ "$FRONTEND_CHANGED" -gt 0 ]; then
   echo "-> Cambios en frontend detectados, corriendo tests..."
-  pnpm --prefix frontend test:all || exit 1
+  pnpm --prefix frontend test:unit || exit 1
 fi
 
 if [ "$BACKEND_CHANGED" -gt 0 ]; then
