@@ -44,20 +44,15 @@ export default function VolunteerPage() {
   return (
     <main className="bg-white">
       {/* Header Section */}
-      <section className="pt-32 md:pt-42 pb-16 md:pb-24 px-4 md:px-6 bg-gradient-to-b from-primary/5 to-white">
-        <Container className="text-center space-y-4 md:space-y-6">
-          <Title htmlTag="h1" className=" text-foreground leading-tight">
-            {volunteerData.title}
-          </Title>
-          <p className="text-lg md:text-xl text-foreground/70 leading-relaxed">
-            {volunteerData.subtitle}
-          </p>
-          <div className="pt-4 md:pt-6 flex justify-center">
-            <Button className="text-lg font-bold py-4 px-6">
-              Comienza tu Aventura
-            </Button>
-          </div>
-        </Container>
+
+      <section aria-label="Banner principal de voluntariado">
+        <img
+          className="aspect-[4/3] md:aspect-[16/9] object-cover"
+          loading="eager"
+          fetchPriority="high"
+          src="/voluntariado/voluntariadoDesktop.jpg"
+          alt="Voluntarios felices alimentando y jugando con perros rescatados en el albergue Adopta Salva Vidas"
+        />
       </section>
 
       {/* Why Volunteer Section */}
