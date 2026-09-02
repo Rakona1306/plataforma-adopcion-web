@@ -64,7 +64,7 @@ export default function VolunteerPage() {
       <section className="py-7 md:py-16 px-4 md:px-6 bg-white">
         <Container className=" space-y-12 md:space-y-16">
           <div className="text-center space-y-4">
-            <Title htmlTag="h2" className="text-foreground">
+            <Title htmlTag="h2" className="text-foreground  ">
               {volunteerData.whyVolunteer.title}
             </Title>
             <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
@@ -78,15 +78,17 @@ export default function VolunteerPage() {
               return (
                 <div key={index} className="group">
                   <Card className="bg-white border-primary/20 hover:border-primary/60 hover:shadow-xl transition-all duration-300 h-full">
-                    <CardContent className="p-6 md:p-8 space-y-4">
+                    <CardContent className="p-6 md:p-8 space-y-4 flex flex-col items-center text-center md:items-start md:text-left">
                       <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                         {IconComponent && (
                           <IconComponent className="w-7 h-7 text-primary" />
                         )}
                       </div>
+
                       <h3 className="text-lg md:text-xl font-bold text-foreground group-hover:text-primary transition-colors">
                         {benefit.title}
                       </h3>
+
                       <p className="text-sm md:text-base text-foreground/70">
                         {benefit.description}
                       </p>

@@ -4,7 +4,7 @@ export const volunteerData = {
     "Tu tiempo y pasión pueden transformar vidas. Únete a nuestro equipo de voluntarios y haz una diferencia real en la vida de nuestras mascotas.",
 
   whyVolunteer: {
-    title: "Por Qué Ser Voluntario",
+    title: "Por Qué Ser Voluntario?",
     description:
       "El voluntariado no solo ayuda a las mascotas, sino que también enriquece tu vida y te conecta con una comunidad de personas que comparten tu pasión.",
     benefits: [
