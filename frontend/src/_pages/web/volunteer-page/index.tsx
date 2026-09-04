@@ -24,6 +24,7 @@ import FormContainer from "@/components/molecules/form-container";
 import Input from "@/components/atoms/input";
 import Textarea from "@/components/atoms/text-area";
 import { notSpace } from "@/core/shared/helpers/notSpace";
+import BannerVoluntariado from "./includes/banner-voluntariado";
 
 const iconMap: Record<string, React.ComponentType<{ className: string }>> = {
   heart: BiHeart,
@@ -44,27 +45,14 @@ export default function VolunteerPage() {
   return (
     <main className="bg-white">
       {/* Header Section */}
-      <section className="pt-32 md:pt-42 pb-16 md:pb-24 px-4 md:px-6 bg-gradient-to-b from-primary/5 to-white">
-        <Container className="text-center space-y-4 md:space-y-6">
-          <Title htmlTag="h1" className=" text-foreground leading-tight">
-            {volunteerData.title}
-          </Title>
-          <p className="text-lg md:text-xl text-foreground/70 leading-relaxed">
-            {volunteerData.subtitle}
-          </p>
-          <div className="pt-4 md:pt-6 flex justify-center">
-            <Button className="text-lg font-bold py-4 px-6">
-              Comienza tu Aventura
-            </Button>
-          </div>
-        </Container>
-      </section>
+
+      <BannerVoluntariado />
 
       {/* Why Volunteer Section */}
       <section className="py-7 md:py-16 px-4 md:px-6 bg-white">
         <Container className=" space-y-12 md:space-y-16">
           <div className="text-center space-y-4">
-            <Title htmlTag="h2" className="text-foreground  ">
+            <Title htmlTag="h2" className="text-foreground">
               {volunteerData.whyVolunteer.title}
             </Title>
             <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
