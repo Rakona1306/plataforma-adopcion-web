@@ -24,6 +24,7 @@ import FormContainer from "@/components/molecules/form-container";
 import Input from "@/components/atoms/input";
 import Textarea from "@/components/atoms/text-area";
 import { notSpace } from "@/core/shared/helpers/notSpace";
+import BannerVoluntariado from "./includes/banner-voluntariado";
 
 const iconMap: Record<string, React.ComponentType<{ className: string }>> = {
   heart: BiHeart,
@@ -45,21 +46,13 @@ export default function VolunteerPage() {
     <main className="bg-white">
       {/* Header Section */}
 
-      <section aria-label="Banner principal de voluntariado">
-        <img
-          className="aspect-[4/3] md:aspect-[16/9] object-cover"
-          loading="eager"
-          fetchPriority="high"
-          src="/voluntariado/voluntariadoDesktop.jpg"
-          alt="Voluntarios felices alimentando y jugando con perros rescatados en el albergue Adopta Salva Vidas"
-        />
-      </section>
+      <BannerVoluntariado />
 
       {/* Why Volunteer Section */}
       <section className="py-7 md:py-16 px-4 md:px-6 bg-white">
         <Container className=" space-y-12 md:space-y-16">
           <div className="text-center space-y-4">
-            <Title htmlTag="h2" className="text-foreground  ">
+            <Title htmlTag="h2" className="text-foreground">
               {volunteerData.whyVolunteer.title}
             </Title>
             <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
