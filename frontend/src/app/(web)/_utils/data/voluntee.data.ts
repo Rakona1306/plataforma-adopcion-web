@@ -1,8 +1,4 @@
 export const volunteerData = {
-  title: "Sé Parte del Cambio",
-  subtitle:
-    "Tu tiempo y pasión pueden transformar vidas. Únete a nuestro equipo de voluntarios y haz una diferencia real en la vida de nuestras mascotas.",
-
   whyVolunteer: {
     title: "Por Qué Ser Voluntario?",
     description:
