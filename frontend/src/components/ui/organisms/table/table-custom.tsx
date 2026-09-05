@@ -82,7 +82,7 @@ export default function CustomTable<T>({
           <div
             role="rowgroup"
             className={cn(
-              "flex flex-col lg:block gap-4 lg:gap-0 divide-y-0 lg:divide-y lg:divide-gray-100 mt-4 lg:mt-5 shadow-sm shadow-slate-500 border-2 border-slate-200 bg-white rounded-xl ",
+              "flex flex-col lg:block gap-4 lg:gap-0 divide-y-0 lg:divide-y lg:divide-gray-100 mt-4 lg:mt-5 lg:shadow-sm lg:shadow-slate-500 lg:border-2 lg:border-slate-200 lg:bg-white lg:rounded-xl ",
               tbodyClassName,
             )}
           >
@@ -127,7 +127,7 @@ export default function CustomTable<T>({
                   }
                   hasActions={hasActions}
                   className={cn(
-                    "transition-colors p-4 lg:p-0 border border-gray-200 lg:border-none rounded-xl lg:rounded-none bg-transparent relative",
+                    "transition-colors p-4 lg:p-0 border border-gray-200 lg:border-none rounded-xl lg:rounded-none bg-white lg:bg-transparent relative",
                     trClassName,
                   )}
                 >
@@ -146,7 +146,9 @@ export default function CustomTable<T>({
                   {hasActions && (
                     <>
                       {isMobile ? (
-                        <></>
+                        <>
+                          <TableActions actions={actions!} rowData={row} />
+                        </>
                       ) : (
                         <div
                           role="cell"

@@ -1,6 +1,10 @@
 // src/components/molecules/table-actions.tsx
+import { useWindowWidth } from "@/hooks/use-window-width";
 import { Menu, ActionIcon } from "@mantine/core";
 import { BiDotsVerticalRounded } from "react-icons/bi";
+import ButtonUI from "../../atoms/button/button-ui";
+import { useModal } from "@/core/application/hooks/ui/useModal";
+import { useId } from "react";
 
 export interface RowAction<T> {
   label: string;
@@ -18,7 +22,29 @@ export default function TableActions<T>({
   actions,
   rowData,
 }: TableActionsProps<T>) {
+  const { isMobile } = useWindowWidth();
+  const { handleOpenModal } = useModal() || {};
+
   if (!actions || actions.length === 0) return null;
+
+  if (isMobile) {
+    return (
+      <ButtonUI
+        onClick={() => {
+          if (handleOpenModal) {
+            handleOpenModal({
+              header: "Escoja una opcion",
+              content: (
+                <ModalTableActions actions={actions} rowData={rowData} />
+              ),
+            });
+          }
+        }}
+      >
+        Acciones
+      </ButtonUI>
+    );
+  }
 
   return (
     <Menu shadow="md" width={260} position="bottom-end">
@@ -42,5 +68,26 @@ export default function TableActions<T>({
         ))}
       </Menu.Dropdown>
     </Menu>
+  );
+}
+
+function ModalTableActions<T>({ actions, rowData }: TableActionsProps<T>) {
+  const id = useId();
+
+  return (
+    <div className="flex flex-col gap-2">
+      {actions.map((action, index) => {
+        return (
+          <ButtonUI
+            color={action.color}
+            key={`${id}:${index}`}
+            onClick={() => action.onClick(rowData)}
+          >
+            {action.icon}
+            {action.label}
+          </ButtonUI>
+        );
+      })}
+    </div>
   );
 }
