@@ -21,6 +21,8 @@ namespace API.Application.Services.Organization.Users
 
         public DniValidationService(HttpClient httpClient, IOptions<ExternalApiSettings> options)
         {
+            Console.WriteLine($"[DEBUG-CTOR] DniApiBaseUrl = '{options.Value.DniApiBaseUrl}'");
+            Console.WriteLine($"[DEBUG-CTOR] DniApiKey = '{options.Value.DniApiKey}'");
             _httpClient = httpClient;
             _httpClient.BaseAddress = new Uri(options.Value.DniApiBaseUrl);
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", options.Value.DniApiKey);
