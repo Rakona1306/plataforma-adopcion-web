@@ -1,5 +1,5 @@
-import Input from "@/components/atoms/input";
-import FormContainer from "@/components/molecules/form-container";
+import Input from "@/components/ui/atoms/input";
+import FormContainer from "@/components/ui/molecules/form-container";
 import { RegisterDto } from "@/core/application/features/system/auth/dtos/register.dto";
 import { getFieldError } from "@/core/shared/helpers/getFieldError";
 import { itemVariants } from "@/core/shared/helpers/variants";

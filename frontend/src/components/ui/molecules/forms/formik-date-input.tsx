@@ -3,7 +3,7 @@
 import { forwardRef } from "react";
 import { useField } from "formik";
 import { BaseDateInputProps } from "@/shared/types/components/date-type";
-import { DateInputBase } from "@/components/atoms/forms/date-input-base";
+import { DateInputBase } from "@/components/ui/atoms/forms/date-input-base";
 import { DateValue } from "@mantine/dates";
 
 export interface FormikDateInputFieldProps extends BaseDateInputProps {

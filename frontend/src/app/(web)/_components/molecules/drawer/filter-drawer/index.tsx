@@ -1,4 +1,4 @@
-import ButtonUI from "@/components/atoms/button/button-ui";
+import ButtonUI from "@/components/ui/atoms/button/button-ui";
 import { useWindowWidth } from "@/hooks/use-window-width";
 import { Box, Divider, Drawer, Flex, Pill, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";

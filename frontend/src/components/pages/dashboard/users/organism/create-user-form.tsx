@@ -1,11 +1,11 @@
 // src/app/dashboard/usuarios/_components/create-user-form.tsx
 "use client";
 
-import { Alert } from "@/components/atoms/alert";
-import Input from "@/components/atoms/input";
-import FormContainer from "@/components/molecules/form-container";
-import { SearchSelect } from "@/components/organisms/search-select";
-import SelectInput from "@/components/organisms/select-input";
+import { Alert } from "@/components/ui/atoms/alert";
+import Input from "@/components/ui/atoms/input";
+import FormContainer from "@/components/ui/molecules/form-container";
+import { SearchSelect } from "@/components/ui/organisms/search-select";
+import SelectInput from "@/components/ui/organisms/select-input";
 import { useGetAllRoles } from "@/core/application/features/organization/roles/hooks/useGetAllRoles";
 import {
   UserCreateDto,
@@ -17,7 +17,7 @@ import { limaDistricts } from "@/core/shared/constants/distritcts";
 import { Grid } from "@mantine/core";
 import { useState } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
-import ButtonUI from "@/components/atoms/button/button-ui";
+import ButtonUI from "@/components/ui/atoms/button/button-ui";
 
 export default function CreateUserForm() {
   const { create, isPending, errorMessage, errorValidation } = useCreateUser();

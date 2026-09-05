@@ -1,14 +1,12 @@
 // src/components/organisms/custom-table.tsx
 import { Skeleton } from "@mantine/core";
 import { cn } from "@/lib/utils";
-import TableActions, {
-  RowAction,
-} from "@/app/dashboard/_components/molecules/table-actions";
+import TableGridRow from "../../atoms/table/table-grid-row";
+import TableHeaderCell from "../../atoms/table/table-header-cell";
+import TableMessageRow from "../../atoms/table/table-message-row";
+import TableBodyCell from "../../atoms/table/table-body-cell";
 import { TablePagination } from "@/app/dashboard/_components/atoms/table-pagination";
-import TableGridRow from "@/components/ui/atoms/table/table-grid-row";
-import TableMessageRow from "@/components/ui/atoms/table/table-message-row";
-import TableHeaderCell from "@/components/ui/atoms/table/table-header-cell";
-import TableBodyCell from "@/components/ui/atoms/table/table-body-cell";
+import TableActions, { RowAction } from "../../molecules/table/table-actions";
 
 export interface TableColumn<T> {
   key: string;
@@ -66,10 +64,7 @@ export default function CustomTable<T>({
               theadClassName,
             )}
           >
-            <TableGridRow
-              columnsCount={hasActions ? columns.length + 1 : columns.length}
-              hasActions={hasActions}
-            >
+            <TableGridRow columnsCount={columns.length} hasActions={hasActions}>
               {columns.map((col) => (
                 <TableHeaderCell key={col.key} label={col.label} />
               ))}
@@ -91,7 +86,7 @@ export default function CustomTable<T>({
               </TableMessageRow>
             ) : isLoading ? (
               <TableGridRow
-                columnsCount={hasActions ? columns.length + 1 : columns.length}
+                columnsCount={columns.length}
                 hasActions={hasActions}
                 className={trClassName}
               >
@@ -99,7 +94,7 @@ export default function CustomTable<T>({
                   <div
                     role="cell"
                     key={col.key}
-                    className="lg:p-12 text-center text-gray-400"
+                    className="p-4 lg:p-12 text-center text-gray-400"
                   >
                     <Skeleton height={40} width={"100%"} />
                   </div>
@@ -121,12 +116,10 @@ export default function CustomTable<T>({
               data.map((row) => (
                 <TableGridRow
                   key={keyExtractor(row)}
-                  columnsCount={
-                    hasActions ? columns.length + 1 : columns.length
-                  }
+                  columnsCount={columns.length}
                   hasActions={hasActions}
                   className={cn(
-                    " transition-colors duration-300 p-4 lg:p-0 border border-gray-200 lg:border-none rounded-xl lg:rounded-xl bg-white relative cursor-default",
+                    "lg:hover:bg-gray-50/50 transition-colors p-4 lg:p-0 border border-gray-200 lg:border-none rounded-xl lg:rounded-none bg-white relative",
                     trClassName,
                   )}
                 >

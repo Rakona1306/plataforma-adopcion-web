@@ -1,9 +1,9 @@
-import FormContainer from "@/components/molecules/form-container";
+import FormContainer from "@/components/ui/molecules/form-container";
 import useGetRequestStatus from "@/features/system/enums/request-status/hooks/use-get-request-status";
-import Textarea from "@/components/atoms/text-area";
+import Textarea from "@/components/ui/atoms/text-area";
 import { useModal } from "@/core/application/hooks/ui/useModal";
-import ButtonUI from "@/components/atoms/button/button-ui";
-import Select from "@/components/atoms/select";
+import ButtonUI from "@/components/ui/atoms/button/button-ui";
+import Select from "@/components/ui/atoms/select";
 import Swal from "sweetalert2";
 import { useQueryClient } from "@tanstack/react-query";
 import { QUERY_KEYS } from "@/shared/constants/queryKeys";

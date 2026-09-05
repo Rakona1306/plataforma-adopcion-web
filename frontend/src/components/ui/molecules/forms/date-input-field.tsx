@@ -1,6 +1,6 @@
 "use client";
 
-import { DateInputBase } from "@/components/atoms/forms/date-input-base";
+import { DateInputBase } from "@/components/ui/atoms/forms/date-input-base";
 import { BaseDateInputProps } from "@/shared/types/components/date-type";
 import { DateValue } from "@mantine/dates";
 import { forwardRef, type ReactNode } from "react";

@@ -1,15 +1,15 @@
-import FormContainer from "@/components/molecules/form-container";
+import FormContainer from "@/components/ui/molecules/form-container";
 import {
   CreateRequestAdoptionDto,
   CreateRequestAdoptionSchema,
 } from "../dto/dashboard/create-request-adoption";
 import { useGetAllUser } from "@/core/application/features/organization/user/hooks/useGetAllUser";
-import { SearchSelect } from "@/components/organisms/search-select";
+import { SearchSelect } from "@/components/ui/organisms/search-select";
 import { Avatar, Grid, Skeleton } from "@mantine/core";
-import ButtonUI from "@/components/atoms/button/button-ui";
-import { ToggleField } from "@/components/atoms/toggle-field";
-import Input from "@/components/atoms/input";
-import SelectInput from "@/components/organisms/select-input";
+import ButtonUI from "@/components/ui/atoms/button/button-ui";
+import { ToggleField } from "@/components/ui/atoms/toggle-field";
+import Input from "@/components/ui/atoms/input";
+import SelectInput from "@/components/ui/organisms/select-input";
 import { limaDistricts } from "@/core/shared/constants/distritcts";
 import { useGetAllPet } from "@/core/application/features/shelter/pets/hooks/useGetAllPet";
 import { SearchSelectField } from "@/components/molecules/forms/sarch-select-field";

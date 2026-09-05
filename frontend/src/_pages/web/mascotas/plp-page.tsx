@@ -3,7 +3,7 @@
 import { PetCard } from "@/app/(web)/_components/atoms/card/pet-card-item";
 import Title from "@/app/(web)/_components/atoms/title";
 import FilterDrawer from "@/app/(web)/_components/molecules/drawer/filter-drawer";
-import Container from "@/components/atoms/container";
+import Container from "@/components/ui/atoms/container";
 import { useGetPaginateSearch } from "@/features/shelter/pet/hooks/use-get-paginate-search";
 import { Box, Flex, Pagination, Select, Skeleton, Text } from "@mantine/core";
 import Image from "next/image";

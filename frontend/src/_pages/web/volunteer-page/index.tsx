@@ -19,10 +19,10 @@ import Title from "@/app/(web)/_components/atoms/title";
 import { companyInfo } from "@/app/(web)/_utils/data/companyInfo.data";
 import { MdOutlineEmail } from "react-icons/md";
 import Link from "next/link";
-import Container from "@/components/atoms/container";
-import FormContainer from "@/components/molecules/form-container";
-import Input from "@/components/atoms/input";
-import Textarea from "@/components/atoms/text-area";
+import Container from "@/components/ui/atoms/container";
+import FormContainer from "@/components/ui/molecules/form-container";
+import Input from "@/components/ui/atoms/input";
+import Textarea from "@/components/ui/atoms/text-area";
 import { notSpace } from "@/core/shared/helpers/notSpace";
 import BannerVoluntariado from "./includes/banner-voluntariado";
 

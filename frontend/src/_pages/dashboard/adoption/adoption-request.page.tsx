@@ -3,9 +3,6 @@ import BodyDashboard from "@/app/dashboard/_components/molecules/body-dashboard"
 import HeaderDashboard from "@/app/dashboard/_components/molecules/header-dashboard";
 import { RowAction } from "@/app/dashboard/_components/molecules/table-actions";
 import { ActionButtons } from "@/app/dashboard/_components/organism/action-buttons";
-import CustomTable, {
-  TableColumn,
-} from "@/app/dashboard/_components/organism/custom-table";
 import { useModal } from "@/core/application/hooks/ui/useModal";
 import AdoptionReviewForm from "@/features/business/request-adoptions/components/adoption-review-form";
 import AdoptionReviewView from "@/features/business/request-adoptions/components/request-adoption-view";
@@ -18,6 +15,9 @@ import { BiBullseye, BiEdit } from "react-icons/bi";
 import { LuDelete } from "react-icons/lu";
 import UpdateRequestAdoptionForm from "@/features/business/request-adoptions/components/update-request-adoption-form";
 import useDeleteRequestAdoption from "@/features/business/request-adoptions/dto/dashboard/use-delete-request-adoption";
+import CustomTable, {
+  TableColumn,
+} from "@/components/ui/organisms/table/table-custom";
 
 export default function AdoptionRequestsPage() {
   const { handleOpenModal } = useModal() || {};
