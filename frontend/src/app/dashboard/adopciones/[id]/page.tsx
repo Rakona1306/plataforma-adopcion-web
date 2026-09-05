@@ -7,7 +7,7 @@ import useGetByIdAdoption from "@/features/business/adoption/hooks/use-get-by-id
 import { FormSection } from "@/components/ui/atoms/form-section";
 import { BarChart, User } from "lucide-react";
 import { MdPets } from "react-icons/md";
-import PieChartWithCustomizedLabel from "@/components/molecules/charts/pie-chart/pie-chart-with-customized-label";
+import PieChartWithCustomizedLabel from "@/components/ui/molecules/charts/pie-chart/pie-chart-with-customized-label";
 import SectionName from "@/components/ui/atoms/sections/section-name";
 
 export default function AdoptionDetailNextPage() {

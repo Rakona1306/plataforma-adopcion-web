@@ -2,7 +2,7 @@
 
 import { FormSection } from "@/components/ui/atoms/form-section";
 import { DataDisplay } from "@/components/ui/atoms/sections/data-display";
-import ImageSlider from "@/components/molecules/image-slider/image-slider";
+import ImageSlider from "@/components/ui/molecules/image-slider/image-slider";
 import { Pet } from "@/core/domain/models/shelter/pet";
 import { Grid, Badge } from "@mantine/core";
 import dayjs from "dayjs";
