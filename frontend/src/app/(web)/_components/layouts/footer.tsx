@@ -6,7 +6,7 @@ import { motion, type Variants } from "motion/react";
 import { paymentMethods } from "@/app/(web)/_utils/data/paymentMethods";
 import { MdPets, MdLocationOn, MdPhone } from "react-icons/md";
 import { companyInfo } from "../../_utils/data/companyInfo.data";
-import Container from "@/components/atoms/container";
+import Container from "@/components/ui/atoms/container";
 import { headerData } from "@/core/shared/utils/web/data/header.data";
 import { notSpace } from "@/core/shared/helpers/notSpace";
 

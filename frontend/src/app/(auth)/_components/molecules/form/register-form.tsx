@@ -4,8 +4,8 @@ import { motion } from "motion/react";
 import { useState } from "react";
 import FormContainer, {
   FormContainerFormikSubmit,
-} from "@/components/molecules/form-container";
-import Input from "@/components/atoms/input";
+} from "@/components/ui/molecules/form-container";
+import Input from "@/components/ui/atoms/input";
 import { RegisterDto } from "@/core/application/features/system/auth/dtos/register.dto";
 import { getFieldError } from "@/core/shared/helpers/getFieldError";
 import {
@@ -21,9 +21,9 @@ import {
 import useConfirmOptUser from "@/features/system/auth/hooks/modal/use-confirm-opt-user";
 import { montserrat } from "@/lib/fonts/monserrat";
 import { Flex, PinInput } from "@mantine/core";
-import ButtonUI from "@/components/atoms/button/button-ui";
+import ButtonUI from "@/components/ui/atoms/button/button-ui";
 import { useTokenStore } from "@/core/application/hooks/session/useToken";
-import { Alert } from "@/components/atoms/alert";
+import { Alert } from "@/components/ui/atoms/alert";
 import useCompleteRegistration from "@/features/system/auth/hooks/modal/use-complete-registration";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";

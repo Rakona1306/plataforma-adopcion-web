@@ -73,12 +73,12 @@ vi.mock("@/app/(web)/_utils/data/companyInfo.data", () => ({
 }));
 
 // ---- form building blocks: render children/inputs minimally --------------
-vi.mock("@/components/molecules/form-container", () => ({
+vi.mock("@/components/ui/molecules/form-container", () => ({
   __esModule: true,
   default: ({ children }: any) => <form>{children}</form>,
 }));
 
-vi.mock("@/components/atoms/input", () => ({
+vi.mock("@/components/ui/atoms/input", () => ({
   __esModule: true,
   default: ({ label, name }: any) => (
     <label>

@@ -6,7 +6,7 @@ import { BiCheck, BiHeart } from "react-icons/bi";
 import { Card, CardContent } from "@/app/(web)/_components/molecules/card/card";
 import Button from "@/app/(web)/_components/atoms/button/button";
 import { paymentMethods } from "@/app/(web)/_utils/data/paymentMethods";
-import Container from "@/components/atoms/container";
+import Container from "@/components/ui/atoms/container";
 
 export default function DonationsPage() {
   const [selectedAmount, setSelectedAmount] = useState(50);

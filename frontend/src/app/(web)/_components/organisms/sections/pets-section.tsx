@@ -1,6 +1,6 @@
 import Title from "../../atoms/title";
 import { PetCard } from "../../atoms/card/pet-card-item";
-import Container from "@/components/atoms/container";
+import Container from "@/components/ui/atoms/container";
 import { useGetPaginateSearch } from "@/features/shelter/pet/hooks/use-get-paginate-search";
 
 export default function PetsSection() {

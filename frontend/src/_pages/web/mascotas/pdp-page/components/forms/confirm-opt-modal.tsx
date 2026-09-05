@@ -1,5 +1,5 @@
-import ButtonUI from "@/components/atoms/button/button-ui";
-import FormContainer from "@/components/molecules/form-container";
+import ButtonUI from "@/components/ui/atoms/button/button-ui";
+import FormContainer from "@/components/ui/molecules/form-container";
 import { useTokenStore } from "@/core/application/hooks/session/useToken";
 import { useModal } from "@/core/application/hooks/ui/useModal";
 import {

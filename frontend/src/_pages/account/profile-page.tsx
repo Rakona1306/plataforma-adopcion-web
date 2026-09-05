@@ -1,7 +1,7 @@
 "use client";
 import Title from "@/app/(web)/_components/atoms/title";
-import Container from "@/components/atoms/container";
-import { FormSection } from "@/components/atoms/form-section";
+import Container from "@/components/ui/atoms/container";
+import { FormSection } from "@/components/ui/atoms/form-section";
 // import usePaginateAdoptionRequest from "@/features/business/adoption/hooks/use-paginate-adoption-request";
 import { useProfile } from "@/features/system/auth/hooks/useProfile";
 import { Grid } from "@mantine/core";

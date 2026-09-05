@@ -1,7 +1,7 @@
-import Input from "@/components/atoms/input";
-import Textarea from "@/components/atoms/text-area";
-import BooleanSelect from "@/components/molecules/boolean-select";
-import FormContainer from "@/components/molecules/form-container";
+import Input from "@/components/ui/atoms/input";
+import Textarea from "@/components/ui/atoms/text-area";
+import BooleanSelect from "@/components/ui/molecules/boolean-select";
+import FormContainer from "@/components/ui/molecules/form-container";
 import {
   RoleUpdateDto,
   RoleUpdateSchema,

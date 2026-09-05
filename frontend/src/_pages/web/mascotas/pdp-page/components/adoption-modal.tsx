@@ -1,10 +1,10 @@
 "use client";
 
-import ButtonUI from "@/components/atoms/button/button-ui";
-import Input from "@/components/atoms/input";
-import { ToggleField } from "@/components/atoms/toggle-field";
-import FormContainer from "@/components/molecules/form-container";
-import SelectInput from "@/components/organisms/select-input";
+import ButtonUI from "@/components/ui/atoms/button/button-ui";
+import Input from "@/components/ui/atoms/input";
+import { ToggleField } from "@/components/ui/atoms/toggle-field";
+import FormContainer from "@/components/ui/molecules/form-container";
+import SelectInput from "@/components/ui/organisms/select-input";
 import { useModal } from "@/core/application/hooks/ui/useModal";
 import { limaDistricts } from "@/core/shared/constants/distritcts";
 import { PetPublic } from "@/features/shelter/pet/model/pet-pub.model";
@@ -17,7 +17,7 @@ import {
   CreatePubReqAdoption,
   createPubRequestAdoptionSchema,
 } from "@/features/business/request-adoptions/dto/web/create-request-adoption.dto";
-import { Alert } from "@/components/atoms/alert";
+import { Alert } from "@/components/ui/atoms/alert";
 
 interface AdoptionModalProps {
   pet?: PetPublic;

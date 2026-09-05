@@ -151,7 +151,7 @@ import Title from "../../atoms/title";
 import Button from "../../atoms/button/button";
 import { BsWhatsapp } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
-import Container from "@/components/atoms/container";
+import Container from "@/components/ui/atoms/container";
 
 export default function AboutSection() {
   const [isVisible, setIsVisible] = useState(false);

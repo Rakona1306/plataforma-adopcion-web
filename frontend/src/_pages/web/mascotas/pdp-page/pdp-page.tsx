@@ -16,7 +16,7 @@ import { companyInfo } from "@/app/(web)/_utils/data/companyInfo.data";
 import { notSpace } from "@/core/shared/helpers/notSpace";
 import { montserrat } from "@/lib/fonts/monserrat";
 import useGetPetRecommend from "@/features/shelter/pet/hooks/use-get-pet-recommend";
-import { RelatedPets } from "@/components/organisms/related-pets";
+import { RelatedPets } from "@/components/ui/organisms/related-pets";
 import { InfoIcon } from "lucide-react";
 import { BsWhatsapp } from "react-icons/bs";
 import { useModal } from "@/core/application/hooks/ui/useModal";

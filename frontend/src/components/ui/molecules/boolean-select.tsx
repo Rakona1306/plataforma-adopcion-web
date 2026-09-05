@@ -3,7 +3,7 @@
 
 import { useField, useFormikContext } from "formik";
 import { BiCheckCircle, BiXCircle } from "react-icons/bi";
-import { SelectOptionButton } from "../atoms/select-option-button";
+import { SelectOptionButton } from "../../ui/atoms/select-option-button";
 
 interface BooleanSelectProps {
   name: string;

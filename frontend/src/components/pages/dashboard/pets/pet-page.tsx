@@ -6,9 +6,7 @@ import { ActionButtons } from "@/app/dashboard/_components/organism/action-butto
 import FilterBar from "@/app/dashboard/_components/organism/filter-bar";
 import { Badge, Divider } from "@mantine/core";
 import useActionsPet from "./hooks/useActionsPet";
-import CustomTable, {
-  TableColumn,
-} from "@/app/dashboard/_components/organism/custom-table";
+import { TableColumn } from "@/components/ui/organisms/table/table-custom";
 import { FilterItemConfig } from "@/app/dashboard/_interfaces/ui/filters";
 import { formatDateTime } from "@/core/shared/helpers/formatDateTime";
 import { Pet } from "@/core/domain/models/shelter/pet";
@@ -24,6 +22,7 @@ import { useModal } from "@/core/application/hooks/ui/useModal";
 import { formatDate } from "@/shared/utils/date/formatDate";
 import { AiOutlineMedicineBox } from "react-icons/ai";
 import { MdVaccines } from "react-icons/md";
+import CustomTable from "@/components/ui/organisms/table/table-custom";
 
 export default function PetPage() {
   const { actionsI } = useActionsPet();

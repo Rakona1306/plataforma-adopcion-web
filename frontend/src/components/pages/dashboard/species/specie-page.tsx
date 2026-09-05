@@ -10,7 +10,7 @@ import { Divider } from "@mantine/core";
 import FilterBar from "@/app/dashboard/_components/organism/filter-bar";
 import CustomTable, {
   TableColumn,
-} from "@/app/dashboard/_components/organism/custom-table";
+} from "@/components/ui/organisms/table/table-custom";
 import { Specie } from "@/core/domain/models/shelter/specie";
 import { useGetAllSpecie } from "@/core/application/features/shelter/species/hooks/useGetAllSpecie";
 import { FilterItemConfig } from "@/app/dashboard/_interfaces/ui/filters";

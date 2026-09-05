@@ -1,5 +1,5 @@
 import Title from "@/app/(web)/_components/atoms/title";
-import ButtonUI from "@/components/atoms/button/button-ui";
+import ButtonUI from "@/components/ui/atoms/button/button-ui";
 
 interface BannerVoluntariadoProps {
   title?: string;
