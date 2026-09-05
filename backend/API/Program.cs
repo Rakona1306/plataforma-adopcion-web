@@ -1,4 +1,5 @@
 using API.Application.Configuration;
+using API.Application.Services.Organization.Users;
 using API.Infrastructure.Configuration;
 using API.Infrastructure.Db;
 using API.Infrastructure.Extensions.Features;
@@ -16,23 +17,25 @@ using System.Threading.RateLimiting;
 
 var envPath = Path.Combine(Directory.GetCurrentDirectory(), "production.env");
 
-Console.WriteLine($"CurrentDirectory: {Directory.GetCurrentDirectory()}");
-Console.WriteLine($"EnvPath: {envPath}");
-Console.WriteLine($"Env Exists: {File.Exists(envPath)}");
+Console.WriteLine($"[DEBUG] Buscando .env en: {envPath}");
+Console.WriteLine($"[DEBUG] ¿Existe el archivo?: {File.Exists(envPath)}");
 
 DotEnvLoader.Load(envPath);
-
-Console.WriteLine(
-    Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection")
-);
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.AddEnvironmentVariables();
 
+Console.WriteLine($"[DEBUG] DniApiBaseUrl desde Configuration = '{builder.Configuration["ExternalApiSettings:DniApiBaseUrl"]}'");
+Console.WriteLine($"[DEBUG] Variable de entorno directa = '{Environment.GetEnvironmentVariable("ExternalApiSettings__DniApiBaseUrl")}'");
+
 builder.Configuration.AddEnvironmentVariables();
 builder.Services.Configure<JwtOptions>(
     builder.Configuration.GetSection("Jwt")
+);
+
+builder.Services.Configure<ExternalApiSettings>(
+    builder.Configuration.GetSection("ExternalApiSettings")
 );
 
 builder.Services.AddAutoMapperFromApplication(
