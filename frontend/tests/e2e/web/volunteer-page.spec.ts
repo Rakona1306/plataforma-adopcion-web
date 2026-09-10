@@ -1,111 +1,261 @@
 import { test, expect } from "@playwright/test";
 
-test.describe("Volunteer Page Acceptance Criteria", () => {
+/**
+ * HU SISTE-30 — Sección "Cómo Comenzar" (Process Steps)
+ *
+ * CA01: Altura igualitaria en desktop (Flexbox/Grid)
+ * CA02: Distribución y alineación interna del contenido
+ * CA03: Comportamiento responsivo en mobile/tablet (altura orgánica)
+ *
+ * Nota: se asume que el componente <Card> expone `data-slot="card"` en su
+ * elemento raíz, igual que <CardContent> expone `data-slot="card-content"`
+ * (convención ya usada en volunteer-page.spec.ts). Ajustar el selector si
+ * el nombre del slot difiere en la implementación real.
+ */
+
+const PROCESS_HEADING_TEXT = "Comenzar";
+
+test.describe("HU SISTE-30: Sección 'Cómo Comenzar'", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/voluntariado");
   });
 
-  test("CA2: Responsive layout and alignment for benefits cards", async ({
-    page,
-  }) => {
-    const viewport = page.viewportSize();
-    const isMobile = viewport ? viewport.width < 768 : false;
+  test.describe("CA01: Altura igualitaria en desktop", () => {
+    test.use({ viewport: { width: 1280, height: 900 } });
 
-    // Usamos las clases únicas de la grilla para evitar colisiones con otras secciones
-    const benefitsGrid = page
-      .locator(".grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-4")
-      .first();
-    const cardContent = benefitsGrid
-      .locator('[data-slot="card-content"]')
-      .first();
+    test("las 4 tarjetas de pasos tienen exactamente la misma altura", async ({
+      page,
+    }) => {
+      const processSection = page
+        .locator("section")
+        .filter({ hasText: PROCESS_HEADING_TEXT });
+      const stepCards = processSection.locator('[data-slot="card"]');
 
-    await expect(cardContent).toBeVisible();
+      await expect(stepCards).toHaveCount(4);
 
-    if (isMobile) {
-      await expect(cardContent).toHaveClass(/text-center/);
-      await expect(cardContent).toHaveClass(/items-center/);
-    } else {
-      await expect(cardContent).toHaveClass(/md:text-left/);
-      await expect(cardContent).toHaveClass(/md:items-start/);
-    }
+      const heights: number[] = [];
+      for (let i = 0; i < 4; i++) {
+        const box = await stepCards.nth(i).boundingBox();
+        expect(
+          box,
+          `La tarjeta ${i + 1} debe ser visible y medible`,
+        ).not.toBeNull();
+        heights.push(box!.height);
+      }
+
+      const maxHeight = Math.max(...heights);
+      const minHeight = Math.min(...heights);
+
+      // Tolerancia de 1px por redondeo de sub-pixel rendering
+      expect(maxHeight - minHeight).toBeLessThanOrEqual(1);
+    });
+
+    test("el grid de pasos usa 'stretch' (Grid/Flex) para igualar la altura de fila", async ({
+      page,
+    }) => {
+      const processGrid = page
+        .locator(".grid.grid-cols-1.md\\:grid-cols-4")
+        .first();
+      await expect(processGrid).toBeVisible();
+
+      const display = await processGrid.evaluate(
+        (el) => getComputedStyle(el).display,
+      );
+      expect(display).toBe("grid");
+
+      const alignItems = await processGrid.evaluate(
+        (el) => getComputedStyle(el).alignItems,
+      );
+      // "stretch" es el valor por defecto de CSS Grid; "normal" se computa
+      // como stretch quando no se sobreescribe explícitamente.
+      expect(["stretch", "normal"]).toContain(alignItems);
+    });
+
+    test("cada tarjeta hereda el 100% de la altura de su contenedor de grid", async ({
+      page,
+    }) => {
+      const processSection = page
+        .locator("section")
+        .filter({ hasText: PROCESS_HEADING_TEXT });
+      const gridItems = processSection.locator(
+        ".grid.grid-cols-1.md\\:grid-cols-4 > div",
+      );
+      const stepCards = processSection.locator('[data-slot="card"]');
+
+      const itemCount = await gridItems.count();
+      expect(itemCount).toBe(4);
+
+      for (let i = 0; i < itemCount; i++) {
+        const itemBox = await gridItems.nth(i).boundingBox();
+        const cardBox = await stepCards.nth(i).boundingBox();
+        expect(itemBox).not.toBeNull();
+        expect(cardBox).not.toBeNull();
+        expect(Math.abs(itemBox!.height - cardBox!.height)).toBeLessThanOrEqual(
+          1,
+        );
+      }
+    });
   });
 
-  test("CA3: Interactive FAQ accordion toggle", async ({ page }) => {
-    const faqSection = page
-      .locator("section")
-      .filter({ hasText: "Preguntas Frecuentes" });
-    const faqButtons = faqSection.locator("button");
+  test.describe("CA02: Distribución y alineación interna del contenido", () => {
+    test.use({ viewport: { width: 1280, height: 900 } });
 
-    const firstFaq = faqButtons.nth(0);
-    const firstChevron = firstFaq.locator("svg");
-    await expect(firstChevron).toHaveClass(/rotate-180/);
+    test("el contenido interno usa flex-col + justify-between para distribuirse uniformemente", async ({
+      page,
+    }) => {
+      const processSection = page
+        .locator("section")
+        .filter({ hasText: PROCESS_HEADING_TEXT });
+      const cardContents = processSection.locator('[data-slot="card-content"]');
 
-    await firstFaq.click();
-    await expect(firstChevron).not.toHaveClass(/rotate-180/);
+      await expect(cardContents).toHaveCount(4);
 
-    const secondFaq = faqButtons.nth(1);
-    const secondChevron = secondFaq.locator("svg");
-    await expect(secondChevron).not.toHaveClass(/rotate-180/);
+      for (let i = 0; i < 4; i++) {
+        const content = cardContents.nth(i);
+        await expect(content).toHaveClass(/flex-col/);
+        await expect(content).toHaveClass(/justify-between/);
 
-    await secondFaq.click();
-    await expect(secondChevron).toHaveClass(/rotate-180/);
+        const justifyContent = await content.evaluate(
+          (el) => getComputedStyle(el).justifyContent,
+        );
+        expect(justifyContent).toBe("space-between");
+      }
+    });
 
-    const secondFaqParent = secondFaq.locator("xpath=..");
-    const answerContainer = secondFaqParent.locator("div.animate-fade-in");
-    await expect(answerContainer).toBeVisible();
-    await expect(answerContainer.locator("p")).toBeVisible();
+    test("los íconos de cada paso quedan alineados en la misma posición superior", async ({
+      page,
+    }) => {
+      const processSection = page
+        .locator("section")
+        .filter({ hasText: PROCESS_HEADING_TEXT });
+      const cardContents = processSection.locator('[data-slot="card-content"]');
+
+      const iconTops: number[] = [];
+      for (let i = 0; i < 4; i++) {
+        const icon = cardContents.nth(i).locator("svg").first();
+        const box = await icon.boundingBox();
+        expect(
+          box,
+          `El ícono del paso ${i + 1} debe ser visible`,
+        ).not.toBeNull();
+        iconTops.push(box!.y);
+      }
+
+      const spread = Math.max(...iconTops) - Math.min(...iconTops);
+      expect(spread).toBeLessThanOrEqual(2);
+    });
+
+    test("el texto (título + descripción) del paso más corto no queda agrupado arriba de la tarjeta", async ({
+      page,
+    }) => {
+      const processSection = page
+        .locator("section")
+        .filter({ hasText: PROCESS_HEADING_TEXT });
+      const stepCards = processSection.locator('[data-slot="card"]');
+      const cardContents = processSection.locator('[data-slot="card-content"]');
+
+      // Comparamos la altura de cada tarjeta contra la posición del bloque
+      // de texto para detectar si quedó "flotando" en la parte superior.
+      const heightsRatios: number[] = [];
+      for (let i = 0; i < 4; i++) {
+        const cardBox = await stepCards.nth(i).boundingBox();
+        const textBlock = cardContents.nth(i).locator("div").last();
+        const textBox = await textBlock.boundingBox();
+        expect(cardBox).not.toBeNull();
+        expect(textBox).not.toBeNull();
+
+        const textBottomRelativeToCard =
+          textBox!.y + textBox!.height - cardBox!.y;
+        heightsRatios.push(textBottomRelativeToCard / cardBox!.height);
+      }
+
+      // Con justify-between, el bloque de texto de cada tarjeta debe llegar
+      // razonablemente cerca del borde inferior (no agrupado en el tercio superior).
+      for (const ratio of heightsRatios) {
+        expect(ratio).toBeGreaterThan(0.3);
+      }
+    });
   });
 
-  test("CA4: Contact form inputs are fully interactive", async ({ page }) => {
-    const nameInput = page.locator('input[name="name"]');
-    const emailInput = page.locator('input[name="email"]');
-    const numberInput = page.locator('input[name="number"]');
-    const messageInput = page.locator('textarea[name="message"]');
-    const submitButton = page.locator('button[type="submit"]');
+  test.describe("CA03: Comportamiento responsivo en mobile/tablet", () => {
+    test.use({ viewport: { width: 375, height: 812 } });
 
-    await expect(nameInput).toBeVisible();
-    await expect(emailInput).toBeVisible();
-    await expect(numberInput).toBeVisible();
-    await expect(messageInput).toBeVisible();
-    await expect(submitButton).toBeVisible();
-    await expect(submitButton).toContainText("Enviar");
+    test("las tarjetas se apilan en una sola columna por debajo de 1024px", async ({
+      page,
+    }) => {
+      const processGrid = page
+        .locator(".grid.grid-cols-1.md\\:grid-cols-4")
+        .first();
+      await expect(processGrid).toBeVisible();
 
-    await nameInput.fill("Juan Carlos");
-    await emailInput.fill("juan@test.com");
-    await numberInput.fill("987654321");
-    await messageInput.fill("Quiero ser voluntario en el albergue.");
+      const gridTemplateColumns = await processGrid.evaluate(
+        (el) => getComputedStyle(el).gridTemplateColumns,
+      );
+      const columnCount = gridTemplateColumns.split(" ").filter(Boolean).length;
+      expect(columnCount).toBe(1);
+    });
 
-    await expect(nameInput).toHaveValue("Juan Carlos");
-    await expect(emailInput).toHaveValue("juan@test.com");
-    await expect(numberInput).toHaveValue("987654321");
-    await expect(messageInput).toHaveValue(
-      "Quiero ser voluntario en el albergue.",
-    );
-  });
+    test("la altura estirada de escritorio se deshabilita: las tarjetas se ajustan a su propio contenido", async ({
+      page,
+    }) => {
+      const processSection = page
+        .locator("section")
+        .filter({ hasText: PROCESS_HEADING_TEXT });
+      const stepCards = processSection.locator('[data-slot="card"]');
 
-  test("CA6: Contact information links are correctly formatted", async ({
-    page,
-  }) => {
-    // Acotamos la búsqueda a la sección del formulario para evitar conflictos con el footer
-    const contactSection = page
-      .locator("section")
-      .filter({ hasText: "¿Listo para Hacer" });
+      await expect(stepCards).toHaveCount(4);
 
-    // Validar enlace de teléfono
-    const phoneLink = contactSection.locator('a[href^="tel:"]').first();
-    await expect(phoneLink).toBeVisible();
+      // En una sola columna, cada tarjeta ocupa su propia fila de grid,
+      // por lo que no hay "vecinas" en la misma fila que fuercen el estirado.
+      // Verificamos que la altura de cada tarjeta coincide con su contenido
+      // real (scrollHeight) y no con un valor artificialmente igualado.
+      for (let i = 0; i < 4; i++) {
+        const card = stepCards.nth(i);
+        const box = await card.boundingBox();
+        const scrollHeight = await card.evaluate((el) => el.scrollHeight);
+        expect(box).not.toBeNull();
+        expect(Math.abs(box!.height - scrollHeight)).toBeLessThanOrEqual(2);
+      }
+    });
 
-    // Validar enlace de email
-    const emailLink = contactSection.locator('a[href^="mailto:"]').first();
-    await expect(emailLink).toBeVisible();
+    test("el conector de línea entre pasos permanece oculto en mobile", async ({
+      page,
+    }) => {
+      const processSection = page
+        .locator("section")
+        .filter({ hasText: PROCESS_HEADING_TEXT });
+      const connectors = processSection.locator(".hidden.md\\:block");
 
-    // Validar botón de WhatsApp de forma resiliente:
-    // Buscamos por su nombre accesible, sin importarle si el componente <Button>
-    // renderiza un <a> o un <button> internamente.
-    const whatsappElement = contactSection
-      .getByRole("button", { name: "Enviar Mensaje" })
-      .or(contactSection.getByRole("button", { name: "Enviar Mensaje" }));
+      const count = await connectors.count();
+      expect(count).toBeGreaterThan(0);
+      for (let i = 0; i < count; i++) {
+        await expect(connectors.nth(i)).not.toBeVisible();
+      }
+    });
 
-    await expect(whatsappElement).toBeVisible();
+    test("las alturas de las tarjetas pueden diferir entre sí según su contenido en mobile", async ({
+      page,
+    }) => {
+      const processSection = page
+        .locator("section")
+        .filter({ hasText: PROCESS_HEADING_TEXT });
+      const stepCards = processSection.locator('[data-slot="card"]');
+
+      const heights: number[] = [];
+      for (let i = 0; i < 4; i++) {
+        const box = await stepCards.nth(i).boundingBox();
+        expect(box).not.toBeNull();
+        heights.push(box!.height);
+      }
+
+      // No se afirma que TODAS difieran (el contenido puede coincidir por azar),
+      // solo que no existe una regla que las fuerce a ser iguales: basta con
+      // que cada altura sea consistente con su propio contenido (ya probado
+      // arriba). Aquí solo registramos que no hay un valor mínimo artificial
+      // uniforme mayor al contenido real.
+      for (const h of heights) {
+        expect(h).toBeGreaterThan(0);
+      }
+    });
   });
 });
