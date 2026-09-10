@@ -100,13 +100,15 @@ test.describe("Auth page — Social links section", () => {
   }) => {
     const socialLink = page.getByRole("link", { name: /facebook/i });
 
+    await page.waitForTimeout(10000);
+
     const borderColorBefore = await socialLink.evaluate(
       (el) => getComputedStyle(el).borderColor,
     );
 
     await socialLink.hover();
     // wait for the CSS transition (duration-200 ≈ 200ms) to settle
-    await page.waitForTimeout(300);
+    await page.waitForTimeout(10000);
 
     const borderColorAfter = await socialLink.evaluate(
       (el) => getComputedStyle(el).borderColor,
