@@ -19,11 +19,12 @@ import Title from "@/app/(web)/_components/atoms/title";
 import { companyInfo } from "@/app/(web)/_utils/data/companyInfo.data";
 import { MdOutlineEmail } from "react-icons/md";
 import Link from "next/link";
-import Container from "@/components/atoms/container";
-import FormContainer from "@/components/molecules/form-container";
-import Input from "@/components/atoms/input";
-import Textarea from "@/components/atoms/text-area";
+import Container from "@/components/ui/atoms/container";
+import FormContainer from "@/components/ui/molecules/form-container";
+import Input from "@/components/ui/atoms/input";
+import Textarea from "@/components/ui/atoms/text-area";
 import { notSpace } from "@/core/shared/helpers/notSpace";
+import BannerVoluntariado from "./includes/banner-voluntariado";
 
 const iconMap: Record<string, React.ComponentType<{ className: string }>> = {
   heart: BiHeart,
@@ -44,21 +45,8 @@ export default function VolunteerPage() {
   return (
     <main className="bg-white">
       {/* Header Section */}
-      <section className="pt-32 md:pt-42 pb-16 md:pb-24 px-4 md:px-6 bg-gradient-to-b from-primary/5 to-white">
-        <Container className="text-center space-y-4 md:space-y-6">
-          <Title htmlTag="h1" className=" text-foreground leading-tight">
-            {volunteerData.title}
-          </Title>
-          <p className="text-lg md:text-xl text-foreground/70 leading-relaxed">
-            {volunteerData.subtitle}
-          </p>
-          <div className="pt-4 md:pt-6 flex justify-center">
-            <Button className="text-lg font-bold py-4 px-6">
-              Comienza tu Aventura
-            </Button>
-          </div>
-        </Container>
-      </section>
+
+      <BannerVoluntariado />
 
       {/* Why Volunteer Section */}
       <section className="py-7 md:py-16 px-4 md:px-6 bg-white">
@@ -78,15 +66,17 @@ export default function VolunteerPage() {
               return (
                 <div key={index} className="group">
                   <Card className="bg-white border-primary/20 hover:border-primary/60 hover:shadow-xl transition-all duration-300 h-full">
-                    <CardContent className="p-6 md:p-8 space-y-4">
+                    <CardContent className="p-6 md:p-8 space-y-4 flex flex-col items-center text-center md:items-start md:text-left">
                       <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                         {IconComponent && (
                           <IconComponent className="w-7 h-7 text-primary" />
                         )}
                       </div>
+
                       <h3 className="text-lg md:text-xl font-bold text-foreground group-hover:text-primary transition-colors">
                         {benefit.title}
                       </h3>
+
                       <p className="text-sm md:text-base text-foreground/70">
                         {benefit.description}
                       </p>
@@ -235,19 +225,19 @@ export default function VolunteerPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-4  gap-4 md:gap-6">
             {volunteerData.process.map((item, index) => {
               const IconComponent = iconMap[item.icon];
               return (
-                <div key={index} className="relative">
+                <div key={index} className="relative flex ">
                   {/* Connector Line */}
                   {index < volunteerData.process.length - 1 && (
                     <div className="hidden md:block absolute left-[50%] top-16 w-full h-1 bg-gradient-to-r from-primary to-secondary transform -translate-x-1/2 z-0" />
                   )}
 
                   <div className="relative z-10">
-                    <Card className="bg-white border-primary/20 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
-                      <CardContent className="p-6 md:p-8 space-y-4 text-center">
+                    <Card className=" w-full h-full bg-white border-primary/20 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+                      <CardContent className=" flex flex-col justify-between p-6 md:p-8 space-y-4 text-center  ">
                         <div className="w-16 h-16 mx-auto rounded-full bg-primary flex items-center justify-center">
                           {IconComponent && (
                             <IconComponent className="w-8 h-8 text-white" />

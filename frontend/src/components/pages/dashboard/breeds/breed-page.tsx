@@ -5,7 +5,7 @@ import HeaderDashboard from "@/app/dashboard/_components/molecules/header-dashbo
 import { ActionButtons } from "@/app/dashboard/_components/organism/action-buttons";
 import CustomTable, {
   TableColumn,
-} from "@/app/dashboard/_components/organism/custom-table";
+} from "@/components/ui/organisms/table/table-custom";
 import FilterBar from "@/app/dashboard/_components/organism/filter-bar";
 import { Breed } from "@/core/domain/models/shelter/breed";
 import { Divider } from "@mantine/core";

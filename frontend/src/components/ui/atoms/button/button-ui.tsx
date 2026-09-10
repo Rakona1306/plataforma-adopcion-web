@@ -49,13 +49,13 @@ export default function ButtonUI({
       classNames={{
         root: cn(
           // 1. Estilos estructurales y estables comunes a todos los botones
-          "font-medium! px-6! py-3! h-auto! rounded-md! relative! transition-all! duration-200! flex! items-center! justify-center! gap-2! active:scale-[0.98]!",
+          "font-medium! px-6! py-4! h-auto! rounded-lg! relative! transition-all! duration-200! flex! items-center! justify-center! gap-2! active:scale-[0.98]!",
           // 2. Aplicación dinámica del modo o el estado deshabilitado
           disabled || props.loading ? disabledStyles : intentStyles[intent],
           // 3. Clases externas inyectadas al vuelo que pueden pisar lo anterior
           rootClassName,
         ),
-        label: cn("flex gap-2 items-center", labelClassName),
+        label: cn("flex gap-2 items-center text-md font-bold", labelClassName),
       }}
     >
       {children}

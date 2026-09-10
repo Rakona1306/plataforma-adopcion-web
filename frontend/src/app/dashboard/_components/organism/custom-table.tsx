@@ -1,15 +1,18 @@
 // src/components/organisms/custom-table.tsx
-import TableHeaderCell from "../atoms/table-header-cell";
-import TableBodyCell from "../atoms/table-body-cell";
-import TableActions, { RowAction } from "../molecules/table-actions";
-import { montserrat } from "@/lib/fonts/monserrat";
-import { TablePagination } from "../atoms/table-pagination";
 import { Skeleton } from "@mantine/core";
+import { cn } from "@/lib/utils";
+import TableActions, {
+  RowAction,
+} from "@/app/dashboard/_components/molecules/table-actions";
+import { TablePagination } from "@/app/dashboard/_components/atoms/table-pagination";
+import TableGridRow from "@/components/ui/atoms/table/table-grid-row";
+import TableMessageRow from "@/components/ui/atoms/table/table-message-row";
+import TableHeaderCell from "@/components/ui/atoms/table/table-header-cell";
+import TableBodyCell from "@/components/ui/atoms/table/table-body-cell";
 
 export interface TableColumn<T> {
   key: string;
   label: string;
-  // render es opcional. Si no viene, renderiza el texto plano de la propiedad.
   render?: (row: T) => React.ReactNode;
 }
 
@@ -23,6 +26,13 @@ interface CustomTableProps<T> {
   page?: number;
   totalItems?: number;
   onPageChange?: (page: number) => void;
+
+  // 🎨 Props de personalización de estilos (Escalabilidad)
+  containerClassName?: string;
+  tableClassName?: string;
+  theadClassName?: string;
+  tbodyClassName?: string;
+  trClassName?: string;
 }
 
 export default function CustomTable<T>({
@@ -35,63 +45,90 @@ export default function CustomTable<T>({
   page,
   totalItems,
   onPageChange,
+  containerClassName,
+  tableClassName,
+  theadClassName,
+  tbodyClassName,
+  trClassName,
 }: CustomTableProps<T>) {
+  const hasActions = !!(actions && actions.length > 0);
+
   return (
-    <div className="w-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
-      <div className="overflow-x-auto">
-        <table className="w-full block lg:table">
-          {/* ENCABEZADO: Se oculta por completo en móviles */}
-          <thead className="hidden lg:table-header-group">
-            <tr>
+    <div className={cn("w-full overflow-hidden", containerClassName)}>
+      <div className="overflow-x-auto p-2">
+        {/* Contenedor "table" */}
+        <div role="table" className={cn("w-full", tableClassName)}>
+          {/* ENCABEZADO ("thead") */}
+          <div
+            role="rowgroup"
+            className={cn(
+              "hidden lg:block bg-primary border border-gray-200 shadow-xl rounded-xl",
+              theadClassName,
+            )}
+          >
+            <TableGridRow
+              columnsCount={hasActions ? columns.length + 1 : columns.length}
+              hasActions={hasActions}
+            >
               {columns.map((col) => (
                 <TableHeaderCell key={col.key} label={col.label} />
               ))}
-              {actions && actions.length > 0 && (
-                <th
-                  className={`px-6 py-4 bg-primary text-left lg:text-center w-16 text-white font-semibold ${montserrat.className}`}
-                >
-                  Acciones
-                </th>
-              )}
-            </tr>
-          </thead>
+              {hasActions && <TableHeaderCell label="Acciones" />}
+            </TableGridRow>
+          </div>
 
-          {/* CUERPO: Se transforma en bloques apilados en móvil */}
-          <tbody className="block lg:table-row-group divide-y divide-gray-100">
+          {/* CUERPO ("tbody") */}
+          <div
+            role="rowgroup"
+            className={cn(
+              "flex flex-col lg:block gap-4 lg:gap-0 divide-y-0 lg:divide-y lg:divide-gray-100 mt-4 lg:mt-5 shadow-sm shadow-slate-500 border-2 border-slate-200 bg-white rounded-xl ",
+              tbodyClassName,
+            )}
+          >
             {isError ? (
-              <tr>
-                <td
-                  colSpan={columns.length}
-                  className="p-10 text-center text-red-500"
-                >
-                  Error al cargar datos.
-                </td>
-              </tr>
+              <TableMessageRow className={cn("text-red-500", trClassName)}>
+                Error al cargar datos.
+              </TableMessageRow>
             ) : isLoading ? (
-              <tr>
+              <TableGridRow
+                columnsCount={hasActions ? columns.length + 1 : columns.length}
+                hasActions={hasActions}
+                className={trClassName}
+              >
                 {columns.map((col) => (
-                  <td key={col.key} className="p-12 text-center text-gray-400">
+                  <div
+                    role="cell"
+                    key={col.key}
+                    className="lg:p-12 text-center text-gray-400"
+                  >
                     <Skeleton height={40} width={"100%"} />
-                  </td>
+                  </div>
                 ))}
-                <td>
-                  <Skeleton height={40} width={"100%"} />
-                </td>
-              </tr>
+                {hasActions && (
+                  <div
+                    role="cell"
+                    className="p-4 lg:p-12 text-center text-gray-400"
+                  >
+                    <Skeleton height={40} width={"100%"} />
+                  </div>
+                )}
+              </TableGridRow>
             ) : data.length === 0 ? (
-              <tr>
-                <td
-                  colSpan={columns.length}
-                  className="p-12 text-center text-gray-400"
-                >
-                  Sin registros.
-                </td>
-              </tr>
+              <TableMessageRow className={trClassName}>
+                Sin registros.
+              </TableMessageRow>
             ) : (
               data.map((row) => (
-                <tr
+                <TableGridRow
                   key={keyExtractor(row)}
-                  className="block lg:table-row lg:hover:bg-gray-50/50 transition-colors p-4 lg:p-0 mb-4 lg:mb-0 border border-gray-200 lg:border-none rounded-xl lg:rounded-none bg-white relative"
+                  columnsCount={
+                    hasActions ? columns.length + 1 : columns.length
+                  }
+                  hasActions={hasActions}
+                  className={cn(
+                    " transition-colors duration-300 p-4 lg:p-0 border border-gray-200 lg:border-none rounded-xl lg:rounded-xl bg-white relative cursor-default",
+                    trClassName,
+                  )}
                 >
                   {columns.map((col) => (
                     <TableBodyCell key={col.key} label={col.label}>
@@ -105,19 +142,19 @@ export default function CustomTable<T>({
                   ))}
 
                   {/* Acciones de la fila */}
-                  {actions && actions.length > 0 && (
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-right block lg:table-cell border-none pt-4 lg:pt-4">
-                      {/* En móvil posicionamos el menú flotante arriba a la derecha */}
-                      <div className="absolute top-2 right-2 lg:relative lg:flex lg:justify-center lg:top-0 lg:right-0">
-                        <TableActions actions={actions} rowData={row} />
-                      </div>
-                    </td>
+                  {hasActions && (
+                    <div
+                      role="cell"
+                      className="flex justify-end lg:justify-center items-center px-0 lg:px-6 py-2 lg:py-4 text-sm absolute top-2 right-2 lg:static"
+                    >
+                      <TableActions actions={actions!} rowData={row} />
+                    </div>
                   )}
-                </tr>
+                </TableGridRow>
               ))
             )}
-          </tbody>
-        </table>
+          </div>
+        </div>
       </div>
 
       <TablePagination

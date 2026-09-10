@@ -7,8 +7,8 @@ import { FaHeart, FaPaw } from "react-icons/fa";
 import { MdPets, MdVolunteerActivism, MdUpdate } from "react-icons/md";
 import { HiSparkles } from "react-icons/hi2";
 import Link from "next/link";
-import Container from "@/components/atoms/container";
-import Tag from "@/components/atoms/tag";
+import Container from "@/components/ui/atoms/container";
+import Tag from "@/components/ui/atoms/tag";
 import { sponsorshipData } from "@/core/shared/utils/web/data/sponsoship.data";
 
 /* ── icons per card (fallback if no img) ─────────────── */

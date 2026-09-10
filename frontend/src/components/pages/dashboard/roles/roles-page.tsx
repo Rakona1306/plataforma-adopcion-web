@@ -7,7 +7,7 @@ import { Divider } from "@mantine/core";
 import useActionsRole from "./hooks/useActionsRole";
 import CustomTable, {
   TableColumn,
-} from "@/app/dashboard/_components/organism/custom-table";
+} from "@/components/ui/organisms/table/table-custom";
 import { RowAction } from "@/app/dashboard/_components/molecules/table-actions";
 import { BiEditAlt, BiTrash } from "react-icons/bi";
 import { FilterItemConfig } from "@/app/dashboard/_interfaces/ui/filters";

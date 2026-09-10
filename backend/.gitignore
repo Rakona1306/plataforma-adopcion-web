@@ -167,6 +167,9 @@ backend/API/obj/
 backend/API/.vs/
 backend/API/.idea/
 
+API/[Bb]in/
+API/[Oo]bj/
+
 # Logs
 *.log
 

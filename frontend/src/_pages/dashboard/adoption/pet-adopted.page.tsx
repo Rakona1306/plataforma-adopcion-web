@@ -5,7 +5,7 @@ import HeaderDashboard from "@/app/dashboard/_components/molecules/header-dashbo
 import { RowAction } from "@/app/dashboard/_components/molecules/table-actions";
 import CustomTable, {
   TableColumn,
-} from "@/app/dashboard/_components/organism/custom-table";
+} from "@/components/ui/organisms/table/table-custom";
 import FilterBar from "@/app/dashboard/_components/organism/filter-bar";
 import { FilterItemConfig } from "@/app/dashboard/_interfaces/ui/filters";
 import { formatDateTime } from "@/core/shared/helpers/formatDateTime";

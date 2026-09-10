@@ -1,12 +1,12 @@
-import FormContainer from "@/components/molecules/form-container";
+import FormContainer from "@/components/ui/molecules/form-container";
 import { PetVaccine } from "../../model/pet-vaccine.model";
 import { PetVaccineUpdateDto } from "../../dto/pet-vaccine-update.dto";
 import { Button, Grid } from "@mantine/core";
-import Input from "@/components/atoms/input";
-import { SearchSelect } from "@/components/organisms/search-select";
+import Input from "@/components/ui/atoms/input";
+import { SearchSelect } from "@/components/ui/organisms/search-select";
 import { Vaccine } from "@/core/domain/models/shelter/vaccine";
 import { useGetAllVaccine } from "@/core/application/features/shelter/vaccines/hooks/useGetAllVaccine";
-import { FormikDateInputField } from "@/components/molecules/forms/formik-date-input";
+import { FormikDateInputField } from "@/components/ui/molecules/forms/formik-date-input";
 import useUpdatePetVaccineService from "../../hooks/useUpdatePetVaccine";
 import { petVaccineSchema } from "../../schemas/pet-vaccine.schema";
 import { useModal } from "@/core/application/hooks/ui/useModal";

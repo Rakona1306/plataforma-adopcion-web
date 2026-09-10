@@ -1,12 +1,12 @@
 // src/app/dashboard/usuarios/_components/update-user-form.tsx
 "use client";
 
-import { Alert } from "@/components/atoms/alert";
-import Input from "@/components/atoms/input";
-import BooleanSelect from "@/components/molecules/boolean-select";
-import FormContainer from "@/components/molecules/form-container";
-import { SearchSelect } from "@/components/organisms/search-select";
-import SelectInput from "@/components/organisms/select-input";
+import { Alert } from "@/components/ui/atoms/alert";
+import Input from "@/components/ui/atoms/input";
+import BooleanSelect from "@/components/ui/molecules/boolean-select";
+import FormContainer from "@/components/ui/molecules/form-container";
+import { SearchSelect } from "@/components/ui/organisms/search-select";
+import SelectInput from "@/components/ui/organisms/select-input";
 import { useGetAllRoles } from "@/core/application/features/organization/roles/hooks/useGetAllRoles";
 import {
   UserUpdateDto,
@@ -17,7 +17,7 @@ import { Role } from "@/core/domain/models/organization/role";
 import { User } from "@/core/domain/models/organization/user";
 import { limaDistricts } from "@/core/shared/constants/distritcts";
 import { Grid } from "@mantine/core";
-import ButtonUI from "@/components/atoms/button/button-ui";
+import ButtonUI from "@/components/ui/atoms/button/button-ui";
 
 interface Props {
   user: User; // El usuario que viene de la tabla/lista

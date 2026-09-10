@@ -1,21 +1,21 @@
-import FormContainer from "@/components/molecules/form-container";
+import FormContainer from "@/components/ui/molecules/form-container";
 import { RequestAdoptionResponse } from "../dto/dashboard/request-adoption";
 import {
   UpdateRequestAdoptionDto,
   UpdateRequestAdoptionSchema,
 } from "../dto/dashboard/update-request-adoption";
 import { Grid } from "@mantine/core";
-import Input from "@/components/atoms/input";
-import SelectInput from "@/components/organisms/select-input";
+import Input from "@/components/ui/atoms/input";
+import SelectInput from "@/components/ui/organisms/select-input";
 import { limaDistricts } from "@/core/shared/constants/distritcts";
-import { ToggleField } from "@/components/atoms/toggle-field";
-import ButtonUI from "@/components/atoms/button/button-ui";
+import { ToggleField } from "@/components/ui/atoms/toggle-field";
+import ButtonUI from "@/components/ui/atoms/button/button-ui";
 import useUpdateRequestAdoption from "../hooks/dashboard/use-update-request-adoption";
 import { useModal } from "@/core/application/hooks/ui/useModal";
 import Swal from "sweetalert2";
 import { useQueryClient } from "@tanstack/react-query";
 import { QUERY_KEYS } from "@/shared/constants/queryKeys";
-import { Alert } from "@/components/atoms/alert";
+import { Alert } from "@/components/ui/atoms/alert";
 
 interface Props {
   requestAdoption: RequestAdoptionResponse;

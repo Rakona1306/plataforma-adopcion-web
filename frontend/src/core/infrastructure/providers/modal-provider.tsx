@@ -1,6 +1,6 @@
 "use client";
-import BodyModal from "@/components/atoms/body-modal";
-import HeaderModal from "@/components/atoms/header-modal";
+import BodyModal from "@/components/ui/atoms/body-modal";
+import HeaderModal from "@/components/ui/atoms/header-modal";
 import { Modal } from "@mantine/core";
 import { createContext, useCallback, useState } from "react";
 

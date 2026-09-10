@@ -1,22 +1,22 @@
 "use client";
 
-import FormContainer from "@/components/molecules/form-container";
+import FormContainer from "@/components/ui/molecules/form-container";
 import BodyDashboard from "../../_components/molecules/body-dashboard";
 import HeaderDashboard from "../../_components/molecules/header-dashboard";
-import Input from "@/components/atoms/input";
+import Input from "@/components/ui/atoms/input";
 import {
   PetCreateDto,
   petCreateSchema,
 } from "@/core/application/features/shelter/pets/dtos/pet-create-dto";
-import { SearchSelect } from "@/components/organisms/search-select";
-import { ChipField } from "@/components/atoms/chip-field";
-import { FormSection } from "@/components/atoms/form-section";
-import { TraitsPicker } from "@/components/atoms/trait-picker";
-import Textarea from "@/components/atoms/text-area";
-import { ToggleField } from "@/components/atoms/toggle-field";
+import { SearchSelect } from "@/components/ui/organisms/search-select";
+import { ChipField } from "@/components/ui/atoms/chip-field";
+import { FormSection } from "@/components/ui/atoms/form-section";
+import { TraitsPicker } from "@/components/ui/atoms/trait-picker";
+import Textarea from "@/components/ui/atoms/text-area";
+import { ToggleField } from "@/components/ui/atoms/toggle-field";
 import { useGetAllSpecie } from "@/core/application/features/shelter/species/hooks/useGetAllSpecie";
 import { useGetAllBreed } from "@/core/application/features/shelter/breeds/hooks/useGetAllBreed";
-import { MultiSearchSelect } from "@/components/atoms/multi-search-select";
+import { MultiSearchSelect } from "@/components/ui/atoms/multi-search-select";
 import { useGetAllTrait } from "@/core/application/features/shelter/traits/hooks/useGetAllTrait";
 import { useGetPetSizes } from "@/features/system/enums/pet-sizes/hooks/useGetPetSizes";
 import { useGetAllPetGenders } from "@/features/system/enums/pet-genders/hooks/useGetAllPetGenders";

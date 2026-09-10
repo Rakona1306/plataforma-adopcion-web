@@ -9,7 +9,7 @@ import { HiMenuAlt3 } from "react-icons/hi";
 import Button from "../../atoms/button/button";
 import ImageExpandable from "../../atoms/image-expandable";
 import { useDevice } from "@/core/application/hooks/useDevice";
-import Container from "@/components/atoms/container";
+import Container from "@/components/ui/atoms/container";
 import { headerData } from "@/core/shared/utils/web/data/header.data";
 import AuthCard from "./molecules/auth-card";
 

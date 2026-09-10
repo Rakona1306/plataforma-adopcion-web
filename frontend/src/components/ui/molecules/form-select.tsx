@@ -1,6 +1,6 @@
 "use client";
 
-import { SelectField, SelectOption } from "../atoms/select-field";
+import { SelectField, SelectOption } from "../../ui/atoms/select-field";
 
 interface FormSelectProps {
   label: string;

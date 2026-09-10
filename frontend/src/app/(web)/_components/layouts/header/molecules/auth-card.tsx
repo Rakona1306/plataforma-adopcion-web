@@ -2,7 +2,7 @@ import { FaDog } from "react-icons/fa";
 import Button from "../../../atoms/button/button";
 import { motion, Variants } from "motion/react";
 import { ProfileCard } from "../../../molecules/auth/profile-card";
-import { Skeleton } from "@/components/atoms/skeleton";
+import { Skeleton } from "@/components/ui/atoms/skeleton";
 import { useProfile } from "@/features/system/auth/hooks/useProfile";
 
 const ctaVariants: Variants = {

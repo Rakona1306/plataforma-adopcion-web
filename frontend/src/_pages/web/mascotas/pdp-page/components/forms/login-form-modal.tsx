@@ -1,7 +1,7 @@
 "use client";
-import { Alert } from "@/components/atoms/alert";
-import Input from "@/components/atoms/input";
-import FormContainer from "@/components/molecules/form-container";
+import { Alert } from "@/components/ui/atoms/alert";
+import Input from "@/components/ui/atoms/input";
+import FormContainer from "@/components/ui/molecules/form-container";
 import { LoginDto } from "@/core/application/features/system/auth/dtos/login.dto";
 import { getFieldError } from "@/core/shared/helpers/getFieldError";
 import { motion } from "motion/react";

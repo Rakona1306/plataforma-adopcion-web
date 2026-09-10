@@ -4,7 +4,7 @@ import React, { ReactNode, useEffect } from "react";
 
 import { createPortal } from "react-dom";
 import { Overlay } from "../atoms/overlay";
-import { ModalLayout } from "../layouts/modal-layout";
+import { ModalLayout } from "../../layouts/modal-layout";
 import { ModalHeader } from "../molecules/modal-header";
 
 interface ModalProps {

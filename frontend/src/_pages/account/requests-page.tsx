@@ -1,7 +1,7 @@
 "use client";
 
 import Title from "@/app/(web)/_components/atoms/title";
-import Container from "@/components/atoms/container";
+import Container from "@/components/ui/atoms/container";
 import AccountAdoptioRequestCard from "@/features/business/adoption/components/account/adoption-request-card";
 import usePaginateRequestAdoption from "@/features/business/request-adoptions/hooks/dashboard/use-paginate-request-adoption";
 import { useProfile } from "@/features/system/auth/hooks/useProfile";

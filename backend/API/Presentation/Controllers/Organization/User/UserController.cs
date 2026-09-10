@@ -6,7 +6,7 @@ using API.Infrastructure.Exceptions;
 using API.Presentation.Helpers;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Presentation.Controllers.Organization
+namespace API.Presentation.Controllers.Organization.User
 {
     [ApiController]
     [Route("api/users")]

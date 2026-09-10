@@ -1,4 +1,4 @@
-import Input from "@/components/atoms/input";
+import Input from "@/components/ui/atoms/input";
 import { useField } from "formik";
 import { useEffect } from "react";
 

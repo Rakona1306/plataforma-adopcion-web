@@ -2,10 +2,10 @@
 
 import BodyDashboard from "@/app/dashboard/_components/molecules/body-dashboard";
 import HeaderDashboard from "@/app/dashboard/_components/molecules/header-dashboard";
-import { FormSection } from "@/components/atoms/form-section";
-import FormContainer from "@/components/molecules/form-container";
-import { FormikDateInputField } from "@/components/molecules/forms/formik-date-input";
-import { SearchSelect } from "@/components/organisms/search-select";
+import { FormSection } from "@/components/ui/atoms/form-section";
+import FormContainer from "@/components/ui/molecules/form-container";
+import { FormikDateInputField } from "@/components/ui/molecules/forms/formik-date-input";
+import { SearchSelect } from "@/components/ui/organisms/search-select";
 import { useGetAllVaccine } from "@/core/application/features/shelter/vaccines/hooks/useGetAllVaccine";
 import { Vaccine } from "@/core/domain/models/shelter/vaccine";
 import PetVaccineCard from "@/features/shelter/pet-vaccine/components/cards/pet-vaccine-card";

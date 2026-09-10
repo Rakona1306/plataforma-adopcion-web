@@ -1,6 +1,6 @@
-import { Alert } from "@/components/atoms/alert";
-import Input from "@/components/atoms/input";
-import FormContainer from "@/components/molecules/form-container";
+import { Alert } from "@/components/ui/atoms/alert";
+import Input from "@/components/ui/atoms/input";
+import FormContainer from "@/components/ui/molecules/form-container";
 import { specieCreateSchema } from "@/core/application/features/shelter/species/dtos/specie-create-dto";
 import { TraitCreateDto } from "@/core/application/features/shelter/traits/dto/trait-create-dto";
 import { useCreateTrait } from "@/core/application/features/shelter/traits/hooks/useCreateTrait";

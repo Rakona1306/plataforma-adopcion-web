@@ -6,7 +6,7 @@ CHANGED=$(git diff --name-only origin/$BRANCH...HEAD 2>/dev/null || git diff --n
 
 if echo "$CHANGED" | grep -q '^frontend/'; then
   echo "-> Validando frontend..."
-  pnpm --prefix frontend typecheck && pnpm --prefix frontend build || exit 1
+  pnpm --prefix frontend test:e2e && pnpm --prefix frontend typecheck && pnpm --prefix frontend build || exit 1
 fi
 
 if echo "$CHANGED" | grep -q '^backend/'; then

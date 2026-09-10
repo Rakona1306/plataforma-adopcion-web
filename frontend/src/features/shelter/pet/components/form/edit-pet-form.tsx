@@ -16,15 +16,15 @@ import { useUpdatePet } from "@/core/application/features/shelter/pets/hooks/use
 import { useRouter } from "next/navigation";
 import HeaderDashboard from "@/app/dashboard/_components/molecules/header-dashboard";
 import BodyDashboard from "@/app/dashboard/_components/molecules/body-dashboard";
-import FormContainer from "@/components/molecules/form-container";
-import { FormSection } from "@/components/atoms/form-section";
-import Input from "@/components/atoms/input";
-import { SearchSelect } from "@/components/organisms/search-select";
-import { MultiSearchSelect } from "@/components/atoms/multi-search-select";
-import { ChipField } from "@/components/atoms/chip-field";
-import { ToggleField } from "@/components/atoms/toggle-field";
-import { TraitsPicker } from "@/components/atoms/trait-picker";
-import Textarea from "@/components/atoms/text-area";
+import FormContainer from "@/components/ui/molecules/form-container";
+import { FormSection } from "@/components/ui/atoms/form-section";
+import Input from "@/components/ui/atoms/input";
+import { SearchSelect } from "@/components/ui/organisms/search-select";
+import { MultiSearchSelect } from "@/components/ui/atoms/multi-search-select";
+import { ChipField } from "@/components/ui/atoms/chip-field";
+import { ToggleField } from "@/components/ui/atoms/toggle-field";
+import { TraitsPicker } from "@/components/ui/atoms/trait-picker";
+import Textarea from "@/components/ui/atoms/text-area";
 import { Button } from "@mantine/core";
 import { formatDateForInput } from "@/shared/utils/date/formatDate";
 

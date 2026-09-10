@@ -1,23 +1,24 @@
-import FormContainer from "@/components/molecules/form-container";
+import FormContainer from "@/components/ui/molecules/form-container";
 import {
   CreateRequestAdoptionDto,
   CreateRequestAdoptionSchema,
 } from "../dto/dashboard/create-request-adoption";
 import { useGetAllUser } from "@/core/application/features/organization/user/hooks/useGetAllUser";
-import { SearchSelect } from "@/components/organisms/search-select";
+import { SearchSelect } from "@/components/ui/organisms/search-select";
 import { Avatar, Grid, Skeleton } from "@mantine/core";
-import ButtonUI from "@/components/atoms/button/button-ui";
-import { ToggleField } from "@/components/atoms/toggle-field";
-import Input from "@/components/atoms/input";
-import SelectInput from "@/components/organisms/select-input";
+import ButtonUI from "@/components/ui/atoms/button/button-ui";
+import { ToggleField } from "@/components/ui/atoms/toggle-field";
+import Input from "@/components/ui/atoms/input";
+import SelectInput from "@/components/ui/organisms/select-input";
 import { limaDistricts } from "@/core/shared/constants/distritcts";
 import { useGetAllPet } from "@/core/application/features/shelter/pets/hooks/useGetAllPet";
-import { SearchSelectField } from "@/components/molecules/forms/sarch-select-field";
+import { SearchSelectField } from "@/components/ui/molecules/forms/sarch-select-field";
 import useCreateRequestAdoption from "../hooks/dashboard/use-create-request-adoption";
 import { useModal } from "@/core/application/hooks/ui/useModal";
 import Swal from "sweetalert2";
 import { useQueryClient } from "@tanstack/react-query";
 import { QUERY_KEYS } from "@/shared/constants/queryKeys";
+import { Pet } from "@/features/shelter/pet/model/pet.model";
 
 export default function CreateRequestAdoptionForm() {
   const {
@@ -104,7 +105,7 @@ export default function CreateRequestAdoptionForm() {
               label="Mascota"
               name="petId"
               options={pets.items || []}
-              renderOption={(item) => (
+              renderOption={(item: Pet) => (
                 <div className="flex items-center gap-3">
                   <Avatar
                     src={
@@ -123,7 +124,7 @@ export default function CreateRequestAdoptionForm() {
               displayField="name"
               valueField="id"
               isLoading={isLoadingPets}
-              onSearch={(value) => updatePetFilter({ search: value })}
+              onSearch={(value: string) => updatePetFilter({ search: value })}
               required
             />
           )}

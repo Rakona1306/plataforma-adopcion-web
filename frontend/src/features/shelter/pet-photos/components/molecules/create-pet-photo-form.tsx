@@ -1,11 +1,11 @@
 "use client";
-import FormContainer from "@/components/molecules/form-container";
+import FormContainer from "@/components/ui/molecules/form-container";
 import { useCreatePetPhotos } from "../../hooks/useCreatePetPhoto";
 import {
   createPetPhotosSchema,
   SyncPetPhotosDto,
 } from "../../dto/create-pet-photo.dto";
-import { FileUpload } from "@/components/atoms/file-upload";
+import { FileUpload } from "@/components/ui/atoms/file-upload";
 import { Button, Skeleton } from "@mantine/core";
 import { useGetAllPetPhoto } from "../../hooks/useGetAllPetPhoto";
 

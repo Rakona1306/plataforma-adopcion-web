@@ -4,8 +4,8 @@ import { RxCaretRight } from "react-icons/rx";
 import Button from "../../atoms/button/button";
 import Title from "../../atoms/title";
 import { socialLinks } from "@/app/(web)/_utils/data/socialLinks";
-import Container from "@/components/atoms/container";
-import Tag from "@/components/atoms/tag";
+import Container from "@/components/ui/atoms/container";
+import Tag from "@/components/ui/atoms/tag";
 
 export default function AdoptionIntro() {
   return (

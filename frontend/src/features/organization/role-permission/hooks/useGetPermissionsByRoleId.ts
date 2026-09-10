@@ -18,6 +18,7 @@ export default function useGetPermissionsByRoleId(roleId: string) {
 
       return true;
     },
+    enabled: roleId !== undefined || roleId !== "",
   });
 
   return {

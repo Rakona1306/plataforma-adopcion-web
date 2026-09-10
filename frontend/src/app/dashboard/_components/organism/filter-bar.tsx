@@ -4,7 +4,7 @@ import FilterSelect from "../atoms/filter-select";
 import FilterDate from "../atoms/filter-date";
 import { FilterItemConfig } from "../../_interfaces/ui/filters";
 import { BiTrash } from "react-icons/bi";
-import { SearchSelectComp } from "@/components/organisms/search-select-comp";
+import { SearchSelectComp } from "@/components/ui/organisms/search-select-comp";
 
 interface FilterBarProps {
   filters: FilterItemConfig[];
