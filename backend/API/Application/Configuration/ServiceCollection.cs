@@ -1,12 +1,16 @@
-﻿using System.Reflection;
-using API.Application.Services.Organization.Users;
+﻿using API.Application.Services.Organization.Users;
+using FluentValidation;
+using System.Reflection;
 
 namespace API.Application.Configuration
 {
     public static class ServiceCollection
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+
         {
+            var assembly = Assembly.GetExecutingAssembly();
+
             services.Configure<ExternalApiSettings>(options =>
             {
                 options.DniApiBaseUrl = Environment.GetEnvironmentVariable("DNI_API_BASE_URL") ?? string.Empty;
@@ -20,8 +24,25 @@ namespace API.Application.Configuration
 
             foreach (var type in mapperTypes) services.AddSingleton(type);
 
-            // 2. 🔥 REGISTRO AUTOMÁTICO DE REPOSITORIOS Y SERVICIOS
-            var implementations = Assembly.GetExecutingAssembly().GetTypes()
+            var validatorTypes = assembly.GetTypes()
+                .Where(t => t.IsClass && !t.IsAbstract);
+
+            foreach (var validatorType in assembly.GetTypes().Where(t => t.IsClass && !t.IsAbstract))
+            {
+                var baseType = validatorType.BaseType;
+                while (baseType != null)
+                {
+                    if (baseType.IsGenericType && baseType.GetGenericTypeDefinition() == typeof(AbstractValidator<>))
+                    {
+                        var dtoType = baseType.GetGenericArguments()[0];
+                        services.AddScoped(typeof(IValidator<>).MakeGenericType(dtoType), validatorType);
+                        break;
+                    }
+                    baseType = baseType.BaseType;
+                }
+            }
+
+            var implementations = assembly.GetTypes()
                 .Where(t => t.IsClass && !t.IsAbstract && (
                     t.Name.EndsWith("Repository") ||
                     t.Name.EndsWith("RepositoryImpl") ||
@@ -30,16 +51,20 @@ namespace API.Application.Configuration
 
             foreach (var currentClass in implementations)
             {
-                // Buscamos las interfaces que implementa esta clase (ej. IRoleRepository)
+                // Obtenemos TODAS las interfaces que implementa esta clase concreta
                 var interfaces = currentClass.GetInterfaces();
 
-                foreach (var currentInterface in interfaces)
+                foreach (var iface in interfaces)
                 {
-                    // Evitamos registrar interfaces de .NET (como IDisposable)
-                    if (currentInterface.Name.StartsWith("I"))
-                    {
-                        services.AddScoped(currentInterface, currentClass);
-                    }
+                    // Filtramos solo interfaces propias del dominio (empiezan con I y no son de sistema)
+                    if (!iface.Name.StartsWith("I") ||
+                        iface.Namespace?.StartsWith("System") == true ||
+                        iface.Namespace?.StartsWith("Microsoft") == true)
+                        continue;
+
+                    // Para servicios genéricos, registramos la interfaz cerrada exacta
+                    // Esto funciona AHORA porque PrivateVolunteerApplicationService existe físicamente
+                    services.AddScoped(iface, currentClass);
                 }
             }
 

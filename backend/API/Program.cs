@@ -10,10 +10,10 @@ using API.Infrastructure.Extensions.Security;
 using API.Infrastructure.Middlewares;
 using FluentValidation;
 using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using Resend;
-using System.Threading.RateLimiting;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 var envPath = Path.Combine(Directory.GetCurrentDirectory(), "production.env");
 
@@ -62,7 +62,12 @@ builder.Services.AddDbContext<ConnDbContext>(options =>
 builder.Services.AddApplicationServices();
 builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddControllers();
+
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
+    });
 builder.Services.AddFluentValidationAutoValidation();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
