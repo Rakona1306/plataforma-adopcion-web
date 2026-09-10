@@ -1,4 +1,13 @@
 #!/usr/bin/env sh
+echo "====== 🔍 VALIDANDO NOMBRE DE RAMA... ======="
+
+node scripts/validate-branch.mjs
+
+if [ $? -ne 0 ]; then
+  echo "======= ❌ Commit cancelado, cambia de nombre tu rama. ======="
+  exit 1
+fi
+
 echo "======== HUSKY PRE-COMMIT ========"
 
 STAGED=$(git diff --cached --name-only --diff-filter=ACM)
