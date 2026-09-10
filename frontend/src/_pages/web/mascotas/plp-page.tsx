@@ -79,24 +79,29 @@ export default function PetListPage() {
         <div className="flex flex-col gap-3 items-center bg-white border border-slate-300 rounded-2xl shadow-sm px-6 py-8">
           <Flex w={"100%"} gap={"lg"}>
             <div className="relative flex-1 w-full">
-              <BiSearch size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 shrink-0" />
+              <BiSearch
+                size={25}
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 shrink-0"
+              />
               <input
                 type="text"
                 placeholder="Busca por nombre, raza o característica..."
                 value={filter.search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full rounded-xl border border-slate-300 bg-white py-3 pl-9 pr-3 text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-colors duration-200 hover:border-slate-400 focus:border-slate-600 focus:ring-1 focus:ring-slate-600"
+                className="w-full rounded-xl border border-slate-300 bg-white py-4 pl-12 pr-5 shadow-sm text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-colors duration-200 hover:border-slate-400 focus:border-slate-600 focus:ring-1 focus:ring-slate-600"
               />
             </div>
             <FilterDrawer />
           </Flex>
-          <Flex w={"100%"} justify={"space-between"} align={"flex-end"}>
+          <Flex w={"100%"} justify={"space-between"} align={"center"}>
             <Select
+              data-testid="sort-select"
+              id="sort-select"
               label="Ordenar por:"
               classNames={{
                 label: "text-slate-900!",
                 input:
-                  "border border-slate-300! rounded-xl! text-sm! py-3! transition-colors duration-200 hover:border-slate-400! focus:border-slate-600! focus:ring-1 focus:ring-slate-600!",
+                  "border border-slate-300! rounded-xl! text-sm! py-3! shadow-sm! transition-colors duration-200 hover:border-slate-400! focus:border-slate-600! focus:ring-1 focus:ring-slate-600!",
               }}
               data={[
                 { value: "recommended", label: "Recomendados" },
