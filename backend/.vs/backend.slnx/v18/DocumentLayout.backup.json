@@ -3,8 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\application\\configuration\\servicecollection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\application\\configuration\\servicecollection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\application\\features\\bussiness\\volunteerapplications\\validators\\volunteerapplicationbasevalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\application\\features\\bussiness\\volunteerapplications\\validators\\volunteerapplicationbasevalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\domain\\model\\bussiness\\volunteerapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\domain\\model\\bussiness\\volunteerapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\application\\services\\bussiness\\volunteerapplications\\volunteerapplicationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\application\\services\\bussiness\\volunteerapplications\\volunteerapplicationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\presentation\\controllers\\system\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\presentation\\controllers\\system\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\application\\features\\bussiness\\volunteerapplications\\validators\\updatevolunteerapplicationvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -15,12 +27,16 @@
       "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\application\\features\\bussiness\\volunteerapplications\\validators\\createvolunteerapplicationvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\application\\features\\bussiness\\volunteerapplications\\validators\\volunteerapplicationbasevalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\application\\features\\bussiness\\volunteerapplications\\validators\\volunteerapplicationbasevalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\application\\features\\bussiness\\volunteerapplications\\dtos\\common\\basevolunteerapplicationdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\application\\features\\bussiness\\volunteerapplications\\dtos\\common\\basevolunteerapplicationdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\application\\services\\bussiness\\volunteerapplications\\volunteerapplicationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\application\\services\\bussiness\\volunteerapplications\\volunteerapplicationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\application\\features\\bussiness\\volunteerapplications\\dtos\\private\\createvolunteerapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\application\\features\\bussiness\\volunteerapplications\\dtos\\private\\createvolunteerapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\application\\configuration\\servicecollection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\application\\configuration\\servicecollection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\application\\services\\bussiness\\volunteerapplications\\volunteerapplicationserviceimpls.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -59,16 +75,8 @@
       "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\application\\features\\bussiness\\volunteerapplications\\dtos\\private\\volunteerapplicationresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\application\\features\\bussiness\\volunteerapplications\\dtos\\private\\createvolunteerapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\application\\features\\bussiness\\volunteerapplications\\dtos\\private\\createvolunteerapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\application\\features\\bussiness\\volunteerapplications\\dtos\\private\\updatevolunteerapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\application\\features\\bussiness\\volunteerapplications\\dtos\\private\\updatevolunteerapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\application\\features\\bussiness\\volunteerapplications\\dtos\\common\\basevolunteerapplicationdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\application\\features\\bussiness\\volunteerapplications\\dtos\\common\\basevolunteerapplicationdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\application\\features\\bussiness\\volunteerapplications\\dtos\\volunteerapplicationfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -105,10 +113,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\domain\\repository\\bussiness\\sponsorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\domain\\repository\\bussiness\\sponsorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|c:\\users\\juanc\\desktop\\proyectos monorepo\\albergue-plataforma\\backend\\api\\domain\\model\\bussiness\\volunteerapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CBFA08EA-AECE-205F-7B85-326FD0B81BAD}|API\\API.csproj|solutionrelative:api\\domain\\model\\bussiness\\volunteerapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -118,7 +122,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -130,85 +134,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ServiceCollection.cs",
-              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Configuration\\ServiceCollection.cs",
-              "RelativeDocumentMoniker": "API\\Application\\Configuration\\ServiceCollection.cs",
-              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Configuration\\ServiceCollection.cs",
-              "RelativeToolTip": "API\\Application\\Configuration\\ServiceCollection.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAowCoAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-10T13:35:19.077Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "VolunteerApplicationController.cs",
-              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Presentation\\Controllers\\Bussiness\\VolunteerApplication\\VolunteerApplicationController.cs",
-              "RelativeDocumentMoniker": "API\\Presentation\\Controllers\\Bussiness\\VolunteerApplication\\VolunteerApplicationController.cs",
-              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Presentation\\Controllers\\Bussiness\\VolunteerApplication\\VolunteerApplicationController.cs",
-              "RelativeToolTip": "API\\Presentation\\Controllers\\Bussiness\\VolunteerApplication\\VolunteerApplicationController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-10T13:00:48.138Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "VolunteerApplicationProfile.cs",
-              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Bussiness\\VolunteerApplications\\Mappers\\VolunteerApplicationProfile.cs",
-              "RelativeDocumentMoniker": "API\\Application\\Features\\Bussiness\\VolunteerApplications\\Mappers\\VolunteerApplicationProfile.cs",
-              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Bussiness\\VolunteerApplications\\Mappers\\VolunteerApplicationProfile.cs",
-              "RelativeToolTip": "API\\Application\\Features\\Bussiness\\VolunteerApplications\\Mappers\\VolunteerApplicationProfile.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAABMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-10T12:55:24.668Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "VolunteerApplicationService.cs",
               "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Services\\Bussiness\\VolunteerApplications\\VolunteerApplicationService.cs",
               "RelativeDocumentMoniker": "API\\Application\\Services\\Bussiness\\VolunteerApplications\\VolunteerApplicationService.cs",
               "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Services\\Bussiness\\VolunteerApplications\\VolunteerApplicationService.cs",
               "RelativeToolTip": "API\\Application\\Services\\Bussiness\\VolunteerApplications\\VolunteerApplicationService.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABsAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABgAAABFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-09-10T12:39:25.171Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UpdateVolunteerApplicationValidator.cs",
-              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Bussiness\\VolunteerApplications\\Validators\\UpdateVolunteerApplicationValidator.cs",
-              "RelativeDocumentMoniker": "API\\Application\\Features\\Bussiness\\VolunteerApplications\\Validators\\UpdateVolunteerApplicationValidator.cs",
-              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Bussiness\\VolunteerApplications\\Validators\\UpdateVolunteerApplicationValidator.cs",
-              "RelativeToolTip": "API\\Application\\Features\\Bussiness\\VolunteerApplications\\Validators\\UpdateVolunteerApplicationValidator.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA4AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-10T12:52:58.901Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "VolunteerApplicationBaseValidator.cs",
               "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Bussiness\\VolunteerApplications\\Validators\\VolunteerApplicationBaseValidator.cs",
               "RelativeDocumentMoniker": "API\\Application\\Features\\Bussiness\\VolunteerApplications\\Validators\\VolunteerApplicationBaseValidator.cs",
               "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Bussiness\\VolunteerApplications\\Validators\\VolunteerApplicationBaseValidator.cs",
               "RelativeToolTip": "API\\Application\\Features\\Bussiness\\VolunteerApplications\\Validators\\VolunteerApplicationBaseValidator.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAABVAAAAAAAAAA==",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAzwCEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-09-10T13:21:02.328Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "CreateVolunteerApplicationValidator.cs",
               "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Bussiness\\VolunteerApplications\\Validators\\CreateVolunteerApplicationValidator.cs",
               "RelativeDocumentMoniker": "API\\Application\\Features\\Bussiness\\VolunteerApplications\\Validators\\CreateVolunteerApplicationValidator.cs",
@@ -216,90 +168,11 @@
               "RelativeToolTip": "API\\Application\\Features\\Bussiness\\VolunteerApplications\\Validators\\CreateVolunteerApplicationValidator.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-10T12:52:25.418Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "VolunteerApplicationPubController.cs",
-              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Presentation\\Controllers\\Bussiness\\VolunteerApplication\\VolunteerApplicationPubController.cs",
-              "RelativeDocumentMoniker": "API\\Presentation\\Controllers\\Bussiness\\VolunteerApplication\\VolunteerApplicationPubController.cs",
-              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Presentation\\Controllers\\Bussiness\\VolunteerApplication\\VolunteerApplicationPubController.cs",
-              "RelativeToolTip": "API\\Presentation\\Controllers\\Bussiness\\VolunteerApplication\\VolunteerApplicationPubController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-10T13:03:24.47Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-10T12:52:25.418Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Program.cs",
-              "RelativeDocumentMoniker": "API\\Program.cs",
-              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Program.cs",
-              "RelativeToolTip": "API\\Program.cs",
-              "ViewState": "AgIAADAAAAAAAAAAAAAAAEEAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-10T13:07:21.624Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "VolunteerApplicationServiceImpls.cs",
-              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Services\\Bussiness\\VolunteerApplications\\VolunteerApplicationServiceImpls.cs",
-              "RelativeDocumentMoniker": "API\\Application\\Services\\Bussiness\\VolunteerApplications\\VolunteerApplicationServiceImpls.cs",
-              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Services\\Bussiness\\VolunteerApplications\\VolunteerApplicationServiceImpls.cs",
-              "RelativeToolTip": "API\\Application\\Services\\Bussiness\\VolunteerApplications\\VolunteerApplicationServiceImpls.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-10T13:48:21.206Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "production.env",
-              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\production.env",
-              "RelativeDocumentMoniker": "API\\production.env",
-              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\production.env",
-              "RelativeToolTip": "API\\production.env",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-09-10T13:22:01.731Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "VolunteerApplicationPubResponse.cs",
-              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\Public\\VolunteerApplicationPubResponse.cs",
-              "RelativeDocumentMoniker": "API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\Public\\VolunteerApplicationPubResponse.cs",
-              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\Public\\VolunteerApplicationPubResponse.cs",
-              "RelativeToolTip": "API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\Public\\VolunteerApplicationPubResponse.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAACEAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-10T13:05:02.607Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "VolunteerApplicationResponse.cs",
-              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\Private\\VolunteerApplicationResponse.cs",
-              "RelativeDocumentMoniker": "API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\Private\\VolunteerApplicationResponse.cs",
-              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\Private\\VolunteerApplicationResponse.cs",
-              "RelativeToolTip": "API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\Private\\VolunteerApplicationResponse.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-10T12:51:40.993Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
               "Title": "CreateVolunteerApplication.cs",
               "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\Private\\CreateVolunteerApplication.cs",
               "RelativeDocumentMoniker": "API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\Private\\CreateVolunteerApplication.cs",
@@ -307,12 +180,169 @@
               "RelativeToolTip": "API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\Private\\CreateVolunteerApplication.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-10T12:50:43.75Z",
+              "WhenOpened": "2026-09-10T12:50:43.75Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ServiceCollection.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Configuration\\ServiceCollection.cs",
+              "RelativeDocumentMoniker": "API\\Application\\Configuration\\ServiceCollection.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Configuration\\ServiceCollection.cs",
+              "RelativeToolTip": "API\\Application\\Configuration\\ServiceCollection.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAowCoAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-10T13:35:19.077Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "BaseVolunteerApplicationDto.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\Common\\BaseVolunteerApplicationDto.cs",
+              "RelativeDocumentMoniker": "API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\Common\\BaseVolunteerApplicationDto.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\Common\\BaseVolunteerApplicationDto.cs",
+              "RelativeToolTip": "API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\Common\\BaseVolunteerApplicationDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-10T12:50:03.379Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "VolunteerApplication.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Domain\\Model\\Bussiness\\VolunteerApplication.cs",
+              "RelativeDocumentMoniker": "API\\Domain\\Model\\Bussiness\\VolunteerApplication.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Domain\\Model\\Bussiness\\VolunteerApplication.cs",
+              "RelativeToolTip": "API\\Domain\\Model\\Bussiness\\VolunteerApplication.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAkAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-10T12:31:13.671Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Presentation\\Controllers\\System\\AuthController.cs",
+              "RelativeDocumentMoniker": "API\\Presentation\\Controllers\\System\\AuthController.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Presentation\\Controllers\\System\\AuthController.cs",
+              "RelativeToolTip": "API\\Presentation\\Controllers\\System\\AuthController.cs",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAUwGMAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-10T14:02:44.981Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "VolunteerApplicationProfile.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Bussiness\\VolunteerApplications\\Mappers\\VolunteerApplicationProfile.cs",
+              "RelativeDocumentMoniker": "API\\Application\\Features\\Bussiness\\VolunteerApplications\\Mappers\\VolunteerApplicationProfile.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Bussiness\\VolunteerApplications\\Mappers\\VolunteerApplicationProfile.cs",
+              "RelativeToolTip": "API\\Application\\Features\\Bussiness\\VolunteerApplications\\Mappers\\VolunteerApplicationProfile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAABMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-10T12:55:24.668Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UpdateVolunteerApplicationValidator.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Bussiness\\VolunteerApplications\\Validators\\UpdateVolunteerApplicationValidator.cs",
+              "RelativeDocumentMoniker": "API\\Application\\Features\\Bussiness\\VolunteerApplications\\Validators\\UpdateVolunteerApplicationValidator.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Bussiness\\VolunteerApplications\\Validators\\UpdateVolunteerApplicationValidator.cs",
+              "RelativeToolTip": "API\\Application\\Features\\Bussiness\\VolunteerApplications\\Validators\\UpdateVolunteerApplicationValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-10T12:52:58.901Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "VolunteerApplicationController.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Presentation\\Controllers\\Bussiness\\VolunteerApplication\\VolunteerApplicationController.cs",
+              "RelativeDocumentMoniker": "API\\Presentation\\Controllers\\Bussiness\\VolunteerApplication\\VolunteerApplicationController.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Presentation\\Controllers\\Bussiness\\VolunteerApplication\\VolunteerApplicationController.cs",
+              "RelativeToolTip": "API\\Presentation\\Controllers\\Bussiness\\VolunteerApplication\\VolunteerApplicationController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-10T13:00:48.138Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "VolunteerApplicationPubController.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Presentation\\Controllers\\Bussiness\\VolunteerApplication\\VolunteerApplicationPubController.cs",
+              "RelativeDocumentMoniker": "API\\Presentation\\Controllers\\Bussiness\\VolunteerApplication\\VolunteerApplicationPubController.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Presentation\\Controllers\\Bussiness\\VolunteerApplication\\VolunteerApplicationPubController.cs",
+              "RelativeToolTip": "API\\Presentation\\Controllers\\Bussiness\\VolunteerApplication\\VolunteerApplicationPubController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-10T13:03:24.47Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Program.cs",
+              "RelativeDocumentMoniker": "API\\Program.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Program.cs",
+              "RelativeToolTip": "API\\Program.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAAEEAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-10T13:07:21.624Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "VolunteerApplicationServiceImpls.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Services\\Bussiness\\VolunteerApplications\\VolunteerApplicationServiceImpls.cs",
+              "RelativeDocumentMoniker": "API\\Application\\Services\\Bussiness\\VolunteerApplications\\VolunteerApplicationServiceImpls.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Services\\Bussiness\\VolunteerApplications\\VolunteerApplicationServiceImpls.cs",
+              "RelativeToolTip": "API\\Application\\Services\\Bussiness\\VolunteerApplications\\VolunteerApplicationServiceImpls.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-10T13:48:21.206Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 12,
+              "Title": "production.env",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\production.env",
+              "RelativeDocumentMoniker": "API\\production.env",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\production.env",
+              "RelativeToolTip": "API\\production.env",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-09-10T13:22:01.731Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "VolunteerApplicationPubResponse.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\Public\\VolunteerApplicationPubResponse.cs",
+              "RelativeDocumentMoniker": "API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\Public\\VolunteerApplicationPubResponse.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\Public\\VolunteerApplicationPubResponse.cs",
+              "RelativeToolTip": "API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\Public\\VolunteerApplicationPubResponse.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAACEAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-10T13:05:02.607Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "VolunteerApplicationResponse.cs",
+              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\Private\\VolunteerApplicationResponse.cs",
+              "RelativeDocumentMoniker": "API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\Private\\VolunteerApplicationResponse.cs",
+              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\Private\\VolunteerApplicationResponse.cs",
+              "RelativeToolTip": "API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\Private\\VolunteerApplicationResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-10T12:51:40.993Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
               "Title": "GivingsService.cs",
               "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Services\\Bussiness\\Givings\\GivingsService.cs",
               "RelativeDocumentMoniker": "API\\Application\\Services\\Bussiness\\Givings\\GivingsService.cs",
@@ -320,12 +350,11 @@
               "RelativeToolTip": "API\\Application\\Services\\Bussiness\\Givings\\GivingsService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-10T12:45:20.243Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-10T12:45:20.243Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 18,
               "Title": "UpdateVolunteerApplication.cs",
               "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\Private\\UpdateVolunteerApplication.cs",
               "RelativeDocumentMoniker": "API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\Private\\UpdateVolunteerApplication.cs",
@@ -333,25 +362,11 @@
               "RelativeToolTip": "API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\Private\\UpdateVolunteerApplication.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-10T12:51:03.792Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-10T12:51:03.792Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "BaseVolunteerApplicationDto.cs",
-              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\Common\\BaseVolunteerApplicationDto.cs",
-              "RelativeDocumentMoniker": "API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\Common\\BaseVolunteerApplicationDto.cs",
-              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\Common\\BaseVolunteerApplicationDto.cs",
-              "RelativeToolTip": "API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\Common\\BaseVolunteerApplicationDto.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAywCYAAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-10T12:50:03.379Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 20,
               "Title": "RequestAdoptionFIlter.cs",
               "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Bussiness\\RequestAdoptions\\Dtos\\RequestAdoptionFIlter.cs",
               "RelativeDocumentMoniker": "API\\Application\\Features\\Bussiness\\RequestAdoptions\\Dtos\\RequestAdoptionFIlter.cs",
@@ -359,12 +374,11 @@
               "RelativeToolTip": "API\\Application\\Features\\Bussiness\\RequestAdoptions\\Dtos\\RequestAdoptionFIlter.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-10T12:48:21.243Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-10T12:48:21.243Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 19,
               "Title": "VolunteerApplicationFilter.cs",
               "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\VolunteerApplicationFilter.cs",
               "RelativeDocumentMoniker": "API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\VolunteerApplicationFilter.cs",
@@ -372,12 +386,11 @@
               "RelativeToolTip": "API\\Application\\Features\\Bussiness\\VolunteerApplications\\Dtos\\VolunteerApplicationFilter.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-10T12:47:53.962Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-10T12:47:53.962Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 21,
               "Title": "UpdateAdoptionStatus.cs",
               "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Bussiness\\Adoptions\\Validators\\UpdateAdoptionStatus.cs",
               "RelativeDocumentMoniker": "API\\Application\\Features\\Bussiness\\Adoptions\\Validators\\UpdateAdoptionStatus.cs",
@@ -385,12 +398,11 @@
               "RelativeToolTip": "API\\Application\\Features\\Bussiness\\Adoptions\\Validators\\UpdateAdoptionStatus.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-10T12:45:00.699Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-10T12:45:00.699Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 22,
               "Title": "AdoptionFollowUpProfile.cs",
               "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Features\\Bussiness\\AdoptionFollowUps\\Mappers\\AdoptionFollowUpProfile.cs",
               "RelativeDocumentMoniker": "API\\Application\\Features\\Bussiness\\AdoptionFollowUps\\Mappers\\AdoptionFollowUpProfile.cs",
@@ -398,12 +410,11 @@
               "RelativeToolTip": "API\\Application\\Features\\Bussiness\\AdoptionFollowUps\\Mappers\\AdoptionFollowUpProfile.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-10T12:44:56.67Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-10T12:44:56.67Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 23,
               "Title": "AdoptionService.cs",
               "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Application\\Services\\Bussiness\\Adoptions\\AdoptionService.cs",
               "RelativeDocumentMoniker": "API\\Application\\Services\\Bussiness\\Adoptions\\AdoptionService.cs",
@@ -411,12 +422,11 @@
               "RelativeToolTip": "API\\Application\\Services\\Bussiness\\Adoptions\\AdoptionService.cs",
               "ViewState": "AgIAAD0AAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-10T12:40:14.545Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-10T12:40:14.545Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 27,
               "Title": "SponsorRepository.cs",
               "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Domain\\Repository\\Bussiness\\SponsorRepository.cs",
               "RelativeDocumentMoniker": "API\\Domain\\Repository\\Bussiness\\SponsorRepository.cs",
@@ -424,25 +434,11 @@
               "RelativeToolTip": "API\\Domain\\Repository\\Bussiness\\SponsorRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-10T12:31:27.775Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-10T12:31:27.775Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 26,
-              "Title": "VolunteerApplication.cs",
-              "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Domain\\Model\\Bussiness\\VolunteerApplication.cs",
-              "RelativeDocumentMoniker": "API\\Domain\\Model\\Bussiness\\VolunteerApplication.cs",
-              "ToolTip": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Domain\\Model\\Bussiness\\VolunteerApplication.cs",
-              "RelativeToolTip": "API\\Domain\\Model\\Bussiness\\VolunteerApplication.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-10T12:31:13.671Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
               "Title": "RequestSponsorRepository.cs",
               "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Domain\\Repository\\Bussiness\\RequestSponsorRepository.cs",
               "RelativeDocumentMoniker": "API\\Domain\\Repository\\Bussiness\\RequestSponsorRepository.cs",
@@ -450,12 +446,11 @@
               "RelativeToolTip": "API\\Domain\\Repository\\Bussiness\\RequestSponsorRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-10T12:31:06.949Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-10T12:31:06.949Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 25,
               "Title": "GivingRepository.cs",
               "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Domain\\Repository\\Bussiness\\GivingRepository.cs",
               "RelativeDocumentMoniker": "API\\Domain\\Repository\\Bussiness\\GivingRepository.cs",
@@ -463,12 +458,11 @@
               "RelativeToolTip": "API\\Domain\\Repository\\Bussiness\\GivingRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-10T12:28:38.349Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-10T12:28:38.349Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 24,
               "Title": "VolunteerApplicationRepository.cs",
               "DocumentMoniker": "C:\\Users\\juanc\\Desktop\\PROYECTOS MONOREPO\\albergue-plataforma\\backend\\API\\Domain\\Repository\\Bussiness\\VolunteerApplicationRepository.cs",
               "RelativeDocumentMoniker": "API\\Domain\\Repository\\Bussiness\\VolunteerApplicationRepository.cs",
@@ -476,8 +470,7 @@
               "RelativeToolTip": "API\\Domain\\Repository\\Bussiness\\VolunteerApplicationRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-10T12:28:13.834Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-10T12:28:13.834Z"
             }
           ]
         }

@@ -31,6 +31,12 @@ namespace API.Application.Features.Bussiness.VolunteerApplications.Validators
                 .LessThan(x => x.EndDate)
                 .When(x => x.StartDate.HasValue && x.EndDate.HasValue)
                 .WithMessage("La fecha de inicio debe ser anterior a la fecha de fin.");
+
+            RuleFor(x => x.IsCertified)
+                   .NotEmpty().WithMessage("La cartificacion es obligatoria");
+
+            RuleFor(x => x.Urgency)
+                 .NotEmpty().WithMessage("La urgencia es obligatoria");
         }
     }
 }
