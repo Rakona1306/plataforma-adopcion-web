@@ -4,7 +4,10 @@ import { useParams } from "next/navigation";
 import { adoptionService } from "../services/adoption.service";
 
 export default function useGetByIdAdoption() {
-  const { id } = useParams();
+  const params = useParams<{ id: string }>();
+
+  const id = params?.id;
+
   const query = useQuery({
     queryKey: [QUERY_KEYS.BUSINESS.ADOPTION.ALL, id],
     queryFn: () => adoptionService.getById(Number(id || 0)),
