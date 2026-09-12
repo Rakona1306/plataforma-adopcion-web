@@ -6,7 +6,6 @@ import { ActionButtons } from "@/app/dashboard/_components/organism/action-butto
 import CustomTable, {
   TableColumn,
 } from "@/components/ui/organisms/table/table-custom";
-import FilterBar from "@/app/dashboard/_components/organism/filter-bar";
 import { useGetAllUser } from "@/core/application/features/organization/user/hooks/useGetAllUser";
 import { useModal } from "@/core/application/hooks/ui/useModal";
 import { Badge, Divider } from "@mantine/core";
@@ -15,16 +14,23 @@ import { RowAction } from "@/app/dashboard/_components/molecules/table-actions";
 import { BsViewList } from "react-icons/bs";
 import { useDeleteUser } from "@/core/application/features/organization/user/hooks/useDeleteUser";
 import useActionsUser from "./hooks/useActionsUser";
-import { FilterItemConfig } from "@/app/dashboard/_interfaces/ui/filters";
+// import { FilterItemConfig } from "@/app/dashboard/_interfaces/ui/filters";
 import UpdateUserForm from "./organism/update-user-form";
 import { User } from "@/core/domain/models/organization/user";
 import { ViewUser } from "./organism";
 import { CgPassword } from "react-icons/cg";
 import { ChangePasswordForm } from "./organism/change-password-form";
+import FilterSection from "@/components/ui/organisms/filter/filter-section";
 
 export default function UsersPage() {
-  const { data, updateFilter, filter, handleClear, isLoading, isError } =
-    useGetAllUser();
+  const {
+    data,
+    updateFilter,
+    filter,
+    // handleClear,
+    isLoading,
+    isError,
+  } = useGetAllUser();
   const { handleOpenModal } = useModal() || {};
   const { deleteUserWithConfirmation, isPending } = useDeleteUser();
   const { actionsI } = useActionsUser();
@@ -90,6 +96,7 @@ export default function UsersPage() {
     },
   ];
 
+  /*
   const myFilters: FilterItemConfig[] = [
     {
       type: "search",
@@ -110,7 +117,7 @@ export default function UsersPage() {
       onChange: (val) => updateFilter({ isBlocked: val ?? "todos" }),
     },
   ];
-
+  */
   return (
     <>
       <HeaderDashboard>
@@ -125,7 +132,29 @@ export default function UsersPage() {
         <ActionButtons title={actionsI.title} buttons={actionsI.buttons} />
         <Divider className="mt-5 border-gray-300!" />
 
-        <FilterBar filters={myFilters} onClearAll={handleClear} />
+        {/* <FilterBar filters={myFilters} onClearAll={handleClear} /> */}
+        <FilterSection
+          orderBy={{
+            options: [
+              { value: "recommend", label: "Recomendado" },
+              { value: "name", label: "Nombre" },
+            ],
+            label: "Ordenar por",
+            onSelected: () => {
+              // console.log(value);
+            },
+            defaultValue: "Recomendado",
+          }}
+          search={{
+            placeholder: "Buscar usuarios...",
+            onSearch: (value) => {
+              updateFilter({ search: String(value) });
+            },
+            label: "Buscar",
+            name: "search",
+            value: filter.search,
+          }}
+        />
 
         <Divider className="mt-5 border-gray-300!" />
 
