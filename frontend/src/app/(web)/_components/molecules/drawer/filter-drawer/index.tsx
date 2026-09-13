@@ -104,12 +104,12 @@ export default function FilterDrawer() {
       </Drawer>
 
       <ButtonUI
-        rootClassName="rounded-3xl!"
+        rootClassName="rounded-2xl! border! border-slate-300! bg-white! text-slate-900! shadow-sm! transition-colors! duration-200! hover:border-slate-400! focus:border-slate-600! focus:ring-1! focus:ring-slate-600!"
         intent="normal"
         maw={"150px"}
         onClick={open}
       >
-        <div className="absolute top-0 right-0 px-2 py-1 bg-red-500 text-white rounded-full flex justify-center items-center">
+        <div className="absolute top-0 right-0 px-2 py-1 bg-red-600 text-white rounded-full flex justify-center items-center">
           {filters.length}
         </div>
         <BsDiagram2 size={25} />
