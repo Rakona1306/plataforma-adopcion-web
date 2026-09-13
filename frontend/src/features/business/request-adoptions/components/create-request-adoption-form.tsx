@@ -25,7 +25,7 @@ export default function CreateRequestAdoptionForm() {
     data: users,
     isLoading: isLoadingUsers,
     updateFilter,
-  } = useGetAllUser({ page: 1, pageSize: 10 });
+  } = useGetAllUser();
   const {
     data: pets,
     isLoading: isLoadingPets,
