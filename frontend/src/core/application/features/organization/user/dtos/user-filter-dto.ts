@@ -1,7 +1,9 @@
 export type UserFilterDto = {
   search?: string;
   isBlocked?: string;
+  district?: string[];
   page: number;
   pageSize: number;
-  roleId?: string;
+  roleId?: string[];
+  sort?: string;
 };

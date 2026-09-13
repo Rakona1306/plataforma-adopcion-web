@@ -3,7 +3,7 @@ import {
   CreateRequestAdoptionDto,
   CreateRequestAdoptionSchema,
 } from "../dto/dashboard/create-request-adoption";
-import { useGetAllUser } from "@/core/application/features/organization/user/hooks/useGetAllUser";
+import { useGetAllUser } from "@/core/application/features/organization/user/hooks/use-get-user";
 import { SearchSelect } from "@/components/ui/organisms/search-select";
 import { Avatar, Grid, Skeleton } from "@mantine/core";
 import ButtonUI from "@/components/ui/atoms/button/button-ui";

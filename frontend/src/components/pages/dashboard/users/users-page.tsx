@@ -6,7 +6,7 @@ import { ActionButtons } from "@/app/dashboard/_components/organism/action-butto
 import CustomTable, {
   TableColumn,
 } from "@/components/ui/organisms/table/table-custom";
-import { useGetAllUser } from "@/core/application/features/organization/user/hooks/useGetAllUser";
+import { useGetAllUser } from "@/core/application/features/organization/user/hooks/use-get-user";
 import { useModal } from "@/core/application/hooks/ui/useModal";
 import { Badge, Divider } from "@mantine/core";
 import { BiEditAlt, BiTrash } from "react-icons/bi";
@@ -23,14 +23,8 @@ import { ChangePasswordForm } from "./organism/change-password-form";
 import FilterSection from "@/components/ui/organisms/filter/filter-section";
 
 export default function UsersPage() {
-  const {
-    data,
-    updateFilter,
-    filter,
-    // handleClear,
-    isLoading,
-    isError,
-  } = useGetAllUser();
+  const { data, updateFilter, filter, handleClear, isLoading, isError } =
+    useGetAllUser();
   const { handleOpenModal } = useModal() || {};
   const { deleteUserWithConfirmation, isPending } = useDeleteUser();
   const { actionsI } = useActionsUser();
@@ -140,8 +134,8 @@ export default function UsersPage() {
               { value: "name", label: "Nombre" },
             ],
             label: "Ordenar por",
-            onSelected: () => {
-              // console.log(value);
+            onSelected: (value) => {
+              updateFilter({ sort: value });
             },
             defaultValue: "Recomendado",
           }}
@@ -154,6 +148,11 @@ export default function UsersPage() {
             name: "search",
             value: filter.search,
           }}
+          filter={{
+            drawer: <></>,
+            title: "Filtros de Usuarios",
+          }}
+          onClearAll={handleClear}
         />
 
         <Divider className="mt-5 border-gray-300!" />

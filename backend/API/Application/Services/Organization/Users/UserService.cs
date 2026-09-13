@@ -42,7 +42,9 @@ namespace API.Application.Services.Organization.Users
             {
                 query = query.Where(x =>
                     x.Name.Contains(filter.Search) ||
-                    x.Email.Contains(filter.Search)
+                    x.Email.Contains(filter.Search) ||
+                    x.LastName.Contains(filter.Search) ||
+                    (x.Dni != null && x.Dni.Contains(filter.Search))
                 );
             }
 

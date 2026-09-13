@@ -1,6 +1,7 @@
 import { Combobox, useCombobox } from "@mantine/core";
 import { useState } from "react";
 import DefaultInput from "./default-input";
+import { ChevronDown } from "lucide-react";
 
 interface Props {
   formikSchema?: FormikSchema;
@@ -70,6 +71,7 @@ function DefaultSelectInput({
           name="select"
           value={value || ""}
           onClick={() => combobox.toggleDropdown()}
+          rightIcon={<ChevronDown size={25} className="text-slate-600" />}
         />
       </Combobox.Target>
 
