@@ -6,11 +6,11 @@ import { useRouter } from "next/navigation";
 import { roleService } from "../services/role.service";
 import { QUERY_KEYS } from "@/shared/constants/queryKeys";
 
-export function useGetAllRoles() {
+export function useGetAllRoles(pageSize = 10) {
   const router = useRouter();
   const [filter, setFilter] = useState<RoleFilterDto>({
     page: 1,
-    pageSize: 10,
+    pageSize: pageSize,
     search: "",
     toDashboard: undefined,
   });
@@ -34,11 +34,13 @@ export function useGetAllRoles() {
       }
       return true; // Propaga otros errores
     },
+    refetchOnWindowFocus: false,
+    staleTime: 15 * 60 * 60,
     enabled: !filter.search || filter.search.length >= 3,
   });
 
   const updateFilter = (newFilter: Partial<RoleFilterDto>) => {
-    setFilter((prev) => ({ ...prev, ...newFilter, page: 1 }));
+    setFilter((prev) => ({ ...prev, ...newFilter }));
   };
 
   const handleClear = () => {

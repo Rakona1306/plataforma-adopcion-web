@@ -13,7 +13,13 @@ interface Props {
 }
 
 interface FilterSchema {
-  drawer: React.ReactNode;
+  /**
+   * Render prop en vez de ReactNode fijo: le entrega `close` a quien
+   * construye el contenido del drawer, para que pueda cerrarlo (ej. al
+   * presionar "Aplicar filtros") sin que este componente genérico tenga
+   * que saber nada sobre esa lógica específica.
+   */
+  drawer: (close: () => void) => React.ReactNode;
   title: string;
 }
 
@@ -39,7 +45,7 @@ export default function FilterSection({
   filter,
 }: Props) {
   return (
-    <div className="w-full py-5 px-4 bg-white border-2 border-slate-200 rounded-xl shadow-sm shadow-slate-500 flex gap-4 items-stretch justify-stretch flex-row">
+    <div className="w-full py-5 px-4 bg-white border-2 border-slate-200 rounded-xl shadow-sm shadow-slate-500 flex gap-4 items-stretch justify-stretch flex-col lg:flex-row">
       {search && <Search {...search} />}
       {orderBy && <OrderBy {...orderBy} />}
       {filter && <Filter {...filter} />}
@@ -60,7 +66,7 @@ function Search(props: SearchSchema) {
 
 function OrderBy(props: OrderBySchema) {
   return (
-    <div className="max-w-2xs w-full">
+    <div className="lg:max-w-2xs w-full">
       <SelectInput defaultSchema={props} />
     </div>
   );
@@ -75,7 +81,7 @@ function Filter({ drawer, title }: FilterSchema) {
         <h2 className="text-sm font-semibold text-slate-700 text-start">
           Filtros
         </h2>
-        <ButtonUI rootClassName="py-2! h-full!" onClick={open}>
+        <ButtonUI rootClassName="py-4! lg:py-2! h-full!" onClick={open}>
           <FilterIcon size={17} />
           <span className="text-sm">Ingresa tus filtros</span>
         </ButtonUI>
@@ -88,8 +94,12 @@ function Filter({ drawer, title }: FilterSchema) {
         position="right"
         offset={8}
         radius="md"
+        classNames={{
+          content: "flex! flex-col!",
+          body: "flex! flex-col! flex-1! px-4! p-0! justify-between! gap-5",
+        }}
       >
-        {drawer}
+        {drawer(close)}
       </Drawer>
     </div>
   );
@@ -102,7 +112,7 @@ function ClearAll({ onClearAll }: { onClearAll: () => void }) {
         Limpiar
       </h2>
       <ButtonUI
-        rootClassName="py-2! h-full! bg-red-600! hover:bg-red-700!"
+        rootClassName="py-4! lg:py-2! h-full! bg-red-600! hover:bg-red-700!"
         onClick={onClearAll}
       >
         <Trash size={25} />

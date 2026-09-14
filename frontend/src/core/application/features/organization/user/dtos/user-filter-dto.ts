@@ -6,4 +6,5 @@ export type UserFilterDto = {
   pageSize: number;
   roleId?: string[];
   sort?: string;
+  toDashboard?: string;
 };

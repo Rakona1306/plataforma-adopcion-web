@@ -16,6 +16,7 @@ export type UserFilterState = {
   roleId: string[];
   isBlocked: string;
   sort: string;
+  toDashboard: string;
 };
 
 type UserFilterStore = UserFilterState & {
@@ -34,7 +35,8 @@ const DEFAULT_FILTER: UserFilterState = {
   search: "",
   roleId: [],
   district: [],
-  isBlocked: "false",
+  isBlocked: "",
+  toDashboard: "",
   sort: "recommend",
 };
 
@@ -74,7 +76,10 @@ export const useUserFilterStore = create<UserFilterStore>((set) => ({
       ...prev,
       search: "",
       roleId: [],
-      isBlocked: "false",
+      isBlocked: "",
       page: 1,
+      toDashboard: "",
+      sort: "",
+      district: [],
     })),
 }));

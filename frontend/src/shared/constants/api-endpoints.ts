@@ -21,7 +21,7 @@ export const API_ENDPOINTS = {
   },
   // Usuarios
   USERS: {
-    LIST: "/api/users",
+    LIST: "/users",
     GET: (id: string) => `/api/users/${id}`,
     CREATE: "/api/users",
     UPDATE: (id: string) => `/api/users/${id}`,

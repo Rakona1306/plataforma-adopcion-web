@@ -6,7 +6,7 @@ import { ActionButtons } from "@/app/dashboard/_components/organism/action-butto
 import CustomTable, {
   TableColumn,
 } from "@/components/ui/organisms/table/table-custom";
-import { useGetAllUser } from "@/core/application/features/organization/user/hooks/use-get-user";
+import { useGetAllUser } from "@/features/organization/user/hooks/use-get-user";
 import { useModal } from "@/core/application/hooks/ui/useModal";
 import { Badge, Divider } from "@mantine/core";
 import { BiEditAlt, BiTrash } from "react-icons/bi";
@@ -14,13 +14,13 @@ import { RowAction } from "@/app/dashboard/_components/molecules/table-actions";
 import { BsViewList } from "react-icons/bs";
 import { useDeleteUser } from "@/core/application/features/organization/user/hooks/useDeleteUser";
 import useActionsUser from "./hooks/useActionsUser";
-// import { FilterItemConfig } from "@/app/dashboard/_interfaces/ui/filters";
 import UpdateUserForm from "./organism/update-user-form";
 import { User } from "@/core/domain/models/organization/user";
 import { ViewUser } from "./organism";
 import { CgPassword } from "react-icons/cg";
 import { ChangePasswordForm } from "./organism/change-password-form";
 import FilterSection from "@/components/ui/organisms/filter/filter-section";
+import FilterUserDrawer from "@/features/organization/user/components/drawer/filter-user-drawer";
 
 export default function UsersPage() {
   const { data, updateFilter, filter, handleClear, isLoading, isError } =
@@ -90,28 +90,6 @@ export default function UsersPage() {
     },
   ];
 
-  /*
-  const myFilters: FilterItemConfig[] = [
-    {
-      type: "search",
-      label: "Buscador",
-      placeholder: "Nombre o correo...",
-      value: filter.search,
-      onChange: (val) => updateFilter({ search: String(val) }),
-    },
-    {
-      type: "select",
-      label: "Bloqueados",
-      options: [
-        { label: "Sí", value: "true" },
-        { label: "No", value: "false" },
-        { label: "Todos", value: "todos" },
-      ],
-      value: filter.isBlocked?.toString() ?? null,
-      onChange: (val) => updateFilter({ isBlocked: val ?? "todos" }),
-    },
-  ];
-  */
   return (
     <>
       <HeaderDashboard>
@@ -126,18 +104,23 @@ export default function UsersPage() {
         <ActionButtons title={actionsI.title} buttons={actionsI.buttons} />
         <Divider className="mt-5 border-gray-300!" />
 
-        {/* <FilterBar filters={myFilters} onClearAll={handleClear} /> */}
         <FilterSection
           orderBy={{
             options: [
-              { value: "recommend", label: "Recomendado" },
-              { value: "name", label: "Nombre" },
+              { value: "", label: "Mas Recientes" },
+              { value: "createdAt_desc", label: "Mas Antiguos" },
+              { value: "name_asc", label: "Nombre (A-Z)" },
+              { value: "name_desc", label: "Nombre (Z-A)" },
+              { value: "email_asc", label: "Email (A-Z)" },
+              { value: "email_desc", label: "Email (Z-A)" },
+              { value: "isBlocked_true", label: "Bloqueado" },
+              { value: "isBlocked_false", label: "Activo" },
             ],
             label: "Ordenar por",
             onSelected: (value) => {
               updateFilter({ sort: value });
             },
-            defaultValue: "Recomendado",
+            defaultValue: "Mas Recientes",
           }}
           search={{
             placeholder: "Buscar usuarios...",
@@ -149,7 +132,7 @@ export default function UsersPage() {
             value: filter.search,
           }}
           filter={{
-            drawer: <></>,
+            drawer: (close) => <FilterUserDrawer onApply={close} />,
             title: "Filtros de Usuarios",
           }}
           onClearAll={handleClear}

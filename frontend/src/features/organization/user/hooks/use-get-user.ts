@@ -1,10 +1,11 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
-import { UserFilterDto } from "../dtos/user-filter-dto";
+import { UserFilterDto } from "../../../../core/application/features/organization/user/dtos/user-filter-dto";
 import { useQuery } from "@tanstack/react-query";
-import { userContainer } from "@/core/infrastructure/container/organization/user-container";
 import { useUserFilterStore } from "@/features/organization/user/store/use-filter-user.store";
+import { useShallow } from "zustand/shallow";
+import { userService } from "../services/user.service";
 
 function joinStacked(values: string[]): string | undefined {
   return values.length > 0 ? values.join("|") : undefined;
@@ -14,13 +15,18 @@ export function useGetAllUser() {
   const router = useRouter();
 
   // Estado global compartido por cualquier componente que use este hook
-  const filter = useUserFilterStore((s) => ({
-    page: s.page,
-    pageSize: s.pageSize,
-    search: s.search,
-    roleId: s.roleId,
-    isBlocked: s.isBlocked,
-  }));
+  const filter = useUserFilterStore(
+    useShallow((s) => ({
+      page: s.page,
+      pageSize: s.pageSize,
+      search: s.search,
+      roleId: s.roleId,
+      isBlocked: s.isBlocked,
+      district: s.district,
+      sort: s.sort,
+      toDashboard: s.toDashboard,
+    })),
+  );
   const updateFilter = useUserFilterStore((s) => s.updateFilter);
   const addStackedValue = useUserFilterStore((s) => s.addStackedValue);
   const removeStackedValue = useUserFilterStore((s) => s.removeStackedValue);
@@ -35,13 +41,13 @@ export function useGetAllUser() {
       ...rest,
       search: search && search.length >= 3 ? search : "",
       roleId: joinStacked(roleId),
-      isBlocked: "",
+      district: joinStacked(filter.district),
     } as UserFilterDto;
   }, [filter]);
 
   const query = useQuery({
     queryKey: ["users", requestFilter],
-    queryFn: () => userContainer.getUsers(requestFilter),
+    queryFn: () => userService.get(requestFilter),
     placeholderData: (previousData) => previousData,
     throwOnError: (error: any) => {
       if (error.response?.status === 401 || error.status === 401) {
