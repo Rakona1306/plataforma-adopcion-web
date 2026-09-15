@@ -15,7 +15,7 @@ import { FaHandshake, FaUsers } from "react-icons/fa";
 import { CgLock } from "react-icons/cg";
 import Title from "@/app/(web)/_components/atoms/title";
 import Container from "@/components/ui/atoms/container";
-import dataTemporal from "../../../public/data-temporal.json";
+import useVolunteers from "@/features/business/volunteer-area/hooks/use-get-volunteer-data";
 const urgencyStyles: Record<string, string> = {
   NORMAL: "bg-gray-100 text-gray-700 border-gray-300",
   LOW: "bg-green-100 text-green-700 border-green-300",
@@ -37,6 +37,7 @@ const iconMap: Record<string, React.ComponentType<{ className: string }>> = {
 
 export default function VolunteerPage() {
   const [expandedFaq, setExpandedFaq] = useState<number | null>(0);
+  const { data: volunteerApplications, isLoading } = useVolunteers();
 
   return (
     <main className="bg-white">
@@ -93,151 +94,157 @@ export default function VolunteerPage() {
             <span className="text-primary">la Diferencia?</span>
           </Title>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 md:gap-8 mt-20 ">
-            {dataTemporal.map((item, index) => (
-              <div key={index}>
-                <Card className="group h-full overflow-hidden border-primary/20 bg-white transition-all duration-300 hover:border-primary/60 hover:shadow-xl">
-                  <CardContent className="flex h-full flex-col p-6 md:p-8">
-                    {/* Título y subtítulo */}
-                    <div className="space-y-2">
-                      <h3 className="text-xl font-bold text-foreground transition-colors group-hover:text-primary md:text-2xl">
-                        {item.title}
-                      </h3>
+          {isLoading ? (
+            <p className="text-lg text-foreground/70 mt-4">
+              Cargando oportunidades de voluntariado...
+            </p>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mt-20 ">
+              {volunteerApplications?.map((item, index) => (
+                <div key={index}>
+                  <Card className="group h-full overflow-hidden border-primary/20 bg-white transition-all duration-300 hover:border-primary/60 hover:shadow-xl">
+                    <CardContent className="flex h-full flex-col p-6 md:p-8">
+                      {/* Título y subtítulo */}
+                      <div className="space-y-2">
+                        <h3 className="text-xl font-bold text-foreground transition-colors group-hover:text-primary md:text-2xl">
+                          {item.title}
+                        </h3>
 
-                      <p className="text-sm font-medium text-primary">
-                        {item.subTitle}
-                      </p>
-                    </div>
+                        <p className="text-sm font-medium text-primary">
+                          {item.subtitle}
+                        </p>
+                      </div>
 
-                    {/* Descripción */}
-                    <div className="mt-6 space-y-2">
-                      <h4 className="text-sm font-semibold uppercase tracking-wide text-foreground/60">
-                        Descripción
-                      </h4>
+                      {/* Descripción */}
+                      <div className="mt-6 space-y-2">
+                        <h4 className="text-sm font-semibold uppercase tracking-wide text-foreground/60">
+                          Descripción
+                        </h4>
 
-                      <p className="text-sm leading-relaxed text-foreground/70 md:text-base">
-                        {item.description}
-                      </p>
-                    </div>
+                        <p className="text-sm leading-relaxed text-foreground/70 md:text-base">
+                          {item.description}
+                        </p>
+                      </div>
 
-                    {/* Requisitos */}
-                    <div className="mt-5 space-y-2">
-                      <h4 className="text-sm font-semibold uppercase tracking-wide text-foreground/60">
-                        Requisitos
-                      </h4>
+                      {/* Requisitos */}
+                      <div className="mt-5 space-y-2">
+                        <h4 className="text-sm font-semibold uppercase tracking-wide text-foreground/60">
+                          Requisitos
+                        </h4>
 
-                      <p className="text-sm leading-relaxed text-foreground/70 md:text-base">
-                        {item.requirements}
-                      </p>
-                    </div>
+                        <p className="text-sm leading-relaxed text-foreground/70 md:text-base">
+                          {item.requirements}
+                        </p>
+                      </div>
 
-                    {/* Edad */}
-                    <div className="mt-5 rounded-lg bg-primary/5 p-4">
-                      <p className="text-sm font-semibold text-foreground">
-                        Rango de edad
-                      </p>
+                      {/* Edad */}
+                      <div className="mt-5 rounded-lg bg-primary/5 p-4">
+                        <p className="text-sm font-semibold text-foreground">
+                          Rango de edad
+                        </p>
 
-                      <p className="mt-1 text-sm text-foreground/70">
-                        {item.minAge} - {item.maxAge} años
-                      </p>
-                    </div>
+                        <p className="mt-1 text-sm text-foreground/70">
+                          {item.minAge} - {item.maxAge} años
+                        </p>
+                      </div>
 
-                    {/* Ubicación */}
-                    <div className="mt-5 space-y-2">
-                      <h4 className="text-sm font-semibold uppercase tracking-wide text-foreground/60">
-                        Ubicación
-                      </h4>
+                      {/* Ubicación */}
+                      <div className="mt-5 space-y-2">
+                        <h4 className="text-sm font-semibold uppercase tracking-wide text-foreground/60">
+                          Ubicación
+                        </h4>
 
-                      <p className="text-sm leading-relaxed text-foreground/70 md:text-base">
-                        {item.address}
-                      </p>
+                        <p className="text-sm leading-relaxed text-foreground/70 md:text-base">
+                          {item.address}
+                        </p>
 
-                      {item.googleMapLinkAddress && (
+                        {item.googleMapLinkAddress && (
+                          <a
+                            href={item.googleMapLinkAddress}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex text-sm font-medium text-primary underline-offset-4 hover:underline"
+                          >
+                            Ver ubicación en Google Maps →
+                          </a>
+                        )}
+                      </div>
+
+                      {/* Fechas */}
+                      <div className="mt-5 grid grid-cols-2 gap-3">
+                        <div className="rounded-lg border border-primary/10 p-3">
+                          <p className="text-xs font-semibold uppercase text-foreground/50">
+                            Inicio
+                          </p>
+
+                          <p className="mt-1 text-sm font-medium text-foreground">
+                            {new Date(item.startDate).toLocaleDateString()}
+                          </p>
+                        </div>
+
+                        <div className="rounded-lg border border-primary/10 p-3">
+                          <p className="text-xs font-semibold uppercase text-foreground/50">
+                            Cierre
+                          </p>
+
+                          <p className="mt-1 text-sm font-medium text-foreground">
+                            {new Date(item.endDate).toLocaleDateString()}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Contacto */}
+                      <div className="mt-5 space-y-2">
+                        <h4 className="text-sm font-semibold uppercase tracking-wide text-foreground/60">
+                          Contacto
+                        </h4>
+
                         <a
-                          href={item.googleMapLinkAddress}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex text-sm font-medium text-primary underline-offset-4 hover:underline"
+                          href={`mailto:${item.contactEmail}`}
+                          className="block truncate text-sm text-primary hover:underline"
                         >
-                          Ver ubicación en Google Maps →
+                          {item.contactEmail}
                         </a>
-                      )}
-                    </div>
 
-                    {/* Fechas */}
-                    <div className="mt-5 grid grid-cols-2 gap-3">
-                      <div className="rounded-lg border border-primary/10 p-3">
-                        <p className="text-xs font-semibold uppercase text-foreground/50">
-                          Inicio
-                        </p>
-
-                        <p className="mt-1 text-sm font-medium text-foreground">
-                          {new Date(item.startDate).toLocaleDateString()}
-                        </p>
+                        <a
+                          href={`tel:${item.contactPhone}`}
+                          className="block text-sm text-primary hover:underline"
+                        >
+                          {item.contactPhone}
+                        </a>
                       </div>
 
-                      <div className="rounded-lg border border-primary/10 p-3">
-                        <p className="text-xs font-semibold uppercase text-foreground/50">
-                          Cierre
-                        </p>
+                      {/* Parte inferior */}
+                      <div className="mt-auto flex flex-wrap items-center justify-between gap-3 border-t border-border/50 pt-6">
+                        {/* Certificación */}
+                        {item.isCertificated ? (
+                          <span className="inline-flex items-center gap-2 rounded-full border border-green-200 bg-green-50 px-3 py-1.5 text-sm font-medium text-green-700">
+                            <span className="h-2 w-2 rounded-full bg-current" />
+                            Certificado oficial
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-gray-50 px-3 py-1.5 text-sm font-medium text-gray-600">
+                            <span className="h-2 w-2 rounded-full bg-current" />
+                            Sin certificación
+                          </span>
+                        )}
 
-                        <p className="mt-1 text-sm font-medium text-foreground">
-                          {new Date(item.endDate).toLocaleDateString()}
-                        </p>
+                        {/* Urgencia */}
+                        <span
+                          className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm font-semibold ${
+                            urgencyStyles[item.urgency]
+                          }`}
+                        >
+                          <span className="h-2 w-2 rounded-full bg-current" />
+                          {item.urgency}
+                        </span>
                       </div>
-                    </div>
-
-                    {/* Contacto */}
-                    <div className="mt-5 space-y-2">
-                      <h4 className="text-sm font-semibold uppercase tracking-wide text-foreground/60">
-                        Contacto
-                      </h4>
-
-                      <a
-                        href={`mailto:${item.contactEmail}`}
-                        className="block truncate text-sm text-primary hover:underline"
-                      >
-                        {item.contactEmail}
-                      </a>
-
-                      <a
-                        href={`tel:${item.contactPhone}`}
-                        className="block text-sm text-primary hover:underline"
-                      >
-                        {item.contactPhone}
-                      </a>
-                    </div>
-
-                    {/* Parte inferior */}
-                    <div className="mt-auto flex flex-wrap items-center justify-between gap-3 border-t border-border/50 pt-6">
-                      {/* Certificación */}
-                      {item.isCertified ? (
-                        <span className="inline-flex items-center gap-2 rounded-full border border-green-200 bg-green-50 px-3 py-1.5 text-sm font-medium text-green-700">
-                          <span className="h-2 w-2 rounded-full bg-current" />
-                          Certificado oficial
-                        </span>
-                      ) : (
-                        <span className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-gray-50 px-3 py-1.5 text-sm font-medium text-gray-600">
-                          <span className="h-2 w-2 rounded-full bg-current" />
-                          Sin certificación
-                        </span>
-                      )}
-
-                      {/* Urgencia */}
-                      <span
-                        className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm font-semibold ${
-                          urgencyStyles[item.urgency]
-                        }`}
-                      >
-                        <span className="h-2 w-2 rounded-full bg-current" />
-                        {item.urgency}
-                      </span>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            ))}
-          </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              ))}
+            </div>
+          )}
         </Container>
       </section>
 

@@ -49,4 +49,8 @@ export const API_ENDPOINTS = {
     DELETE: (id: number) => `/adoption-follow-ups/${id}`,
     GET_BY_ID: (id: number) => `/adoption-follow-ups/${id}`,
   },
+  VOLUNTEER_APPLICATIONS: {
+    GET_BY_ID: (id: number) => `/volunteer-applications/${id}`,
+    LIST: "/volunteer-applications",
+  },
 } as const;
