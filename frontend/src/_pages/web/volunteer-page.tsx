@@ -264,14 +264,14 @@ export default function VolunteerPage() {
             {volunteerData.process.map((item, index) => {
               const IconComponent = iconMap[item.icon];
               return (
-                <div key={index} className="relative">
+                <div key={index} className="relative flex">
                   {/* Connector Line */}
                   {index < volunteerData.process.length - 1 && (
                     <div className="hidden md:block absolute left-[50%] top-16 w-full h-1 bg-gradient-to-r from-primary to-secondary transform -translate-x-1/2 z-0" />
                   )}
 
                   <div className="relative z-10">
-                    <Card className="bg-white border-primary/20 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+                    <Card className="h-full bg-white border-primary/20 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
                       <CardContent className="p-6 md:p-8 space-y-4 text-center">
                         <div className="w-16 h-16 mx-auto rounded-full bg-primary flex items-center justify-center">
                           {IconComponent && (
