@@ -100,7 +100,7 @@ export default function VolunteerPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mt-20 ">
               {volunteerApplications?.map((item, index) => (
                 <div key={index}>
-                  <Card className="group h-full overflow-hidden border-primary/20 bg-white transition-all duration-300 hover:border-primary/60 hover:shadow-xl">
+                  <Card className="group h-full overflow-hidden border-primary/20 bg-white transition-all duration-300 hover:border-primary/60 hover:shadow-xl flex flex-col justify-between">
                     <CardContent className="flex h-full flex-col p-6 md:p-8">
                       {/* Título y subtítulo */}
                       <div className="space-y-2">
