@@ -270,7 +270,7 @@ export default function VolunteerPage() {
 
                   <div className="relative z-10">
                     <Card className="h-full bg-white border-primary/20 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
-                      <CardContent className="p-6 md:p-8 space-y-4 text-center flex flex-col justify-betweencd ">
+                      <CardContent className="p-6 md:p-8 space-y-4 text-center flex flex-col justify-between">
                         <div className="w-16 h-16 mx-auto rounded-full bg-primary flex items-center justify-center">
                           {IconComponent && (
                             <IconComponent className="w-8 h-8 text-white" />
