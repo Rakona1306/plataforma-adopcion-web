@@ -23,7 +23,7 @@ export const TablePagination = ({
         value={value}
         onChange={onChange}
         color="blue"
-        size="sm"
+        size="md"
       />
     </div>
   );

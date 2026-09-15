@@ -16,7 +16,7 @@ import { BsViewList } from "react-icons/bs";
 import { useModal } from "@/core/application/hooks/ui/useModal";
 import { UpdateRoleForm, ViewRole } from "./organism";
 import { Role } from "@/features/organization/role/model/role.model";
-import { useGetAllRoles } from "@/features/organization/role/hooks/useGetAllRoles";
+import { useGetAllRoles } from "@/features/organization/role/hooks/use-get-all-role";
 import { useDeleteRole } from "@/features/organization/role/hooks/useDeleteRole";
 
 export default function RolesPage() {

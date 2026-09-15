@@ -10,6 +10,6 @@
 
         public int PageSize { get; set; }
 
-        public int TotalPages { get; set; } = 0;
+        public int TotalPages { get; set; }
     }
 }

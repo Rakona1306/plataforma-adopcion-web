@@ -3,7 +3,7 @@ import {
   CreateRequestAdoptionDto,
   CreateRequestAdoptionSchema,
 } from "../dto/dashboard/create-request-adoption";
-import { useGetAllUser } from "@/core/application/features/organization/user/hooks/useGetAllUser";
+import { useGetAllUser } from "@/features/organization/user/hooks/use-get-user";
 import { SearchSelect } from "@/components/ui/organisms/search-select";
 import { Avatar, Grid, Skeleton } from "@mantine/core";
 import ButtonUI from "@/components/ui/atoms/button/button-ui";
@@ -25,7 +25,7 @@ export default function CreateRequestAdoptionForm() {
     data: users,
     isLoading: isLoadingUsers,
     updateFilter,
-  } = useGetAllUser({ page: 1, pageSize: 10 });
+  } = useGetAllUser();
   const {
     data: pets,
     isLoading: isLoadingPets,
