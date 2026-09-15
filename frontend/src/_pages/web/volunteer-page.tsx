@@ -43,8 +43,6 @@ export default function VolunteerPage() {
     <main className="bg-white">
       {/* Header Section */}
 
-      {/*<BannerVoluntariado /> no encuentro banner voluntario archivo*/}
-
       {/* Why Volunteer Section */}
       <section className="py-7 md:py-16 px-4 md:px-6 bg-white">
         <Container className=" space-y-12 md:space-y-16">
@@ -62,7 +60,7 @@ export default function VolunteerPage() {
               const IconComponent = iconMap[benefit.icon];
               return (
                 <div key={index} className="group">
-                  <Card className="bg-white border-primary/20 hover:border-primary/60 hover:shadow-xl transition-all duration-300 h-full">
+                  <Card className="bg-white border-primary/20 hover:border-primary/60 hover:shadow-xl transition-all duration-300 ">
                     <CardContent className="p-6 md:p-8 space-y-4 flex flex-col items-center text-center md:items-start md:text-left">
                       <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                         {IconComponent && (
@@ -272,7 +270,7 @@ export default function VolunteerPage() {
 
                   <div className="relative z-10">
                     <Card className="h-full bg-white border-primary/20 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
-                      <CardContent className="p-6 md:p-8 space-y-4 text-center flex flex-col justify-between">
+                      <CardContent className="p-6 md:p-8 space-y-4 text-center flex flex-col justify-betweencd ">
                         <div className="w-16 h-16 mx-auto rounded-full bg-primary flex items-center justify-center">
                           {IconComponent && (
                             <IconComponent className="w-8 h-8 text-white" />
