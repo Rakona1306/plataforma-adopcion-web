@@ -32,9 +32,7 @@ namespace API.Application.Services.Organization.Users
             _mapper = mapper;
         }
 
-        public async Task<Paginate<UserResponse>> GetAllAsync(
-            UserFilterDto filter
-        )
+        public async Task<Paginate<UserResponse>> GetAllAsync(UserFilterDto filter)
         {
             IQueryable<User> query = _repository.Query().Include(x => x.Role);
 
@@ -48,24 +46,62 @@ namespace API.Application.Services.Organization.Users
                 );
             }
 
-            if (filter.RoleId.HasValue)
+            if (!string.IsNullOrWhiteSpace(filter.RoleId))
             {
-                query = query.Where(x =>
-                    x.RoleId == filter.RoleId
-                );
+                var roleIds = filter.RoleId
+                    .Split('|', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                    .Select(id => Guid.TryParse(id, out var guid) ? guid : (Guid?)null)
+                    .Where(id => id.HasValue)
+                    .Select(id => id!.Value)
+                    .ToList();
+
+                if (roleIds.Count > 0)
+                {
+                    query = query.Where(x => roleIds.Contains(x.RoleId));
+                }
+            }
+
+            if (!string.IsNullOrWhiteSpace(filter.District))
+            {
+                var districts = filter.District
+                    .Split('|', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                    .ToList();
+
+                if (districts.Count > 0)
+                {
+                    query = query.Where(x => x.District != null && districts.Contains(x.District));
+                }
             }
 
             if (filter.IsBlocked.HasValue)
             {
-                query = query.Where(x =>
-                    x.IsBlocked == filter.IsBlocked
-                );
+                query = query.Where(x => x.IsBlocked == filter.IsBlocked);
             }
+
+            if (filter.ToDashboard.HasValue)
+            {
+                query = query.Where(x => x.Role != null && x.Role.ToDashboard == filter.ToDashboard);
+            }
+
+            query = filter.Sort switch
+            {
+                "name_asc" => query.OrderBy(x => x.Name),
+                "name_desc" => query.OrderByDescending(x => x.Name),
+                "email_asc" => query.OrderBy(x => x.Email),
+                "email_desc" => query.OrderByDescending(x => x.Email),
+                "createdAt_desc" => query.OrderByDescending(x => x.CreatedAt),
+                "isBlocked_true" => query.OrderByDescending(x => x.IsBlocked),
+                "isBlocked_false" => query.OrderBy(x => x.IsBlocked),
+                _ => query.OrderBy(x => x.CreatedAt)
+            };
 
             var totalCount = await query.CountAsync();
 
+            var totalPages = totalCount == 0
+                ? 0
+                : (int)Math.Ceiling(totalCount / (double)filter.PageSize);
+
             var items = await query
-                .OrderByDescending(x => x.CreatedAt)
                 .Skip((filter.Page - 1) * filter.PageSize)
                 .Take(filter.PageSize)
                 .ToListAsync();
@@ -75,7 +111,8 @@ namespace API.Application.Services.Organization.Users
                 Items = _mapper.ToResponseList(items),
                 TotalCount = totalCount,
                 Page = filter.Page,
-                PageSize = filter.PageSize
+                PageSize = filter.PageSize,
+                TotalPages = totalPages
             };
         }
 
