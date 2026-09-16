@@ -71,12 +71,17 @@ namespace API.Application.Services.Organization.Roles
                                    })
                                    .ToListAsync();
 
+            var totalPages = total == 0
+                ? 0
+                : (int)Math.Ceiling(total / (double)filter.PageSize);
+
             return new Paginate<RoleResponse>
             {
                 Items = items,
                 TotalCount = total,
                 Page = filter.Page,
-                PageSize = filter.PageSize
+                PageSize = filter.PageSize,
+                TotalPages = totalPages
             };
         }
 

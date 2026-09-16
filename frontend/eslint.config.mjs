@@ -16,6 +16,7 @@ const eslintConfig = defineConfig([
     "**/*.test.tsx",
     "**/*.spec.ts",
     "**/*.spec.tsx",
+    "scripts/**"
   ]),
 
   // Desactivar las advertencias de 'any' en todo el proyecto
