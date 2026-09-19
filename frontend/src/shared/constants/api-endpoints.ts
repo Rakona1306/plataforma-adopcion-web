@@ -51,6 +51,7 @@ export const API_ENDPOINTS = {
   },
   VOLUNTEER_APPLICATIONS: {
     GET_BY_ID: (id: number) => `/volunteer-applications/${id}`,
-    LIST: "/volunteer-applications",
+
+    PUBLIC_LIST: "/v1/volunteer-applications",
   },
 } as const;

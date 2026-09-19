@@ -1,9 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 using API.Domain.Common.Model;
+using System.ComponentModel.DataAnnotations;
 
 namespace API.Domain.Model.Bussiness
 {
@@ -32,14 +28,13 @@ namespace API.Domain.Model.Bussiness
         [MaxLength(20)]
         public string? ContactPhone { get; set; }
         public bool IsCertified { get; set; } = false;
-        public UrgencyLevel Urgency { get; set; } = UrgencyLevel.NORMAL;
+        public UrgencyLevel Urgency { get; set; } = UrgencyLevel.MEDIO;
     }
     public enum UrgencyLevel
     {
-        NORMAL = 0,
-        LOW = 1,
-        MEDIUM = 2,
-        HIGH = 3,
-        URGENT = 4
+        BAJO = 1,
+        MEDIO = 2,
+        ALTO = 3,
+        URGENTE = 4
     }
 }

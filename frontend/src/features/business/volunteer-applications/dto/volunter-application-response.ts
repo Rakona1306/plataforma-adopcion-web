@@ -1,4 +1,4 @@
-export interface volunteerResponse {
+export interface VolunteerApplicationResponse {
   title: string;
   subtitle?: string;
   description: string;
@@ -12,5 +12,5 @@ export interface volunteerResponse {
   contactEmail?: string;
   contactPhone?: string;
   isCertificated: boolean;
-  urgency: number;
+  urgency: string;
 }
