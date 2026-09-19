@@ -31,5 +31,8 @@ export const QUERY_KEYS = {
     REQUEST_ADOPTION: {
       PAGINATE: "request-adoption-paginate",
     },
+    VOLUNTEER: {
+      PAGINATE: "volunteer-data",
+    },
   },
 };

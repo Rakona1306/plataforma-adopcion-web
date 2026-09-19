@@ -14,10 +14,11 @@ import { test, expect } from "@playwright/test";
  */
 
 const PROCESS_HEADING_TEXT = "Comenzar";
+const BASE_URL = "/voluntariado";
 
 test.describe("HU SISTE-30: Sección 'Cómo Comenzar'", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/voluntariado");
+    await page.goto(BASE_URL);
   });
 
   test.describe("CA01: Altura igualitaria en desktop", () => {
@@ -259,3 +260,92 @@ test.describe("HU SISTE-30: Sección 'Cómo Comenzar'", () => {
     });
   });
 });
+/*
+test.describe('SISTE-43: Página de Voluntariado', () => {
+  
+  test.beforeEach(async ({ page }) => {
+  // QUITAMOS ESPACIO ACA DEL **
+  await page.route('** /api/volunteer-applications ** ', async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          items: [
+            {
+              title: 'E2E Test Voluntariado',
+              subtitle: 'Subtitulo E2E',
+              description: 'Descripción de prueba para E2E',
+              requirements: 'Ninguno',
+              minAge: 18,
+              maxAge: 99,
+              address: 'Calle Falsa 123',
+              googleMapLinkAddress: 'https://maps.google.com',
+              startDate: '2026-09-20',
+              endDate: '2026-09-21',
+              contactEmail: 'e2e@test.com',
+              contactPhone: '123456789',
+              isCertificated: true,
+              urgency: 'URGENT',
+            }
+          ]
+        }),
+      });
+    });
+  });
+
+  test('debería cargar la página y mostrar las tarjetas de voluntariado', async ({ page }) => {
+    await page.goto(BASE_URL);
+
+    // Verificamos que el título principal de la sección de cards está visible
+    await expect(page.getByRole('heading', { name: /¿Listo para Hacer la Diferencia\?/i })).toBeVisible();
+
+    // Verificamos que la tarjeta mockeada se renderizó
+    const cardTitle = page.getByRole('heading', { name: 'E2E Test Voluntariado' });
+    await expect(cardTitle).toBeVisible();
+    
+    // Verificamos los botones de la tarjeta
+    await expect(page.getByRole('button', { name: /Postular ahora/i })).toBeVisible();
+  });
+
+  test('debería abrir el enlace de Google Maps en una nueva pestaña', async ({ page }) => {
+    await page.goto(BASE_URL);
+    
+    // Esperamos a que la tarjeta cargue
+    await expect(page.getByText('E2E Test Voluntariado')).toBeVisible();
+
+    // Escuchamos si se abre una nueva pestaña (popup)
+    const [newPage] = await Promise.all([
+      page.context().waitForEvent('page'),
+      page.getByRole('link', { name: /Dirección en Google Map/i }).click()
+    ]);
+
+    // Verificamos que la nueva pestaña se abrió con la URL correcta
+    await expect(newPage).toHaveURL('https://maps.google.com');
+  });
+
+  test('debería interactuar con el acordeón de Preguntas Frecuentes (FAQ)', async ({ page }) => {
+    await page.goto(BASE_URL);
+
+    // Scroll hacia la sección de FAQ
+    await page.getByRole('heading', { name: /Preguntas Frecuentes/i }).scrollIntoViewIfNeeded();
+
+    // Buscamos el primer botón de pregunta (el que contiene un h3)
+    const firstFaqButton = page.locator('button').filter({ has: page.locator('h3') }).first();
+    
+    // Aseguramos que la pregunta es visible
+    await expect(firstFaqButton).toBeVisible();
+
+    // Hacemos click para expandir
+    await firstFaqButton.click();
+
+    // Verificamos que el ícono de la flecha rotó (clase de Tailwind)
+    const chevronIcon = firstFaqButton.locator('svg');
+    await expect(chevronIcon).toHaveClass(/rotate-180/);
+
+    // Verificamos que el contenedor de la respuesta es visible
+    // (Asumiendo que el div de la respuesta tiene la clase animate-fade-in o bg-primary/5)
+    const answerContainer = firstFaqButton.locator('..').locator('div').filter({ hasText: /.+/ }).last();
+    await expect(answerContainer).toBeVisible();
+  });
+});
+*/

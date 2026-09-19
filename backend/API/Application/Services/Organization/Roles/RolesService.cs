@@ -1,7 +1,5 @@
 ﻿using API.Application.Common.Services;
-using API.Application.Features.Bussiness.Permissions.Dtos;
 using API.Application.Features.Organization.Roles.Dtos;
-using API.Application.Features.Roles.Mappers;
 using API.Application.Features.System.AuditLogs.Dtos;
 using API.Application.Features.System.AuditLogs.Mappers;
 using API.Application.Helpers;
@@ -12,6 +10,8 @@ using API.Domain.Repository.Organization;
 using API.Domain.Repository.System;
 using API.Infrastructure.Db; // Necesario para acceder al contexto si buscas permisos
 using API.Infrastructure.Exceptions;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Application.Services.Organization.Roles
@@ -20,14 +20,15 @@ namespace API.Application.Services.Organization.Roles
     {
         private readonly IRoleRepository _repository;
         private readonly IRolePermissionRepository _rolePermissionRepository;
-        private readonly RoleMapper _mapper;
+        // private readonly RoleMapper _mapper;
         private readonly ConnDbContext _context;
         private readonly IAuditLogRepository _auditLogRepository;
+        private readonly IMapper _mapper;
 
         public RolesService(
             IRoleRepository repository,
             IRolePermissionRepository rolePermissionRepository,
-            RoleMapper mapper,
+            IMapper mapper,
             AuditLogMapper auditLogMapper,
             ConnDbContext context,
             IAuditLogRepository auditLogRepository
@@ -50,25 +51,35 @@ namespace API.Application.Services.Organization.Roles
             if (filter.ToDashboard.HasValue)
                 query = query.Where(x => x.ToDashboard == filter.ToDashboard);
 
+            if (!string.IsNullOrWhiteSpace(filter.PermissionId))
+            {
+                var permissionIds = filter.PermissionId
+                    .Split('|', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                    .Select(id => Guid.TryParse(id, out var guid) ? guid : (Guid?)null)
+                    .Where(id => id.HasValue)
+                    .Select(id => id!.Value)
+                    .ToList();
+
+                if (permissionIds.Count > 0)
+                {
+                    query = query.Where(x =>
+                        x.RolePermissions.Any(rp => permissionIds.Contains(rp.PermissionId)));
+                }
+            }
+
+            query = filter.Sort switch
+            {
+                "name_asc" => query.OrderBy(x => x.Name),
+                "name_desc" => query.OrderByDescending(x => x.Name),
+                "createdAt_desc" => query.OrderByDescending(x => x.CreatedAt),
+                _ => query.OrderBy(x => x.CreatedAt)
+            };
+
             var total = await query.CountAsync();
             var items = await query.OrderByDescending(x => x.CreatedAt)
                                    .Skip((filter.Page - 1) * filter.PageSize)
                                    .Take(filter.PageSize)
-                                   .Select(x => new RoleResponse
-                                   {
-                                       Id = x.Id,
-                                       Name = x.Name,
-                                       Description = x.Description,
-                                       ToDashboard = x.ToDashboard,
-                                       CreatedAt = x.CreatedAt,
-                                       UsersCount = x.Users.Count(),
-                                       Permissions = x.RolePermissions.Select(rp => new PermissionResponse
-                                       {
-                                           Id = rp.Permission.Id,
-                                           Name = rp.Permission.Name,
-                                           Module = rp.Permission.Module
-                                       }).ToList()
-                                   })
+                                   .ProjectTo<RoleResponse>(_mapper.ConfigurationProvider)
                                    .ToListAsync();
 
             var totalPages = total == 0
@@ -91,7 +102,7 @@ namespace API.Application.Services.Organization.Roles
                 .FirstOrDefaultAsync<Role>(x => x.Id == id);
 
             if (entity is null) throw new NotFoundException("Rol no encontrado");
-            return _mapper.ToResponse(entity);
+            return _mapper.Map<RoleResponse>(entity);
         }
 
         public async Task<RoleResponse> CreateAsync(
@@ -114,7 +125,7 @@ namespace API.Application.Services.Organization.Roles
             }
 
             var entity =
-                _mapper.ToEntity(dto);
+                _mapper.Map<Role>(dto);
 
             entity.RolePermissions = [];
 
@@ -156,7 +167,7 @@ namespace API.Application.Services.Organization.Roles
                         x => x.Id == entity.Id
                     );
 
-            return _mapper.ToResponse(
+            return _mapper.Map<RoleResponse>(
                 createdRole!
             );
         }
@@ -204,7 +215,7 @@ namespace API.Application.Services.Organization.Roles
             // UPDATE DATA
             // =========================================
 
-            _mapper.Update(dto, entity);
+            _mapper.Map(dto, entity);
 
             // =========================================
             // REMOVE PERMISSIONS
@@ -307,7 +318,7 @@ namespace API.Application.Services.Organization.Roles
                         x => x.Id == id
                     );
 
-            return _mapper.ToResponse(
+            return _mapper.Map<RoleResponse>(
                 updatedRole!
             );
         }
