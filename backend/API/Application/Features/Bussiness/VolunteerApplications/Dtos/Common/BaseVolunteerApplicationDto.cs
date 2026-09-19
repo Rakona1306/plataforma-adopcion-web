@@ -42,6 +42,6 @@ namespace API.Application.Features.Bussiness.VolunteerApplications.Dtos.Common
 
         public bool IsCertified { get; set; } = false;
 
-        public UrgencyLevel Urgency { get; set; } = UrgencyLevel.NORMAL;
+        public UrgencyLevel Urgency { get; set; } = UrgencyLevel.MEDIO;
     }
 }

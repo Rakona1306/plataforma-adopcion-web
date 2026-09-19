@@ -1,0 +1,271 @@
+"use client";
+
+import { useState } from "react";
+import { volunteerData } from "@/app/(web)/_utils/data/voluntee.data";
+import { Card, CardContent } from "@/app/(web)/_components/molecules/card/card";
+import {
+  BiBookOpen,
+  BiChevronDown,
+  BiClipboard,
+  BiHeart,
+  BiSmile,
+  BiTrendingUp,
+} from "react-icons/bi";
+import { FaHandshake, FaUsers } from "react-icons/fa";
+import { CgLock } from "react-icons/cg";
+import Title from "@/app/(web)/_components/atoms/title";
+import Container from "@/components/ui/atoms/container";
+import useVolunteers from "@/features/business/volunteer-applications/hooks/use-get-volunteer-data";
+import { VolunteerCardSkeleton } from "@/features/business/volunteer-applications/components/ui/molecules/volunteer-card-skeleton";
+import { VolunteerCard } from "@/features/business/volunteer-applications/components/ui/organism/volunteer-card";
+const urgencyStyles: Record<string, string> = {
+  NORMAL: "bg-gray-100 text-gray-700 border-gray-300",
+  LOW: "bg-green-100 text-green-700 border-green-300",
+  MEDIUM: "bg-yellow-100 text-yellow-700 border-yellow-300",
+  HIGH: "bg-orange-100 text-orange-700 border-orange-300",
+  URGENT: "bg-red-100 text-red-700 border-red-300",
+};
+
+const iconMap: Record<string, React.ComponentType<{ className: string }>> = {
+  heart: BiHeart,
+  users: FaUsers,
+  "trending-up": BiTrendingUp,
+  clock: CgLock,
+  clipboard: BiClipboard,
+  handshake: FaHandshake,
+  "book-open": BiBookOpen,
+  smile: BiSmile,
+};
+
+const SKELETON_COUNT = 3;
+
+export default function VolunteerPage() {
+  const [expandedFaq, setExpandedFaq] = useState<number | null>(0);
+  const { data: volunteerApplications, isLoading } = useVolunteers();
+
+  return (
+    <main className="bg-white">
+      {/* Header Section */}
+
+      {/* Why Volunteer Section */}
+      <section className="py-7 md:py-16 px-4 md:px-6 bg-white">
+        <Container className=" space-y-12 md:space-y-16">
+          <div className="text-center space-y-4">
+            <Title htmlTag="h2" className="text-foreground">
+              {volunteerData.whyVolunteer.title}
+            </Title>
+            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
+              {volunteerData.whyVolunteer.description}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 space-y-12 md:space-y-16">
+            {volunteerData.whyVolunteer.benefits.map((benefit, index) => {
+              const IconComponent = iconMap[benefit.icon];
+              return (
+                <div key={index} className="group">
+                  <Card className="bg-white border-primary/20 hover:border-primary/60 hover:shadow-xl transition-all duration-300 ">
+                    <CardContent className="p-6 md:p-8 space-y-4 flex flex-col items-center text-center md:items-start md:text-left">
+                      <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                        {IconComponent && (
+                          <IconComponent className="w-7 h-7 text-primary" />
+                        )}
+                      </div>
+
+                      <h3 className="text-lg md:text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+                        {benefit.title}
+                      </h3>
+
+                      <p className="text-sm md:text-base text-foreground/70">
+                        {benefit.description}
+                      </p>
+                    </CardContent>
+                  </Card>
+                </div>
+              );
+            })}
+          </div>
+        </Container>
+      </section>
+
+      {/* Form Section*/}
+      <section className="py-7 md:py-16 px-4 md:px-6 bg-slate-50">
+        <Container className="text-center">
+          <Title htmlTag="h2">
+            ¿Listo para Hacer{" "}
+            <span className="text-primary">la Diferencia?</span>
+          </Title>
+
+          <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6 text-left md:mt-20 md:gap-8">
+            {isLoading
+              ? Array.from({ length: SKELETON_COUNT }).map((_, index) => (
+                  <VolunteerCardSkeleton key={index} />
+                ))
+              : volunteerApplications?.map((application, index) => (
+                  <VolunteerCard
+                    key={index}
+                    application={application}
+                    urgencyStyles={urgencyStyles}
+                  />
+                ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* Process Section */}
+      <section className="py-7 md:py-10 px-4 md:px-6 bg-white">
+        <Container className="space-y-12 md:space-y-16">
+          <div className="text-center space-y-4">
+            <Title htmlTag="h2" className="text-foreground">
+              Cómo <span className="text-primary">Comenzar</span>
+            </Title>
+            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
+              El proceso es simple y directo. Te guiaremos en cada paso.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
+            {volunteerData.process.map((item, index) => {
+              const IconComponent = iconMap[item.icon];
+              return (
+                <div key={index} className="relative flex">
+                  {/* Connector Line */}
+                  {index < volunteerData.process.length - 1 && (
+                    <div className="hidden md:block absolute left-[50%] top-16 w-full h-1 bg-gradient-to-r from-primary to-secondary transform -translate-x-1/2 z-0" />
+                  )}
+
+                  <div className="relative z-10">
+                    <Card className="h-full bg-white border-primary/20 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+                      <CardContent className="p-6 md:p-8 space-y-4 text-center flex flex-col justify-between">
+                        <div className="w-16 h-16 mx-auto rounded-full bg-primary flex items-center justify-center">
+                          {IconComponent && (
+                            <IconComponent className="w-8 h-8 text-white" />
+                          )}
+                        </div>
+                        <div>
+                          <div className="text-sm font-bold text-primary/70 mb-1">
+                            Paso {item.step}
+                          </div>
+                          <h3 className="text-lg md:text-xl font-bold text-foreground mb-2">
+                            {item.title}
+                          </h3>
+                          <p className="text-sm md:text-base text-foreground/70">
+                            {item.description}
+                          </p>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </Container>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-16 md:py-16 px-4 md:px-6 bg-gradient-to-b from-primary/5 to-white">
+        <div className="container mx-auto max-w-6xl space-y-12 md:space-y-16">
+          <div className="text-center space-y-4">
+            <Title htmlTag="h2" className=" text-foreground">
+              Lo que Dicen{" "}
+              <span className="text-primary">Nuestros Voluntarios</span>
+            </Title>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            {volunteerData.testimonials.map((testimonial, index) => (
+              <Card
+                key={index}
+                className="bg-white border-primary/20 hover:border-primary/50 hover:shadow-xl transition-all duration-300"
+              >
+                <CardContent className="p-6 md:p-8 space-y-4">
+                  <div className="flex items-center gap-1 text-lg">
+                    {"★★★★★".split("").map((star, i) => (
+                      <span key={i} className="text-primary">
+                        {star}
+                      </span>
+                    ))}
+                  </div>
+                  <blockquote className="text-foreground/80 italic text-base">
+                    {testimonial.quote}
+                  </blockquote>
+                  <div className="pt-4 border-t border-primary/20 space-y-2">
+                    <div className="text-2xl">{testimonial.image}</div>
+                    <div>
+                      <div className="font-bold text-foreground">
+                        {testimonial.name}
+                      </div>
+                      <div className="text-sm text-foreground/60">
+                        {testimonial.role}
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 md:py-16 px-4 md:px-6 bg-white">
+        <div className="container mx-auto max-w-3xl space-y-8 md:space-y-12">
+          <div className="text-center space-y-4">
+            <Title htmlTag="h2" className=" text-foreground">
+              Preguntas <span className="text-primary">Frecuentes</span>
+            </Title>
+          </div>
+
+          <div className="space-y-4">
+            {volunteerData.faq.map((item, index) => (
+              <div key={index} className="group">
+                <button
+                  onClick={() =>
+                    setExpandedFaq(expandedFaq === index ? null : index)
+                  }
+                  className="w-full text-left"
+                >
+                  <Card className="bg-white border-primary/20 hover:border-primary/50 transition-all duration-300 cursor-pointer hover:shadow-lg">
+                    <CardContent className="px-6 py-1 flex items-center justify-between gap-4">
+                      <h3 className="text-lg md:text-xl font-bold text-foreground flex-1">
+                        {item.question}
+                      </h3>
+                      <BiChevronDown
+                        className={`w-6 h-6 text-primary transition-transform duration-300 flex-shrink-0 ${expandedFaq === index ? "rotate-180" : ""}`}
+                      />
+                    </CardContent>
+                  </Card>
+                </button>
+
+                {expandedFaq === index && (
+                  <div className="mt-2 px-6 py-6 bg-primary/5 rounded-2xl border border-primary/20 animate-fade-in">
+                    <p className="text-foreground/70 text-base md:text-lg leading-relaxed">
+                      {item.answer}
+                    </p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <style jsx>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-fade-in {
+          animation: fadeIn 0.3s ease-out forwards;
+        }
+      `}</style>
+    </main>
+  );
+}

@@ -1,0 +1,36 @@
+[
+  {
+    "id": 1,
+    "title": "Rescate y Cuidado Canino",
+    "subTitle": "Turno Mañana",
+    "description": "Apoyo directo en la alimentación, limpieza de áreas y socialización de perritos rescatados en el albergue.",
+    "requirements": "Amor genuino por los animales, mayor de 18 años y disponibilidad mínima de 4 horas semanales.",
+    "minAge": 18,
+    "maxAge": 55,
+    "address": "Altura de Av. José Saco Rojas, Carabayllo 15121",
+    "googleMapLinkAddress": "https://maps.google.com/?q=Carabayllo",
+    "startDate": "2026-04-01T08:00:00Z",
+    "endDate": "2026-12-31T12:00:00Z",
+    "contactEmail": "albergue.adoptasalvavidas@gmail.com",
+    "contactPhone": "+51955288116",
+    "isCertified": true,
+    "urgency": "HIGH"
+  },
+  {
+    "id": 2,
+    "title": "Logística y Campañas de Adopción",
+    "subTitle": "Fines de Semana",
+    "description": "Organización de stands, traslado de donaciones y atención orientativa al público en ferias.",
+    "requirements": "Persona proactiva, dinámica y con facilidad de palabra.",
+    "minAge": 16,
+    "maxAge": 60,
+    "address": "Parque Central de Carabayllo",
+    "googleMapLinkAddress": null,
+    "startDate": "2026-05-10T09:00:00Z",
+    "endDate": "2026-10-30T17:00:00Z",
+    "contactEmail": "voluntarios@adoptasalvavidas.com",
+    "contactPhone": "+51955288116",
+    "isCertified": true,
+    "urgency": "MEDIUM"
+  }
+]
