@@ -89,10 +89,10 @@ namespace API.Application.Services.Organization.Users
                 "name_desc" => query.OrderByDescending(x => x.Name),
                 "email_asc" => query.OrderBy(x => x.Email),
                 "email_desc" => query.OrderByDescending(x => x.Email),
-                "createdAt_desc" => query.OrderByDescending(x => x.CreatedAt),
+                "createdAt_asc" => query.OrderBy(x => x.CreatedAt),
                 "isBlocked_true" => query.OrderByDescending(x => x.IsBlocked),
                 "isBlocked_false" => query.OrderBy(x => x.IsBlocked),
-                _ => query.OrderBy(x => x.CreatedAt)
+                _ => query.OrderByDescending(x => x.CreatedAt)
             };
 
             var totalCount = await query.CountAsync();

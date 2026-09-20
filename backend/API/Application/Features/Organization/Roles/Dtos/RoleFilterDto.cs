@@ -9,7 +9,7 @@
         public string? Search { get; set; }
 
         public bool? ToDashboard { get; set; }
-        public string PermissionId { get; set; }
-        public string Sort { get; set; }
+        public string? PermissionId { get; set; }
+        public string? Sort { get; set; }
     }
 }
