@@ -18,6 +18,8 @@ class RoleService implements IRoleService {
 
   async get(filter: RoleFilterDto) {
     const params = new URLSearchParams();
+    if (filter.sort) params.append("sort", filter.sort);
+    if (filter.permissionId) params.append("permissionId", filter.permissionId);
     if (filter.search) params.append("search", filter.search);
     if (filter.toDashboard !== undefined && filter.toDashboard !== "todos")
       params.append("toDashboard", filter.toDashboard);
