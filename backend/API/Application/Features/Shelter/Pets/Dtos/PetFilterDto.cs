@@ -1,22 +1,19 @@
-﻿using API.Domain.Model.Enums;
-
-namespace API.Application.Features.Shelter.Pets.Dtos
+﻿namespace API.Application.Features.Shelter.Pets.Dtos
 {
     public class PetFilterDto
     {
         public int Page { get; set; } = 1;
 
         public int PageSize { get; set; } = 10;
+        public string Search { get; set; } = string.Empty;
+        public string Sort { get; set; } = string.Empty;
 
-        public string? Search { get; set; }
-
-        public Guid? SpeciesId { get; set; }
-
-        public PetStatus? Status { get; set; }
-
-        public PetGender? Gender { get; set; }
-
-        public PetSize? Size { get; set; }
+        public string? Gender { get; set; }
+        public string? SpecieId { get; set; }
+        public string? Size { get; set; }
+        public string? BreedId { get; set; }
+        public int? MinAge { get; set; }
+        public int? MaxAge { get; set; }
 
         public bool? IsVaccinated { get; set; }
 

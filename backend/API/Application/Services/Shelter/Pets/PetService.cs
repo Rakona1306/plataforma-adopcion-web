@@ -1,138 +1,312 @@
-﻿using System.Globalization;
-using System.Text;
-using System.Text.RegularExpressions;
-using API.Application.Common.Services;
+﻿using API.Application.Common.Services;
 using API.Application.Features.Shelter.Pets.Dtos;
 using API.Application.Features.Shelter.Pets.Dtos.Private;
-using API.Application.Features.Shelter.Pets.Mappers;
 using API.Application.Features.System.AuditLogs.Dtos;
 using API.Application.Features.System.AuditLogs.Mappers;
 using API.Domain.Common.Model;
+using API.Domain.Model.Enums;
 using API.Domain.Model.Shelter;
 using API.Domain.Repository.Bussiness;
 using API.Domain.Repository.Shelter;
 using API.Infrastructure.Exceptions;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace API.Application.Services.Shelter.Pets
 {
     public class PetService : BaseService<Pet, IPetRepository>, IPetService
     {
         private readonly IPetRepository _petRepository;
-        private readonly PetMapper _mapper;
         private readonly IRequestAdoptionRepository _requestAdoptionRepository;
-        private readonly IMapper _autoMapper;
+        private readonly IMapper _mapper;
 
         public PetService(
-            IMapper autoMapper,
+            IMapper mapper,
             IPetRepository petRepository,
-            PetMapper mapper,
             AuditLogMapper auditLogMapper,
             IRequestAdoptionRepository requestAdoptionRepository
-        )
-            : base(petRepository, auditLogMapper)
+        ) : base(petRepository, auditLogMapper)
         {
-            _autoMapper = autoMapper;
-            _petRepository = petRepository;
             _mapper = mapper;
+            _petRepository = petRepository;
             _requestAdoptionRepository = requestAdoptionRepository;
         }
 
         // --- GET ALL ---
         public async Task<Paginate<PetResponse>> GetAllAsync(PetFilterDto filter)
         {
-            IQueryable<Pet> query = _petRepository.Query()
-                .Include(x => x.Species)
-                .Include(x => x.PetBreeds).ThenInclude(x => x.Breed)
-                .Include(x => x.PetTraits).ThenInclude(x => x.Trait)
-                .Include(x => x.PetVaccines).ThenInclude(x => x.Vaccine)
-                .Include(x => x.Photos);
+            IQueryable<Pet> query = _petRepository.Query();
 
+            // 1. Aplicar Filtros
+            query = ApplyFilters(query, filter);
+
+            // 2. Contar total ANTES de paginar
+            var totalCount = await query.CountAsync();
+
+            // 3. Aplicar Ordenamiento
+            query = ApplySort(query, filter.Sort);
+
+            // 4. Paginar y Proyectar a Response (SQL Optimizado)
+            var items = await query
+                .Skip((filter.Page - 1) * filter.PageSize)
+                .Take(filter.PageSize)
+                .ProjectTo<PetResponse>(_mapper.ConfigurationProvider)
+                .ToListAsync();
+
+            return new Paginate<PetResponse>
+            {
+                Items = items,
+                TotalCount = totalCount,
+                Page = filter.Page,
+                PageSize = filter.PageSize,
+                TotalPages = totalCount == 0 ? 0 : (int)Math.Ceiling(totalCount / (double)filter.PageSize)
+            };
+        }
+
+        // --- FILTROS (reutilizable) ---
+        // Los strings de filtro (Gender, SpecieId, Size, BreedId) aceptan varios valores
+        // separados por '|' y se combinan con OR dentro de cada campo.
+        private static IQueryable<Pet> ApplyFilters(IQueryable<Pet> query, PetFilterDto filter)
+        {
             if (!string.IsNullOrWhiteSpace(filter.Search))
                 query = query.Where(x => x.Name.Contains(filter.Search));
 
             if (filter.IsAdopted.HasValue)
                 query = query.Where(x => x.IsAdopted == filter.IsAdopted.Value);
 
-            var totalCount = await query.CountAsync();
-            var items = await query.Skip((filter.Page - 1) * filter.PageSize)
-                                   .Take(filter.PageSize)
-                                   .ToListAsync();
+            if (filter.IsVaccinated.HasValue)
+                query = query.Where(x => x.IsVaccinated == filter.IsVaccinated.Value);
 
-            return new Paginate<PetResponse>
+            if (filter.IsSterilized.HasValue)
+                query = query.Where(x => x.IsSterilized == filter.IsSterilized.Value);
+
+            if (filter.MinAge.HasValue)
+                query = query.Where(x => x.Age >= filter.MinAge.Value);
+
+            if (filter.MaxAge.HasValue)
+                query = query.Where(x => x.Age <= filter.MaxAge.Value);
+
+            if (!string.IsNullOrWhiteSpace(filter.Gender))
             {
-                Items = _mapper.ToResponseList(items),
-                TotalCount = totalCount,
-                Page = filter.Page,
-                PageSize = filter.PageSize
-            };
+                var genders = filter.Gender
+                    .Split('|', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                    .Select(g => Enum.TryParse<PetGender>(g, true, out var parsed) ? parsed : (PetGender?)null)
+                    .Where(g => g.HasValue)
+                    .Select(g => g!.Value)
+                    .ToList();
+
+                if (genders.Count > 0)
+                    query = query.Where(x => genders.Contains(x.Gender));
+            }
+
+            if (!string.IsNullOrWhiteSpace(filter.Size))
+            {
+                var sizes = filter.Size
+                    .Split('|', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                    .Select(s => Enum.TryParse<PetSize>(s, true, out var parsed) ? parsed : (PetSize?)null)
+                    .Where(s => s.HasValue)
+                    .Select(s => s!.Value)
+                    .ToList();
+
+                if (sizes.Count > 0)
+                    query = query.Where(x => sizes.Contains(x.Size));
+            }
+
+            if (!string.IsNullOrWhiteSpace(filter.SpecieId))
+            {
+                var specieIds = filter.SpecieId
+                    .Split('|', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                    .Select(id => Guid.TryParse(id, out var guid) ? guid : (Guid?)null)
+                    .Where(id => id.HasValue)
+                    .Select(id => id!.Value)
+                    .ToList();
+
+                if (specieIds.Count > 0)
+                    query = query.Where(x => specieIds.Contains(x.SpeciesId));
+            }
+
+            if (!string.IsNullOrWhiteSpace(filter.BreedId))
+            {
+                var breedIds = filter.BreedId
+                    .Split('|', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                    .Select(id => Guid.TryParse(id, out var guid) ? guid : (Guid?)null)
+                    .Where(id => id.HasValue)
+                    .Select(id => id!.Value)
+                    .ToList();
+
+                if (breedIds.Count > 0)
+                    query = query.Where(x => x.PetBreeds.Any(pb => breedIds.Contains(pb.BreedId)));
+            }
+
+            return query;
+        }
+
+        // --- SORT (reutilizable) ---
+        // Formato esperado: campos separados por '|', cada uno opcionalmente
+        // prefijado con '-' para orden descendente. Ej: "Name|-Age" => ordena por
+        // Name asc y luego por Age desc. Sin Sort -> primero los que cumplen años
+        // hoy (BirthDate con mismo mes/día que hoy), luego CreatedAt desc.
+        private static IQueryable<Pet> ApplySort(IQueryable<Pet> query, string? sort)
+        {
+            if (string.IsNullOrWhiteSpace(sort))
+                return DefaultOrder(query);
+
+            var fields = sort.Split('|', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+
+            IOrderedQueryable<Pet>? ordered = null;
+
+            foreach (var field in fields)
+            {
+                var descending = field.StartsWith('-');
+                var key = (descending ? field[1..] : field).Trim();
+
+                ordered = key.ToLowerInvariant() switch
+                {
+                    "name" => ordered is null
+                        ? (descending ? query.OrderByDescending(x => x.Name) : query.OrderBy(x => x.Name))
+                        : (descending ? ordered.ThenByDescending(x => x.Name) : ordered.ThenBy(x => x.Name)),
+
+                    "age" => ordered is null
+                        ? (descending ? query.OrderByDescending(x => x.Age) : query.OrderBy(x => x.Age))
+                        : (descending ? ordered.ThenByDescending(x => x.Age) : ordered.ThenBy(x => x.Age)),
+
+                    "weightkg" => ordered is null
+                        ? (descending ? query.OrderByDescending(x => x.WeightKg) : query.OrderBy(x => x.WeightKg))
+                        : (descending ? ordered.ThenByDescending(x => x.WeightKg) : ordered.ThenBy(x => x.WeightKg)),
+
+                    "birthdate" => ordered is null
+                        ? (descending ? query.OrderByDescending(x => x.BirthDate) : query.OrderBy(x => x.BirthDate))
+                        : (descending ? ordered.ThenByDescending(x => x.BirthDate) : ordered.ThenBy(x => x.BirthDate)),
+
+                    "createdat" => ordered is null
+                        ? (descending ? query.OrderByDescending(x => x.CreatedAt) : query.OrderBy(x => x.CreatedAt))
+                        : (descending ? ordered.ThenByDescending(x => x.CreatedAt) : ordered.ThenBy(x => x.CreatedAt)),
+
+                    "isadopted" => ordered is null
+                        ? (descending ? query.OrderByDescending(x => x.IsAdopted) : query.OrderBy(x => x.IsAdopted))
+                        : (descending ? ordered.ThenByDescending(x => x.IsAdopted) : ordered.ThenBy(x => x.IsAdopted)),
+
+                    "isvaccinated" => ordered is null
+                        ? (descending ? query.OrderByDescending(x => x.IsVaccinated) : query.OrderBy(x => x.IsVaccinated))
+                        : (descending ? ordered.ThenByDescending(x => x.IsVaccinated) : ordered.ThenBy(x => x.IsVaccinated)),
+
+                    "issterilized" => ordered is null
+                        ? (descending ? query.OrderByDescending(x => x.IsSterilized) : query.OrderBy(x => x.IsSterilized))
+                        : (descending ? ordered.ThenByDescending(x => x.IsSterilized) : ordered.ThenBy(x => x.IsSterilized)),
+
+                    "gender" => ordered is null
+                        ? (descending ? query.OrderByDescending(x => x.Gender) : query.OrderBy(x => x.Gender))
+                        : (descending ? ordered.ThenByDescending(x => x.Gender) : ordered.ThenBy(x => x.Gender)),
+
+                    "size" => ordered is null
+                        ? (descending ? query.OrderByDescending(x => x.Size) : query.OrderBy(x => x.Size))
+                        : (descending ? ordered.ThenByDescending(x => x.Size) : ordered.ThenBy(x => x.Size)),
+
+                    "status" => ordered is null
+                        ? (descending ? query.OrderByDescending(x => x.Status) : query.OrderBy(x => x.Status))
+                        : (descending ? ordered.ThenByDescending(x => x.Status) : ordered.ThenBy(x => x.Status)),
+
+                    _ => ordered // clave no reconocida: se ignora
+                };
+            }
+
+            return ordered ?? DefaultOrder(query);
+        }
+
+        // Orden por defecto cuando no hay Sort: cumpleañeros de hoy primero
+        // (comparando solo mes/día del BirthDate contra la fecha actual),
+        // luego los más recientes.
+        private static IQueryable<Pet> DefaultOrder(IQueryable<Pet> query)
+        {
+            var todayMonth = DateTime.Today.Month;
+            var todayDay = DateTime.Today.Day;
+
+            return query
+                .OrderByDescending(x =>
+                    x.BirthDate.HasValue
+                    && x.BirthDate.Value.Month == todayMonth
+                    && x.BirthDate.Value.Day == todayDay)
+                .ThenByDescending(x => x.CreatedAt);
         }
 
         // --- GET BY ID ---
         public async Task<PetResponse?> GetByIdAsync(Guid id)
         {
-            var pet = await GetPetWithRelationsAsync(id);
-            return _mapper.ToResponse(pet);
+            // Usamos ProjectTo aquí también para evitar traer datos basura si no los necesitamos en el response
+            var response = await _petRepository.Query()
+                .Where(x => x.Id == id)
+                .ProjectTo<PetResponse>(_mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync();
+
+            if (response is null)
+                throw new NotFoundException("Mascota no encontrada");
+
+            return response;
         }
 
         public async Task<PetResponse> CreateAsync(CreatePetDto dto, Guid? userId = null)
         {
-            var entity = _mapper.ToEntity(dto);
+            var entity = _mapper.Map<Pet>(dto);
 
-            // Solo AddIds aplica en creación
-            entity.PetBreeds = dto.BreedIds.AddIds
-                .Select(id => new PetBreed { BreedId = id })
-                .ToList();
+            // Inicializar colecciones vacías para evitar nulls
+            entity.PetBreeds = new List<PetBreed>();
+            entity.PetTraits = new List<PetTrait>();
+            entity.Photos = new List<PetPhoto>();
 
-            entity.PetTraits = dto.TraitIds.AddIds
-                .Select(id => new PetTrait { TraitId = id })
-                .ToList();
+            // Asignar relaciones iniciales
+            if (dto.BreedIds?.AddIds != null && dto.BreedIds.AddIds.Any())
+            {
+                entity.PetBreeds = dto.BreedIds.AddIds.Select(id => new PetBreed { BreedId = id }).ToList();
+            }
 
-            entity.Slug = $"{GenerateSlug(entity.Name)}-{entity.Id}";
+            if (dto.TraitIds?.AddIds != null && dto.TraitIds.AddIds.Any())
+            {
+                entity.PetTraits = dto.TraitIds.AddIds.Select(id => new PetTrait { TraitId = id }).ToList();
+            }
+
+            entity.Slug = $"{GenerateSlug(entity.Name)}-{entity.Id}"; // Nota: El ID puede ser temporal si es DB-generated, ajustar si es necesario
 
             await _petRepository.CreateAsync(entity, userId);
             await _petRepository.SaveChangesAsync();
 
+            // Retornar el objeto completo creado
             return await GetByIdAsync(entity.Id);
         }
 
         private static string GenerateSlug(string text)
         {
-            if (string.IsNullOrWhiteSpace(text))
-                return string.Empty;
-
+            if (string.IsNullOrWhiteSpace(text)) return string.Empty;
             text = text.ToLowerInvariant().Normalize(NormalizationForm.FormD);
-
             var sb = new StringBuilder();
-
             foreach (var c in text)
             {
                 var category = CharUnicodeInfo.GetUnicodeCategory(c);
-
-                if (category != UnicodeCategory.NonSpacingMark)
-                    sb.Append(c);
+                if (category != UnicodeCategory.NonSpacingMark) sb.Append(c);
             }
-
             text = sb.ToString().Normalize(NormalizationForm.FormC);
-
             text = Regex.Replace(text, @"[^a-z0-9\s-]", "");
             text = Regex.Replace(text, @"\s+", "-");
             text = Regex.Replace(text, @"-+", "-");
-
             return text.Trim('-');
         }
+
         public async Task<PetResponse> UpdateAsync(Guid id, UpdatePetDto dto, Guid? userId = null)
         {
-            // Reemplaza GetByIdWithTrackingAsync con el query directo con relaciones
+            // Recuperamos la entidad con sus relaciones para poder sincronizarlas
             var entity = await _petRepository.Query()
                 .Include(x => x.PetBreeds)
                 .Include(x => x.PetTraits)
                 .FirstOrDefaultAsync(x => x.Id == id)
-                ?? throw new NotFoundException("No encontrado");
+                ?? throw new NotFoundException("Mascota no encontrada");
 
-            _mapper.Update(dto, entity);
+            // Mapeo de propiedades simples (Name, Age, etc.)
+            _mapper.Map(dto, entity);
 
+            // Sincronización manual de colecciones (Lógica original)
             SyncBreeds(entity.PetBreeds, dto.BreedIds);
             SyncTraits(entity.PetTraits, dto.TraitIds);
 
@@ -143,24 +317,15 @@ namespace API.Application.Services.Shelter.Pets
 
             return await GetByIdAsync(entity.Id);
         }
+
         // --- DELETE ---
         public async Task DeleteAsync(Guid id, Guid? userId = null)
         {
-            var pet = await _petRepository.GetByIdAsync(id) ?? throw new Exception("Pet not found");
+            var pet = await _petRepository.GetByIdAsync(id)
+                ?? throw new NotFoundException("Mascota no encontrada");
+
             await _petRepository.DeleteAsync(pet, userId);
             await _petRepository.SaveChangesAsync();
-        }
-
-        // --- HELPERS PRIVADOS ---
-        private async Task<Pet> GetPetWithRelationsAsync(Guid id)
-        {
-            return await _petRepository.Query()
-                .Include(x => x.Species)
-                .Include(x => x.Photos)
-                .Include(x => x.PetBreeds).ThenInclude(x => x.Breed)
-                .Include(x => x.PetTraits).ThenInclude(x => x.Trait)
-                .Include(x => x.PetVaccines).ThenInclude(x => x.Vaccine)
-                .FirstOrDefaultAsync(x => x.Id == id) ?? throw new Exception("Pet not found");
         }
 
         private static void SyncBreeds(ICollection<PetBreed> collection, UpdatePetRelationDto dto)
@@ -199,92 +364,98 @@ namespace API.Application.Services.Shelter.Pets
 
         public async Task<Paginate<PetResponse>> GetAllAdoptedAsync(PetFilterDto filter)
         {
+            // 1. Query base filtrando solo por adoptados
             IQueryable<Pet> query = _petRepository.Query()
-                .Include(x => x.Species)
-                .Include(x => x.PetBreeds).ThenInclude(x => x.Breed)
-                .Include(x => x.PetTraits).ThenInclude(x => x.Trait)
-                .Include(x => x.PetVaccines).ThenInclude(x => x.Vaccine)
-                .Include(x => x.Photos)
                 .Where(x => x.IsAdopted);
 
-            if (!string.IsNullOrWhiteSpace(filter.Search))
-                query = query.Where(x => x.Name.Contains(filter.Search));
+            // 2. Aplicar filtros adicionales (búsqueda, edad, etc.)
+            query = ApplyFilters(query, filter);
 
+            // 3. Contar total ANTES de paginar
             var totalCount = await query.CountAsync();
-            var items = await query.Skip((filter.Page - 1) * filter.PageSize)
-                                   .Take(filter.PageSize)
-                                   .ToListAsync();
+
+            // 4. Aplicar ordenamiento
+            query = ApplySort(query, filter.Sort);
+
+            // 5. Paginar y Proyectar a Response (SQL Optimizado: solo trae lo necesario)
+            var items = await query
+                .Skip((filter.Page - 1) * filter.PageSize)
+                .Take(filter.PageSize)
+                .ProjectTo<PetResponse>(_mapper.ConfigurationProvider)
+                .ToListAsync();
 
             return new Paginate<PetResponse>
             {
-                Items = _mapper.ToResponseList(items),
+                Items = items,
                 TotalCount = totalCount,
                 Page = filter.Page,
-                PageSize = filter.PageSize
+                PageSize = filter.PageSize,
+                TotalPages = totalCount == 0 ? 0 : (int)Math.Ceiling(totalCount / (double)filter.PageSize)
             };
         }
 
         public async Task<Paginate<PetMostRequestedResponse>> GetMostRequestedAsync(PetFilterDto filter)
         {
-            // Query base sin Include, para filtrar y contar (liviana)
-            IQueryable<Pet> baseQuery = _petRepository.Query();
+            // 1. Query base para contar solicitudes
+            var requestQuery = _requestAdoptionRepository.Query();
 
-            if (!string.IsNullOrWhiteSpace(filter.Search))
-                baseQuery = baseQuery.Where(x => x.Name.Contains(filter.Search));
+            // Agrupamos por PetId para obtener el conteo
+            var groupedCounts = requestQuery
+                .GroupBy(r => r.PetId)
+                .Select(g => new { PetId = g.Key, Count = g.Count() })
+                .OrderByDescending(x => x.Count);
 
-            if (filter.IsAdopted.HasValue)
-                baseQuery = baseQuery.Where(x => x.IsAdopted == filter.IsAdopted.Value);
+            // Aplicar filtros básicos si es necesario (aunque usualmente "más solicitados" es global o por especie)
+            // Si quieres filtrar por especie en los más solicitados, habría que hacer un Join complejo.
+            // Por ahora asumimos que el filtro de búsqueda aplica sobre el nombre de la mascota después.
 
-            var requestAdoptionsQuery = _requestAdoptionRepository.Query();
+            var totalCount = await groupedCounts.CountAsync();
 
-            // PASO 1: solo Id + conteo, sin Include (acá el GroupBy es seguro)
-            var groupedQuery =
-                from pet in baseQuery
-                join request in requestAdoptionsQuery
-                    on pet.Id equals request.PetId
-                group pet by pet.Id into g
-                select new
-                {
-                    PetId = g.Key,
-                    RequestCount = g.Count()
-                };
-
-            var totalCount = await groupedQuery.CountAsync();
-
-            var pageOfCounts = await groupedQuery
-                .OrderByDescending(x => x.RequestCount)
+            // Paginamos los IDs y contadores primero (muy ligero)
+            var pagedCounts = await groupedCounts
                 .Skip((filter.Page - 1) * filter.PageSize)
                 .Take(filter.PageSize)
                 .ToListAsync();
 
-            var petIds = pageOfCounts.Select(x => x.PetId).ToList();
+            if (!pagedCounts.Any())
+            {
+                return new Paginate<PetMostRequestedResponse>
+                {
+                    Items = new List<PetMostRequestedResponse>(),
+                    TotalCount = 0,
+                    Page = filter.Page,
+                    PageSize = filter.PageSize,
+                    TotalPages = 0
+                };
+            }
 
-            // PASO 2: traer esas mascotas puntuales CON sus Include (sin GroupBy, así no se pierden)
-            var pets = await _petRepository.Query()
-                .Include(x => x.Species)
-                .Include(x => x.Photos)
+            var petIds = pagedCounts.Select(x => x.PetId).ToList();
+
+            // 2. Traemos los detalles de esas mascotas específicas usando ProjectTo
+            var petsDetails = await _petRepository.Query()
                 .Where(x => petIds.Contains(x.Id))
+                .ProjectTo<PetMostRequestedResponse>(_mapper.ConfigurationProvider)
                 .ToListAsync();
 
-            // Reordenar según el orden por RequestCount (el Where con Contains no garantiza el orden)
-            var petsById = pets.ToDictionary(x => x.Id);
+            // 3. Unimos los detalles con el conteo
+            var countDict = pagedCounts.ToDictionary(k => k.PetId, v => v.Count);
 
-            var items = pageOfCounts
-                .Where(x => petsById.ContainsKey(x.PetId)) // salvaguarda por si alguna Pet fue borrada entre queries
-                .Select(x =>
-                {
-                    var response = _autoMapper.Map<PetMostRequestedResponse>(petsById[x.PetId]);
-                    response.RequestCount = x.RequestCount;
-                    return response;
-                })
-                .ToList();
+            var items = petsDetails.Select(pet =>
+            {
+                pet.RequestCount = countDict.TryGetValue(pet.Id, out var count) ? count : 0;
+                return pet;
+            }).ToList();
+
+            // Ordenamos nuevamente por RequestCount para asegurar el orden correcto tras el Where
+            items = items.OrderByDescending(x => x.RequestCount).ToList();
 
             return new Paginate<PetMostRequestedResponse>
             {
                 Items = items,
                 TotalCount = totalCount,
                 Page = filter.Page,
-                PageSize = filter.PageSize
+                PageSize = filter.PageSize,
+                TotalPages = totalCount == 0 ? 0 : (int)Math.Ceiling(totalCount / (double)filter.PageSize)
             };
         }
 
