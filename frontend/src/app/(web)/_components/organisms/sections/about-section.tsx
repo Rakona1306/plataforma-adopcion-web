@@ -277,15 +277,15 @@ export default function AboutSection() {
             Servicios del <span className="text-primary">Albergue</span>
           </Title>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {companyInfo.services.map((service, index) => (
               <div key={index} className="group cursor-pointer">
-                <Card className="overflow-hidden border-primary/20 hover:border-primary/60 hover:shadow-2xl transition-all duration-300 h-full bg-white">
-                  <div className="relative h-48 md:h-56 overflow-hidden bg-gray-200">
+                <Card className="overflow-hidden border-primary/20 hover:border-primary/60 hover:shadow-2xl transition-all duration-300 h-full bg-white py-0">
+                  <div className="relative h-48 md:h-56 overflow-hidden bg-gray-200 p-0 m-0">
                     <img
                       src={service.image}
                       alt={service.alt}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      className="block w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
