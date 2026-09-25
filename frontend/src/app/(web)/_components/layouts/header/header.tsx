@@ -114,24 +114,18 @@ export function Header() {
               >
                 <Link
                   href={link.href}
-                  className="group relative px-4 py-2 text-sm font-medium text-primary/75
-                             hover:text-primary rounded-xl hover:bg-primary/[0.06]
-                             transition-all duration-200 flex items-center"
-                >
+                  className="group relative px-4 py-2 text-sm font-medium text-primary/75 hover:text-primary rounded-xl hover:bg-primary/[0.06] transition-all duration-200 flex items-center">
                   {/* Paw appears floating above on hover */}
                   <MdOutlinePets
                     size={17}
-                    className="absolute -top-0.5 left-1/2 -translate-x-1/2 text-terciary
-                               opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-100
-                               transition-all duration-200 pointer-events-none"
+                    className="absolute -top-0.5 left-1/2 -translate-x-1/2 text-terciary opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-100 transition-all duration-200 pointer-events-none"
                   />
                   <span className="transition-transform font-bold duration-200 group-hover:-translate-y-0.5 relative z-10">
                     {link.name}
                   </span>
                   {/* Gold underline sweep */}
                   <span
-                    className="absolute bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-0
-                                bg-terciary rounded-full group-hover:w-5 transition-all duration-300"
+                    className="absolute bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-0 bg-terciary rounded-full group-hover:w-5 transition-all duration-300"
                   />
                 </Link>
               </motion.div>
@@ -203,14 +197,10 @@ export function Header() {
                   <Link
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
-                    className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm
-                               font-medium text-primary/80 hover:text-primary
-                               hover:bg-primary/5 transition-colors duration-200 group"
-                  >
+                    className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-primary/80 hover:text-primary hover:bg-primary/5 transition-colors duration-200 group">
                     <MdOutlinePets
                       size={16}
-                      className="text-terciary opacity-60 group-hover:opacity-100
-                                 transition-all duration-200 group-hover:scale-110 flex-shrink-0"
+                      className="text-terciary opacity-60 group-hover:opacity-100 transition-all duration-200 group-hover:scale-110 flex-shrink-0"
                     />
                     {link.name}
                   </Link>

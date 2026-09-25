@@ -8,6 +8,7 @@
 
         public string? Search { get; set; }
 
-        public Guid? SpeciesId { get; set; }
+        public string? SpeciesId { get; set; }
+        public string? Sort { get; set; }
     }
 }

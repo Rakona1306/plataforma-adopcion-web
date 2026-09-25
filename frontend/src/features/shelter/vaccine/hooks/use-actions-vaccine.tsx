@@ -1,6 +1,6 @@
 import { IActionButtons } from "@/app/dashboard/_components/organism/action-buttons";
 import { useModal } from "@/core/application/hooks/ui/useModal";
-import { CreateVaccineForm } from "../organism";
+import { CreateVaccineForm } from "../components";
 
 export default function useActionsVaccine() {
   const { handleOpenModal } = useModal() || {};

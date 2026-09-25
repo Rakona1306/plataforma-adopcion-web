@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace API.Application.Features.Shelter.Breeds.Dtos.Public
 {
     public class BreedPubFilterDto
@@ -11,5 +6,6 @@ namespace API.Application.Features.Shelter.Breeds.Dtos.Public
         public int PageSize { get; set; } = 10;
         public string? SpecieId { get; set; }
         public string? Search { get; set; }
+        public string? Sort { get; set; }
     }
 }

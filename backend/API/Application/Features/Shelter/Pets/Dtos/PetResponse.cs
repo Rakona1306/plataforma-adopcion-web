@@ -22,6 +22,7 @@ namespace API.Application.Features.Shelter.Pets.Dtos
         public bool IsRecommend { get; set; } = false;
         public bool IsSterilized { get; set; }
         public bool IsAdopted { get; set; }
+        public bool IsBirthday { get; set; }
         public EnumResponse Gender { get; set; } = new();
         public EnumResponse Size { get; set; } = new();
         public EnumResponse Status { get; set; } = new();   // Mapeado desde el Enum
