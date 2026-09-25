@@ -1,6 +1,4 @@
-﻿using API.Domain.Model.Enums;
-
-namespace API.Application.Features.Shelter.Pets.Dtos
+﻿namespace API.Application.Features.Shelter.Pets.Dtos
 {
     public class CreatePetDto
     {
@@ -14,9 +12,9 @@ namespace API.Application.Features.Shelter.Pets.Dtos
         public bool IsRecommend { get; set; } = false;
         public bool IsAdopted { get; set; }
         public int Age { get; set; }
-        public PetGender Gender { get; set; }
-        public PetSize Size { get; set; }
-        public PetStatus Status { get; set; }
+        public int GenderId { get; set; }
+        public int SizeId { get; set; }
+        public int StatusId { get; set; }
         public Guid SpeciesId { get; set; }
 
         public UpdatePetRelationDto BreedIds { get; set; } = null!;
