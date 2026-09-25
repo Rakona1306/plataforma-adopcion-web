@@ -26,6 +26,8 @@ namespace API.Infrastructure.Db.Builders.Shelter
 
             builder.Property(p => p.Slug).IsRequired();
 
+
+
             // Relación 1:N con Specie (Restringimos cascada para evitar conflictos con Breed)
             builder.HasOne(p => p.Species)
                    .WithMany()

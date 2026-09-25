@@ -23,6 +23,8 @@ namespace API.Application.Features.Shelter.Breeds.Mappers
 
             CreateMap<UpdateBreedDto, Breed>();
 
+            CreateMap<Breed, OptionBreedResponse>();
+
 
             // --- Mapeo de Filtros (Opcional) ---
             // Convierte el filtro público (SpecieId) al filtro interno (SpeciesId)

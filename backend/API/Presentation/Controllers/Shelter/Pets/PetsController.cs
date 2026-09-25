@@ -46,9 +46,7 @@ namespace API.Presentation.Controllers.Shelter
 
         [HttpPost]
         [AuthorizeJwt]
-        public async Task<IActionResult> Create(
-            CreatePetDto dto
-        )
+        public async Task<IActionResult> Create(CreatePetDto dto)
         {
             return Ok(await _service.CreateAsync(dto));
         }

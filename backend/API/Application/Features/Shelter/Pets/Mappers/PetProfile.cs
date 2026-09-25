@@ -1,5 +1,7 @@
 using API.Application.Features.Shelter.Pets.Dtos;
 using API.Application.Features.Shelter.Pets.Dtos.Private;
+using API.Application.Features.System.Enums.Dto;
+using API.Domain.Model.Enums;
 using API.Domain.Model.Shelter;
 using AutoMapper;
 
@@ -15,7 +17,6 @@ namespace API.Application.Features.Shelter.Pets.Mappers
                     src.BirthDate.HasValue
                     && src.BirthDate.Value.Month == DateTime.Today.Month
                     && src.BirthDate.Value.Day == DateTime.Today.Day))
-                // Mapeo de colecciones anidadas para ProjectTo
                 .ForMember(dest => dest.SpeciesName, opt => opt.MapFrom(src => src.Species != null ? src.Species.Name : string.Empty))
                 .ForMember(dest => dest.Breeds, opt => opt.MapFrom(src => src.PetBreeds.Select(pb => pb.Breed)))
                 .ForMember(dest => dest.Traits, opt => opt.MapFrom(src => src.PetTraits.Select(pt => pt.Trait)))
@@ -34,6 +35,28 @@ namespace API.Application.Features.Shelter.Pets.Mappers
             // DTOs a Entidad
             CreateMap<CreatePetDto, Pet>();
             CreateMap<UpdatePetDto, Pet>();
+
+            CreateMap<PetGender, EnumResponse>()
+            .ConvertUsing(src => new EnumResponse
+            {
+                Key = (int)src,
+                Value = src.ToString()
+            });
+
+            CreateMap<PetStatus, EnumResponse>()
+            .ConvertUsing(src => new EnumResponse
+            {
+                Key = (int)src,
+                Value = src.ToString()
+            });
+
+
+            CreateMap<PetSize, EnumResponse>()
+                .ConvertUsing(src => new EnumResponse
+                {
+                    Key = (int)src,
+                    Value = src.ToString()
+                });
         }
     }
 }

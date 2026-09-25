@@ -23,14 +23,43 @@ Authorization: Bearer <tu_token_jwt>
 
 * **Método:** `GET`
 * **Ruta:** `api/pets`
-* **Autenticación:** Pública (Caché de 60 segundos)
+* **Autenticación:** Privada (Caché de 60 segundos)
 
 
 * **Parámetros de consulta (`Query Parameters`):** `PetFilterDto`
 
-* `Page`, `PageSize`, `Search`, `Sort`, `Gender`, `SpecieId`, `Size`, `BreedId`, `MinAge`, `MaxAge`, `IsVaccinated`, `IsSterilized`, `IsAdopted`.
+| Parámetro | Tipo | Stackeable Key | Descripción / Observación | 
+| ------------ | ------------------------- | :-------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Page | `integer` ($Int32$) | No | Número de página para la paginación (por defecto suele ser 1). | 
+| PageSize | `integer` ($Int32$) | No | Cantidad de elementos por página. | 
+| Search | `string` | No | Texto de búsqueda general (nombre, descripción, etc.). | 
+| Sort | `string` | No | Criterio de ordenamiento (ej. `name`, `-createdAt`). | 
+| Gender | `string` | No | Filtro por género de la mascota. | 
+| SpecieId | `string` | Sí (dependiendo de la implementación) | ID de la especie para filtrar. A veces se permite más de uno. | 
+| Size | `string` | No | Filtro por tamaño de la mascota. | 
+| BreedId | `string` | Sí | ID de la raza. Puede acumularse para filtrar por varias razas a la vez. | 
+| MinAge | `integer` | No | Edad mínima permitida. | 
+| MaxAge | `integer` | No | Edad máxima permitida. | 
+| IsVaccinated | `boolean` | No | Filtro booleano para mascotas vacunadas (`true`/`false`). | 
+| IsSterilized | `boolean` | No | Filtro booleano para mascotas esterilizadas (`true`/`false`). | 
+| IsAdopted | `boolean` | No | Filtro booleano para el estado de adopción (`true`/`false`). |
 
 
+* **Valores de Ordenamiento** (`Sort`):
+
+| **Campo** | **Ascendente** | **Descendente** | **Descripción** |
+| --- | --- | --- | --- |
+| **Nombre** | `name` | `-name` | Ordena alfabéticamente por el nombre de la mascota. |
+| **Edad** | `age` | `-age` | Ordena numéricamente por la edad. |
+| **Peso** | `weightkg` | `-weightkg` | Ordena por el peso en kilogramos (`WeightKg`). |
+| **Fecha de Nacimiento** | `birthdate` | `-birthdate` | Ordena por la fecha de nacimiento (`BirthDate`). |
+| **Fecha de Creación** | `createdat` | `-createdat` | Ordena por la fecha de registro en el sistema (`CreatedAt`). |
+| **Adoptado** | `isadopted` | `-isadopted` | Ordena por el estado de adopción (`IsAdopted`). |
+| **Vacunado** | `isvaccinated` | `-isvaccinated` | Ordena por el estado de vacunación (`IsVaccinated`). |
+| **Esterilizado** | `issterilized` | `-issterilized` | Ordena por el estado de esterilización (`IsSterilized`). |
+| **Género** | `gender` | `-gender` | Ordena por el valor del género. |
+| **Tamaño** | `size` | `-size` | Ordena por el valor del tamaño. |
+| **Estado** | `status` | `-status` | Ordena por el estado actual de la mascota. |
 
 
 * **Ejemplo de Respuesta (`200 OK` - `List<PetResponse>`):**
