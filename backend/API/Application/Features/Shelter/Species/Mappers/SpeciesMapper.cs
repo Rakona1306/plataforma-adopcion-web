@@ -1,27 +1,33 @@
 ﻿using API.Application.Features.Shelter.Species.Dtos;
-using Riok.Mapperly.Abstractions;
 using API.Domain.Model.Shelter;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 
 namespace API.Application.Features.Shelter.Species.Mappers
 {
-    [Mapper]
     public partial class SpeciesMapper
     {
-        public partial Specie ToEntity(
-            CreateSpeciesDto dto
-        );
+        private readonly IMapper _mapper;
 
-        public partial void Update(
-            UpdateSpeciesDto dto,
-            [MappingTarget] Specie entity
-        );
+        public SpeciesMapper(IMapper mapper)
+        {
+            _mapper = mapper;
+        }
 
-        public partial SpeciesResponse ToResponse(
-            Specie entity
-        );
+        // Proyecta directamente el IQueryable hacia el DTO en la base de datos
+        public IQueryable<SpeciesResponse> ProjectToResponse(IQueryable<Specie> query)
+        {
+            return query.ProjectTo<SpeciesResponse>(_mapper.ConfigurationProvider);
+        }
 
-        public partial List<SpeciesResponse> ToResponseList(
-            List<Specie> entities
-        );
+        public Specie ToEntity(CreateSpeciesDto dto)
+        {
+            return _mapper.Map<Specie>(dto);
+        }
+
+        public void Update(UpdateSpeciesDto dto, Specie entity)
+        {
+            _mapper.Map(dto, entity);
+        }
     }
 }
