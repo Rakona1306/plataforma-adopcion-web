@@ -16,13 +16,13 @@ export default function AdoptProccess() {
           y feliz.
         </p>
 
-        <div className="flex mt-10 items-stretch flex-wrap lg:flex-nowrap lg:gap-5 gap-10">
+        <div className="mt-10 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)] gap-10 lg:gap-5 items-stretch">
           {adoptInfoData.map((item, index) => (
             <div
               key={index}
-              className="flex items-stretch max-lg:w-full min-w-[300px]"
+              className="contents"
             >
-              <div className="flex-1">
+              <div className="w-full min-w-0">
                 <AdoptInfoCard
                   Icon={item.Icon}
                   title={item.title}
@@ -32,7 +32,7 @@ export default function AdoptProccess() {
               </div>
 
               {index < adoptInfoData.length - 1 && (
-                <div className="flex items-center px-2 max-lg:hidden">
+                <div className="flex items-center justify-center px-2 max-lg:hidden">
                   <div className="w-7 border-t-4 border-secondary rounded-lg"></div>
                 </div>
               )}
