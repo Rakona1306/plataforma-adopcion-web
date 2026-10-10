@@ -15,7 +15,7 @@ using Resend;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-var envPath = Path.Combine(Directory.GetCurrentDirectory(), "production.env");
+var envPath = Path.Combine(Directory.GetCurrentDirectory(), ".env");
 
 Console.WriteLine($"[DEBUG] Buscando .env en: {envPath}");
 Console.WriteLine($"[DEBUG] ¿Existe el archivo?: {File.Exists(envPath)}");

@@ -14,7 +14,6 @@ namespace API.Application.Services.Shelter.Species
     public class SpeciesService : BaseService<Specie, ISpeciesRepository>, ISpeciesService
     {
         private readonly ISpeciesRepository _repository;
-
         private readonly SpeciesMapper _mapper;
 
         public SpeciesService(
@@ -27,30 +26,36 @@ namespace API.Application.Services.Shelter.Species
             _mapper = mapper;
         }
 
-        public async Task<Paginate<SpeciesResponse>> GetAllAsync(
-            SpeciesFilterDto filter
-        )
+        public async Task<Paginate<SpeciesResponse>> GetAllAsync(SpeciesFilterDto filter)
         {
             var query = _repository.Query();
 
             if (!string.IsNullOrWhiteSpace(filter.Search))
             {
-                query = query.Where(x =>
-                    x.Name.Contains(filter.Search)
-                );
+                query = query.Where(x => x.Name.Contains(filter.Search));
             }
+
+            // El ordenamiento se aplica sobre la entidad antes de proyectar
+            query = filter.Sort?.ToLower() switch
+            {
+                "created" => query.OrderBy(x => x.CreatedAt),
+                "-created" => query.OrderByDescending(x => x.CreatedAt),
+                "name" => query.OrderBy(x => x.Name),
+                "-name" => query.OrderByDescending(x => x.Name),
+                _ => query.OrderByDescending(x => x.CreatedAt)
+            };
 
             var totalCount = await query.CountAsync();
 
-            var items = await query
-                .OrderByDescending(x => x.CreatedAt)
+            // Aquí aplicamos ProjectTo antes de paginar y materializar la lista
+            var items = await _mapper.ProjectToResponse(query)
                 .Skip((filter.Page - 1) * filter.PageSize)
                 .Take(filter.PageSize)
                 .ToListAsync();
 
             return new Paginate<SpeciesResponse>
             {
-                Items = _mapper.ToResponseList(items),
+                Items = items,
                 TotalCount = totalCount,
                 Page = filter.Page,
                 PageSize = filter.PageSize
@@ -59,22 +64,19 @@ namespace API.Application.Services.Shelter.Species
 
         public async Task<SpeciesResponse?> GetByIdAsync(Guid id)
         {
-            var entity = await _repository.GetByIdAsync(id);
+            // Para un solo elemento también podemos aprovechar ProjectTo si lo deseas, o mantener GetByIdAsync
+            var query = _repository.Query().Where(x => x.Id == id);
+            var response = await _mapper.ProjectToResponse(query).FirstOrDefaultAsync();
 
-            if (entity is null)
+            if (response is null)
                 throw new Exception("Species not found");
 
-            return _mapper.ToResponse(entity);
+            return response;
         }
 
-        public async Task<SpeciesResponse> CreateAsync(
-            CreateSpeciesDto dto,
-            Guid? userId
-        )
+        public async Task<SpeciesResponse> CreateAsync(CreateSpeciesDto dto, Guid? userId)
         {
-            var exists = await _repository.ExistsAsync(
-                x => x.Name.ToLower() == dto.Name.ToLower()
-            );
+            var exists = await _repository.ExistsAsync(x => x.Name.ToLower() == dto.Name.ToLower());
 
             if (exists)
                 throw new Exception("Species already exists");
@@ -87,14 +89,11 @@ namespace API.Application.Services.Shelter.Species
 
             await _repository.SaveChangesAsync();
 
-            return _mapper.ToResponse(entity);
+            // Retornamos mapeando la entidad creada o volviendo a consultar por ID con ProjectTo
+            return await GetByIdAsync(entity.Id) ?? throw new Exception("Error retrieving created species");
         }
 
-        public async Task<SpeciesResponse> UpdateAsync(
-            Guid id,
-            UpdateSpeciesDto dto,
-            Guid? userId
-        )
+        public async Task<SpeciesResponse> UpdateAsync(Guid id, UpdateSpeciesDto dto, Guid? userId)
         {
             var entity = await _repository.GetByIdAsync(id);
 
@@ -109,13 +108,10 @@ namespace API.Application.Services.Shelter.Species
 
             await _repository.SaveChangesAsync();
 
-            return _mapper.ToResponse(entity);
+            return await GetByIdAsync(entity.Id) ?? throw new Exception("Error retrieving updated species");
         }
 
-        public async Task DeleteAsync(
-            Guid id,
-            Guid? userId
-        )
+        public async Task DeleteAsync(Guid id, Guid? userId)
         {
             var entity = await _repository.GetByIdAsync(id);
 
