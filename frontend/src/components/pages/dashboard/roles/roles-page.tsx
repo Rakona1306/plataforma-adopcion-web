@@ -1,5 +1,4 @@
 "use client";
-
 import BodyDashboard from "@/app/dashboard/_components/molecules/body-dashboard";
 import HeaderDashboard from "@/app/dashboard/_components/molecules/header-dashboard";
 import { ActionButtons } from "@/app/dashboard/_components/organism/action-buttons";
@@ -10,14 +9,14 @@ import CustomTable, {
 } from "@/components/ui/organisms/table/table-custom";
 import { RowAction } from "@/app/dashboard/_components/molecules/table-actions";
 import { BiEditAlt, BiTrash } from "react-icons/bi";
-import { FilterItemConfig } from "@/app/dashboard/_interfaces/ui/filters";
-import FilterBar from "@/app/dashboard/_components/organism/filter-bar";
 import { BsViewList } from "react-icons/bs";
 import { useModal } from "@/core/application/hooks/ui/useModal";
 import { UpdateRoleForm, ViewRole } from "./organism";
 import { Role } from "@/features/organization/role/model/role.model";
 import { useGetAllRoles } from "@/features/organization/role/hooks/use-get-all-role";
 import { useDeleteRole } from "@/features/organization/role/hooks/useDeleteRole";
+import FilterSection from "@/components/ui/organisms/filter/filter-section";
+import FilterRoleDrawer from "@/features/organization/role/components/drawer/filter-role-drawer";
 
 export default function RolesPage() {
   const { actionsRoles } = useActionsRole();
@@ -25,7 +24,6 @@ export default function RolesPage() {
     useGetAllRoles();
   const { deleteRoleWithConfirmation, isPending } = useDeleteRole();
   const { handleOpenModal } = useModal() || {};
-
   const columns: TableColumn<Role>[] = [
     { key: "name", label: "Nombre" },
     { key: "description", label: "Descripcion" },
@@ -69,29 +67,9 @@ export default function RolesPage() {
     },
   ];
 
-  const myFilters: FilterItemConfig[] = [
-    {
-      type: "search",
-      label: "Buscador",
-      placeholder: "Nombre o correo...",
-      value: filter.search,
-      onChange: (val) => updateFilter({ search: String(val).toUpperCase() }),
-    },
-    {
-      type: "select",
-      label: "Dashboard",
-      options: [
-        { label: "Sí", value: "true" },
-        { label: "No", value: "false" },
-        { label: "Todos", value: "todos" },
-      ],
-      value: filter.toDashboard?.toString() ?? null,
-      onChange: (val) => updateFilter({ toDashboard: val ?? "todos" }),
-    },
-  ];
-
   return (
     <>
+      <p>{filter.sort} wa</p>
       <HeaderDashboard>
         <h1 className="text-lg md:text-2xl font-bold text-slate-800">
           Sistema de Roles
@@ -105,10 +83,36 @@ export default function RolesPage() {
           title={actionsRoles.title}
           buttons={actionsRoles.buttons}
         />
+        <FilterSection
+          orderBy={{
+            options: [
+              { value: "", label: "Mas Recientes" },
+              { value: "createdAt_asc", label: "Mas Antiguos" },
+              { value: "name_asc", label: "Nombre (A-Z)" },
+              { value: "name_desc", label: "Nombre (Z-A)" },
+            ],
+            label: "Ordenar por",
+            onSelected: (value) => {
+              updateFilter({ sort: value });
+            },
+            defaultValue: "Mas Recientes",
+          }}
+          search={{
+            placeholder: "Buscar Roles...",
+            onSearch: (value) => {
+              updateFilter({ search: String(value) });
+            },
+            label: "Buscar",
+            name: "search",
+            value: filter.search,
+          }}
+          filter={{
+            drawer: (close) => <FilterRoleDrawer onApply={close} />,
+            title: "Filtros de roles ",
+          }}
+          onClearAll={handleClear}
+        />
         <Divider className="mt-5 border-gray-300!" />
-
-        <FilterBar filters={myFilters} onClearAll={handleClear} />
-
         <Divider className="mt-5 border-gray-300!" />
 
         <div>

@@ -3,4 +3,6 @@ export interface RoleFilterDto {
   toDashboard?: string;
   page: number;
   pageSize: number;
+  permissionId?: string;
+  sort?: string;
 }

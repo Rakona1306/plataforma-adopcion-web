@@ -16,7 +16,7 @@ export default function FilterRoleDisclosure<TKey extends string>(
     isLoading,
     updateFilter,
     isFetching,
-  } = useGetAllRoles(6);
+  } = useGetAllRoles();
 
   const roleOptions = useMemo(
     () =>
